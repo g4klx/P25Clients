@@ -24,7 +24,7 @@
 
 CParrot::CParrot(unsigned int timeout) :
 m_data(NULL),
-m_length(timeout * 1550U + 1000U),
+m_length(timeout * 1000U + 1000U),
 m_used(0U),
 m_ptr(0U)
 {

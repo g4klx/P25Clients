@@ -22,31 +22,42 @@
 #include "Network.h"
 #include "Version.h"
 #include "Timer.h"
+#include "Log.h"
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 int main(int argc, char** argv)
 {
 	if (argc == 1) {
-		::fprintf(stderr, "Usage: P25Parrot <port>\n");
+		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] <port>\n");
 		return 1;
 	}
 
-	unsigned int port = ::atoi(argv[1]);
+	unsigned int n = 1U;
+
+	bool debug = false;
+	if (::strcmp(argv[1], "-d") == 0 || ::strcmp(argv[1], "--debug") == 0) {
+		debug = true;
+		n = 2U;
+	}
+
+	unsigned int port = ::atoi(argv[n]);
 	if (port == 0U) {
-		::fprintf(stderr, "P25Parrot: invalid port number\n");
+		::fprintf(stderr, "P25Parrot: invalid port number - %s\n", argv[n]);
 		return 1;
 	}
 
-	CP25Parrot parrot(port);
+	CP25Parrot parrot(port, debug);
 	parrot.run();
 
 	return 0;
 }
 
-CP25Parrot::CP25Parrot(unsigned int port) :
-m_port(port)
+CP25Parrot::CP25Parrot(unsigned int port, bool debug) :
+m_port(port),
+m_debug(debug)
 {
 }
 
@@ -56,12 +67,20 @@ CP25Parrot::~CP25Parrot()
 
 void CP25Parrot::run()
 {
-	CParrot parrot(180U);
-	CNetwork network(m_port, false);
-
-	bool ret = network.open();
-	if (!ret)
+	bool ret = ::LogInitialise(".", "P25Parrot", m_debug ? 1U : 2U, m_debug ? 1U : 2U);
+	if (!ret) {
+		::fprintf(stderr, "P25Parrot: unable to open the log file\n");
 		return;
+	}
+
+	CParrot parrot(180U);
+	CNetwork network(m_port);
+
+	ret = network.open();
+	if (!ret) {
+		::LogFinalise();
+		return;
+	}
 
 	CStopWatch stopWatch;
 	stopWatch.start();
@@ -73,7 +92,7 @@ void CP25Parrot::run()
 	unsigned int count = 0U;
 	bool playing = false;
 
-	::fprintf(stdout, "Starting P25Parrot-%s\n", VERSION);
+	LogInfo("Starting P25Parrot-%s", VERSION);
 
 	for (;;) {
 		unsigned char buffer[200U];
@@ -84,7 +103,7 @@ void CP25Parrot::run()
 			watchdogTimer.start();
 
 			if ((buffer[0U] == 0x6AU && buffer[15U] == 0x00U) || (buffer[0U] == 0x73U && buffer[15U] == 0x00U)) {
-				::fprintf(stdout, "Received end of transmission\n");
+				LogDebug("Received end of transmission");
 				turnaroundTimer.start();
 				watchdogTimer.stop();
 				parrot.end();
@@ -123,7 +142,7 @@ void CP25Parrot::run()
 		turnaroundTimer.clock(ms);
 
 		if (watchdogTimer.isRunning() && watchdogTimer.hasExpired()) {
-			::fprintf(stdout, "Network watchdog has expired\n");
+			LogDebug("Network watchdog has expired");
 			turnaroundTimer.start();
 			watchdogTimer.stop();
 			parrot.end();
@@ -139,4 +158,6 @@ void CP25Parrot::run()
 	}
 
 	network.close();
+
+	::LogFinalise();
 }

@@ -22,13 +22,14 @@
 class CP25Parrot
 {
 public:
-	CP25Parrot(unsigned int port);
+	CP25Parrot(unsigned int port, bool debug);
 	~CP25Parrot();
 
 	void run();
 
 private:
 	unsigned int m_port;
+	bool         m_debug;
 };
 
 #endif

@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Parrot.h" />
     <ClInclude Include="Parrot.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="P25Parrot.cpp" />
     <ClCompile Include="Parrot.cpp" />

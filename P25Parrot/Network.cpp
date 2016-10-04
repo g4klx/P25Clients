@@ -18,6 +18,7 @@
 
 #include "Network.h"
 #include "Utils.h"
+#include "Log.h"
 
 #include <cstdio>
 #include <cassert>
@@ -25,11 +26,10 @@
 
 const unsigned int BUFFER_LENGTH = 200U;
 
-CNetwork::CNetwork(unsigned int port, bool debug) :
+CNetwork::CNetwork(unsigned int port) :
 m_socket(port),
 m_address(),
 m_port(0U),
-m_debug(debug),
 m_buffer(1000U, "P25 Network")
 {
 }
@@ -40,7 +40,7 @@ CNetwork::~CNetwork()
 
 bool CNetwork::open()
 {
-	::fprintf(stdout, "Opening P25 network connection\n");
+	LogInfo("Opening P25 network connection");
 
 	return m_socket.open();
 }
@@ -52,8 +52,7 @@ bool CNetwork::write(const unsigned char* data, unsigned int length)
 
 	assert(data != NULL);
 
-	if (m_debug)
-		CUtils::dump(1U, "P25 Network Data Sent", data, length);
+	CUtils::dump(1U, "P25 Network Data Sent", data, length);
 
 	return m_socket.write(data, length, m_address, m_port);
 }
@@ -71,8 +70,7 @@ void CNetwork::clock(unsigned int ms)
 	m_address.s_addr = address.s_addr;
 	m_port = port;
 
-	if (m_debug)
-		CUtils::dump(1U, "P25 Network Data Received", buffer, length);
+	CUtils::dump(1U, "P25 Network Data Received", buffer, length);
 
 	unsigned char l = length;
 	m_buffer.addData(&l, 1U);
@@ -104,5 +102,5 @@ void CNetwork::close()
 {
 	m_socket.close();
 
-	::fprintf(stdout, "Closing P25 network connection\n");
+	LogInfo("Closing P25 network connection");
 }
