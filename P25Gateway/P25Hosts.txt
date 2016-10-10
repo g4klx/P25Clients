@@ -3,4 +3,4 @@
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
 
-10100	m1geo.com	41000
+10100	85.119.82.151	41000
