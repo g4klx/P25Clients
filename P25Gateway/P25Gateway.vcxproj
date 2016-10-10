@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2AE94EAA-FD57-45C9-8555-6425CFA777A3}</ProjectGuid>
+    <ProjectGuid>{8B7A5406-8560-4B40-ADDA-9B8EBF93E232}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>P25Parrot</RootNamespace>
+    <RootNamespace>P25Gateway</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,23 +146,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Conf.h" />
+    <ClInclude Include="DMRLookup.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Mutex.h" />
     <ClInclude Include="Network.h" />
-    <ClInclude Include="P25Parrot.h" />
-    <ClInclude Include="Parrot.h" />
+    <ClInclude Include="P25Gateway.h" />
+    <ClInclude Include="Reflectors.h" />
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UDPSocket.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Conf.cpp" />
+    <ClCompile Include="DMRLookup.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Mutex.cpp" />
     <ClCompile Include="Network.cpp" />
-    <ClCompile Include="P25Parrot.cpp" />
-    <ClCompile Include="Parrot.cpp" />
+    <ClCompile Include="P25Gateway.cpp" />
+    <ClCompile Include="Reflectors.cpp" />
     <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
     <ClCompile Include="Utils.cpp" />
