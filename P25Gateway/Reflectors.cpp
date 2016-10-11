@@ -91,7 +91,7 @@ bool CReflectors::load()
 	// Add the Parrot entry
 	if (m_parrotPort > 0U) {
 		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id      = 1U;
+		refl->m_id      = 10U;
 		refl->m_address = CUDPSocket::lookup(m_parrotAddress);
 		refl->m_port    = m_parrotPort;
 		m_reflectors.push_back(refl);
