@@ -72,10 +72,16 @@ void CNetwork::clock(unsigned int ms)
 
 	CUtils::dump(1U, "P25 Network Data Received", buffer, length);
 
-	unsigned char l = length;
-	m_buffer.addData(&l, 1U);
+	if (buffer[0U] == 0xF0U) {			// A poll
+		write(buffer, length);
+	} else if (buffer[0U] == 0xF1U) {	// An unlink
+		// Nothing to do
+	} else {
+		unsigned char l = length;
+		m_buffer.addData(&l, 1U);
 
-	m_buffer.addData(buffer, length);
+		m_buffer.addData(buffer, length);
+	}
 }
 
 unsigned int CNetwork::read(unsigned char* data)
