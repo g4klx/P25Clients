@@ -214,6 +214,10 @@ void CP25Gateway::run()
 				pollTimer.start();
 				lostTimer.start();
 
+				remoteNetwork->writePoll(currentAddr, currentPort);
+				remoteNetwork->writePoll(currentAddr, currentPort);
+				remoteNetwork->writePoll(currentAddr, currentPort);
+
 				LogMessage("Linked at startup to reflector %u", currentId);
 			}
 		}
