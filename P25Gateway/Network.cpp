@@ -24,10 +24,12 @@
 #include <cassert>
 #include <cstring>
 
-CNetwork::CNetwork(unsigned int port, bool debug) :
+CNetwork::CNetwork(unsigned int port, const std::string& callsign, bool debug) :
+m_callsign(callsign),
 m_socket(port),
 m_debug(debug)
 {
+	m_callsign.resize(10U, ' ');
 }
 
 CNetwork::~CNetwork()
@@ -51,6 +53,40 @@ bool CNetwork::writeData(const unsigned char* data, unsigned int length, const i
 		CUtils::dump(1U, "P25 Network Data Sent", data, length);
 
 	return m_socket.write(data, length, address, port);
+}
+
+bool CNetwork::writePoll(const in_addr& address, unsigned int port)
+{
+	assert(port > 0U);
+
+	unsigned char data[15U];
+
+	data[0U] = 0xF0U;
+
+	for (unsigned int i = 0U; i < 10U; i++)
+		data[i + 1U] = m_callsign.at(i);
+
+	if (m_debug)
+		CUtils::dump(1U, "P25 Network Poll Sent", data, 11U);
+
+	return m_socket.write(data, 11U, address, port);
+}
+
+bool CNetwork::writeUnlink(const in_addr& address, unsigned int port)
+{
+	assert(port > 0U);
+
+	unsigned char data[15U];
+
+	data[0U] = 0xF1U;
+
+	for (unsigned int i = 0U; i < 10U; i++)
+		data[i + 1U] = m_callsign.at(i);
+
+	if (m_debug)
+		CUtils::dump(1U, "P25 Network Unlink Sent", data, 11U);
+
+	return m_socket.write(data, 11U, address, port);
 }
 
 unsigned int CNetwork::readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port)

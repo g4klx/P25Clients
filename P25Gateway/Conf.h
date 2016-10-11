@@ -42,8 +42,6 @@ public:
   unsigned int getLookupTime() const;
 
   // The Log section
-  unsigned int getLogDisplayLevel() const;
-  unsigned int getLogFileLevel() const;
   std::string  getLogFilePath() const;
   std::string  getLogFileRoot() const;
 
@@ -68,8 +66,6 @@ private:
   std::string  m_lookupName;
   unsigned int m_lookupTime;
 
-  unsigned int m_logDisplayLevel;
-  unsigned int m_logFileLevel;
   std::string  m_logFilePath;
   std::string  m_logFileRoot;
 

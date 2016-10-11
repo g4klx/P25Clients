@@ -43,8 +43,6 @@ m_myPort(0U),
 m_daemon(false),
 m_lookupName(),
 m_lookupTime(0U),
-m_logDisplayLevel(0U),
-m_logFileLevel(0U),
 m_logFilePath(),
 m_logFileRoot(),
 m_networkEnabled(false),
@@ -121,10 +119,6 @@ bool CConf::read()
 			  m_logFilePath = value;
 		  else if (::strcmp(key, "FileRoot") == 0)
 			  m_logFileRoot = value;
-		  else if (::strcmp(key, "FileLevel") == 0)
-			  m_logFileLevel = (unsigned int)::atoi(value);
-		  else if (::strcmp(key, "DisplayLevel") == 0)
-			  m_logDisplayLevel = (unsigned int)::atoi(value);
 	  } else if (section == SECTION_NETWORK) {
 		  if (::strcmp(key, "Enable") == 0)
 			  m_networkEnabled = ::atoi(value) == 1;
@@ -183,16 +177,6 @@ std::string CConf::getLookupName() const
 unsigned int CConf::getLookupTime() const
 {
 	return m_lookupTime;
-}
-
-unsigned int CConf::getLogDisplayLevel() const
-{
-	return m_logDisplayLevel;
-}
-
-unsigned int CConf::getLogFileLevel() const
-{
-	return m_logFileLevel;
 }
 
 std::string CConf::getLogFilePath() const

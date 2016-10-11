@@ -153,7 +153,6 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Gateway.h" />
     <ClInclude Include="Reflectors.h" />
-    <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />

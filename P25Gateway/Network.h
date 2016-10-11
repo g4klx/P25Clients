@@ -26,7 +26,7 @@
 
 class CNetwork {
 public:
-	CNetwork(unsigned int port, bool debug);
+	CNetwork(unsigned int port, const std::string& callsign, bool debug);
 	~CNetwork();
 
 	bool open();
@@ -35,9 +35,14 @@ public:
 
 	unsigned int readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port);
 
+	bool writePoll(const in_addr& address, unsigned int port);
+
+	bool writeUnlink(const in_addr& address, unsigned int port);
+
 	void close();
 
 private:
+	std::string  m_callsign;
 	CUDPSocket   m_socket;
 	bool         m_debug;
 };

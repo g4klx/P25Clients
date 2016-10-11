@@ -113,8 +113,6 @@ CP25Reflector* CReflectors::find(unsigned int id)
 			return *it;
 	}
 
-	LogMessage("Trying to find non existent reflector with an id of %u", id);
-
 	return NULL;
 }
 
