@@ -267,7 +267,12 @@ void CP25Gateway::run()
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
 
 				if (dstId != currentId) {
-					if (dstId == 9999U) {
+					CP25Reflector* reflector = NULL;
+					if (dstId != 9999U)
+						reflector = reflectors.find(dstId);
+
+					// If we're unlinking or changing reflectors, unlink from the current one
+					if (dstId == 9999U || reflector != NULL) {
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
 						currentId = dstId;
@@ -279,23 +284,23 @@ void CP25Gateway::run()
 							pollTimer.stop();
 							lostTimer.stop();
 						}
-					} else {
-						CP25Reflector* reflector = reflectors.find(dstId);
-						if (reflector != NULL) {
-							currentId   = dstId;
-							currentAddr = reflector->m_address;
-							currentPort = reflector->m_port;
+					}
 
-							std::string callsign = lookup->find(srcId);
-							LogMessage("Linked to reflector %u by %s", currentId, callsign.c_str());
+					// Link to the new reflector
+					if (reflector != NULL) {
+						currentId   = dstId;
+						currentAddr = reflector->m_address;
+						currentPort = reflector->m_port;
 
-							if (remoteNetwork != NULL) {
-								remoteNetwork->writePoll(currentAddr, currentPort);
-								remoteNetwork->writePoll(currentAddr, currentPort);
-								remoteNetwork->writePoll(currentAddr, currentPort);
-								pollTimer.start();
-								lostTimer.start();
-							}
+						std::string callsign = lookup->find(srcId);
+						LogMessage("Linked to reflector %u by %s", currentId, callsign.c_str());
+
+						if (remoteNetwork != NULL) {
+							remoteNetwork->writePoll(currentAddr, currentPort);
+							remoteNetwork->writePoll(currentAddr, currentPort);
+							remoteNetwork->writePoll(currentAddr, currentPort);
+							pollTimer.start();
+							lostTimer.start();
 						}
 					}
 				}
