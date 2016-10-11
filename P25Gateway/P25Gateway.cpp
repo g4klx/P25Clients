@@ -192,22 +192,23 @@ void CP25Gateway::run()
 
 	LogMessage("Starting P25Gateway-%s", VERSION);
 
-	bool displayed = false;
-	bool seen64 = false;
-	bool seen65 = false;
+	unsigned int srcId = 0U;
+	unsigned int dstId = 0U;
 
-	unsigned int currentId = 0U;
+	unsigned int currentId = 9999U;
 	in_addr currentAddr;
 	unsigned int currentPort = 0U;
+
 	if (remoteNetwork != NULL) {
-		currentId = m_conf.getNetworkStartup();
-		CP25Reflector* reflector = reflectors.find(currentId);
-		if (reflector != NULL) {
-			currentAddr = reflector->m_address;
-			currentPort = reflector->m_port;
-		} else {
-			LogInfo("Startup reflector with id of %u, not found", currentId);
-			currentId = 0U;
+		unsigned int id = m_conf.getNetworkStartup();
+		if (id != 9999U) {
+			CP25Reflector* reflector = reflectors.find(id);
+			if (reflector != NULL) {
+				currentId   = id;
+				currentAddr = reflector->m_address;
+				currentPort = reflector->m_port;
+				LogMessage("Linked at startup to reflector %u", currentId);
+			}
 		}
 	}
 
@@ -221,7 +222,7 @@ void CP25Gateway::run()
 			unsigned int len = remoteNetwork->readData(buffer, 200U, address, port);
 			if (len > 0U) {
 				// If we're linked and it's from the right place, send it on
-				if (currentId != 0U && currentAddr.s_addr == address.s_addr && currentPort == port) {
+				if (currentId != 9999U && currentAddr.s_addr == address.s_addr && currentPort == port) {
 					// Rewrite the LCF and the destination TG
 					if (buffer[0U] == 0x64U) {
 						buffer[1U] = 0x00U;			// LCF is for TGs
@@ -240,33 +241,46 @@ void CP25Gateway::run()
 		unsigned int len = localNetwork.readData(buffer, 200U, address, port);
 		if (len > 0U) {
 			if (buffer[0U] == 0x65U) {
-				unsigned int id = 0U;
-				id |= (buffer[1U] << 16) & 0xFF0000U;
-				id |= (buffer[2U] << 8) & 0x00FF00U;
-				id |= (buffer[3U] << 0) & 0x0000FFU;
+				dstId  = (buffer[1U] << 16) & 0xFF0000U;
+				dstId |= (buffer[2U] << 8)  & 0x00FF00U;
+				dstId |= (buffer[3U] << 0)  & 0x0000FFU;
+			} else if (buffer[0U] == 0x66U) {
+				srcId  = (buffer[1U] << 16) & 0xFF0000U;
+				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
+				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
 
-				if (id != currentId) {
-					CP25Reflector* reflector = reflectors.find(id);
-					if (reflector != NULL) {
-						currentId   = id;
-						currentAddr = reflector->m_address;
-						currentPort = reflector->m_port;
+				if (dstId != currentId) {
+					if (dstId == 9999U) {
+						std::string callsign = lookup->find(srcId);
+						LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
+						currentId = dstId;
+					} else {
+						CP25Reflector* reflector = reflectors.find(dstId);
+						if (reflector != NULL) {
+							currentId   = dstId;
+							currentAddr = reflector->m_address;
+							currentPort = reflector->m_port;
+
+							std::string callsign = lookup->find(srcId);
+							LogMessage("Linked to reflector %u by %s", currentId, callsign.c_str());
+						}
 					}
 				}
 			}
 
-			// Rewrite the LCF and the destination TG
-			if (buffer[0U] == 0x64U) {
-				buffer[1U] = 0x00U;			// LCF is for TGs
-			} else if (buffer[0U] == 0x65U) {
-				buffer[1U] = (currentId >> 16) & 0xFFU;
-				buffer[2U] = (currentId >> 8)  & 0xFFU;
-				buffer[3U] = (currentId >> 0)  & 0xFFU;
-			}
-
 			// If we're linked and we have a network, send it on
-			if (currentId != 0U && remoteNetwork != NULL)
+			if (currentId != 9999U && remoteNetwork != NULL) {
+				// Rewrite the LCF and the destination TG
+				if (buffer[0U] == 0x64U) {
+					buffer[1U] = 0x00U;			// LCF is for TGs
+				} else if (buffer[0U] == 0x65U) {
+					buffer[1U] = (currentId >> 16) & 0xFFU;
+					buffer[2U] = (currentId >> 8)  & 0xFFU;
+					buffer[3U] = (currentId >> 0)  & 0xFFU;
+				}
+
 				remoteNetwork->writeData(buffer, len, currentAddr, currentPort);
+			}
 		}
 
 		unsigned int ms = stopWatch.elapsed();

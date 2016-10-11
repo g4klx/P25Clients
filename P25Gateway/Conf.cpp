@@ -53,7 +53,7 @@ m_networkHosts(),
 m_networkReloadTime(0U),
 m_networkParrotAddress("127.0.0.1"),
 m_networkParrotPort(0U),
-m_networkStartup(0U),
+m_networkStartup(9999U),
 m_networkDebug(false)
 {
 }
