@@ -93,7 +93,6 @@ unsigned int CNetwork::readData(unsigned char* data, unsigned int length, in_add
 {
 	assert(data != NULL);
 	assert(length > 0U);
-	assert(port > 0U);
 
 	int len = m_socket.read(data, length, address, port);
 	if (len <= 0)
