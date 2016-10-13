@@ -275,15 +275,16 @@ void CP25Gateway::run()
 					if (dstId == 9999U || reflector != NULL) {
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
-						currentId = dstId;
 
-						if (remoteNetwork != NULL) {
+						if (remoteNetwork != NULL && currentId != 9999U) {
 							remoteNetwork->writeUnlink(currentAddr, currentPort);
 							remoteNetwork->writeUnlink(currentAddr, currentPort);
 							remoteNetwork->writeUnlink(currentAddr, currentPort);
 							pollTimer.stop();
 							lostTimer.stop();
 						}
+
+						currentId = dstId;
 					}
 
 					// Link to the new reflector
