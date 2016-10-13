@@ -188,7 +188,7 @@ void CP25Gateway::run()
 	lookup->read();
 
 	CTimer lostTimer(1000U, 120U);
-	CTimer pollTimer(1000U, 20U);
+	CTimer pollTimer(1000U, 5U);
 
 	CStopWatch stopWatch;
 	stopWatch.start();
