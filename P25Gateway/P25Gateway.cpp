@@ -161,22 +161,18 @@ void CP25Gateway::run()
 	unsigned int rptPort = m_conf.getRptPort();
 
 	CNetwork localNetwork(m_conf.getMyPort(), m_conf.getCallsign(), false);
-
 	ret = localNetwork.open();
 	if (!ret) {
 		::LogFinalise();
 		return;
 	}
 
-	CNetwork* remoteNetwork = NULL;
-	if (m_conf.getNetworkEnabled()) {
-		remoteNetwork = new CNetwork(m_conf.getNetworkDataPort(), m_conf.getCallsign(), m_conf.getNetworkDebug());
-		ret = remoteNetwork->open();
-		if (!ret) {
-			localNetwork.close();
-			::LogFinalise();
-			return;
-		}
+	CNetwork remoteNetwork(m_conf.getNetworkPort(), m_conf.getCallsign(), m_conf.getNetworkDebug());
+	ret = remoteNetwork.open();
+	if (!ret) {
+		localNetwork.close();
+		::LogFinalise();
+		return;
 	}
 
 	CReflectors reflectors(m_conf.getNetworkHosts(), m_conf.getNetworkReloadTime());
@@ -202,24 +198,22 @@ void CP25Gateway::run()
 	in_addr currentAddr;
 	unsigned int currentPort = 0U;
 
-	if (remoteNetwork != NULL) {
-		unsigned int id = m_conf.getNetworkStartup();
-		if (id != 9999U) {
-			CP25Reflector* reflector = reflectors.find(id);
-			if (reflector != NULL) {
-				currentId   = id;
-				currentAddr = reflector->m_address;
-				currentPort = reflector->m_port;
+	unsigned int id = m_conf.getNetworkStartup();
+	if (id != 9999U) {
+		CP25Reflector* reflector = reflectors.find(id);
+		if (reflector != NULL) {
+			currentId   = id;
+			currentAddr = reflector->m_address;
+			currentPort = reflector->m_port;
 
-				pollTimer.start();
-				lostTimer.start();
+			pollTimer.start();
+			lostTimer.start();
 
-				remoteNetwork->writePoll(currentAddr, currentPort);
-				remoteNetwork->writePoll(currentAddr, currentPort);
-				remoteNetwork->writePoll(currentAddr, currentPort);
+			remoteNetwork.writePoll(currentAddr, currentPort);
+			remoteNetwork.writePoll(currentAddr, currentPort);
+			remoteNetwork.writePoll(currentAddr, currentPort);
 
-				LogMessage("Linked at startup to reflector %u", currentId);
-			}
+			LogMessage("Linked at startup to reflector %u", currentId);
 		}
 	}
 
@@ -229,33 +223,31 @@ void CP25Gateway::run()
 		unsigned int port;
 
 		// From the reflector to the MMDVM
-		if (remoteNetwork != NULL) {
-			unsigned int len = remoteNetwork->readData(buffer, 200U, address, port);
-			if (len > 0U) {
-				// If we're linked and it's from the right place, send it on
-				if (currentId != 9999U && currentAddr.s_addr == address.s_addr && currentPort == port) {
-					// Don't pass reflector control data through to the MMDVM
-					if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
-						// Rewrite the LCF and the destination TG
-						if (buffer[0U] == 0x64U) {
-							buffer[1U] = 0x00U;			// LCF is for TGs
-						} else if (buffer[0U] == 0x65U) {
-							buffer[1U] = (currentId >> 16) & 0xFFU;
-							buffer[2U] = (currentId >> 8) & 0xFFU;
-							buffer[3U] = (currentId >> 0) & 0xFFU;
-						}
-
-						localNetwork.writeData(buffer, len, rptAddr, rptPort);
+		unsigned int len = remoteNetwork.readData(buffer, 200U, address, port);
+		if (len > 0U) {
+			// If we're linked and it's from the right place, send it on
+			if (currentId != 9999U && currentAddr.s_addr == address.s_addr && currentPort == port) {
+				// Don't pass reflector control data through to the MMDVM
+				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
+					// Rewrite the LCF and the destination TG
+					if (buffer[0U] == 0x64U) {
+						buffer[1U] = 0x00U;			// LCF is for TGs
+					} else if (buffer[0U] == 0x65U) {
+						buffer[1U] = (currentId >> 16) & 0xFFU;
+						buffer[2U] = (currentId >> 8) & 0xFFU;
+						buffer[3U] = (currentId >> 0) & 0xFFU;
 					}
 
-					// Any network activity is proof that the reflector is alive
-					lostTimer.start();
+					localNetwork.writeData(buffer, len, rptAddr, rptPort);
 				}
+
+				// Any network activity is proof that the reflector is alive
+				lostTimer.start();
 			}
 		}
 
 		// From the MMDVM to the reflector or control data
-		unsigned int len = localNetwork.readData(buffer, 200U, address, port);
+		len = localNetwork.readData(buffer, 200U, address, port);
 		if (len > 0U) {
 			if (buffer[0U] == 0x65U) {
 				dstId  = (buffer[1U] << 16) & 0xFF0000U;
@@ -276,10 +268,11 @@ void CP25Gateway::run()
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
 
-						if (remoteNetwork != NULL && currentId != 9999U) {
-							remoteNetwork->writeUnlink(currentAddr, currentPort);
-							remoteNetwork->writeUnlink(currentAddr, currentPort);
-							remoteNetwork->writeUnlink(currentAddr, currentPort);
+						if (currentId != 9999U) {
+							remoteNetwork.writeUnlink(currentAddr, currentPort);
+							remoteNetwork.writeUnlink(currentAddr, currentPort);
+							remoteNetwork.writeUnlink(currentAddr, currentPort);
+
 							pollTimer.stop();
 							lostTimer.stop();
 						}
@@ -296,19 +289,18 @@ void CP25Gateway::run()
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Linked to reflector %u by %s", currentId, callsign.c_str());
 
-						if (remoteNetwork != NULL) {
-							remoteNetwork->writePoll(currentAddr, currentPort);
-							remoteNetwork->writePoll(currentAddr, currentPort);
-							remoteNetwork->writePoll(currentAddr, currentPort);
-							pollTimer.start();
-							lostTimer.start();
-						}
+						remoteNetwork.writePoll(currentAddr, currentPort);
+						remoteNetwork.writePoll(currentAddr, currentPort);
+						remoteNetwork.writePoll(currentAddr, currentPort);
+
+						pollTimer.start();
+						lostTimer.start();
 					}
 				}
 			}
 
 			// If we're linked and we have a network, send it on
-			if (currentId != 9999U && remoteNetwork != NULL) {
+			if (currentId != 9999U) {
 				// Rewrite the LCF and the destination TG
 				if (buffer[0U] == 0x64U) {
 					buffer[1U] = 0x00U;			// LCF is for TGs
@@ -318,7 +310,7 @@ void CP25Gateway::run()
 					buffer[3U] = (currentId >> 0)  & 0xFFU;
 				}
 
-				remoteNetwork->writeData(buffer, len, currentAddr, currentPort);
+				remoteNetwork.writeData(buffer, len, currentAddr, currentPort);
 			}
 		}
 
@@ -329,8 +321,8 @@ void CP25Gateway::run()
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
-			if (currentId != 9999U && remoteNetwork != NULL)
-				remoteNetwork->writePoll(currentAddr, currentPort);
+			if (currentId != 9999U)
+				remoteNetwork.writePoll(currentAddr, currentPort);
 			pollTimer.start();
 		}
 
@@ -340,6 +332,7 @@ void CP25Gateway::run()
 				LogWarning("No response from %u, unlinking", currentId);
 				currentId = 9999U;
 			}
+
 			lostTimer.stop();
 		}
 
@@ -354,10 +347,7 @@ void CP25Gateway::run()
 
 	localNetwork.close();
 
-	if (remoteNetwork != NULL) {
-		remoteNetwork->close();
-		delete remoteNetwork;
-	}
+	remoteNetwork.close();
 
 	lookup->stop();
 
