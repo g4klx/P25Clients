@@ -66,9 +66,9 @@ bool CReflectors::load()
 			if (buffer[0U] == '#')
 				continue;
 
-			char* p1 = ::strtok(buffer, "\t\r\n");
-			char* p2 = ::strtok(NULL, "\t\r\n");
-			char* p3 = ::strtok(NULL, "\t\r\n");
+			char* p1 = ::strtok(buffer, " \t\r\n");
+			char* p2 = ::strtok(NULL,   " \t\r\n");
+			char* p3 = ::strtok(NULL,   " \t\r\n");
 
 			if (p1 != NULL && p2 != NULL && p3 != NULL) {
 				std::string host = std::string(p2);
