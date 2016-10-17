@@ -153,6 +153,12 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Gateway.h" />
     <ClInclude Include="Reflectors.h" />
+    <ClInclude Include="Speech.h" />
+    <ClInclude Include="SpeechDefault.h" />
+    <ClInclude Include="SpeechEU.h" />
+    <ClInclude Include="SpeechNA.h" />
+    <ClInclude Include="SpeechPacific.h" />
+    <ClInclude Include="SpeechWW.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
@@ -168,6 +174,7 @@
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="P25Gateway.cpp" />
     <ClCompile Include="Reflectors.cpp" />
+    <ClCompile Include="Speech.cpp" />
     <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Timer.cpp" />

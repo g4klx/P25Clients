@@ -22,6 +22,7 @@
 #include "DMRLookup.h"
 #include "Network.h"
 #include "Version.h"
+#include "Speech.h"
 #include "Log.h"
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -189,6 +190,10 @@ void CP25Gateway::run()
 	CStopWatch stopWatch;
 	stopWatch.start();
 
+	CSpeech* speech = NULL;
+	if (m_conf.getAnnouncements())
+		speech = new CSpeech(localNetwork, rptAddr, rptPort);
+
 	LogMessage("Starting P25Gateway-%s", VERSION);
 
 	unsigned int srcId = 0U;
@@ -293,10 +298,16 @@ void CP25Gateway::run()
 						remoteNetwork.writePoll(currentAddr, currentPort);
 						remoteNetwork.writePoll(currentAddr, currentPort);
 
+						if (speech != NULL)
+							speech->announce(dstId);
+
 						pollTimer.start();
 						lostTimer.start();
 					}
 				}
+			} else if (buffer[0U] == 0x6AU || buffer[0U] == 0x73U) {
+				if (buffer[15U] == 0x00U && speech != NULL)
+					speech->eof();
 			}
 
 			// If we're linked and we have a network, send it on
@@ -318,6 +329,9 @@ void CP25Gateway::run()
 		stopWatch.start();
 
 		reflectors.clock(ms);
+
+		if (speech != NULL)
+			speech->clock(ms);
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
@@ -344,6 +358,8 @@ void CP25Gateway::run()
 #endif
 		}
 	}
+
+	delete speech;
 
 	localNetwork.close();
 
