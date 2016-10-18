@@ -4,7 +4,7 @@ CFLAGS  = -g -O3 -Wall -std=c++0x
 LIBS    =
 LDFLAGS = -g
 
-OBJECTS = Log.o Network.o P25Parrot.o Parrot.o StopWatch.o Timer.o UDPSocket.o Utils.o
+OBJECTS = Log.o Network.o P25Parrot.o Parrot.o StopWatch.o Thread.o Timer.o UDPSocket.o Utils.o
 
 all:		P25Parrot
 

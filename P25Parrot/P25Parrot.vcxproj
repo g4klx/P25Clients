@@ -152,6 +152,7 @@
     <ClInclude Include="Parrot.h" />
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UDPSocket.h" />
     <ClInclude Include="Utils.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="P25Parrot.cpp" />
     <ClCompile Include="Parrot.cpp" />
     <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
     <ClCompile Include="Utils.cpp" />
