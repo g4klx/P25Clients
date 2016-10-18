@@ -88,6 +88,12 @@ bool CReflectors::load()
 		::fclose(fp);
 	}
 
+	size_t size = m_reflectors.size();
+	if (size == 0U)
+		return false;
+
+	LogInfo("Loaded %u P25 reflectors", size);
+
 	// Add the Parrot entry
 	if (m_parrotPort > 0U) {
 		CP25Reflector* refl = new CP25Reflector;
@@ -95,13 +101,8 @@ bool CReflectors::load()
 		refl->m_address = CUDPSocket::lookup(m_parrotAddress);
 		refl->m_port    = m_parrotPort;
 		m_reflectors.push_back(refl);
+		LogInfo("Loaded P25 parrot");
 	}
-
-	size_t size = m_reflectors.size();
-	if (size == 0U)
-		return false;
-
-	LogInfo("Loaded %u P25 reflectors", size);
 
 	return true;
 }
