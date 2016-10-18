@@ -272,7 +272,9 @@ void CP25Gateway::run()
 					// If we're unlinking or changing reflectors, unlink from the current one
 					if (dstId == 9999U || reflector != NULL) {
 						std::string callsign = lookup->find(srcId);
-						LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
+
+						if (currentId != 9999U)
+							LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
 
 						if (currentId != 9999U) {
 							remoteNetwork.writeUnlink(currentAddr, currentPort);
