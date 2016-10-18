@@ -283,6 +283,9 @@ void CP25Gateway::run()
 							lostTimer.stop();
 						}
 
+						if (speech != NULL)
+							speech->announce(dstId);
+
 						currentId = dstId;
 					}
 
@@ -298,9 +301,6 @@ void CP25Gateway::run()
 						remoteNetwork.writePoll(currentAddr, currentPort);
 						remoteNetwork.writePoll(currentAddr, currentPort);
 						remoteNetwork.writePoll(currentAddr, currentPort);
-
-						if (speech != NULL)
-							speech->announce(dstId);
 
 						pollTimer.start();
 						lostTimer.start();
