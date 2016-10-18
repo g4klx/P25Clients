@@ -1,7 +1,7 @@
 CC      = gcc
 CXX     = g++
-CFLAGS  = -g -O3 -Wall -std=c++0x
-LIBS    =
+CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
+LIBS    = -lpthread
 LDFLAGS = -g
 
 OBJECTS = Log.o Network.o P25Parrot.o Parrot.o StopWatch.o Thread.o Timer.o UDPSocket.o Utils.o
