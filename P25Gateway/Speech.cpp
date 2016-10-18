@@ -26,6 +26,7 @@
 
 #include <cstdio>
 #include <cassert>
+#include <cstring>
 
 const unsigned int SRC_ID = 10999U;
 
