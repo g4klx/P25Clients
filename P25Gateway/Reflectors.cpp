@@ -89,9 +89,6 @@ bool CReflectors::load()
 	}
 
 	size_t size = m_reflectors.size();
-	if (size == 0U)
-		return false;
-
 	LogInfo("Loaded %u P25 reflectors", size);
 
 	// Add the Parrot entry
@@ -103,6 +100,10 @@ bool CReflectors::load()
 		m_reflectors.push_back(refl);
 		LogInfo("Loaded P25 parrot");
 	}
+
+	size = m_reflectors.size();
+	if (size == 0U)
+		return false;
 
 	return true;
 }
