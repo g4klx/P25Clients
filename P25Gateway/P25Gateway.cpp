@@ -307,8 +307,8 @@ void CP25Gateway::run()
 						lostTimer.start();
 					}
 				}
-			} else if (buffer[0U] == 0x6AU || buffer[0U] == 0x73U) {
-				if (buffer[15U] == 0x00U && speech != NULL)
+			} else if (buffer[0U] == 0x80U) {
+				if (speech != NULL)
 					speech->eof();
 			}
 

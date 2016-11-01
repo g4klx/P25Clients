@@ -103,7 +103,7 @@ void CP25Parrot::run()
 			parrot.write(buffer, len);
 			watchdogTimer.start();
 
-			if ((buffer[0U] == 0x6AU && buffer[15U] == 0x00U) || (buffer[0U] == 0x73U && buffer[15U] == 0x00U)) {
+			if (buffer[0U] == 0x80U) {
 				LogDebug("Received end of transmission");
 				turnaroundTimer.start();
 				watchdogTimer.stop();
