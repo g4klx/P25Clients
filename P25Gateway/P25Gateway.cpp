@@ -214,6 +214,7 @@ void CP25Gateway::run()
 			currentAddr = reflector->m_address;
 			currentPort = reflector->m_port;
 
+			inactivityTimer.start();
 			pollTimer.start();
 			lostTimer.start();
 
@@ -282,6 +283,7 @@ void CP25Gateway::run()
 							remoteNetwork.writeUnlink(currentAddr, currentPort);
 							remoteNetwork.writeUnlink(currentAddr, currentPort);
 
+							inactivityTimer.stop();
 							pollTimer.stop();
 							lostTimer.stop();
 						}
@@ -305,6 +307,7 @@ void CP25Gateway::run()
 						remoteNetwork.writePoll(currentAddr, currentPort);
 						remoteNetwork.writePoll(currentAddr, currentPort);
 
+						inactivityTimer.start();
 						pollTimer.start();
 						lostTimer.start();
 					}
@@ -372,6 +375,7 @@ void CP25Gateway::run()
 				currentId = 9999U;
 			}
 
+			inactivityTimer.stop();
 			lostTimer.stop();
 		}
 
