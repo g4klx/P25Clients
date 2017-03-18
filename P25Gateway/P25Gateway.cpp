@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2017 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include "Version.h"
 #include "Thread.h"
 #include "Speech.h"
+#include "Timer.h"
 #include "Log.h"
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -185,6 +186,7 @@ void CP25Gateway::run()
 	CDMRLookup* lookup = new CDMRLookup(m_conf.getLookupName(), m_conf.getLookupTime());
 	lookup->read();
 
+	CTimer inactivityTimer(1000U, m_conf.getNetworkInactivityTimeout());
 	CTimer lostTimer(1000U, 120U);
 	CTimer pollTimer(1000U, 5U);
 
@@ -324,6 +326,7 @@ void CP25Gateway::run()
 				}
 
 				remoteNetwork.writeData(buffer, len, currentAddr, currentPort);
+				inactivityTimer.start();
 			}
 		}
 
@@ -334,6 +337,26 @@ void CP25Gateway::run()
 
 		if (speech != NULL)
 			speech->clock(ms);
+
+		inactivityTimer.clock(ms);
+		if (inactivityTimer.isRunning() && inactivityTimer.hasExpired()) {
+			if (currentId != 9999U) {
+				LogMessage("Unlinking from %u due to inactivity", currentId);
+
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+
+				if (speech != NULL)
+					speech->announce(currentId);
+				currentId = 9999U;
+
+				pollTimer.stop();
+				lostTimer.stop();
+			}
+
+			inactivityTimer.stop();
+		}
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
