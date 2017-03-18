@@ -186,7 +186,7 @@ void CP25Gateway::run()
 	CDMRLookup* lookup = new CDMRLookup(m_conf.getLookupName(), m_conf.getLookupTime());
 	lookup->read();
 
-	CTimer inactivityTimer(1000U, m_conf.getNetworkInactivityTimeout());
+	CTimer inactivityTimer(1000U, m_conf.getNetworkInactivityTimeout() * 60U);
 	CTimer lostTimer(1000U, 120U);
 	CTimer pollTimer(1000U, 5U);
 
