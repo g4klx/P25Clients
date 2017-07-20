@@ -32,16 +32,22 @@
 int main(int argc, char** argv)
 {
 	if (argc == 1) {
-		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] <port>\n");
+		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] [-n|--nolog] <port>\n");
 		return 1;
 	}
 
-	unsigned int n = 1U;
+	int n = 1U;
 
 	bool debug = false;
-	if (::strcmp(argv[1], "-d") == 0 || ::strcmp(argv[1], "--debug") == 0) {
-		debug = true;
-		n = 2U;
+	bool log = true;
+
+	for (; n < argc-1; n++) {
+		if (::strcmp(argv[n], "-d") == 0 || ::strcmp(argv[n], "--debug") == 0) {
+			debug = true;
+		}
+		if (::strcmp(argv[n], "-n") == 0 || ::strcmp(argv[n], "--nolog") == 0) {
+			log = false;
+		}
 	}
 
 	unsigned int port = ::atoi(argv[n]);
@@ -50,15 +56,16 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	CP25Parrot parrot(port, debug);
+	CP25Parrot parrot(port, debug, log);
 	parrot.run();
 
 	return 0;
 }
 
-CP25Parrot::CP25Parrot(unsigned int port, bool debug) :
+CP25Parrot::CP25Parrot(unsigned int port, bool debug, bool log) :
 m_port(port),
-m_debug(debug)
+m_debug(debug),
+m_log(log)
 {
 }
 
@@ -68,11 +75,19 @@ CP25Parrot::~CP25Parrot()
 
 void CP25Parrot::run()
 {
-	bool ret = ::LogInitialise(".", "P25Parrot", m_debug ? 1U : 2U, m_debug ? 1U : 2U);
+	int fileLevel = 0U;
+	if (m_log) {
+		fileLevel = m_debug ? 1U : 2U;
+	}
+	bool ret = ::LogInitialise(".", "P25Parrot", fileLevel, m_debug ? 1U : 2U);
+
 	if (!ret) {
 		::fprintf(stderr, "P25Parrot: unable to open the log file\n");
 		return;
 	}
+
+	LogInfo("Debug: %s", m_debug ? "enabled" : "disabled");
+	LogInfo("Logging to file: %s", m_log ? "enabled" : "disabled");
 
 	CParrot parrot(180U);
 	CNetwork network(m_port);
