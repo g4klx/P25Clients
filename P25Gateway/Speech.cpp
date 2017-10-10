@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2017 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -115,27 +115,28 @@ void CSpeech::announce(unsigned int id)
 	case 10100U:
 		m_speech = SPEECH_WW;
 		m_count  = SPEECH_WW_COUNT;
-		m_id     = 10100U;
+		m_id     = id;
 		break;
 	case 10200U:
 		m_speech = SPEECH_NA;
 		m_count  = SPEECH_NA_COUNT;
-		m_id     = 10200U;
+		m_id     = id;
 		break;
 	case 10300U:
 		m_speech = SPEECH_EU;
 		m_count  = SPEECH_EU_COUNT;
-		m_id     = 10300U;
+		m_id     = id;
 		break;
 	case 10400U:
+	case 10401U:
 		m_speech = SPEECH_PACIFIC;
 		m_count  = SPEECH_PACIFIC_COUNT;
-		m_id     = 10400U;
+		m_id     = id;
 		break;
 	case 9999U:
 		m_speech = SPEECH_DEFAULT;
 		m_count  = SPEECH_DEFAULT_COUNT;
-		m_id     = 9999U;
+		m_id     = id;
 		break;
 	default:
 		m_speech = NULL;
