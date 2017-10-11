@@ -14,3 +14,4 @@
 
 # Pacific, 1040x
 10400	pacificp25.repeaters.info	41000
+10401	pacifictac1.repeaters.info	41000
