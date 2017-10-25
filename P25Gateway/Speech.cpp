@@ -20,10 +20,23 @@
 
 #include "SpeechDefault.h"
 #include "SpeechEU.h"
+#include "SpeechEUTAC1.h"
+#include "SpeechEUTAC2.h"
+#include "SpeechEUTAC3.h"
+#include "SpeechFrance.h"
+#include "SpeechGermany.h"
 #include "SpeechNA.h"
+#include "SpeechNATAC1.h"
+#include "SpeechNATAC2.h"
+#include "SpeechNATAC3.h"
 #include "SpeechPacific.h"
 #include "SpeechPacificTAC1.h"
+#include "SpeechPacificTAC2.h"
+#include "SpeechPacificTAC3.h"
 #include "SpeechWW.h"
+#include "SpeechWWTAC1.h"
+#include "SpeechWWTAC2.h"
+#include "SpeechWWTAC3.h"
 
 #include <cstdio>
 #include <cassert>
@@ -118,15 +131,70 @@ void CSpeech::announce(unsigned int id)
 		m_count  = SPEECH_WW_COUNT;
 		m_id     = id;
 		break;
+	case 10101U:
+		m_speech = SPEECH_WW_TAC1;
+		m_count = SPEECH_WW_TAC1_COUNT;
+		m_id = id;
+		break;
+	case 10102U:
+		m_speech = SPEECH_WW_TAC2;
+		m_count = SPEECH_WW_TAC2_COUNT;
+		m_id = id;
+		break;
+	case 10103U:
+		m_speech = SPEECH_WW_TAC3;
+		m_count = SPEECH_WW_TAC3_COUNT;
+		m_id = id;
+		break;
 	case 10200U:
 		m_speech = SPEECH_NA;
 		m_count  = SPEECH_NA_COUNT;
 		m_id     = id;
 		break;
+	case 10201U:
+		m_speech = SPEECH_NA_TAC1;
+		m_count = SPEECH_NA_TAC1_COUNT;
+		m_id = id;
+		break;
+	case 10202U:
+		m_speech = SPEECH_NA_TAC2;
+		m_count = SPEECH_NA_TAC2_COUNT;
+		m_id = id;
+		break;
+	case 10203U:
+		m_speech = SPEECH_NA_TAC3;
+		m_count = SPEECH_NA_TAC3_COUNT;
+		m_id = id;
+		break;
 	case 10300U:
 		m_speech = SPEECH_EU;
 		m_count  = SPEECH_EU_COUNT;
 		m_id     = id;
+		break;
+	case 10301U:
+		m_speech = SPEECH_EU_TAC1;
+		m_count = SPEECH_EU_TAC1_COUNT;
+		m_id = id;
+		break;
+	case 10302U:
+		m_speech = SPEECH_EU_TAC2;
+		m_count = SPEECH_EU_TAC2_COUNT;
+		m_id = id;
+		break;
+	case 10303U:
+		m_speech = SPEECH_EU_TAC3;
+		m_count = SPEECH_EU_TAC3_COUNT;
+		m_id = id;
+		break;
+	case 10310U:
+		m_speech = SPEECH_FRANCE;
+		m_count = SPEECH_FRANCE_COUNT;
+		m_id = id;
+		break;
+	case 10320U:
+		m_speech = SPEECH_GERMANY;
+		m_count = SPEECH_GERMANY_COUNT;
+		m_id = id;
 		break;
 	case 10400U:
 		m_speech = SPEECH_PACIFIC;
@@ -137,6 +205,16 @@ void CSpeech::announce(unsigned int id)
 		m_speech = SPEECH_PACIFIC_TAC1;
 		m_count  = SPEECH_PACIFIC_TAC1_COUNT;
 		m_id     = id;
+		break;
+	case 10402U:
+		m_speech = SPEECH_PACIFIC_TAC2;
+		m_count = SPEECH_PACIFIC_TAC2_COUNT;
+		m_id = id;
+		break;
+	case 10403U:
+		m_speech = SPEECH_PACIFIC_TAC3;
+		m_count = SPEECH_PACIFIC_TAC3_COUNT;
+		m_id = id;
 		break;
 	case 9999U:
 		m_speech = SPEECH_DEFAULT;
