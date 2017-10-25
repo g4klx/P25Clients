@@ -147,6 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Conf.h" />
+    <ClInclude Include="CTone.h" />
+    <ClInclude Include="CTone1.h" />
+    <ClInclude Include="CTone2.h" />
     <ClInclude Include="DMRLookup.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mutex.h" />
@@ -156,9 +159,24 @@
     <ClInclude Include="Speech.h" />
     <ClInclude Include="SpeechDefault.h" />
     <ClInclude Include="SpeechEU.h" />
+    <ClInclude Include="SpeechEUTAC1.h" />
+    <ClInclude Include="SpeechEUTAC2.h" />
+    <ClInclude Include="SpeechEUTAC3.h" />
+    <ClInclude Include="SpeechFrance.h" />
+    <ClInclude Include="SpeechGermany.h" />
     <ClInclude Include="SpeechNA.h" />
+    <ClInclude Include="SpeechNATAC1.h" />
+    <ClInclude Include="SpeechNATAC2.h" />
+    <ClInclude Include="SpeechNATAC3.h" />
     <ClInclude Include="SpeechPacific.h" />
+    <ClInclude Include="SpeechPacificTAC1.h" />
+    <ClInclude Include="SpeechPacificTAC2.h" />
+    <ClInclude Include="SpeechPacificTAC3.h" />
+    <ClInclude Include="SpeechStart.h" />
     <ClInclude Include="SpeechWW.h" />
+    <ClInclude Include="SpeechWWTAC1.h" />
+    <ClInclude Include="SpeechWWTAC2.h" />
+    <ClInclude Include="SpeechWWTAC3.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
