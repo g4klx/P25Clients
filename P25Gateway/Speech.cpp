@@ -22,6 +22,7 @@
 #include "SpeechEU.h"
 #include "SpeechNA.h"
 #include "SpeechPacific.h"
+#include "SpeechPacificTAC1.h"
 #include "SpeechWW.h"
 
 #include <cstdio>
@@ -128,9 +129,13 @@ void CSpeech::announce(unsigned int id)
 		m_id     = id;
 		break;
 	case 10400U:
-	case 10401U:
-		m_speech = SPEECH_PACIFIC;
-		m_count  = SPEECH_PACIFIC_COUNT;
+        m_speech = SPEECH_PACIFIC;
+        m_count  = SPEECH_PACIFIC_COUNT;
+        m_id     = id;
+        break;
+    case 10401U:
+		m_speech = SPEECH_PACIFIC_TAC1;
+		m_count  = SPEECH_PACIFIC_TAC1_COUNT;
 		m_id     = id;
 		break;
 	case 9999U:
