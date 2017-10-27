@@ -68,15 +68,6 @@
     <ClInclude Include="Speech.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTone.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTone1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CTone2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SpeechEUTAC1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,9 +99,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpeechPacificTAC3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechStart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpeechWWTAC1.h">

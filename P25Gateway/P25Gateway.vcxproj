@@ -147,9 +147,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Conf.h" />
-    <ClInclude Include="CTone.h" />
-    <ClInclude Include="CTone1.h" />
-    <ClInclude Include="CTone2.h" />
     <ClInclude Include="DMRLookup.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mutex.h" />
@@ -172,7 +169,6 @@
     <ClInclude Include="SpeechPacificTAC1.h" />
     <ClInclude Include="SpeechPacificTAC2.h" />
     <ClInclude Include="SpeechPacificTAC3.h" />
-    <ClInclude Include="SpeechStart.h" />
     <ClInclude Include="SpeechWW.h" />
     <ClInclude Include="SpeechWWTAC1.h" />
     <ClInclude Include="SpeechWWTAC2.h" />
