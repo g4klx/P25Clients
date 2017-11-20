@@ -154,7 +154,7 @@
     <ClInclude Include="P25Gateway.h" />
     <ClInclude Include="Reflectors.h" />
     <ClInclude Include="Speech.h" />
-    <ClInclude Include="SpeechDefault.h" />
+    <ClInclude Include="SpeechDisconnected.h" />
     <ClInclude Include="SpeechEU.h" />
     <ClInclude Include="SpeechEUTAC1.h" />
     <ClInclude Include="SpeechEUTAC2.h" />

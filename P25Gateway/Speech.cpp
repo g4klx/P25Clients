@@ -18,7 +18,7 @@
 
 #include "Speech.h"
 
-#include "SpeechDefault.h"
+#include "SpeechDisconnected.h"
 #include "SpeechEU.h"
 #include "SpeechEUTAC1.h"
 #include "SpeechEUTAC2.h"
@@ -217,8 +217,8 @@ void CSpeech::announce(unsigned int id)
 		m_id = id;
 		break;
 	case 9999U:
-		m_speech = SPEECH_DEFAULT;
-		m_count  = SPEECH_DEFAULT_COUNT;
+		m_speech = SPEECH_DISCONNECTED;
+		m_count  = SPEECH_DISCONNECTED_COUNT;
 		m_id     = id;
 		break;
 	default:
