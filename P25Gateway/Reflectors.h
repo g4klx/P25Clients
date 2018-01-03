@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ public:
 
 class CReflectors {
 public:
-	CReflectors(const std::string& hostsFile, unsigned int reloadTime);
+	CReflectors(const std::string& hostsFile1, const std::string& hostsFile2, unsigned int reloadTime);
 	~CReflectors();
 
 	void setParrot(const std::string& address, unsigned int port);
@@ -53,7 +53,8 @@ public:
 	void clock(unsigned int ms);
 
 private:
-	std::string                 m_hostsFile;
+	std::string                 m_hostsFile1;
+	std::string                 m_hostsFile2;
 	std::string                 m_parrotAddress;
 	unsigned int                m_parrotPort;
 	std::vector<CP25Reflector*> m_reflectors;

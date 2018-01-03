@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2017 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2017,2018 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -178,7 +178,7 @@ void CP25Gateway::run()
 		return;
 	}
 
-	CReflectors reflectors(m_conf.getNetworkHosts(), m_conf.getNetworkReloadTime());
+	CReflectors reflectors(m_conf.getNetworkHosts1(), m_conf.getNetworkHosts2(), m_conf.getNetworkReloadTime());
 	if (m_conf.getNetworkParrotPort() > 0U)
 		reflectors.setParrot(m_conf.getNetworkParrotAddress(), m_conf.getNetworkParrotPort());
 	reflectors.load();

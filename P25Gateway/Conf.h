@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015,2016,2017 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015,2016,2017,2018 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,7 +48,8 @@ public:
 
   // The Network section
   unsigned int getNetworkPort() const;
-  std::string  getNetworkHosts() const;
+  std::string  getNetworkHosts1() const;
+  std::string  getNetworkHosts2() const;
   unsigned int getNetworkReloadTime() const;
   std::string  getNetworkParrotAddress() const;
   unsigned int getNetworkParrotPort() const;
@@ -72,7 +73,8 @@ private:
   std::string  m_logFileRoot;
 
   unsigned int m_networkPort;
-  std::string  m_networkHosts;
+  std::string  m_networkHosts1;
+  std::string  m_networkHosts2;
   unsigned int m_networkReloadTime;
   std::string  m_networkParrotAddress;
   unsigned int m_networkParrotPort;
