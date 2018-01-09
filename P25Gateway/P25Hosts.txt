@@ -17,3 +17,6 @@
 10400	pacificp25.repeaters.info	41000
 10401	pacifictac1.repeaters.info	41010
 10402	115.238.33.158				41000
+
+# 31665 P25-DMR Gateway
+31665	74.91.127.166	41000
