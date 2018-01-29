@@ -32,13 +32,7 @@
     <ClInclude Include="UDPSocket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Thread.h">
@@ -62,12 +56,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UDPSocket.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Thread.cpp">

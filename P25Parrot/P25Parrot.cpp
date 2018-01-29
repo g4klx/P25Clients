@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@
 #include "Version.h"
 #include "Thread.h"
 #include "Timer.h"
-#include "Log.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -32,7 +31,7 @@
 int main(int argc, char** argv)
 {
 	if (argc == 1) {
-		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] [-n|--nolog] <port>\n");
+		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] <port>\n");
 		return 1;
 	}
 
@@ -45,9 +44,6 @@ int main(int argc, char** argv)
 		if (::strcmp(argv[n], "-d") == 0 || ::strcmp(argv[n], "--debug") == 0) {
 			debug = true;
 		}
-		if (::strcmp(argv[n], "-n") == 0 || ::strcmp(argv[n], "--nolog") == 0) {
-			log = false;
-		}
 	}
 
 	unsigned int port = ::atoi(argv[n]);
@@ -56,16 +52,15 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	CP25Parrot parrot(port, debug, log);
+	CP25Parrot parrot(port, debug);
 	parrot.run();
 
 	return 0;
 }
 
-CP25Parrot::CP25Parrot(unsigned int port, bool debug, bool log) :
+CP25Parrot::CP25Parrot(unsigned int port, bool debug) :
 m_port(port),
-m_debug(debug),
-m_log(log)
+m_debug(debug)
 {
 }
 
@@ -75,28 +70,12 @@ CP25Parrot::~CP25Parrot()
 
 void CP25Parrot::run()
 {
-	int fileLevel = 0U;
-	if (m_log) {
-		fileLevel = m_debug ? 1U : 2U;
-	}
-	bool ret = ::LogInitialise(".", "P25Parrot", fileLevel, m_debug ? 1U : 2U);
-
-	if (!ret) {
-		::fprintf(stderr, "P25Parrot: unable to open the log file\n");
-		return;
-	}
-
-	LogInfo("Debug: %s", m_debug ? "enabled" : "disabled");
-	LogInfo("Logging to file: %s", m_log ? "enabled" : "disabled");
-
 	CParrot parrot(180U);
 	CNetwork network(m_port);
 
-	ret = network.open();
-	if (!ret) {
-		::LogFinalise();
+	bool ret = network.open();
+	if (!ret)
 		return;
-	}
 
 	CStopWatch stopWatch;
 	stopWatch.start();
@@ -108,7 +87,7 @@ void CP25Parrot::run()
 	unsigned int count = 0U;
 	bool playing = false;
 
-	LogInfo("Starting P25Parrot-%s", VERSION);
+	::fprintf(stdout, "Starting P25Parrot-%s\n", VERSION);
 
 	for (;;) {
 		unsigned char buffer[200U];
@@ -119,7 +98,6 @@ void CP25Parrot::run()
 			watchdogTimer.start();
 
 			if (buffer[0U] == 0x80U) {
-				LogDebug("Received end of transmission");
 				turnaroundTimer.start();
 				watchdogTimer.stop();
 				parrot.end();
@@ -158,7 +136,6 @@ void CP25Parrot::run()
 		turnaroundTimer.clock(ms);
 
 		if (watchdogTimer.isRunning() && watchdogTimer.hasExpired()) {
-			LogDebug("Network watchdog has expired");
 			turnaroundTimer.start();
 			watchdogTimer.stop();
 			parrot.end();
@@ -169,6 +146,4 @@ void CP25Parrot::run()
 	}
 
 	network.close();
-
-	::LogFinalise();
 }
