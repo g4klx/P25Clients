@@ -31,36 +31,24 @@
 int main(int argc, char** argv)
 {
 	if (argc == 1) {
-		::fprintf(stderr, "Usage: P25Parrot [-d|--debug] <port>\n");
+		::fprintf(stderr, "Usage: P25Parrot <port>\n");
 		return 1;
 	}
 
-	int n = 1U;
-
-	bool debug = false;
-	bool log = true;
-
-	for (; n < argc-1; n++) {
-		if (::strcmp(argv[n], "-d") == 0 || ::strcmp(argv[n], "--debug") == 0) {
-			debug = true;
-		}
-	}
-
-	unsigned int port = ::atoi(argv[n]);
+	unsigned int port = ::atoi(argv[1U]);
 	if (port == 0U) {
-		::fprintf(stderr, "P25Parrot: invalid port number - %s\n", argv[n]);
+		::fprintf(stderr, "P25Parrot: invalid port number - %s\n", argv[1U]);
 		return 1;
 	}
 
-	CP25Parrot parrot(port, debug);
+	CP25Parrot parrot(port);
 	parrot.run();
 
 	return 0;
 }
 
-CP25Parrot::CP25Parrot(unsigned int port, bool debug) :
-m_port(port),
-m_debug(debug)
+CP25Parrot::CP25Parrot(unsigned int port) :
+m_port(port)
 {
 }
 
