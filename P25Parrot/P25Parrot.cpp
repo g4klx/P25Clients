@@ -99,8 +99,8 @@ void CP25Parrot::run()
 				count = 0U;
 			}
 
-			// A frame every 20ms
-			unsigned int wanted = playoutTimer.elapsed() / 20U;
+			// A frame every 180ms
+			unsigned int wanted = playoutTimer.elapsed() / 180U;
 			while (count < wanted) {
 				len = parrot.read(buffer);
 				if (len > 0U) {
