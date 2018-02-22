@@ -128,7 +128,7 @@ bool CReflectors::load()
 		refl->m_address = CUDPSocket::lookup(m_parrotAddress);
 		refl->m_port    = m_parrotPort;
 		m_reflectors.push_back(refl);
-		LogInfo("Loaded P25 parrot");
+		LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
 	}
 
 	size = m_reflectors.size();
