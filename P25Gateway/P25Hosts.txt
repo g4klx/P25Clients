@@ -12,6 +12,7 @@
 
 # Europe, 1030x
 10300	176.9.1.168	41000
+10301	ea5gvk.duckdns.org	41000
 
 # Pacific, 1040x
 10400	pacificp25.repeaters.info	41000
