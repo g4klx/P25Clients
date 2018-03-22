@@ -27,8 +27,7 @@ const unsigned int BUFFER_LENGTH = 200U;
 CNetwork::CNetwork(unsigned int port) :
 m_socket(port),
 m_address(),
-m_port(0U),
-m_buffer(1000U, "P25 Network")
+m_port(0U)
 {
 }
 
@@ -53,44 +52,26 @@ bool CNetwork::write(const unsigned char* data, unsigned int length)
 	return m_socket.write(data, length, m_address, m_port);
 }
 
-void CNetwork::clock(unsigned int ms)
+unsigned int CNetwork::read(unsigned char* data)
 {
-	unsigned char buffer[BUFFER_LENGTH];
-
 	in_addr address;
 	unsigned int port;
-	int length = m_socket.read(buffer, BUFFER_LENGTH, address, port);
+	int length = m_socket.read(data, BUFFER_LENGTH, address, port);
 	if (length <= 0)
-		return;
+		return 0U;
 
 	m_address.s_addr = address.s_addr;
 	m_port = port;
 
-	if (buffer[0U] == 0xF0U) {			// A poll
-		write(buffer, length);
-	} else if (buffer[0U] == 0xF1U) {	// An unlink
-		// Nothing to do
-	} else {
-		unsigned char l = length;
-		m_buffer.addData(&l, 1U);
-
-		m_buffer.addData(buffer, length);
-	}
-}
-
-unsigned int CNetwork::read(unsigned char* data)
-{
-	assert(data != NULL);
-
-	if (m_buffer.isEmpty())
+	if (data[0U] == 0xF0U) {			// A poll
+		write(data, length);
 		return 0U;
-
-	unsigned char len = 0U;
-	m_buffer.getData(&len, 1U);
-
-	m_buffer.getData(data, len);
-
-	return len;
+	} else if (data[0U] == 0xF1U) {	// An unlink
+		// Nothing to do
+		return 0U;
+	} else {
+		return length;
+	}
 }
 
 void CNetwork::end()

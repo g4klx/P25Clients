@@ -25,7 +25,6 @@
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Reflector.h" />
-    <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />

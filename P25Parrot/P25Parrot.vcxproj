@@ -149,7 +149,6 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Parrot.h" />
     <ClInclude Include="Parrot.h" />
-    <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
