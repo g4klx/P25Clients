@@ -343,23 +343,42 @@ void CP25Gateway::run()
 
 		inactivityTimer.clock(ms);
 		if (inactivityTimer.isRunning() && inactivityTimer.hasExpired()) {
-			if (currentId != 9999U) {
-				LogMessage("Unlinking from %u due to inactivity", currentId);
+				unsigned int startId = m_conf.getNetworkStartup();
+				if (currentId != startId) {
+					LogMessage("Unlinking from %u due to inactivity", currentId);
 
-				remoteNetwork.writeUnlink(currentAddr, currentPort);
-				remoteNetwork.writeUnlink(currentAddr, currentPort);
-				remoteNetwork.writeUnlink(currentAddr, currentPort);
+					remoteNetwork.writeUnlink(currentAddr, currentPort);
+					remoteNetwork.writeUnlink(currentAddr, currentPort);
+					remoteNetwork.writeUnlink(currentAddr, currentPort);
 
-				if (speech != NULL)
-					speech->announce(currentId);
-				currentId = 9999U;
+					if (speech != NULL)
+						speech->announce(currentId);
+					currentId = 9999U;
 
-				pollTimer.stop();
-				lostTimer.stop();
+					pollTimer.stop();
+					lostTimer.stop();
+					inactivityTimer.stop();
+
+					//Connecting to default startup reflector
+
+					CP25Reflector* reflector = reflectors.find(startId);
+					currentAddr = reflector->m_address;
+					currentPort = reflector->m_port;
+
+					remoteNetwork.writePoll(currentAddr, currentPort);
+					remoteNetwork.writePoll(currentAddr, currentPort);
+					remoteNetwork.writePoll(currentAddr, currentPort);
+
+					LogMessage("Linked to startup %u due to inactivity", startId);
+
+					inactivityTimer.start();
+					pollTimer.start();
+					lostTimer.start();
+					currentId = startId;
+				}
+
+				inactivityTimer.stop();
 			}
-
-			inactivityTimer.stop();
-		}
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
