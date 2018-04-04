@@ -17,7 +17,7 @@
 # Pacific, 1040x
 10400	pacificp25.repeaters.info	41000
 10401	pacifictac1.repeaters.info	41010
-10402	115.238.33.158				41000
+10402	47.104.177.248				41000
 10403	120.234.41.144				41000
 
 # 31665 P25-DMR Gateway
