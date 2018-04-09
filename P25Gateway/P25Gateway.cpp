@@ -206,11 +206,11 @@ void CP25Gateway::run()
 	in_addr currentAddr;
 	unsigned int currentPort = 0U;
 
-	unsigned int id = m_conf.getNetworkStartup();
-	if (id != 9999U) {
-		CP25Reflector* reflector = reflectors.find(id);
+	unsigned int startupId = m_conf.getNetworkStartup();
+	if (startupId != 9999U) {
+		CP25Reflector* reflector = reflectors.find(startupId);
 		if (reflector != NULL) {
-			currentId   = id;
+			currentId   = startupId;
 			currentAddr = reflector->m_address;
 			currentPort = reflector->m_port;
 
@@ -343,42 +343,53 @@ void CP25Gateway::run()
 
 		inactivityTimer.clock(ms);
 		if (inactivityTimer.isRunning() && inactivityTimer.hasExpired()) {
-				unsigned int startId = m_conf.getNetworkStartup();
-				if (currentId != startId) {
-					LogMessage("Unlinking from %u due to inactivity", currentId);
+			if (currentId != 9999U && startupId == 9999U) {
+				LogMessage("Unlinking from %u due to inactivity", currentId);
 
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+				remoteNetwork.writeUnlink(currentAddr, currentPort);
+
+				if (speech != NULL)
+					speech->announce(currentId);
+				currentId = 9999U;
+
+				pollTimer.stop();
+				lostTimer.stop();
+				inactivityTimer.stop();
+			} else if (currentId != startupId) {
+				if (currentId != 9999U) {
 					remoteNetwork.writeUnlink(currentAddr, currentPort);
 					remoteNetwork.writeUnlink(currentAddr, currentPort);
 					remoteNetwork.writeUnlink(currentAddr, currentPort);
+				}
 
-					if (speech != NULL)
-						speech->announce(currentId);
-					currentId = 9999U;
-
-					pollTimer.stop();
-					lostTimer.stop();
-					inactivityTimer.stop();
-
-					//Connecting to default startup reflector
-
-					CP25Reflector* reflector = reflectors.find(startId);
+				CP25Reflector* reflector = reflectors.find(startupId);
+				if (reflector != NULL) {
+					currentId   = startupId;
 					currentAddr = reflector->m_address;
 					currentPort = reflector->m_port;
-
-					remoteNetwork.writePoll(currentAddr, currentPort);
-					remoteNetwork.writePoll(currentAddr, currentPort);
-					remoteNetwork.writePoll(currentAddr, currentPort);
-
-					LogMessage("Linked to startup %u due to inactivity", startId);
 
 					inactivityTimer.start();
 					pollTimer.start();
 					lostTimer.start();
-					currentId = startId;
-				}
 
-				inactivityTimer.stop();
+					LogMessage("Linked to reflector %u due to inactivity", currentId);
+
+					if (speech != NULL)
+						speech->announce(currentId);
+
+					remoteNetwork.writePoll(currentAddr, currentPort);
+					remoteNetwork.writePoll(currentAddr, currentPort);
+					remoteNetwork.writePoll(currentAddr, currentPort);
+				} else {
+					startupId = 9999U;
+					inactivityTimer.stop();
+					pollTimer.stop();
+					lostTimer.stop();
+				}
 			}
+		}
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
