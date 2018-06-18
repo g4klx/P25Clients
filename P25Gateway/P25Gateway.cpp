@@ -95,33 +95,27 @@ void CP25Gateway::run()
 		return;
 	}
 
-	ret = ::LogInitialise(m_conf.getLogFilePath(), m_conf.getLogFileRoot(), 1U, 1U);
-	if (!ret) {
-		::fprintf(stderr, "P25Gateway: unable to open the log file\n");
-		return;
-	}
-
 #if !defined(_WIN32) && !defined(_WIN64)
 	bool m_daemon = m_conf.getDaemon();
 	if (m_daemon) {
 		// Create new process
 		pid_t pid = ::fork();
 		if (pid == -1) {
-			::LogWarning("Couldn't fork() , exiting");
+			::fprintf(stderr, "Couldn't fork() , exiting\n");
 			return;
-		}
-		else if (pid != 0)
+		} else if (pid != 0) {
 			exit(EXIT_SUCCESS);
+		}
 
 		// Create new session and process group
 		if (::setsid() == -1) {
-			::LogWarning("Couldn't setsid(), exiting");
+			::fprintf(stderr, "Couldn't setsid(), exiting\n");
 			return;
 		}
 
 		// Set the working directory to the root directory
 		if (::chdir("/") == -1) {
-			::LogWarning("Couldn't cd /, exiting");
+			::fprintf(stderr, "Couldn't cd /, exiting\n");
 			return;
 		}
 
@@ -129,36 +123,42 @@ void CP25Gateway::run()
 		::close(STDOUT_FILENO);
 		::close(STDERR_FILENO);
 
-		//If we are currently root...
+		// If we are currently root...
 		if (getuid() == 0) {
 			struct passwd* user = ::getpwnam("mmdvm");
 			if (user == NULL) {
-				::LogError("Could not get the mmdvm user, exiting");
+				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
 				return;
 			}
 
 			uid_t mmdvm_uid = user->pw_uid;
 			gid_t mmdvm_gid = user->pw_gid;
 
-			//Set user and group ID's to mmdvm:mmdvm
+			// Set user and group ID's to mmdvm:mmdvm
 			if (setgid(mmdvm_gid) != 0) {
-				::LogWarning("Could not set mmdvm GID, exiting");
+				::fprintf(stderr, "Could not set mmdvm GID, exiting\n");
 				return;
 			}
 
 			if (setuid(mmdvm_uid) != 0) {
-				::LogWarning("Could not set mmdvm UID, exiting");
+				::fprintf(stderr, "Could not set mmdvm UID, exiting\n");
 				return;
 			}
 
-			//Double check it worked (AKA Paranoia) 
+			// Double check it worked (AKA Paranoia) 
 			if (setuid(0) != -1) {
-				::LogWarning("It's possible to regain root - something is wrong!, exiting");
+				::fprintf(stderr, "It's possible to regain root - something is wrong!, exiting\n");
 				return;
 			}
 		}
 	}
 #endif
+
+	ret = ::LogInitialise(m_conf.getLogFilePath(), m_conf.getLogFileRoot(), 1U, 1U);
+	if (!ret) {
+		::fprintf(stderr, "P25Gateway: unable to open the log file\n");
+		return;
+	}
 
 	in_addr rptAddr = CUDPSocket::lookup(m_conf.getRptAddress());
 	unsigned int rptPort = m_conf.getRptPort();
