@@ -101,16 +101,20 @@ bool CReflectors::load()
 			char* p3 = ::strtok(NULL, " \t\r\n");
 
 			if (p1 != NULL && p2 != NULL && p3 != NULL) {
-				std::string host = std::string(p2);
+				// Don't allow duplicate reflector ids from the secondary hosts file.
+				unsigned int id = (unsigned int)::atoi(p1);
+				if (find(id) == NULL) {
+					std::string host = std::string(p2);
 
-				in_addr address = CUDPSocket::lookup(host);
-				if (address.s_addr != INADDR_NONE) {
-					CP25Reflector* refl = new CP25Reflector;
-					refl->m_id      = (unsigned int)::atoi(p1);
-					refl->m_address = address;
-					refl->m_port    = (unsigned int)::atoi(p3);
+					in_addr address = CUDPSocket::lookup(host);
+					if (address.s_addr != INADDR_NONE) {
+						CP25Reflector* refl = new CP25Reflector;
+						refl->m_id      = id;
+						refl->m_address = address;
+						refl->m_port    = (unsigned int)::atoi(p3);
 
-					m_reflectors.push_back(refl);
+						m_reflectors.push_back(refl);
+					}
 				}
 			}
 		}
