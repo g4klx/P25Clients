@@ -27,7 +27,7 @@
 31010	p25.alabamalink.info	41000
 
 # 31665 P25-DMR Gateway
-31665	74.91.127.166	41000
+31665	18.223.66.56	41000
 
 # 31672 P25 Pi-Star chat
 31672	w1msg.trianglenc.net		41000
