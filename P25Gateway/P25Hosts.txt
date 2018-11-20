@@ -3,7 +3,7 @@
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
 
-# P252YSF VW Bridge
+# Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org	41004
 
 # World Wide, 1010x
