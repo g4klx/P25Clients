@@ -29,6 +29,9 @@
 # Alabama Link
 31010	p25.alabamalink.info	41000
 
+# Colorado HD
+31088 54.191.50.212 41000
+
 # 31665 P25-DMR Gateway
 31665	18.223.66.56	41000
 
