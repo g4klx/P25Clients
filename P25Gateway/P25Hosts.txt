@@ -6,6 +6,9 @@
 # Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org	41004
 
+# Indiana Digital Ham Radio P25 Reflector
+6395 p25ref.nf9k.net 41000
+
 # World Wide, 1010x
 10100	85.119.82.151	41000
 
