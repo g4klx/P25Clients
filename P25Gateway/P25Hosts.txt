@@ -29,6 +29,9 @@
 # America-Ragchew, 28299
 28299	65.101.7.51	41000
 
+# NorCal-Bridge / Multimode-P25-TG30639
+30639	wiresxdigi.dyndns.org	41000
+
 # Alabama Link
 31010	p25.alabamalink.info	41000
 
