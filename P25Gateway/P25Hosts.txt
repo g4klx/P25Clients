@@ -29,6 +29,9 @@
 10402	47.104.177.248				41000
 10403	120.234.41.144				41000
 
+# 10700 Australia NSW Bridge to AU NSW YSF
+10700 p25nsw.gustotech.net  41000
+
 # America-Ragchew, 28299
 28299	65.101.7.51	41000
 
@@ -50,6 +53,5 @@
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
-# 10700 Australia NSW Bridge to AU NSW YSF
-10700 p25nsw.gustotech.net  41000
-
+# 53099 New Zealand bridge to D-Star, DMR and NXDN
+53099 203.86.206.49 41000
