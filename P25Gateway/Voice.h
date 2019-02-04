@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2017,2018 by Jonathan Naylor G4KLX
+*   Copyright (C) 2017,2018,2019 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -56,13 +56,13 @@ public:
 private:
 	std::string                            m_language;
 	std::string                            m_indxFile;
-	std::string                            m_ambeFile;
+	std::string                            m_imbeFile;
 	unsigned int                           m_srcId;
 	VOICE_STATUS                           m_status;
 	CTimer                                 m_timer;
 	CStopWatch                             m_stopWatch;
 	unsigned int                           m_sent;
-	unsigned char*                         m_ambe;
+	unsigned char*                         m_imbe;
 	unsigned char*                         m_voiceData;
 	unsigned int                           m_voiceLength;
 	std::unordered_map<std::string, CPositions*> m_positions;

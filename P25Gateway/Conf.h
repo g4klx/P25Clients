@@ -35,7 +35,6 @@ public:
   std::string  getRptAddress() const;
   unsigned int getRptPort() const;
   unsigned int getMyPort() const;
-  bool         getAnnouncements() const;
   bool         getDaemon() const;
 
   // The Id Lookup section
@@ -68,7 +67,6 @@ private:
   std::string  m_rptAddress;
   unsigned int m_rptPort;
   unsigned int m_myPort;
-  bool         m_announcements;
   bool         m_daemon;
 
   std::string  m_lookupName;

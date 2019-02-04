@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2017,2018 by Jonathan Naylor G4KLX
+*   Copyright (C) 2017,2018,2019 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -27,8 +27,64 @@
 
 #include <sys/stat.h>
 
-const unsigned char HEADER[] = { 0x83U, 0x01U, 0x10U, 0x00U, 0x0FU, 0x01U, 0x00U, 0x20U };
-const unsigned char TRAILER[] = { 0x83U, 0x01U, 0x10U, 0x00U, 0x0FU, 0x08U, 0x00U, 0x20U };
+const unsigned char REC62[] = {
+    0x62U, 0x02U, 0x02U, 0x0CU, 0x0BU, 0x12U, 0x64U, 0x00U, 0x00U, 0x80U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U,
+    0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
+
+const unsigned char REC63[] = {
+    0x63U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC64[] = {
+    0x64U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC65[] = {
+    0x65U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC66[] = {
+    0x66U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC67[] = {
+    0x67U, 0xF0U, 0x9DU, 0x6AU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC68[] = {
+    0x68U, 0x19U, 0xD4U, 0x26U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC69[] = {
+    0x69U, 0xE0U, 0xEBU, 0x7BU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC6A[] = {
+    0x6AU, 0x00U, 0x00U, 0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
+
+const unsigned char REC6B[] = {
+    0x6BU, 0x02U, 0x02U, 0x0CU, 0x0BU, 0x12U, 0x64U, 0x00U, 0x00U, 0x80U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U,
+    0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
+
+const unsigned char REC6C[] = {
+    0x6CU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC6D[] = {
+    0x6DU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC6E[] = {
+    0x6EU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC6F[] = {
+    0x6FU, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC70[] = {
+    0x70U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC71[] = {
+    0x71U, 0xACU, 0xB8U, 0xA4U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC72[] = {
+    0x72U, 0x9BU, 0xDCU, 0x75U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x02U };
+
+const unsigned char REC73[] = {
+    0x73U, 0x00U, 0x00U, 0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
+
+const unsigned char REC80[] = {
+    0x80U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
 
 const unsigned char SILENCE[] = { 0xF0U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x78U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
 
@@ -47,13 +103,13 @@ const unsigned char BIT_MASK_TABLE[] = { 0x80U, 0x40U, 0x20U, 0x10U, 0x08U, 0x04
 CVoice::CVoice(const std::string& directory, const std::string& language, unsigned int srcId) :
 m_language(language),
 m_indxFile(),
-m_ambeFile(),
+m_imbeFile(),
 m_srcId(srcId),
 m_status(VS_NONE),
 m_timer(1000U, 1U),
 m_stopWatch(),
 m_sent(0U),
-m_ambe(NULL),
+m_imbe(NULL),
 m_voiceData(NULL),
 m_voiceLength(0U),
 m_positions()
@@ -63,10 +119,10 @@ m_positions()
 
 #if defined(_WIN32) || defined(_WIN64)
 	m_indxFile = directory + "\\" + language + ".indx";
-	m_ambeFile = directory + "\\" + language + ".nxdn";
+	m_imbeFile = directory + "\\" + language + ".p25";
 #else
 	m_indxFile = directory + "/" + language + ".indx";
-	m_ambeFile = directory + "/" + language + ".nxdn";
+	m_imbeFile = directory + "/" + language + ".p25";
 #endif
 
 	// Approximately 10 seconds worth
@@ -80,7 +136,7 @@ CVoice::~CVoice()
 
 	m_positions.clear();
 
-	delete[] m_ambe;
+	delete[] m_imbe;
 	delete[] m_voiceData;
 }
 
@@ -93,23 +149,23 @@ bool CVoice::open()
 	}
 
 	struct stat statStruct;
-	int ret = ::stat(m_ambeFile.c_str(), &statStruct);
+	int ret = ::stat(m_imbeFile.c_str(), &statStruct);
 	if (ret != 0) {
-		LogError("Unable to stat the AMBE file - %s", m_ambeFile.c_str());
+		LogError("Unable to stat the AMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
 	}
 
-	FILE* fpambe = ::fopen(m_ambeFile.c_str(), "rb");
+	FILE* fpambe = ::fopen(m_imbeFile.c_str(), "rb");
 	if (fpambe == NULL) {
-		LogError("Unable to open the AMBE file - %s", m_ambeFile.c_str());
+		LogError("Unable to open the AMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
 	}
 
-	m_ambe = new unsigned char[statStruct.st_size];
+	m_imbe = new unsigned char[statStruct.st_size];
 
-	size_t sizeRead = ::fread(m_ambe, 1U, statStruct.st_size, fpambe);
+	size_t sizeRead = ::fread(m_imbe, 1U, statStruct.st_size, fpimbe);
 	if (sizeRead != 0U) {
 		char buffer[80U];
 		while (::fgets(buffer, 80, fpindx) != NULL) {
@@ -119,8 +175,8 @@ bool CVoice::open()
 
 			if (p1 != NULL && p2 != NULL && p3 != NULL) {
 				std::string symbol  = std::string(p1);
-				unsigned int start  = ::atoi(p2) * AMBE_LENGTH;
-				unsigned int length = ::atoi(p3) * AMBE_LENGTH;
+				unsigned int start  = ::atoi(p2) * IMBE_LENGTH;
+				unsigned int length = ::atoi(p3) * IMBE_LENGTH;
 
 				CPositions* pos = new CPositions;
 				pos->m_start = start;
@@ -132,7 +188,7 @@ bool CVoice::open()
 	}
 
 	::fclose(fpindx);
-	::fclose(fpambe);
+	::fclose(fpimbe);
 
 	LogInfo("Loaded the audio and index file for %s", m_language.c_str());
 
@@ -168,11 +224,11 @@ void CVoice::unlinked()
 
 void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 {
-	unsigned int ambeLength = 0U;
+	unsigned int imbeLength = 0U;
 	for (std::vector<std::string>::const_iterator it = words.begin(); it != words.end(); ++it) {
 		if (m_positions.count(*it) > 0U) {
 			CPositions* position = m_positions.at(*it);
-			ambeLength += position->m_length;
+			imbeLength += position->m_length;
 		} else {
 			LogWarning("Unable to find character/phrase \"%s\" in the index", (*it).c_str());
 		}
@@ -183,8 +239,8 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 		ambeLength++;
 
 	// Add space for silence before and after the voice
-	ambeLength += SILENCE_LENGTH * AMBE_LENGTH;
-	ambeLength += SILENCE_LENGTH * AMBE_LENGTH;
+	ambeLength += SILENCE_LENGTH * IMBE_LENGTH;
+	ambeLength += SILENCE_LENGTH * IMBE_LENGTH;
 
 	unsigned char* ambeData = new unsigned char[ambeLength];
 
@@ -221,7 +277,7 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 	sacch[6U] = (tg >> 0) & 0xFFU;
 
 	unsigned int n = 0U;
-	for (unsigned int i = 0U; i < ambeLength; i += (2U * AMBE_LENGTH)) {
+	for (unsigned int i = 0U; i < ambeLength; i += (2U * IMBE_LENGTH)) {
 		unsigned char* p = ambeData + i;
 
 		unsigned char buffer[NXDN_FRAME_LENGTH];
@@ -243,8 +299,8 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 
 		CNXDNCRC::encodeCRC6(buffer + 1U, 26U);
 
-		::memcpy(buffer + 5U + 0U,  p + 0U,  AMBE_LENGTH);
-		::memcpy(buffer + 5U + 14U, p + 13U, AMBE_LENGTH);
+		::memcpy(buffer + 5U + 0U,  p + 0U,  IMBE_LENGTH);
+		::memcpy(buffer + 5U + 14U, p + 13U, IMBE_LENGTH);
 
 		n = (n + 1U) % 4U;
 
@@ -264,7 +320,7 @@ unsigned int CVoice::read(unsigned char* data)
 	if (m_status != VS_SENDING)
 		return 0U;
 
-	unsigned int count = m_stopWatch.elapsed() / NXDN_FRAME_TIME;
+	unsigned int count = m_stopWatch.elapsed() / P25_FRAME_TIME;
 
 	if (m_sent < count) {
 		unsigned int offset = m_sent * NXDN_FRAME_LENGTH;

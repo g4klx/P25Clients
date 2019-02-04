@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2017,2018 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016-2019 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include "Network.h"
 #include "Version.h"
 #include "Thread.h"
-#include "Speech.h"
+#include "Voice.h"
 #include "Timer.h"
 #include "Log.h"
 
@@ -46,6 +46,8 @@ const char* DEFAULT_INI_FILE = "P25Gateway.ini";
 #else
 const char* DEFAULT_INI_FILE = "/etc/P25Gateway.ini";
 #endif
+
+const unsigned P25_VOICE_ID = 10999U;
 
 #include <cstdio>
 #include <cstdlib>
@@ -197,9 +199,15 @@ void CP25Gateway::run()
 	CStopWatch stopWatch;
 	stopWatch.start();
 
-	CSpeech* speech = NULL;
-	if (m_conf.getAnnouncements())
-		speech = new CSpeech(localNetwork, rptAddr, rptPort);
+	CVoice* voice = NULL;
+	if (m_conf.getVoiceEnabled()) {
+		voice = new CVoice(m_conf.getVoiceDirectory(), m_conf.getVoiceLanguage(), P25_VOICE_ID);
+		bool ok = voice->open();
+		if (!ok) {
+			delete voice;
+			voice = NULL;
+		}
+	}
 
 	LogMessage("Starting P25Gateway-%s", VERSION);
 
@@ -292,8 +300,12 @@ void CP25Gateway::run()
 							lostTimer.stop();
 						}
 
-						if (speech != NULL)
-							speech->announce(dstId);
+						if (voice != NULL) {
+							if (dstId == 9999U)
+								voice->unlinked();
+							else
+								voice->linkedTo(dstId);
+						}
 
 						currentId = dstId;
 					}
@@ -317,8 +329,8 @@ void CP25Gateway::run()
 					}
 				}
 			} else if (buffer[0U] == 0x80U) {
-				if (speech != NULL)
-					speech->eof();
+				if (voice != NULL)
+					voice->eof();
 			}
 
 			// If we're linked and we have a network, send it on
@@ -337,13 +349,19 @@ void CP25Gateway::run()
 			}
 		}
 
+		if (voice != NULL) {
+			unsigned int length = voice->read(buffer);
+			if (length > 0U)
+				localNetwork.write(buffer, length, rptAddr, rptPort);
+		}
+
 		unsigned int ms = stopWatch.elapsed();
 		stopWatch.start();
 
 		reflectors.clock(ms);
 
-		if (speech != NULL)
-			speech->clock(ms);
+		if (voice != NULL)
+			voice->clock(ms);
 
 		inactivityTimer.clock(ms);
 		if (inactivityTimer.isRunning() && inactivityTimer.hasExpired()) {
@@ -354,8 +372,8 @@ void CP25Gateway::run()
 				remoteNetwork.writeUnlink(currentAddr, currentPort);
 				remoteNetwork.writeUnlink(currentAddr, currentPort);
 
-				if (speech != NULL)
-					speech->announce(currentId);
+				if (voice != NULL)
+					voice->unlinked();
 				currentId = 9999U;
 
 				pollTimer.stop();
@@ -380,8 +398,8 @@ void CP25Gateway::run()
 
 					LogMessage("Linked to reflector %u due to inactivity", currentId);
 
-					if (speech != NULL)
-						speech->announce(currentId);
+					if (voice != NULL)
+						voice->linkedTo(currentId);
 
 					remoteNetwork.writePoll(currentAddr, currentPort);
 					remoteNetwork.writePoll(currentAddr, currentPort);
@@ -417,7 +435,7 @@ void CP25Gateway::run()
 			CThread::sleep(5U);
 	}
 
-	delete speech;
+	delete voice;
 
 	localNetwork.close();
 
