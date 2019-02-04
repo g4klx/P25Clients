@@ -62,13 +62,12 @@ private:
 	CTimer                                 m_timer;
 	CStopWatch                             m_stopWatch;
 	unsigned int                           m_sent;
+	unsigned int                           m_n;
 	unsigned char*                         m_imbe;
 	unsigned char*                         m_voiceData;
 	unsigned int                           m_voiceLength;
 	std::unordered_map<std::string, CPositions*> m_positions;
 
-	void createHeader(bool grp, unsigned int dstId);
-	void createTrailer(bool grp, unsigned int dstId);
 	void createVoice(unsigned int tg, const std::vector<std::string>& words);
 };
 

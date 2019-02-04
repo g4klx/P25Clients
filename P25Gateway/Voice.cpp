@@ -16,7 +16,6 @@
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include "NXDNCRC.h"
 #include "Voice.h"
 #include "Log.h"
 
@@ -88,17 +87,10 @@ const unsigned char REC80[] = {
 
 const unsigned char SILENCE[] = { 0xF0U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x78U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
 
-const unsigned char NXDN_FRAME_LENGTH = 33U;
-
-const unsigned int NXDN_FRAME_TIME = 80U;
+const unsigned int P25_FRAME_TIME = 20U;
 
 const unsigned int SILENCE_LENGTH = 4U;
-const unsigned int AMBE_LENGTH = 13U;
-
-const unsigned char BIT_MASK_TABLE[] = { 0x80U, 0x40U, 0x20U, 0x10U, 0x08U, 0x04U, 0x02U, 0x01U };
-
-#define WRITE_BIT1(p,i,b) p[(i)>>3] = (b) ? (p[(i)>>3] | BIT_MASK_TABLE[(i)&7]) : (p[(i)>>3] & ~BIT_MASK_TABLE[(i)&7])
-#define READ_BIT1(p,i)    (p[(i)>>3] & BIT_MASK_TABLE[(i)&7])
+const unsigned int IMBE_LENGTH = 11U;
 
 CVoice::CVoice(const std::string& directory, const std::string& language, unsigned int srcId) :
 m_language(language),
@@ -109,6 +101,7 @@ m_status(VS_NONE),
 m_timer(1000U, 1U),
 m_stopWatch(),
 m_sent(0U),
+m_n(0x62U),
 m_imbe(NULL),
 m_voiceData(NULL),
 m_voiceLength(0U),
@@ -156,8 +149,8 @@ bool CVoice::open()
 		return false;
 	}
 
-	FILE* fpambe = ::fopen(m_imbeFile.c_str(), "rb");
-	if (fpambe == NULL) {
+	FILE* fpimbe = ::fopen(m_imbeFile.c_str(), "rb");
+	if (fpimbe == NULL) {
 		LogError("Unable to open the AMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
@@ -224,93 +217,36 @@ void CVoice::unlinked()
 
 void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 {
-	unsigned int imbeLength = 0U;
+	m_voiceLength = 0U;
 	for (std::vector<std::string>::const_iterator it = words.begin(); it != words.end(); ++it) {
 		if (m_positions.count(*it) > 0U) {
 			CPositions* position = m_positions.at(*it);
-			imbeLength += position->m_length;
+			m_voiceeLength += position->m_length;
 		} else {
 			LogWarning("Unable to find character/phrase \"%s\" in the index", (*it).c_str());
 		}
 	}
 
-	// Ensure that the AMBE is an integer number of NXDN frames
-	if ((ambeLength % (2U * AMBE_LENGTH)) != 0U)
-		ambeLength++;
-
 	// Add space for silence before and after the voice
-	ambeLength += SILENCE_LENGTH * IMBE_LENGTH;
-	ambeLength += SILENCE_LENGTH * IMBE_LENGTH;
+	m_voiceLength += SILENCE_LENGTH * IMBE_LENGTH;
+	m_voiceLength += SILENCE_LENGTH * IMBE_LENGTH;
 
-	unsigned char* ambeData = new unsigned char[ambeLength];
-
-	// Fill the AMBE data with silence
+	// Fill the IMBE data with silence
 	unsigned int offset = 0U;
-	for (unsigned int i = 0U; i < (ambeLength / AMBE_LENGTH); i++, offset += AMBE_LENGTH)
-		::memcpy(ambeData + offset, SILENCE, AMBE_LENGTH);
+	for (unsigned int i = 0U; i < (m_voiceLength / IMBE_LENGTH); i++, offset += IMBE_LENGTH)
+		::memcpy(m_voiceData + offset, SILENCE, IMBE_LENGTH);
 
 	// Put offset in for silence at the beginning
-	unsigned int pos = SILENCE_LENGTH * AMBE_LENGTH;
+	unsigned int pos = SILENCE_LENGTH * IMBE_LENGTH;
 	for (std::vector<std::string>::const_iterator it = words.begin(); it != words.end(); ++it) {
 		if (m_positions.count(*it) > 0U) {
 			CPositions* position = m_positions.at(*it);
 			unsigned int start  = position->m_start;
 			unsigned int length = position->m_length;
-			::memcpy(ambeData + pos, m_ambe + start, length);
+			::memcpy(m_voiceData + pos, m_imbe + start, length);
 			pos += length;
 		}
 	}
-
-	m_voiceLength = 0U;
-
-	createHeader(true, tg);
-
-	unsigned char sacch[12U];
-	::memset(sacch, 0x00U, 12U);
-	sacch[0U] = 0x01U;
-	sacch[2U] = 0x20U;
-
-	sacch[3U] = (m_srcId >> 8) & 0xFFU;
-	sacch[4U] = (m_srcId >> 0) & 0xFFU;
-
-	sacch[5U] = (tg >> 8) & 0xFFU;
-	sacch[6U] = (tg >> 0) & 0xFFU;
-
-	unsigned int n = 0U;
-	for (unsigned int i = 0U; i < ambeLength; i += (2U * IMBE_LENGTH)) {
-		unsigned char* p = ambeData + i;
-
-		unsigned char buffer[NXDN_FRAME_LENGTH];
-		::memset(buffer, 0x00U, NXDN_FRAME_LENGTH);
-
-		buffer[0U] = 0xAEU;
-
-		switch (n) {
-		case 0U: buffer[1U] = 0xC1U; break;
-		case 1U: buffer[1U] = 0x81U; break;
-		case 2U: buffer[1U] = 0x41U; break;
-		default: buffer[1U] = 0x01U; break;
-		}
-
-		for (unsigned int j = 0U; j < 18U; j++) {
-			bool b = READ_BIT1(sacch, j + n * 18U);
-			WRITE_BIT1(buffer, j + 16U, b);
-		}
-
-		CNXDNCRC::encodeCRC6(buffer + 1U, 26U);
-
-		::memcpy(buffer + 5U + 0U,  p + 0U,  IMBE_LENGTH);
-		::memcpy(buffer + 5U + 14U, p + 13U, IMBE_LENGTH);
-
-		n = (n + 1U) % 4U;
-
-		::memcpy(m_voiceData + m_voiceLength, buffer, NXDN_FRAME_LENGTH);
-		m_voiceLength += NXDN_FRAME_LENGTH;
-	}
-
-	createTrailer(true, tg);
-
-	delete[] ambeData;
 }
 
 unsigned int CVoice::read(unsigned char* data)
@@ -359,54 +295,7 @@ void CVoice::clock(unsigned int ms)
 			m_stopWatch.start();
 			m_status = VS_SENDING;
 			m_sent = 0U;
+			m_n = 0x62U;
 		}
 	}
-}
-
-void CVoice::createHeader(bool grp, unsigned int dstId)
-{
-	unsigned char buffer[NXDN_FRAME_LENGTH];
-
-	::memset(buffer, 0x00U, NXDN_FRAME_LENGTH);
-	::memcpy(buffer, HEADER, 8U);
-
-	if (grp)
-		buffer[7U] = 0x20U;
-
-	buffer[8U] = (m_srcId >> 8) & 0xFFU;
-	buffer[9U] = (m_srcId >> 0) & 0xFFU;
-
-	buffer[10U] = (dstId >> 8) & 0xFFU;
-	buffer[11U] = (dstId >> 0) & 0xFFU;
-
-	CNXDNCRC::encodeCRC12(buffer + 5U, 80U);
-
-	::memcpy(buffer + 19U, buffer + 5U, 12U);
-
-	::memcpy(m_voiceData + m_voiceLength, buffer, NXDN_FRAME_LENGTH);
-	m_voiceLength += NXDN_FRAME_LENGTH;
-}
-
-void CVoice::createTrailer(bool grp, unsigned int dstId)
-{
-	unsigned char buffer[NXDN_FRAME_LENGTH];
-
-	::memset(buffer, 0x00U, NXDN_FRAME_LENGTH);
-	::memcpy(buffer, TRAILER, 8U);
-
-	if (grp)
-		buffer[7U] = 0x20U;
-
-	buffer[8U] = (m_srcId >> 8) & 0xFFU;
-	buffer[9U] = (m_srcId >> 0) & 0xFFU;
-
-	buffer[10U] = (dstId >> 8) & 0xFFU;
-	buffer[11U] = (dstId >> 0) & 0xFFU;
-
-	CNXDNCRC::encodeCRC12(buffer + 5U, 80U);
-
-	::memcpy(buffer + 19U, buffer + 5U, 12U);
-
-	::memcpy(m_voiceData + m_voiceLength, buffer, NXDN_FRAME_LENGTH);
-	m_voiceLength += NXDN_FRAME_LENGTH;
 }
