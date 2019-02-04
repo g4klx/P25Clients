@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015,2016,2017,2018 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015-2019 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -42,6 +42,11 @@ public:
   std::string  getLookupName() const;
   unsigned int getLookupTime() const;
 
+  // The Voice section
+  bool         getVoiceEnabled() const;
+  std::string  getVoiceLanguage() const;
+  std::string  getVoiceDirectory() const;
+
   // The Log section
   std::string  getLogFilePath() const;
   std::string  getLogFileRoot() const;
@@ -68,6 +73,10 @@ private:
 
   std::string  m_lookupName;
   unsigned int m_lookupTime;
+
+  bool         m_voiceEnabled;
+  std::string  m_voiceLanguage;
+  std::string  m_voiceDirectory;
 
   std::string  m_logFilePath;
   std::string  m_logFileRoot;
