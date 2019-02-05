@@ -226,7 +226,7 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 	for (std::vector<std::string>::const_iterator it = words.begin(); it != words.end(); ++it) {
 		if (m_positions.count(*it) > 0U) {
 			CPositions* position = m_positions.at(*it);
-			m_voiceeLength += position->m_length;
+			m_voiceLength += position->m_length;
 		} else {
 			LogWarning("Unable to find character/phrase \"%s\" in the index", (*it).c_str());
 		}

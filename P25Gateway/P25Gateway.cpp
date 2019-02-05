@@ -352,7 +352,7 @@ void CP25Gateway::run()
 		if (voice != NULL) {
 			unsigned int length = voice->read(buffer);
 			if (length > 0U)
-				localNetwork.write(buffer, length, rptAddr, rptPort);
+				localNetwork.writeData(buffer, length, rptAddr, rptPort);
 		}
 
 		unsigned int ms = stopWatch.elapsed();
