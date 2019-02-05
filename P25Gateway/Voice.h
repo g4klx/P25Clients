@@ -63,6 +63,7 @@ private:
 	CStopWatch                             m_stopWatch;
 	unsigned int                           m_sent;
 	unsigned int                           m_n;
+	unsigned int                           m_dstId;
 	unsigned char*                         m_imbe;
 	unsigned char*                         m_voiceData;
 	unsigned int                           m_voiceLength;

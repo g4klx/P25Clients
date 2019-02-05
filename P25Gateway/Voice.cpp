@@ -102,6 +102,7 @@ m_timer(1000U, 1U),
 m_stopWatch(),
 m_sent(0U),
 m_n(0x62U),
+m_dstId(0U),
 m_imbe(NULL),
 m_voiceData(NULL),
 m_voiceLength(0U),
@@ -119,7 +120,7 @@ m_positions()
 #endif
 
 	// Approximately 10 seconds worth
-	m_voiceData = new unsigned char[120U * NXDN_FRAME_LENGTH];
+	m_voiceData = new unsigned char[10U * 50U * IMBE_LENGTH];
 }
 
 CVoice::~CVoice()
@@ -144,14 +145,14 @@ bool CVoice::open()
 	struct stat statStruct;
 	int ret = ::stat(m_imbeFile.c_str(), &statStruct);
 	if (ret != 0) {
-		LogError("Unable to stat the AMBE file - %s", m_imbeFile.c_str());
+		LogError("Unable to stat the IMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
 	}
 
 	FILE* fpimbe = ::fopen(m_imbeFile.c_str(), "rb");
 	if (fpimbe == NULL) {
-		LogError("Unable to open the AMBE file - %s", m_imbeFile.c_str());
+		LogError("Unable to open the IMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
 	}
@@ -217,6 +218,8 @@ void CVoice::unlinked()
 
 void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 {
+	m_dstId = tg;
+
 	m_voiceLength = 0U;
 	for (std::vector<std::string>::const_iterator it = words.begin(); it != words.end(); ++it) {
 		if (m_positions.count(*it) > 0U) {
@@ -230,6 +233,11 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 	// Add space for silence before and after the voice
 	m_voiceLength += SILENCE_LENGTH * IMBE_LENGTH;
 	m_voiceLength += SILENCE_LENGTH * IMBE_LENGTH;
+
+	// Round to the next highest LDU frame length
+	unsigned int n = (m_voiceLength / IMBE_LENGTH) % 9U;
+	if (n > 0U)
+		m_voiceLength += (9U - n) * IMBE_LENGTH;
 
 	// Fill the IMBE data with silence
 	unsigned int offset = 0U;
@@ -256,25 +264,140 @@ unsigned int CVoice::read(unsigned char* data)
 	if (m_status != VS_SENDING)
 		return 0U;
 
-	unsigned int count = m_stopWatch.elapsed() / P25_FRAME_TIME;
-
-	if (m_sent < count) {
-		unsigned int offset = m_sent * NXDN_FRAME_LENGTH;
-		::memcpy(data, m_voiceData + offset, NXDN_FRAME_LENGTH);
-
-		offset += NXDN_FRAME_LENGTH;
-		m_sent++;
-
-		if (offset >= m_voiceLength) {
-			m_timer.stop();
-			m_voiceLength = 0U;
-			m_status = VS_NONE;
-		}
-
-		return NXDN_FRAME_LENGTH;
+	if ((m_sent * IMBE_LENGTH) >= m_voiceLength) {
+		::memcpy(data, REC80, 17U);
+		m_timer.stop();
+		m_voiceLength = 0U;
+		m_status = VS_NONE;
+		return 17U;
 	}
 
-	return 0U;
+	unsigned int count = m_stopWatch.elapsed() / P25_FRAME_TIME;
+
+	unsigned int length = 0U;
+
+	if (m_sent < count) {
+		switch (m_n) {
+		case 0x62U:
+			::memcpy(data, REC62, 22U);
+			::memcpy(data + 10U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 22U;
+			m_n = 0x63U;
+			break;
+		case 0x63U:
+			::memcpy(data, REC63, 14U);
+			::memcpy(data + 1U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 14U;
+			m_n = 0x64U;
+			break;
+		case 0x64U:
+			::memcpy(data, REC64, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x65U;
+			break;
+		case 0x65U:
+			::memcpy(data, REC65, 17U);
+			data[1U] = (m_dstId >> 16) & 0xFFU;
+			data[2U] = (m_dstId >> 8) & 0xFFU;
+			data[3U] = (m_dstId >> 0) & 0xFFU;
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x66U;
+			break;
+		case 0x66U:
+			::memcpy(data, REC66, 17U);
+			data[1U] = (m_srcId >> 16) & 0xFFU;
+			data[2U] = (m_srcId >> 8) & 0xFFU;
+			data[3U] = (m_srcId >> 0) & 0xFFU;
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x67U;
+			break;
+		case 0x67U:
+			::memcpy(data, REC67, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x68U;
+			break;
+		case 0x68U:
+			::memcpy(data, REC68, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x69U;
+			break;
+		case 0x69U:
+			::memcpy(data, REC69, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x6AU;
+			break;
+		case 0x6AU:
+			::memcpy(data, REC6A, 16U);
+			::memcpy(data + 4U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 16U;
+			m_n = 0x6BU;
+			break;
+		case 0x6BU:
+			::memcpy(data, REC6B, 22U);
+			::memcpy(data + 10U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 22U;
+			m_n = 0x6CU;
+			break;
+		case 0x6CU:
+			::memcpy(data, REC6C, 14U);
+			::memcpy(data + 1U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 14U;
+			m_n = 0x6DU;
+			break;
+		case 0x6DU:
+			::memcpy(data, REC6D, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x6EU;
+			break;
+		case 0x6EU:
+			::memcpy(data, REC6E, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x6FU;
+			break;
+		case 0x6FU:
+			::memcpy(data, REC6F, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x70U;
+			break;
+		case 0x70U:
+			::memcpy(data, REC70, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x71U;
+			break;
+		case 0x71U:
+			::memcpy(data, REC71, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x72U;
+			break;
+		case 0x72U:
+			::memcpy(data, REC72, 17U);
+			::memcpy(data + 5U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 17U;
+			m_n = 0x73U;
+			break;
+		default:
+			::memcpy(data, REC73, 16U);
+			::memcpy(data + 4U, m_voiceData + (m_sent * IMBE_LENGTH), IMBE_LENGTH);
+			length = 16U;
+			m_n = 0x62U;
+			break;
+		}
+
+		m_sent++;
+	}
+
+	return length;
 }
 
 void CVoice::eof()

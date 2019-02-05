@@ -153,32 +153,13 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="P25Gateway.h" />
     <ClInclude Include="Reflectors.h" />
-    <ClInclude Include="Speech.h" />
-    <ClInclude Include="SpeechDisconnected.h" />
-    <ClInclude Include="SpeechEU.h" />
-    <ClInclude Include="SpeechEUTAC1.h" />
-    <ClInclude Include="SpeechEUTAC2.h" />
-    <ClInclude Include="SpeechEUTAC3.h" />
-    <ClInclude Include="SpeechFrance.h" />
-    <ClInclude Include="SpeechGermany.h" />
-    <ClInclude Include="SpeechNA.h" />
-    <ClInclude Include="SpeechNATAC1.h" />
-    <ClInclude Include="SpeechNATAC2.h" />
-    <ClInclude Include="SpeechNATAC3.h" />
-    <ClInclude Include="SpeechPacific.h" />
-    <ClInclude Include="SpeechPacificTAC1.h" />
-    <ClInclude Include="SpeechPacificTAC2.h" />
-    <ClInclude Include="SpeechPacificTAC3.h" />
-    <ClInclude Include="SpeechWW.h" />
-    <ClInclude Include="SpeechWWTAC1.h" />
-    <ClInclude Include="SpeechWWTAC2.h" />
-    <ClInclude Include="SpeechWWTAC3.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UDPSocket.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Version.h" />
+    <ClInclude Include="Voice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Conf.cpp" />
@@ -188,12 +169,12 @@
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="P25Gateway.cpp" />
     <ClCompile Include="Reflectors.cpp" />
-    <ClCompile Include="Speech.cpp" />
     <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Voice.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

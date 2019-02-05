@@ -29,6 +29,9 @@
     <ClInclude Include="P25Gateway.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Reflectors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,67 +50,7 @@
     <ClInclude Include="Version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Reflectors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechEU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechNA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechPacific.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechWW.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Speech.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechEUTAC1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechEUTAC2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechEUTAC3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechFrance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechGermany.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechNATAC1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechNATAC2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechNATAC3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechPacificTAC1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechPacificTAC2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechPacificTAC3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechWWTAC1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechWWTAC2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechWWTAC3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeechDisconnected.h">
+    <ClInclude Include="Voice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -130,6 +73,9 @@
     <ClCompile Include="P25Gateway.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reflectors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="StopWatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -145,10 +91,7 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Reflectors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Speech.cpp">
+    <ClCompile Include="Voice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
