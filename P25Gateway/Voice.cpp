@@ -85,12 +85,14 @@ const unsigned char REC73[] = {
 const unsigned char REC80[] = {
     0x80U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
 
-const unsigned char SILENCE[] = { 0xF0U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x78U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U, 0x00U };
+const unsigned char SILENCE[] = { 0x04U, 0x0CU, 0xFDU, 0x7BU, 0xFBU, 0x7DU, 0xF2U, 0x7BU, 0x3DU, 0x9EU, 0x44U };
 
 const unsigned int P25_FRAME_TIME = 20U;
 
 const unsigned int SILENCE_LENGTH = 4U;
 const unsigned int IMBE_LENGTH = 11U;
+
+const unsigned int LDU_LENGTH = 9U;
 
 CVoice::CVoice(const std::string& directory, const std::string& language, unsigned int srcId) :
 m_language(language),
@@ -235,9 +237,9 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 	m_voiceLength += SILENCE_LENGTH * IMBE_LENGTH;
 
 	// Round to the next highest LDU frame length
-	unsigned int n = (m_voiceLength / IMBE_LENGTH) % 9U;
+	unsigned int n = (m_voiceLength / IMBE_LENGTH) % LDU_LENGTH;
 	if (n > 0U)
-		m_voiceLength += (9U - n) * IMBE_LENGTH;
+		m_voiceLength += (LDU_LENGTH - n) * IMBE_LENGTH;
 
 	// Fill the IMBE data with silence
 	unsigned int offset = 0U;
