@@ -50,6 +50,9 @@
 # 31672 P25 Pi-Star chat
 31672 p25-31672.pistar.uk   41000
 
+# 31777 DX-LINK
+31777 45.77.204.214   41000
+
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
