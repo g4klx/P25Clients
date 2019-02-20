@@ -115,10 +115,10 @@ m_positions()
 
 #if defined(_WIN32) || defined(_WIN64)
 	m_indxFile = directory + "\\" + language + ".indx";
-	m_imbeFile = directory + "\\" + language + ".p25";
+	m_imbeFile = directory + "\\" + language + ".imbe";
 #else
 	m_indxFile = directory + "/" + language + ".indx";
-	m_imbeFile = directory + "/" + language + ".p25";
+	m_imbeFile = directory + "/" + language + ".imbe";
 #endif
 
 	// Approximately 10 seconds worth
