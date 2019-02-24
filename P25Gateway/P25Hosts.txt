@@ -21,7 +21,7 @@
 10301	ea5gvk.duckdns.org	41000
 
 # 10320 Germany
-10320	78.47.206.12	41000
+10320	46.41.0.214	41000
 
 # 1040x Pacific
 10400	pacificp25.repeaters.info	41000
