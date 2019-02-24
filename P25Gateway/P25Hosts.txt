@@ -3,27 +3,27 @@
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
 
-# Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
+# 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org	41004
 
-# Indiana Digital Ham Radio P25 Reflector
+# 6935 Indiana Digital Ham Radio P25 Reflector
 6395 p25ref.nf9k.net 41000
 
-# World Wide, 1010x
+# 1010x World Wide
 10100	85.119.82.151	41000
 
-# North America, 1020x
+# 1020x North America
 10200 dvswitch.org  41000
 10201 dvswitch.org  41010
 
-# Europe, 1030x
+# 1030x Europe
 10300	176.9.1.168	41000
 10301	ea5gvk.duckdns.org	41000
 
-# Germany, 10320
+# 10320 Germany
 10320	78.47.206.12	41000
 
-# Pacific, 1040x
+# 1040x Pacific
 10400	pacificp25.repeaters.info	41000
 10401	pacifictac1.repeaters.info	41010
 10402	47.104.177.248				41000
@@ -32,17 +32,20 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700 p25nsw.gustotech.net  41000
 
-# America-Ragchew, 28299
+# 28299 America-Ragchew
 28299	65.101.7.51	41000
 
-# NorCal-Bridge / Multimode-P25-TG30639
+# 30639 NorCal-Bridge / Multimode-P25-TG30639
 30639	wiresxdigi.dyndns.org	41000
 
-# Alabama Link
+# 31010 Alabama Link
 31010	p25.alabamalink.info	41000
 
-# Colorado HD
+# 31088 Colorado HD
 31088 54.191.50.212 41000
+
+# 31171 Illinois
+31171	74.208.235.115	41000
 
 # 31665 P25-DMR Gateway
 31665	18.223.66.56	41000
@@ -50,8 +53,8 @@
 # 31672 P25 Pi-Star chat
 31672 p25-31672.pistar.uk   41000
 
-# 31171 Illinois
-31171	74.208.235.115	41000
+# 31341 South Jersey, http://p25.kc2idb.net
+31341	p25.kc2idb.net	41000
 
 # 31777 DX-LINK
 31777 45.77.204.214   41000
