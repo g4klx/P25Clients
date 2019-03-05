@@ -23,6 +23,9 @@
 # 10320 Germany
 10320	46.41.0.214	41000
 
+# 23225 Austria
+23225	94.199.173.123	41000
+
 # 1040x Pacific
 10400	pacificp25.repeaters.info	41000
 10401	pacifictac1.repeaters.info	41010
