@@ -7,14 +7,14 @@
 4	p25.duckdns.org	41004
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
-6395 p25ref.nf9k.net 41000
+6395	p25ref.nf9k.net	41000
 
 # 1010x World Wide
 10100	85.119.82.151	41000
 
 # 1020x North America
-10200 dvswitch.org  41000
-10201 dvswitch.org  41010
+10200	dvswitch.org	41000
+10201	dvswitch.org	41010
 
 # 1030x Europe
 10300	176.9.1.168	41000
@@ -33,7 +33,10 @@
 10403	120.234.41.144				41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
-10700 p25nsw.gustotech.net  41000
+10700	p25nsw.gustotech.net	41000
+
+# 25641 Russia P25 Net
+25641	194.182.85.217	41000
 
 # 28299 America-Ragchew
 28299	65.101.7.51	41000
@@ -63,10 +66,10 @@
 31341	p25.kc2idb.net	41000
 
 # 31777 DX-LINK
-31777 45.77.204.214   41000
+31777	45.77.204.214	41000
 
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
-53099 203.86.206.49 41000
+53099	203.86.206.49	41000
