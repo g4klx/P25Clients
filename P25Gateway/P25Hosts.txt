@@ -31,6 +31,7 @@
 10401	pacifictac1.repeaters.info	41010
 10402	47.104.177.248				41000
 10403	120.234.41.144				41000
+10404	p25tw338.ddns.net	41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
