@@ -57,8 +57,8 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
-# 31665 P25-DMR Gateway
-31665	18.223.66.56	41000
+# 31665 TGIF Network, http://tgif.network
+31665	tgif.network	41000
 
 # 31672 P25 Pi-Star chat
 31672 p25-31672.pistar.uk   41000
