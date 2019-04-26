@@ -66,6 +66,9 @@
 # 31341 South Jersey, http://p25.kc2idb.net
 31341	p25.kc2idb.net	41000
 
+# 31403 Oklahoma Link
+31403	3.208.70.29	41000
+
 # 31777 DX-LINK
 31777	45.77.204.214	41000
 
