@@ -6,6 +6,9 @@
 # 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org	41004
 
+# 5057 VK7 TAS 
+5057    45.248.50.37    41000
+
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
