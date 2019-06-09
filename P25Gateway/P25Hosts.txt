@@ -29,6 +29,9 @@
 # 10328 German Pegasus Project
 10328	5.9.59.26	41000
 
+# 10342 UK
+10342 P25R.northwestdigital.club 41000
+
 # 23225 Austria
 23225	94.199.173.123	41000
 
