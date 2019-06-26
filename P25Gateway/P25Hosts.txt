@@ -84,6 +84,9 @@
 # 31888 KG4JPL North-Central Florida
 31888 p25.kg4jpl.com  41000
 
+ + #40721 Fusion Canada Fr
+ + #40721 38.110.97.161 41000
+ 
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
