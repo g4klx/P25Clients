@@ -13,7 +13,7 @@
 6395	p25ref.nf9k.net	41000
 
 # 1010x World Wide
-10100	85.119.82.151	41000
+10100	m1geo.com	41000
 
 # 1020x North America
 10200	dvswitch.org	41000
