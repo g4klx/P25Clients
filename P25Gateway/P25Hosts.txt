@@ -32,6 +32,9 @@
 # 10342 UK
 10342 P25R.northwestdigital.club 41000
 
+# 10350 GB WARC
+10350 warc.ddns.net 41000
+
 # 23225 Austria
 23225	94.199.173.123	41000
 
