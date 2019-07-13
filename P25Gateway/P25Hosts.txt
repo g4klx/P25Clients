@@ -60,6 +60,9 @@
 # 31010 Alabama Link
 31010	p25.alabamalink.info	41000
 
+# 31062 Mountain West
+31062 p25.mw-dmr.net 41000
+
 # 31088 Colorado HD
 31088 54.191.50.212 41000
 
