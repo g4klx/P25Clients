@@ -23,6 +23,9 @@
 10300	176.9.1.168	41000
 10301	ea5gvk.duckdns.org	41000
 
+# 10310 HAMNET HAMCLOUD
+10310	44.148.230.100	41000
+
 # 10320 Germany
 10320	46.41.0.214	41000
 
@@ -35,9 +38,6 @@
 # 10350 GB WARC
 10350 warc.ddns.net 41000
 
-# 23225 Austria
-23225	94.199.173.123	41000
-
 # 1040x Pacific
 10400	pacificp25.repeaters.info	41000
 10401	pacifictac1.repeaters.info	41010
@@ -47,6 +47,9 @@
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
+
+# 23225 Austria
+23225	94.199.173.123	41000
 
 # 25641 Russia P25 Net
 25641	194.182.85.217	41000
