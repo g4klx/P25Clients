@@ -6,6 +6,9 @@
 # 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org	41004
 
+# 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
+707 707p25.kd0ioe.com 41000
+
 # 5057 VK7 TAS 
 5057    45.248.50.37    41000
 
