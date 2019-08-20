@@ -107,3 +107,6 @@
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49	41000
+
+# 3023 Ontario Crosslink
+3023   ontxlink.hopto.org 41000
