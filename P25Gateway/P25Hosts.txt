@@ -112,4 +112,4 @@
 3023   ontxlink.hopto.org 41000
 
 # 2140 P25 Reflector BM DMR+ Multi 
-2140 94.177.235.81 4100
+2140 94.177.235.81 41000
