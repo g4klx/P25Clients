@@ -1,2 +1,2 @@
-# 2503 RU DMR TG2503
-2503   p25.r1ik.ru 41000
+# 2221 IT PIEDMONT GDO
+2221  iz1zpj.duckdns.org 41000
