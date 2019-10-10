@@ -4,36 +4,85 @@
 #
 
 # 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
-4	p25.duckdns.org	41004
+4	p25.duckdns.org		41004
+
+# 420 Super Freq
+4 45.76.16.174 41000
+
+# 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
+707	707p25.kd0ioe.com	41000
+
+# 2140 P25 Reflector BM DMR+ Multi 
+2140	94.177.235.81		41000
+
+# 3023 Ontario Crosslink
+3023	ontxlink.hopto.org	41000
+
+# 5057 VK7 TAS 
+5057	45.248.50.37		41000
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
-6395 p25ref.nf9k.net 41000
+6395	p25ref.nf9k.net		41000
 
-# 1010x World Wide
-10100	85.119.82.151	41000
+# 10100 World Wide	http://www.george-smart.co.uk/p25/
+10100	m1geo.com		41000
 
-# 1020x North America
-10200 dvswitch.org  41000
-10201 dvswitch.org  41010
+# 10200 North America
+10200	dvswitch.org		41000
 
-# 1030x Europe
-10300	176.9.1.168	41000
+# 10200 North America TAC 1
+10201	dvswitch.org		41010
+
+# 10300 Europe	https://p25-eu.n18.de/
+10300	176.9.1.168		41000
+
+# 10301	Europe
 10301	ea5gvk.duckdns.org	41000
 
-# 10320 Germany
-10320	46.41.0.214	41000
+# 10310 HAMNET HAMCLOUD	http://44.148.230.100/P25Reflector-Dashboard/
+10310	44.148.230.100		41000
 
-# 1040x Pacific
+# 10320 Germany	https://db0he.de:8002/p25db/
+10320	46.41.0.214		41000
+
+# 10321 Germany Multimode	https://db0he.de:8003/p25db/
+10321	46.41.0.214		41010
+
+# 10328 German Pegasus Project
+10328	5.9.59.26		41000
+
+# 10342 UK
+10342	P25R.northwestdigital.club	41000
+
+# 10350 GB WARC
+10350	warc.ddns.net		41000
+
+# 10400 Pacific	http://pacificp25.repeaters.info/
 10400	pacificp25.repeaters.info	41000
+
+# 10401 Pacific	TAC 1 http://pacifictac1.repeaters.info/
 10401	pacifictac1.repeaters.info	41010
-10402	47.104.177.248				41000
-10403	120.234.41.144				41000
+
+# 10402	Pacific	TAC 2
+10402	47.104.177.248		41000
+
+# 10401	Pacific	TAC 3
+10403	120.234.41.144		41000
+
+# 10401	Pacific	TAC 4
+10404	p25tw338.ddns.net	41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
-10700 p25nsw.gustotech.net  41000
+10700	p25nsw.gustotech.net	41000
+
+# 23225 Austria
+23225	94.199.173.123		41000
+
+# 25641 Russia P25 Net
+25641	194.182.85.217		41000
 
 # 28299 America-Ragchew
-28299	65.101.7.51	41000
+28299	65.101.7.51		41000
 
 # 30639 NorCal-Bridge / Multimode-P25-TG30639
 30639	wiresxdigi.dyndns.org	41000
@@ -41,29 +90,44 @@
 # 31010 Alabama Link
 31010	p25.alabamalink.info	41000
 
+# 31062 Mountain West
+31062	p25.mw-dmr.net		41000
+
 # 31088 Colorado HD
-31088 54.191.50.212 41000
+31088	54.191.50.212		41000
+
+# 31092 Connecticut Chat
+31092	p25.alecwasserman.com	41000
 
 # 31171 Illinois
-31171	74.208.235.115	41000
+31171	74.208.235.115		41000
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
-# 31665 P25-DMR Gateway
-31665	18.223.66.56	41000
+# 31665 TGIF Network, http://tgif.network
+31665	tgif.network		41000
 
 # 31672 P25 Pi-Star chat
-31672 p25-31672.pistar.uk   41000
+31672	p25-31672.pistar.uk	41000
 
 # 31341 South Jersey, http://p25.kc2idb.net
-31341	p25.kc2idb.net	41000
+31341	p25.kc2idb.net		41000
+
+# 31403 Oklahoma Link
+31403	3.208.70.29		41000
 
 # 31777 DX-LINK
-31777 45.77.204.214   41000
+31777	45.77.204.214		41000
 
+# 31888 KG4JPL North-Central Florida
+31888	p25.kg4jpl.com		41000
+
+# 40721 Fusion Canada Fr
+40721	38.110.97.161		41000
+ 
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
-53099 203.86.206.49 41000
+53099	203.86.206.49		41000
