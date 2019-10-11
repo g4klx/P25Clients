@@ -7,7 +7,7 @@
 4	p25.duckdns.org		41004
 
 # 420 Super Freq
-4 45.76.16.174 41000
+420 45.76.16.174 41000
 
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
