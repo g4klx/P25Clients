@@ -15,7 +15,7 @@
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	94.177.235.81		41000
 
-# 2503 RU DMR TG2503
+# RU DMR TG2503
 2503 p25.r1ik.ru 41000
 
 # 3023 Ontario Crosslink
