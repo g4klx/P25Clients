@@ -9,6 +9,9 @@
 # 420 Super Freq
 420 p25.evsuperfreqs.com 41000
 
+# 530 NZ
+530 zldigitalreflectors.hopto.org 41000
+
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
 
