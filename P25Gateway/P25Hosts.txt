@@ -15,6 +15,9 @@
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
 
+# 927 Southern California
+927 927.org 41000
+
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	94.177.235.81		41000
 
@@ -98,6 +101,9 @@
 
 # 31062 Mountain West
 31062	p25.mw-dmr.net		41000
+
+# 31079 ALERT Radio / Multimode P25/DMR
+31079 927.org 41001
 
 # 31088 Colorado HD
 31088	54.191.50.212		41000
