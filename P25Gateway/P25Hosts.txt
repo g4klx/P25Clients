@@ -111,6 +111,9 @@
 # 31092 Connecticut Chat
 31092	p25.alecwasserman.com	41000
 
+# 31161 Virginia
+31161	24.53.67.238	41000
+
 # 31171 Illinois
 31171	74.208.235.115		41000
 
