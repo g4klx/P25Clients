@@ -78,8 +78,8 @@
 # 10402	Pacific	TAC 2
 10402	47.104.177.248		41000
 
-# 10401	Pacific	TAC 3
-10403	120.234.41.144		41000
+# 10403	Pacific	TAC 3 http://ysf.sz790.com:8082/
+10403	ysf.sz790.com		41000
 
 # 10401	Pacific	TAC 4
 10404	p25tw338.ddns.net	41000
