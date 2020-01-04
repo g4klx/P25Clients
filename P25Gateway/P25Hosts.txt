@@ -126,6 +126,9 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
+# 31340 Central New Jersey
+31340	cnjham.msmts.com	41000
+
 # 31341 South Jersey, http://p25.kc2idb.net
 31341	p25.kc2idb.net		41000
 
