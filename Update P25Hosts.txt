@@ -1,2 +1,5 @@
 # 2221 IT PIEDMONT GDO
 2221  iz1zpj.duckdns.org 41000
+
+# 7225 MULTIPROTOCOLO ARGENTINA
+7225  ysfarg.ddns.net 41000
