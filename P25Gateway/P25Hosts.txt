@@ -36,6 +36,9 @@
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net		41000
 
+# 7225 MULTIPROTOCOLO ARGENTINA
+7225  ysfarg.ddns.net 41000
+
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
