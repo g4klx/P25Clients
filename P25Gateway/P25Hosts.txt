@@ -2,6 +2,8 @@
 #
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
+# HELLAS Zone P25 TG202
+202 hellaszone.com 41000
 
 # 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org		41004
