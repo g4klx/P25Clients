@@ -47,6 +47,9 @@
 # 10200 North America
 10200	dvswitch.org		41000
 
+# 10260 Poland
+10260	31.0.161.238		41000
+
 # 10200 North America TAC 1
 10201	dvswitch.org		41010
 
