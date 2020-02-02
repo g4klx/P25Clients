@@ -173,7 +173,7 @@
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
-# 51575 PH-Dumaguete Link to YSF and DMR (BM 51575)
+# 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
