@@ -11,6 +11,9 @@
 # XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
 6	70.44.20.24	41000
 
+# 302 Canada
+302 p25canada.hopto.org 41000
+
 # 420 Super Freq
 420	p25.evsuperfreqs.com	41000
 
