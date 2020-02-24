@@ -32,6 +32,9 @@
 # 3023 Ontario Crosslink
 3023	ontxlink.hopto.org	41000
 
+# 3142 Pennsylvania
+3142 3.215.215.169 41002
+
 # 5057 VK7 TAS 
 5057	45.248.50.37		41000
 
