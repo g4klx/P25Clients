@@ -140,6 +140,9 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
+# 31264 XLX625 The BROniverse www.wa8bro.com
+31264 p25.dudetronics.com 41000
+
 # 31340 Central New Jersey
 31340	cnjham.msmts.com	41000
 
