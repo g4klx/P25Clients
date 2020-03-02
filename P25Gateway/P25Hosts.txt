@@ -50,6 +50,9 @@
 # 10200 North America
 10200	dvswitch.org		41000
 
+# P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
+10209	p25.we0fun.com	41000
+
 # 10260 Poland
 10260	31.0.161.238		41000
 
