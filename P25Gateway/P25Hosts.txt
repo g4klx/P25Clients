@@ -126,7 +126,7 @@
 10700	p25nsw.gustotech.net	41000
 
 # 22200 IT HBLINK REFLECTOR
-22200 nxdn.hblink.it 41000
+22200 p25.hblink.it 41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
