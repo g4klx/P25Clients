@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015-2019 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015-2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -61,6 +61,10 @@ public:
   unsigned int getNetworkInactivityTimeout() const;
   bool         getNetworkDebug() const;
 
+  // The Remote Commands section
+  bool         getRemoteCommandsEnabled() const;
+  unsigned int getRemoteCommandsPort() const;
+
 private:
   std::string  m_file;
   std::string  m_callsign;
@@ -88,6 +92,9 @@ private:
   unsigned int m_networkStartup;
   unsigned int m_networkInactivityTimeout;
   bool         m_networkDebug;
+
+  bool         m_remoteCommandsEnabled;
+  unsigned int m_remoteCommandsPort;
 };
 
 #endif
