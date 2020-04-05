@@ -6,3 +6,9 @@
 
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225  ysfarg.ddns.net 41000
+
+# 32103 CW-Ops Academy
+32103 cwops.dyndns.org  41000
+
+# 33581 OMISS Group
+33581 omiss.dyndns.org  41000
