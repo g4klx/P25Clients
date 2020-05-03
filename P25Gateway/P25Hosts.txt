@@ -2,14 +2,15 @@
 #
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
-# HELLAS Zone P25 TG202
-202 hellaszone.com 41000
 
 # 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
 4	p25.duckdns.org		41004
 
 # XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
 6	70.44.20.24	41000
+
+# HELLAS Zone P25 TG202
+202 hellaszone.com 41000
 
 # 420 Super Freq
 420	hb.superfreqdigital.com	41000
@@ -70,6 +71,9 @@
 
 # P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
 10209	p25.we0fun.com	41000
+
+# 10216 Northeast Ohio
+10216	xlx216.km8v.com	41000
 
 # 10260 Poland
 10260	31.0.161.238		41000
@@ -203,11 +207,20 @@
 # 31672 P25 Pi-Star chat
 31672	p25-31672.pistar.uk	41000
 
+# 31691 US Midwest P25 Reflector
+31691 net.w3axl.com 43169
+
 # 31777 DX-LINK
 31777	8.9.4.102		41000
 
 # 31888 KG4JPL North-Central Florida
 31888	p25.kg4jpl.com		41000
+
+# 32103 CW-Ops Academy
+32103 cwops.dyndns.org 41000
+
+# 33581 OMISS Group
+33581 omiss.dyndns.org 41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161		41000
