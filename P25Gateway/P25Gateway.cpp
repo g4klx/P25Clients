@@ -397,8 +397,7 @@ void CP25Gateway::run()
 						lostTimer.stop();
 
 						currentId = 9999U;
-					}
-					else if (reflector != NULL && currentId == 9999U) {
+					} else if (reflector != NULL && currentId == 9999U) {
 						currentId = tg;
 						currentAddr = reflector->m_address;
 						currentPort = reflector->m_port;
@@ -415,8 +414,7 @@ void CP25Gateway::run()
 						inactivityTimer.start();
 						pollTimer.start();
 						lostTimer.start();
-					}
-					else if (reflector != NULL && currentId != 9999U) {
+					} else if (reflector != NULL && currentId != 9999U) {
 						LogMessage("Unlinked from reflector %u by remote command", currentId);
 
 						remoteNetwork.writeUnlink(currentAddr, currentPort);
@@ -440,8 +438,7 @@ void CP25Gateway::run()
 						pollTimer.start();
 						lostTimer.start();
 					}
-				}
-				else {
+				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}
 			}
