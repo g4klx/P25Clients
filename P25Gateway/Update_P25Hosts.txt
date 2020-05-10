@@ -69,6 +69,9 @@
 # 10203 North America TAC 3 (Bridged to the P25NX Network).
 10203	44.98.254.131		41004
 
+# P25 France
+10208 m55.evxonline.net 41000
+
 # P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
 10209	p25.we0fun.com	41000
 
