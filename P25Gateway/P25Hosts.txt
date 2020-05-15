@@ -132,6 +132,9 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
+# 10945 Deutschland DL1BH
+10945	dl1bh.ddns.net	41000
+
 # 22200 IT HBLINK REFLECTOR
 22200 p25.hblink.it 41000
 
