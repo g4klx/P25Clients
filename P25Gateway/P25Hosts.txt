@@ -21,6 +21,9 @@
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
 
+# 858 San Diego, CA
+858	nz6d.dx40.com	41000
+
 # 927 Southern California
 927	927.org			41000
 
