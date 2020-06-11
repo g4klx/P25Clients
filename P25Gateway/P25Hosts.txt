@@ -225,6 +225,9 @@
 # 31888 KG4JPL North-Central Florida
 31888	p25.kg4jpl.com		41000
 
+# 31983 K8JTK Hub Multimode ILS/DVMIS (K8JTK.org)
+31983	P25Reflector31983.K8JTK.org	41000
+
 # 32103 CW-Ops Academy
 32103 cwops.dyndns.org 41000
 
