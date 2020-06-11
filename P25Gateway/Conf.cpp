@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015-2019 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015-2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -32,7 +32,8 @@ enum SECTION {
   SECTION_ID_LOOKUP,
   SECTION_VOICE,
   SECTION_LOG,
-  SECTION_NETWORK
+  SECTION_NETWORK,
+  SECTION_REMOTE_COMMANDS
 };
 
 CConf::CConf(const std::string& file) :
@@ -57,7 +58,9 @@ m_networkParrotAddress("127.0.0.1"),
 m_networkParrotPort(0U),
 m_networkStartup(9999U),
 m_networkInactivityTimeout(0U),
-m_networkDebug(false)
+m_networkDebug(false),
+m_remoteCommandsEnabled(false),
+m_remoteCommandsPort(6074U)
 {
 }
 
@@ -91,6 +94,8 @@ bool CConf::read()
 			  section = SECTION_LOG;
 		  else if (::strncmp(buffer, "[Network]", 9U) == 0)
 			  section = SECTION_NETWORK;
+		  else if (::strncmp(buffer, "[Remote Commands]", 17U) == 0)
+			  section = SECTION_REMOTE_COMMANDS;
 		  else
 			  section = SECTION_NONE;
 
@@ -152,6 +157,11 @@ bool CConf::read()
 			  m_networkInactivityTimeout = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "Debug") == 0)
 			  m_networkDebug = ::atoi(value) == 1;
+	  } else if (section == SECTION_REMOTE_COMMANDS) {
+		  if (::strcmp(key, "Enable") == 0)
+			  m_remoteCommandsEnabled = ::atoi(value) == 1;
+		  else if (::strcmp(key, "Port") == 0)
+			  m_remoteCommandsPort = (unsigned int)::atoi(value);
 	  }
   }
 
@@ -263,4 +273,14 @@ unsigned int CConf::getNetworkInactivityTimeout() const
 bool CConf::getNetworkDebug() const
 {
 	return m_networkDebug;
+}
+
+bool CConf::getRemoteCommandsEnabled() const
+{
+	return m_remoteCommandsEnabled;
+}
+
+unsigned int CConf::getRemoteCommandsPort() const
+{
+	return m_remoteCommandsPort;
 }
