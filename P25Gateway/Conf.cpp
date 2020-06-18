@@ -151,6 +151,10 @@ bool CConf::read()
 			  m_networkParrotAddress = value;
 		  else if (::strcmp(key, "ParrotPort") == 0)
 			  m_networkParrotPort = (unsigned int)::atoi(value);
+		  else if (::strcmp(key, "P252DMRAddress") == 0)
+			  m_networkP252DMRAddress = value;
+		  else if (::strcmp(key, "P252DMRPort") == 0)
+			  m_networkP252DMRPort = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "Startup") == 0)
 			  m_networkStartup = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "InactivityTimeout") == 0)
@@ -258,6 +262,16 @@ std::string CConf::getNetworkParrotAddress() const
 unsigned int CConf::getNetworkParrotPort() const
 {
 	return m_networkParrotPort;
+}
+
+std::string CConf::getNetworkP252DMRAddress() const
+{
+	return m_networkP252DMRAddress;
+}
+
+unsigned int CConf::getNetworkP252DMRPort() const
+{
+	return m_networkP252DMRPort;
 }
 
 unsigned int CConf::getNetworkStartup() const
