@@ -232,6 +232,8 @@ void CP25Gateway::run()
 	unsigned int currentPort = 0U;
 
 	unsigned int startupId = m_conf.getNetworkStartup();
+	bool p252dmr_enabled = (startupId == 20) ? true : false;
+	
 	if (startupId != 9999U) {
 		CP25Reflector* reflector = reflectors.find(startupId);
 		if (reflector != NULL) {
@@ -291,8 +293,11 @@ void CP25Gateway::run()
 				srcId  = (buffer[1U] << 16) & 0xFF0000U;
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
-
-				if (dstId != currentId) {
+				
+				if(p252dmr_enabled){
+					currentId = dstId;
+				}
+				else if (dstId != currentId) {
 					CP25Reflector* reflector = NULL;
 					if (dstId != 9999U)
 						reflector = reflectors.find(dstId);
