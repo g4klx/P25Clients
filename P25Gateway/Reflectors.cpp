@@ -52,6 +52,12 @@ void CReflectors::setParrot(const std::string& address, unsigned int port)
 	m_parrotPort    = port;
 }
 
+void CReflectors::setP252DMR(const std::string& address, unsigned int port)
+{
+	m_p252dmrAddress = address;
+	m_p252dmrPort    = port;
+}
+
 bool CReflectors::load()
 {
 	// Clear out the old reflector list
@@ -133,6 +139,16 @@ bool CReflectors::load()
 		refl->m_port    = m_parrotPort;
 		m_reflectors.push_back(refl);
 		LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
+	}
+	
+	// Add the P252DMR entry
+	if (m_p252dmrPort > 0U) {
+		CP25Reflector* refl = new CP25Reflector;
+		refl->m_id      = 20U;
+		refl->m_address = CUDPSocket::lookup(m_p252dmrAddress);
+		refl->m_port    = m_p252dmrPort;
+		m_reflectors.push_back(refl);
+		LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
 	}
 
 	size = m_reflectors.size();
