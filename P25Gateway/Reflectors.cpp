@@ -144,7 +144,7 @@ bool CReflectors::load()
 	// Add the P252DMR entry
 	if (m_p252dmrPort > 0U) {
 		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id      = 10U;
+		refl->m_id      = 20U;
 		refl->m_address = CUDPSocket::lookup(m_p252dmrAddress);
 		refl->m_port    = m_p252dmrPort;
 		m_reflectors.push_back(refl);
