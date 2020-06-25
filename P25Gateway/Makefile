@@ -14,6 +14,9 @@ P25Gateway:	$(OBJECTS)
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
+install:
+		install -m 755 P25Gateway /usr/local/bin/
+
 clean:
 		$(RM) P25Gateway *.o *.d *.bak *~
  

@@ -14,5 +14,8 @@ P25Parrot:	$(OBJECTS)
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
+install:
+		install -m 755 P25Parrot /usr/local/bin/
+
 clean:
 		$(RM) P25Parrot *.o *.d *.bak *~

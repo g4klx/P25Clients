@@ -14,6 +14,9 @@ P25Reflector:	$(OBJECTS)
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
+install:
+		install -m 755 P25Reflector /usr/local/bin/
+
 clean:
 		$(RM) P25Reflector *.o *.d *.bak *~
  
