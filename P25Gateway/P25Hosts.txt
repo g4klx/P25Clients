@@ -12,6 +12,9 @@
 # HELLAS Zone P25 TG202
 202 hellaszone.com 41000
 
+# 214 SPAIN P25 Reflector
+214 214p25.xreflector.es 41000
+
 # HBLink Poland P25 TG260
 260 p25.hblink.pl 41000
 
@@ -254,6 +257,3 @@
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
-
-# 214 SPAIN P25 Reflector
-214 214p25.xreflector.es 41000
