@@ -60,6 +60,9 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225  ysfarg.ddns.net 41000
 
+# 7272 PAPA System (Bridged to analog)
+7272	216.240.173.55	41000
+
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
