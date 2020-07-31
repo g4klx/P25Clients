@@ -15,6 +15,9 @@
 # 214 SPAIN P25 Reflector
 214 214p25.xreflector.es 41000
 
+# 226 Romania YO P25 Network
+226	p25.dstar-yo.ro	41000
+
 # HBLink Poland P25 TG260
 260 p25.hblink.pl 41000
 
@@ -35,6 +38,9 @@
 
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	94.177.235.81		41000
+
+# 2263 Bucharest YO3 P25 Network
+2263	p25.dstar-yo.ro	41000
 
 # RU DMR TG2503
 2503	p25.r1ik.ru		41000
