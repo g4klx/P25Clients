@@ -60,9 +60,6 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225  ysfarg.ddns.net 41000
 
-# 7272 PAPA System (Bridged to analog)
-7272	216.240.173.55	41000
-
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
@@ -194,6 +191,12 @@
 
 # 31062 Mountain West
 31062	p25.mw-dmr.net		41000
+
+# 31077 PAPA Chat http://papasys.com
+31077	216.240.173.55	41000
+
+# 31078 PAPA Bridge (Bridged to analog) http://papasys.com
+31078	216.240.173.55	41000
 
 # 31079 ALERT Radio / Multimode P25/DMR
 31079	927.org			41001
