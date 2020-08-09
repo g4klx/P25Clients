@@ -150,6 +150,9 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
+# 10888 Texas
+10888 29520.asnode.org 41000
+
 # 10945 Deutschland DL1BH
 10945	dl1bh.ddns.net	41000
 
