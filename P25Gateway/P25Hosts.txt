@@ -196,9 +196,9 @@
 31062	p25.mw-dmr.net		41000
 
 # 31077 PAPA Chat http://papasys.com
-31077	216.240.173.55	41000
+31077	216.240.173.55	41007
 
-# 31078 PAPA Bridge (Bridged to analog) http://papasys.com
+# 31078 PAPA Bridge to analog (formerly 7272) http://papasys.com
 31078	216.240.173.55	41000
 
 # 31079 ALERT Radio / Multimode P25/DMR
