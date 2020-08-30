@@ -187,7 +187,7 @@
 28299	65.101.7.51		41000
 
 # 30639 NorCal-Bridge / Multimode-P25-TG30639
-30639	wiresxdigi.dyndns.org	41000
+30639	NFOnorcalP25.dyndns.org	41000
 
 # 31010 Alabama Link
 31010	p25.alabamalink.info	41000
