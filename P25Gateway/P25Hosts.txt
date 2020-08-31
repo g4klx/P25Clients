@@ -147,6 +147,9 @@
 # 10405 Shenzhen City, China http://125.91.17.122:8090/ysf/
 10405	125.91.17.122	42020
 
+# 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
+10421 9v1lh.spdns.org 41000
+
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
