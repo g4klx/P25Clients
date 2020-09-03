@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016,2018 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2018,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ const unsigned int BUFFER_LENGTH = 200U;
 
 CNetwork::CNetwork(unsigned int port) :
 m_socket(port),
-m_address(),
-m_port(0U)
+m_addr(),
+m_addrLen(0U)
 {
 }
 
@@ -44,24 +44,24 @@ bool CNetwork::open()
 
 bool CNetwork::write(const unsigned char* data, unsigned int length)
 {
-	if (m_port == 0U)
+	if (m_addrLen == 0U)
 		return true;
 
 	assert(data != NULL);
 
-	return m_socket.write(data, length, m_address, m_port);
+	return m_socket.write(data, length, m_addr, m_addrLen);
 }
 
 unsigned int CNetwork::read(unsigned char* data)
 {
-	in_addr address;
-	unsigned int port;
-	int length = m_socket.read(data, BUFFER_LENGTH, address, port);
+	sockaddr_storage addr;
+	unsigned int addrlen;
+	int length = m_socket.read(data, BUFFER_LENGTH, addr, addrlen);
 	if (length <= 0)
 		return 0U;
 
-	m_address.s_addr = address.s_addr;
-	m_port = port;
+	m_addr    = addr;
+	m_addrLen = addrlen;
 
 	if (data[0U] == 0xF0U) {			// A poll
 		write(data, length);
@@ -76,7 +76,7 @@ unsigned int CNetwork::read(unsigned char* data)
 
 void CNetwork::end()
 {
-	m_port = 0U;
+	m_addrLen = 0U;
 }
 
 void CNetwork::close()

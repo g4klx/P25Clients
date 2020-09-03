@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -31,13 +31,13 @@ public:
 
 	bool open();
 
-	bool writeData(const unsigned char* data, unsigned int length, const in_addr& address, unsigned int port);
+	bool writeData(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
 
-	unsigned int readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port);
+	unsigned int readData(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
 
-	bool writePoll(const in_addr& address, unsigned int port);
+	bool writePoll(const sockaddr_storage& addr, unsigned int addrLen);
 
-	bool writeUnlink(const in_addr& address, unsigned int port);
+	bool writeUnlink(const sockaddr_storage& addr, unsigned int addrLen);
 
 	void close();
 

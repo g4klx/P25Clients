@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2018 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018,2020 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -31,6 +31,8 @@ m_hostsFile1(hostsFile1),
 m_hostsFile2(hostsFile2),
 m_parrotAddress(),
 m_parrotPort(0U),
+m_p252dmrAddress(),
+m_p252dmrPort(0U),
 m_reflectors(),
 m_timer(1000U, reloadTime * 60U)
 {
@@ -78,17 +80,13 @@ bool CReflectors::load()
 			char* p3 = ::strtok(NULL,   " \t\r\n");
 
 			if (p1 != NULL && p2 != NULL && p3 != NULL) {
-				std::string host = std::string(p2);
+				std::string host  = std::string(p2);
+				unsigned int port = (unsigned int)::atoi(p3);
 
-				in_addr address = CUDPSocket::lookup(host);
-				if (address.s_addr != INADDR_NONE) {
-					CP25Reflector* refl = new CP25Reflector;
-					refl->m_id      = (unsigned int)::atoi(p1);
-					refl->m_address = address;
-					refl->m_port    = (unsigned int)::atoi(p3);
-
-					m_reflectors.push_back(refl);
-				}
+				CP25Reflector* refl = new CP25Reflector;
+				refl->m_id = (unsigned int)::atoi(p1);
+				CUDPSocket::lookup(host, port, refl->m_addr, refl->m_addrLen);
+				m_reflectors.push_back(refl);
 			}
 		}
 
@@ -110,17 +108,13 @@ bool CReflectors::load()
 				// Don't allow duplicate reflector ids from the secondary hosts file.
 				unsigned int id = (unsigned int)::atoi(p1);
 				if (find(id) == NULL) {
-					std::string host = std::string(p2);
+					std::string host  = std::string(p2);
+					unsigned int port = (unsigned int)::atoi(p3);
 
-					in_addr address = CUDPSocket::lookup(host);
-					if (address.s_addr != INADDR_NONE) {
-						CP25Reflector* refl = new CP25Reflector;
-						refl->m_id      = id;
-						refl->m_address = address;
-						refl->m_port    = (unsigned int)::atoi(p3);
-
-						m_reflectors.push_back(refl);
-					}
+					CP25Reflector* refl = new CP25Reflector;
+					refl->m_id = id;
+					CUDPSocket::lookup(host, port, refl->m_addr, refl->m_addrLen);
+					m_reflectors.push_back(refl);
 				}
 			}
 		}
@@ -134,9 +128,8 @@ bool CReflectors::load()
 	// Add the Parrot entry
 	if (m_parrotPort > 0U) {
 		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id      = 10U;
-		refl->m_address = CUDPSocket::lookup(m_parrotAddress);
-		refl->m_port    = m_parrotPort;
+		refl->m_id = 10U;
+		CUDPSocket::lookup(m_parrotAddress, m_parrotPort, refl->m_addr, refl->m_addrLen);
 		m_reflectors.push_back(refl);
 		LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
 	}
@@ -144,9 +137,8 @@ bool CReflectors::load()
 	// Add the P252DMR entry
 	if (m_p252dmrPort > 0U) {
 		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id      = 20U;
-		refl->m_address = CUDPSocket::lookup(m_p252dmrAddress);
-		refl->m_port    = m_p252dmrPort;
+		refl->m_id = 20U;
+		CUDPSocket::lookup(m_p252dmrAddress, m_p252dmrPort, refl->m_addr, refl->m_addrLen);
 		m_reflectors.push_back(refl);
 		LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
 	}

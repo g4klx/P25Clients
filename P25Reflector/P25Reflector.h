@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2020 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -41,17 +41,17 @@
 class CP25Repeater {
 public:
 	CP25Repeater() :
-	m_address(),
-	m_port(0U),
+	m_addr(),
+	m_addrLen(0U),
 	m_callsign(),
 	m_timer(1000U, 120U)
 	{
 	}
 
-	in_addr      m_address;
-	unsigned int m_port;
-	std::string  m_callsign;
-	CTimer       m_timer;
+	sockaddr_storage m_addr;
+	unsigned int     m_addrLen;
+	std::string      m_callsign;
+	CTimer           m_timer;
 };
 
 class CP25Reflector
@@ -66,7 +66,7 @@ private:
 	CConf                      m_conf;
 	std::vector<CP25Repeater*> m_repeaters;
 
-	CP25Repeater* findRepeater(const in_addr& address, unsigned int port) const;
+	CP25Repeater* findRepeater(const sockaddr_storage& addr) const;
 	void dumpRepeaters() const;
 };
 

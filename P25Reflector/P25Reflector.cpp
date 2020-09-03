@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2018 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018,2020 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -196,34 +196,34 @@ void CP25Reflector::run()
 
 	for (;;) {
 		unsigned char buffer[200U];
-		in_addr address;
-		unsigned int port;
+		sockaddr_storage addr;
+		unsigned int addrLen;
 
-		unsigned int len = network.readData(buffer, 200U, address, port);
+		unsigned int len = network.readData(buffer, 200U, addr, addrLen);
 		if (len > 0U) {
-			CP25Repeater* rpt = findRepeater(address, port);
+			CP25Repeater* rpt = findRepeater(addr);
 
 			if (buffer[0U] == 0xF0U) {
 				if (rpt == NULL) {
 					rpt = new CP25Repeater;
 					rpt->m_timer.start();
-					rpt->m_address  = address;
-					rpt->m_port     = port;
+					rpt->m_addr     = addr;
+					rpt->m_addrLen  = addrLen;
 					rpt->m_callsign = std::string((char*)(buffer + 1U), 10U);
 					m_repeaters.push_back(rpt);
 
-					LogMessage("Adding %s (%s:%u)", rpt->m_callsign.c_str(), ::inet_ntoa(address), port);
+					LogMessage("Adding %s", rpt->m_callsign.c_str());
 				} else {
 					rpt->m_timer.start();
 				}
 
 				// Return the poll
-				network.writeData(buffer, len, address, port);
+				network.writeData(buffer, len, addr, addrLen);
 			} else if (buffer[0U] == 0xF1U && rpt != NULL) {
-				LogMessage("Removing %s (%s:%u) unlinked", rpt->m_callsign.c_str(), ::inet_ntoa(address), port);
+				LogMessage("Removing %s unlinked", rpt->m_callsign.c_str());
 				for (std::vector<CP25Repeater*>::iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
 					CP25Repeater* itRpt = *it;
-					if (itRpt->m_address.s_addr == rpt->m_address.s_addr && itRpt->m_port == rpt->m_port) {
+					if (CUDPSocket::match(itRpt->m_addr, rpt->m_addr)) {
 						m_repeaters.erase(it);
 						delete itRpt;
 						break;
@@ -237,7 +237,7 @@ void CP25Reflector::run()
 					displayed = false;
 					seen64    = false;
 					seen65    = false;
-					LogMessage("Transmission started from %s (%s:%u)", current->m_callsign.c_str(), ::inet_ntoa(address), port);
+					LogMessage("Transmission started from %s", current->m_callsign.c_str());
 				}
 
 				if (current == rpt) {
@@ -266,10 +266,8 @@ void CP25Reflector::run()
 					}
 
 					for (std::vector<CP25Repeater*>::const_iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-						in_addr addr = (*it)->m_address;
-						unsigned int prt = (*it)->m_port;
-						if (addr.s_addr != address.s_addr || prt != port)
-							network.writeData(buffer, len, addr, prt);
+						if (!CUDPSocket::match(addr, (*it)->m_addr))
+							network.writeData(buffer, len, (*it)->m_addr, (*it)->m_addrLen);
 					}
 
 					if (buffer[0U] == 0x80U) {
@@ -279,7 +277,7 @@ void CP25Reflector::run()
 					}
 				}
 			} else {
-				LogMessage("Data received from an unknown source - %s:%u", ::inet_ntoa(address), port);
+				LogMessage("Data received from an unknown source");
 				CUtils::dump(2U, "Data", buffer, len);
 			}
 		}
@@ -294,10 +292,7 @@ void CP25Reflector::run()
 		for (std::vector<CP25Repeater*>::iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
 			CP25Repeater* itRpt = *it;
 			if (itRpt->m_timer.hasExpired()) {
-				in_addr address      = itRpt->m_address;
-				unsigned int port    = itRpt->m_port;
-				std::string callsign = itRpt->m_callsign;
-				LogMessage("Removing %s (%s:%u) disappeared", callsign.c_str(), ::inet_ntoa(address), port);
+				LogMessage("Removing %s disappeared", itRpt->m_callsign.c_str());
 				m_repeaters.erase(it);
 				delete itRpt;
 				break;
@@ -328,10 +323,10 @@ void CP25Reflector::run()
 	::LogFinalise();
 }
 
-CP25Repeater* CP25Reflector::findRepeater(const in_addr& address, unsigned int port) const
+CP25Repeater* CP25Reflector::findRepeater(const sockaddr_storage& addr) const
 {
 	for (std::vector<CP25Repeater*>::const_iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-		if (address.s_addr == (*it)->m_address.s_addr && (*it)->m_port == port)
+		if (CUDPSocket::match(addr, (*it)->m_addr))
 			return *it;
 	}
 
@@ -348,11 +343,9 @@ void CP25Reflector::dumpRepeaters() const
 	LogMessage("Currently linked repeaters:");
 
 	for (std::vector<CP25Repeater*>::const_iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-		in_addr address      = (*it)->m_address;
-		unsigned int port    = (*it)->m_port;
 		std::string callsign = (*it)->m_callsign;
 		unsigned int timer   = (*it)->m_timer.getTimer();
 		unsigned int timeout = (*it)->m_timer.getTimeout();
-		LogMessage("    %s (%s:%u) %u/%u", callsign.c_str(), ::inet_ntoa(address), port, timer, timeout);
+		LogMessage("    %s %u/%u", callsign.c_str(), timer, timeout);
 	}
 }

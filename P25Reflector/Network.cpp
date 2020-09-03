@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -41,24 +41,23 @@ bool CNetwork::open()
 	return m_socket.open();
 }
 
-bool CNetwork::writeData(const unsigned char* data, unsigned int length, const in_addr& address, unsigned int port)
+bool CNetwork::writeData(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
-	assert(port > 0U);
 
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Data Sent", data, length);
 
-	return m_socket.write(data, length, address, port);
+	return m_socket.write(data, length, addr, addrLen);
 }
 
-unsigned int CNetwork::readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port)
+unsigned int CNetwork::readData(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
 
-	int len = m_socket.read(data, length, address, port);
+	int len = m_socket.read(data, length, addr, addrLen);
 	if (len <= 0)
 		return 0U;
 
