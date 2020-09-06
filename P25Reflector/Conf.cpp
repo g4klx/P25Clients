@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2015,2016 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2015,2016,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -87,6 +87,26 @@ bool CConf::read()
 		  continue;
 
 	  char* value = ::strtok(NULL, "\r\n");
+	  if (value == NULL)
+		  continue;
+
+	  // Remove quotes from the value
+	  size_t len = ::strlen(value);
+	  if (len > 1U && *value == '"' && value[len - 1U] == '"') {
+		  value[len - 1U] = '\0';
+		  value++;
+	  } else {
+		  char *p;
+
+		  // if value is not quoted, remove after # (to make comment)
+		  if ((p = strchr(value, '#')) != NULL)
+			  *p = '\0';
+
+		  // remove trailing tab/space
+		  for (p = value + strlen(value) - 1U; p >= value && (*p == '\t' || *p == ' '); p--)
+			  *p = '\0';
+	  }
+
 	  if (section == SECTION_GENERAL) {
 		  if (::strcmp(key, "Daemon") == 0)
 			  m_daemon = ::atoi(value) == 1;
