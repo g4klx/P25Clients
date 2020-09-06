@@ -83,10 +83,17 @@ bool CReflectors::load()
 				std::string host  = std::string(p2);
 				unsigned int port = (unsigned int)::atoi(p3);
 
-				CP25Reflector* refl = new CP25Reflector;
-				refl->m_id = (unsigned int)::atoi(p1);
-				CUDPSocket::lookup(host, port, refl->m_addr, refl->m_addrLen);
-				m_reflectors.push_back(refl);
+				sockaddr_storage addr;
+				unsigned int addrLen;
+				if (CUDPSocket::lookup(host, port, addr, addrLen) == 0) {
+					CP25Reflector* refl = new CP25Reflector;
+					refl->m_id      = (unsigned int)::atoi(p1);
+					refl->m_addr    = addr;
+					refl->m_addrLen = addrLen;
+					m_reflectors.push_back(refl);
+				} else {
+					LogWarning("Unable to resolve the address of %s", host.c_str());
+				}
 			}
 		}
 
@@ -111,10 +118,17 @@ bool CReflectors::load()
 					std::string host  = std::string(p2);
 					unsigned int port = (unsigned int)::atoi(p3);
 
-					CP25Reflector* refl = new CP25Reflector;
-					refl->m_id = id;
-					CUDPSocket::lookup(host, port, refl->m_addr, refl->m_addrLen);
-					m_reflectors.push_back(refl);
+					sockaddr_storage addr;
+					unsigned int addrLen;
+					if (CUDPSocket::lookup(host, port, addr, addrLen) == 0) {
+						CP25Reflector* refl = new CP25Reflector;
+						refl->m_id      = id;
+						refl->m_addr    = addr;
+						refl->m_addrLen = addrLen;
+						m_reflectors.push_back(refl);
+					} else {
+						LogWarning("Unable to resolve the address of %s", host.c_str());
+					}
 				}
 			}
 		}
@@ -127,20 +141,34 @@ bool CReflectors::load()
 
 	// Add the Parrot entry
 	if (m_parrotPort > 0U) {
-		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id = 10U;
-		CUDPSocket::lookup(m_parrotAddress, m_parrotPort, refl->m_addr, refl->m_addrLen);
-		m_reflectors.push_back(refl);
-		LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
+		sockaddr_storage addr;
+		unsigned int addrLen;
+		if (CUDPSocket::lookup(m_parrotAddress, m_parrotPort, addr, addrLen) == 0) {
+			CP25Reflector* refl = new CP25Reflector;
+			refl->m_id      = 10U;
+			refl->m_addr    = addr;
+			refl->m_addrLen = addrLen;
+			m_reflectors.push_back(refl);
+			LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
+		} else {
+			LogWarning("Unable to resolve the address of the Parrot");
+		}
 	}
 	
 	// Add the P252DMR entry
 	if (m_p252dmrPort > 0U) {
-		CP25Reflector* refl = new CP25Reflector;
-		refl->m_id = 20U;
-		CUDPSocket::lookup(m_p252dmrAddress, m_p252dmrPort, refl->m_addr, refl->m_addrLen);
-		m_reflectors.push_back(refl);
-		LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
+		sockaddr_storage addr;
+		unsigned int addrLen;
+		if (CUDPSocket::lookup(m_p252dmrAddress, m_p252dmrPort, addr, addrLen) == 0) {
+			CP25Reflector* refl = new CP25Reflector;
+			refl->m_id      = 20U;
+			refl->m_addr    = addr;
+			refl->m_addrLen = addrLen;
+			m_reflectors.push_back(refl);
+			LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
+		} else {
+			LogWarning("Unable to resolve the address of P252DMR");
+		}
 	}
 
 	size = m_reflectors.size();

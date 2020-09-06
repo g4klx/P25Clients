@@ -42,9 +42,9 @@ public:
 	void close();
 
 private:
-	std::string  m_callsign;
-	CUDPSocket   m_socket;
-	bool         m_debug;
+	std::string m_callsign;
+	CUDPSocket  m_socket;
+	bool        m_debug;
 };
 
 #endif

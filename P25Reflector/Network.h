@@ -38,8 +38,8 @@ public:
 	void close();
 
 private:
-	CUDPSocket   m_socket;
-	bool         m_debug;
+	CUDPSocket m_socket;
+	bool       m_debug;
 };
 
 #endif

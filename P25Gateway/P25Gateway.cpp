@@ -169,7 +169,10 @@ void CP25Gateway::run()
 
 	sockaddr_storage rptAddr;
 	unsigned int rptAddrLen;
-	CUDPSocket::lookup(m_conf.getRptAddress(), m_conf.getRptPort(), rptAddr, rptAddrLen);
+	if (CUDPSocket::lookup(m_conf.getRptAddress(), m_conf.getRptPort(), rptAddr, rptAddrLen) != 0) {
+		LogError("Unable to resolve the address of the host");
+		return;
+	}
 
 	CUDPSocket* remoteSocket = NULL;
 	if (m_conf.getRemoteCommandsEnabled()) {
