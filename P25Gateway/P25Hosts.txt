@@ -36,6 +36,9 @@
 # 927 Southern California
 927	927.org			41000
 
+# KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
+2050	reflector.p25.link		41009
+
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	94.177.235.81		41000
 
@@ -51,6 +54,9 @@
 # 3142 Pennsylvania
 3142 3.215.215.169 41002
 
+# 4095 KM4NNO Wave (Bridged to the P25Link Network).
+4095	reflector.p25.link		41010
+
 # 5057 VK7 TAS 
 5057	45.248.50.37		41000
 
@@ -63,14 +69,14 @@
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
-# 10101 World Wide TAC 1 (Bridged to the P25NX Network).
-10101	44.98.254.131		41000
+# 10101 World Wide TAC 1 (Bridged to the P25Link Network).
+10101	reflector.p25.link		41000
 
-# 10102 World Wide TAC 2 (Bridged to the P25NX Network).
-10102	44.98.254.131		41001
+# 10102 World Wide TAC 2 (Bridged to the P25Link Network).
+10102	reflector.p25.link		41001
 
-# 10103 World Wide TAC 3 (Bridged to the P25NX Network).
-10103	44.98.254.131		41002
+# 10103 World Wide TAC 3 (Bridged to the P25Link Network).
+10103	reflector.p25.link		41002
 
 # 10200 North America
 10200	dvswitch.org		41000
@@ -78,11 +84,11 @@
 # 10201 North America TAC 1
 10201	dvswitch.org		41010
 
-# 10202 North America TAC 2 (Bridged to the P25NX Network).
-10202	44.98.254.131		41003
+# 10202 North America TAC 2 (Bridged to the P25Link Network).
+10202	reflector.p25.link		41003
 
-# 10203 North America TAC 3 (Bridged to the P25NX Network).
-10203	44.98.254.131		41004
+# 10203 North America TAC 3 (Bridged to the P25Link Network).
+10203	reflector.p25.link		41004
 
 # P25 France
 10208 m55.evxonline.net 41000
@@ -102,11 +108,11 @@
 # 10301	Europe TAC 1
 10301	ea5gvk.duckdns.org	41000
 
-# 10302 Europe TAC 2 (Bridged to the P25NX Network).
-10302	44.98.254.131		41005
+# 10302 Europe TAC 2 (Bridged to the P25Link Network).
+10302	reflector.p25.link		41005
 
-# 10303 Europe TAC 3 (Bridged to the P25NX Network).
-10303	44.98.254.131		41006
+# 10303 Europe TAC 3 (Bridged to the P25Link Network).
+10303	reflector.p25.link		41006
 
 # 10310 Germany HAMNET (Bridge to 10320)	http://44.148.230.100/
 10310	44.148.230.100		41000
