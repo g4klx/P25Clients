@@ -85,10 +85,12 @@ int main(int argc, char** argv)
 CP25Gateway::CP25Gateway(const std::string& file) :
 m_conf(file)
 {
+	CUDPSocket::startup();
 }
 
 CP25Gateway::~CP25Gateway()
 {
+	CUDPSocket::shutdown();
 }
 
 void CP25Gateway::run()

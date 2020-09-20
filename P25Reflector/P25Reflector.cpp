@@ -82,10 +82,12 @@ CP25Reflector::CP25Reflector(const std::string& file) :
 m_conf(file),
 m_repeaters()
 {
+	CUDPSocket::startup();
 }
 
 CP25Reflector::~CP25Reflector()
 {
+	CUDPSocket::shutdown();
 }
 
 void CP25Reflector::run()
