@@ -26,6 +26,7 @@
 #include "Log.h"
 
 #if defined(_WIN32) || defined(_WIN64)
+#include <WS2tcpip.h>
 #include <Windows.h>
 #else
 #include <sys/socket.h>

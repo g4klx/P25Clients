@@ -20,6 +20,7 @@
 #define	THREAD_H
 
 #if defined(_WIN32) || defined(_WIN64)
+#include <WS2tcpip.h>
 #include <windows.h>
 #else
 #include <pthread.h>
