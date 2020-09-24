@@ -40,7 +40,7 @@
 2050	reflector.p25.link		41009
 
 # 2140 P25 Reflector BM DMR+ Multi 
-2140	94.177.235.81		41000
+2140	164.132.96.157	41000
 
 # 2263 Bucharest YO3 P25 Network
 2263	p25.dstar-yo.ro	41000
@@ -57,7 +57,7 @@
 # 4095 KM4NNO Wave (Bridged to the P25Link Network).
 4095	reflector.p25.link		41010
 
-# 5057 VK7 TAS 
+# 5057 VK7 TAS (hosted by VK7HSE)
 5057	45.248.50.37		41000
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
@@ -77,6 +77,9 @@
 
 # 10103 World Wide TAC 3 (Bridged to the P25Link Network).
 10103	reflector.p25.link		41002
+
+# 10120 CQ-UK
+10120	81.150.10.62	41000
 
 # 10200 North America
 10200	dvswitch.org		41000
@@ -155,6 +158,9 @@
 
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421 9v1lh.spdns.org 41000
+
+# 10444 VK64 P25 Group
+10444 vk64.chiffers.com 41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
