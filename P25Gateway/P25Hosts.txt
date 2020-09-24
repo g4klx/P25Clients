@@ -78,6 +78,9 @@
 # 10103 World Wide TAC 3 (Bridged to the P25Link Network).
 10103	reflector.p25.link		41002
 
+# 10120 CQ-UK
+10120	81.150.10.62	41000
+
 # 10200 North America
 10200	dvswitch.org		41000
 
