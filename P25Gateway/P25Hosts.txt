@@ -40,7 +40,7 @@
 2050	reflector.p25.link		41009
 
 # 2140 P25 Reflector BM DMR+ Multi 
-2140	94.177.235.81		41000
+2140	164.132.96.157	41000
 
 # 2263 Bucharest YO3 P25 Network
 2263	p25.dstar-yo.ro	41000
