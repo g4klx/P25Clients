@@ -42,6 +42,9 @@
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	164.132.96.157	41000
 
+# 2231 IT Sardinia Is. - Multimode - https://is0.org
+2231	p25.is0.org			41000
+
 # 2263 Bucharest YO3 P25 Network
 2263	p25.dstar-yo.ro	41000
 
