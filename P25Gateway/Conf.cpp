@@ -56,6 +56,10 @@ m_networkHosts2(),
 m_networkReloadTime(0U),
 m_networkParrotAddress("127.0.0.1"),
 m_networkParrotPort(0U),
+m_networkP252DMRAddress("127.0.0.1"),
+m_networkP252DMRPort(0U),
+m_networkP252PCMAddress("127.0.0.1"),
+m_networkP252PCMPort(0U),
 m_networkStartup(9999U),
 m_networkInactivityTimeout(0U),
 m_networkDebug(false),
@@ -155,6 +159,10 @@ bool CConf::read()
 			  m_networkP252DMRAddress = value;
 		  else if (::strcmp(key, "P252DMRPort") == 0)
 			  m_networkP252DMRPort = (unsigned int)::atoi(value);
+		  else if (::strcmp(key, "P252PCMAddress") == 0)
+			  m_networkP252PCMAddress = value;
+		  else if (::strcmp(key, "P252PCMPort") == 0)
+			  m_networkP252PCMPort = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "Startup") == 0)
 			  m_networkStartup = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "InactivityTimeout") == 0)
@@ -272,6 +280,16 @@ std::string CConf::getNetworkP252DMRAddress() const
 unsigned int CConf::getNetworkP252DMRPort() const
 {
 	return m_networkP252DMRPort;
+}
+
+std::string CConf::getNetworkP252PCMAddress() const
+{
+	return m_networkP252PCMAddress;
+}
+
+unsigned int CConf::getNetworkP252PCMPort() const
+{
+	return m_networkP252PCMPort;
 }
 
 unsigned int CConf::getNetworkStartup() const

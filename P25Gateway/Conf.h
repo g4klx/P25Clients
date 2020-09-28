@@ -59,6 +59,8 @@ public:
   unsigned int getNetworkParrotPort() const;
   std::string  getNetworkP252DMRAddress() const;
   unsigned int getNetworkP252DMRPort() const;
+  std::string  getNetworkP252PCMAddress() const;
+  unsigned int getNetworkP252PCMPort() const;
   unsigned int getNetworkStartup() const;
   unsigned int getNetworkInactivityTimeout() const;
   bool         getNetworkDebug() const;
@@ -93,6 +95,8 @@ private:
   unsigned int m_networkParrotPort;
   std::string  m_networkP252DMRAddress;
   unsigned int m_networkP252DMRPort;
+  std::string  m_networkP252PCMAddress;
+  unsigned int m_networkP252PCMPort;
   unsigned int m_networkStartup;
   unsigned int m_networkInactivityTimeout;
   bool         m_networkDebug;
