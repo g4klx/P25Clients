@@ -181,7 +181,7 @@
 22200 p25.hblink.it 41000
 
 # 22202 IT SARDINIA
-22202 p25.is0hha.hblink.it 41000
+22202 p25.sardinia.hblink.it 41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
