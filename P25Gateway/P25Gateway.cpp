@@ -403,8 +403,10 @@ void CP25Gateway::run()
 					if (reflector == NULL && currentId != 9999U) {
 						LogMessage("Unlinked from reflector %u by remote command", currentId);
 
-						if (voice != NULL)
+						if (voice != NULL) {
 							voice->unlinked();
+							voice->eof();
+						}
 
 						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
 						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
@@ -422,8 +424,10 @@ void CP25Gateway::run()
 
 						LogMessage("Linked to reflector %u by remote command", currentId);
 
-						if (voice != NULL)
+						if (voice != NULL) {
 							voice->linkedTo(currentId);
+							voice->eof();
+						}
 
 						remoteNetwork.writePoll(currentAddr, currentAddrLen);
 						remoteNetwork.writePoll(currentAddr, currentAddrLen);
@@ -445,8 +449,10 @@ void CP25Gateway::run()
 
 						LogMessage("Linked to reflector %u by remote command", currentId);
 
-						if (voice != NULL)
+						if (voice != NULL) {
 							voice->linkedTo(currentId);
+							voice->eof();
+						}
 
 						remoteNetwork.writePoll(currentAddr, currentAddrLen);
 						remoteNetwork.writePoll(currentAddr, currentAddrLen);
