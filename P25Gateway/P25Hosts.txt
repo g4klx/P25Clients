@@ -69,6 +69,12 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225  ysfarg.ddns.net 41000
 
+# 8208 China P25 Network bridge to P25NX
+8208 47.105.33.47 41000
+
+# 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
+9846	p25.dudetronics.com	41001
+
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
