@@ -271,7 +271,7 @@ void CP25Gateway::run()
 					// Rewrite the LCF and the destination TG
 					if (buffer[0U] == 0x64U) {
 						buffer[1U] = 0x00U;			// LCF is for TGs
-					} else if (buffer[0U] == 0x65U) {
+					} else if ((buffer[0U] == 0x65U) && !p252pcm_enabled) {
 						buffer[1U] = (currentId >> 16) & 0xFFU;
 						buffer[2U] = (currentId >> 8) & 0xFFU;
 						buffer[3U] = (currentId >> 0) & 0xFFU;
