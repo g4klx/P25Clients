@@ -32,8 +32,7 @@ enum SECTION {
   SECTION_ID_LOOKUP,
   SECTION_VOICE,
   SECTION_LOG,
-  SECTION_NETWORK,
-  SECTION_REMOTE_COMMANDS
+  SECTION_NETWORK
 };
 
 CConf::CConf(const std::string& file) :
@@ -42,6 +41,7 @@ m_callsign(),
 m_rptAddress(),
 m_rptPort(0U),
 m_myPort(0U),
+m_debug(false),
 m_daemon(false),
 m_lookupName(),
 m_lookupTime(0U),
@@ -58,11 +58,10 @@ m_networkHosts2(),
 m_networkReloadTime(0U),
 m_networkParrotAddress("127.0.0.1"),
 m_networkParrotPort(0U),
-m_networkStartup(9999U),
-m_networkInactivityTimeout(0U),
-m_networkDebug(false),
-m_remoteCommandsEnabled(false),
-m_remoteCommandsPort(6074U)
+m_networkStatic(),
+m_networkRFHangTime(120U),
+m_networkNetHangTime(60U),
+m_networkDebug(false)
 {
 }
 
@@ -96,8 +95,6 @@ bool CConf::read()
 			  section = SECTION_LOG;
 		  else if (::strncmp(buffer, "[Network]", 9U) == 0)
 			  section = SECTION_NETWORK;
-		  else if (::strncmp(buffer, "[Remote Commands]", 17U) == 0)
-			  section = SECTION_REMOTE_COMMANDS;
 		  else
 			  section = SECTION_NONE;
 
@@ -141,6 +138,8 @@ bool CConf::read()
 			  m_rptPort = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "LocalPort") == 0)
 			  m_myPort = (unsigned int)::atoi(value);
+		  else if (::strcmp(key, "Debug") == 0)
+			  m_debug = ::atoi(value) == 1;
 		  else if (::strcmp(key, "Daemon") == 0)
 			  m_daemon = ::atoi(value) == 1;
 	  } else if (section == SECTION_ID_LOOKUP) {
@@ -181,17 +180,19 @@ bool CConf::read()
 			  m_networkP252DMRAddress = value;
 		  else if (::strcmp(key, "P252DMRPort") == 0)
 			  m_networkP252DMRPort = (unsigned int)::atoi(value);
-		  else if (::strcmp(key, "Startup") == 0)
-			  m_networkStartup = (unsigned int)::atoi(value);
-		  else if (::strcmp(key, "InactivityTimeout") == 0)
-			  m_networkInactivityTimeout = (unsigned int)::atoi(value);
+		  else if (::strcmp(key, "Static") == 0) {
+			  char* p = ::strtok(value, ",\r\n");
+			  while (p != NULL) {
+				  unsigned int tg = (unsigned int)::atoi(p);
+				  m_networkStatic.push_back(tg);
+				  p = ::strtok(NULL, ",\r\n");
+			  }
+		  } else if (::strcmp(key, "RFHangTime") == 0)
+			  m_networkRFHangTime = (unsigned int)::atoi(value);
+		  else if (::strcmp(key, "NetHangTime") == 0)
+			  m_networkNetHangTime = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "Debug") == 0)
 			  m_networkDebug = ::atoi(value) == 1;
-	  } else if (section == SECTION_REMOTE_COMMANDS) {
-		  if (::strcmp(key, "Enable") == 0)
-			  m_remoteCommandsEnabled = ::atoi(value) == 1;
-		  else if (::strcmp(key, "Port") == 0)
-			  m_remoteCommandsPort = (unsigned int)::atoi(value);
 	  }
   }
 
@@ -218,6 +219,11 @@ unsigned int CConf::getRptPort() const
 unsigned int CConf::getMyPort() const
 {
 	return m_myPort;
+}
+
+bool CConf::getDebug() const
+{
+	return m_debug;
 }
 
 bool CConf::getDaemon() const
@@ -310,27 +316,22 @@ unsigned int CConf::getNetworkP252DMRPort() const
 	return m_networkP252DMRPort;
 }
 
-unsigned int CConf::getNetworkStartup() const
+std::vector<unsigned int> CConf::getNetworkStatic() const
 {
-	return m_networkStartup;
+	return m_networkStatic;
 }
 
-unsigned int CConf::getNetworkInactivityTimeout() const
+unsigned int CConf::getNetworkRFHangTime() const
 {
-	return m_networkInactivityTimeout;
+	return m_networkRFHangTime;
+}
+
+unsigned int CConf::getNetworkNetHangTime() const
+{
+	return m_networkNetHangTime;
 }
 
 bool CConf::getNetworkDebug() const
 {
 	return m_networkDebug;
-}
-
-bool CConf::getRemoteCommandsEnabled() const
-{
-	return m_remoteCommandsEnabled;
-}
-
-unsigned int CConf::getRemoteCommandsPort() const
-{
-	return m_remoteCommandsPort;
 }

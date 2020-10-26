@@ -57,6 +57,13 @@ const unsigned P25_VOICE_ID = 10999U;
 #include <ctime>
 #include <cstring>
 
+class CStaticTG {
+public:
+	unsigned int     m_tg;
+	sockaddr_storage m_addr;
+	unsigned int     m_addrLen;
+};
+
 int main(int argc, char** argv)
 {
 	const char* iniFile = DEFAULT_INI_FILE;
@@ -181,17 +188,7 @@ void CP25Gateway::run()
 		return;
 	}
 
-	CUDPSocket* remoteSocket = NULL;
-	if (m_conf.getRemoteCommandsEnabled()) {
-		remoteSocket = new CUDPSocket(m_conf.getRemoteCommandsPort());
-		ret = remoteSocket->open();
-		if (!ret) {
-			delete remoteSocket;
-			remoteSocket = NULL;
-		}
-	}
-
-	CNetwork localNetwork(m_conf.getMyPort(), m_conf.getCallsign(), false);
+	CNetwork localNetwork(m_conf.getMyPort(), m_conf.getCallsign(), m_conf.getDebug());
 	ret = localNetwork.open();
 	if (!ret) {
 		::LogFinalise();
@@ -216,9 +213,13 @@ void CP25Gateway::run()
 	CDMRLookup* lookup = new CDMRLookup(m_conf.getLookupName(), m_conf.getLookupTime());
 	lookup->read();
 
-	CTimer inactivityTimer(1000U, m_conf.getNetworkInactivityTimeout() * 60U);
-	CTimer lostTimer(1000U, 120U);
+	unsigned int rfHangTime  = m_conf.getNetworkRFHangTime();
+	unsigned int netHangTime = m_conf.getNetworkNetHangTime();
+
+	CTimer hangTimer(1000U);
+
 	CTimer pollTimer(1000U, 5U);
+	pollTimer.start();
 
 	CStopWatch stopWatch;
 	stopWatch.start();
@@ -236,145 +237,189 @@ void CP25Gateway::run()
 	LogMessage("Starting P25Gateway-%s", VERSION);
 
 	unsigned int srcId = 0U;
-	unsigned int dstId = 0U;
+	unsigned int dstTG = 0U;
 
-	unsigned int currentId = 9999U;
+	bool currentIsStatic        = false;
+	unsigned int currentTG      = 0U;
 	unsigned int currentAddrLen = 0U;
 	sockaddr_storage currentAddr;
 
-	unsigned int startupId = m_conf.getNetworkStartup();
-	bool p252dmr_enabled = (startupId == 20) ? true : false;
-	
-	if (startupId != 9999U) {
-		CP25Reflector* reflector = reflectors.find(startupId);
+	std::vector<unsigned int> staticIds = m_conf.getNetworkStatic();
+
+	std::vector<CStaticTG> staticTGs;
+	for (std::vector<unsigned int>::const_iterator it = staticIds.cbegin(); it != staticIds.cend(); ++it) {
+		CP25Reflector* reflector = reflectors.find(*it);
 		if (reflector != NULL) {
-			currentId      = startupId;
-			currentAddr    = reflector->m_addr;
-			currentAddrLen = reflector->m_addrLen;
+			CStaticTG staticTG;
+			staticTG.m_tg      = *it;
+			staticTG.m_addr    = reflector->m_addr;
+			staticTG.m_addrLen = reflector->m_addrLen;
+			staticTGs.push_back(staticTG);
 
-			inactivityTimer.start();
-			pollTimer.start();
-			lostTimer.start();
+			remoteNetwork.writePoll(staticTG.m_addr, staticTG.m_addrLen);
+			remoteNetwork.writePoll(staticTG.m_addr, staticTG.m_addrLen);
+			remoteNetwork.writePoll(staticTG.m_addr, staticTG.m_addrLen);
 
-			remoteNetwork.writePoll(currentAddr, currentAddrLen);
-			remoteNetwork.writePoll(currentAddr, currentAddrLen);
-			remoteNetwork.writePoll(currentAddr, currentAddrLen);
-
-			LogMessage("Linked at startup to reflector %u", currentId);
+			LogMessage("Statically linked to reflector %u", *it);
 		}
 	}
 
 	for (;;) {
 		unsigned char buffer[200U];
 		sockaddr_storage addr;
-		unsigned int addrlen;
+		unsigned int addrLen;
 
 		// From the reflector to the MMDVM
-		unsigned int len = remoteNetwork.readData(buffer, 200U, addr, addrlen);
+		unsigned int len = remoteNetwork.readData(buffer, 200U, addr, addrLen);
 		if (len > 0U) {
 			// If we're linked and it's from the right place, send it on
-			if (currentId != 9999U && CUDPSocket::match(currentAddr, addr)) {
+			if (currentTG > 0U && CUDPSocket::match(currentAddr, addr)) {
 				// Don't pass reflector control data through to the MMDVM
 				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
 					// Rewrite the LCF and the destination TG
 					if (buffer[0U] == 0x64U) {
 						buffer[1U] = 0x00U;			// LCF is for TGs
 					} else if (buffer[0U] == 0x65U) {
-						buffer[1U] = (currentId >> 16) & 0xFFU;
-						buffer[2U] = (currentId >> 8) & 0xFFU;
-						buffer[3U] = (currentId >> 0) & 0xFFU;
+						buffer[1U] = (currentTG >> 16) & 0xFFU;
+						buffer[2U] = (currentTG >> 8)  & 0xFFU;
+						buffer[3U] = (currentTG >> 0)  & 0xFFU;
 					}
 
 					localNetwork.writeData(buffer, len, rptAddr, rptAddrLen);
-				}
 
-				// Any network activity is proof that the reflector is alive
-				lostTimer.start();
+					hangTimer.start();
+				}
+			} else if (currentTG == 0U) {
+				// Don't pass reflector control data through to the MMDVM
+				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
+					// Find the static TG that this audio data belongs to
+					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+						if (CUDPSocket::match(addr, (*it).m_addr)) {
+							currentTG = (*it).m_tg;
+							break;
+						}
+					}
+
+					if (currentTG > 0U) {
+						currentAddr     = addr;
+						currentAddrLen  = addrLen;
+						currentIsStatic = true;
+
+						// Rewrite the LCF and the destination TG
+						if (buffer[0U] == 0x64U) {
+							buffer[1U] = 0x00U;			// LCF is for TGs
+						} else if (buffer[0U] == 0x65U) {
+							buffer[1U] = (currentTG >> 16) & 0xFFU;
+							buffer[2U] = (currentTG >> 8)  & 0xFFU;
+							buffer[3U] = (currentTG >> 0)  & 0xFFU;
+						}
+
+						localNetwork.writeData(buffer, len, rptAddr, rptAddrLen);
+
+						LogMessage("Switched to reflector %u due to network activity", currentTG);
+
+						hangTimer.setTimeout(netHangTime);
+						hangTimer.start();
+					}
+				}
 			}
 		}
 
 		// From the MMDVM to the reflector or control data
-		len = localNetwork.readData(buffer, 200U, addr, addrlen);
+		len = localNetwork.readData(buffer, 200U, addr, addrLen);
 		if (len > 0U) {
 			if (buffer[0U] == 0x65U) {
-				dstId  = (buffer[1U] << 16) & 0xFF0000U;
-				dstId |= (buffer[2U] << 8)  & 0x00FF00U;
-				dstId |= (buffer[3U] << 0)  & 0x0000FFU;
+				dstTG  = (buffer[1U] << 16) & 0xFF0000U;
+				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
+				dstTG |= (buffer[3U] << 0)  & 0x0000FFU;
 			} else if (buffer[0U] == 0x66U) {
 				srcId  = (buffer[1U] << 16) & 0xFF0000U;
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
 				
-				if(p252dmr_enabled){
-					currentId = dstId;
-				}
-				else if (dstId != currentId) {
-					CP25Reflector* reflector = NULL;
-					if (dstId != 9999U)
-						reflector = reflectors.find(dstId);
-
-					// If we're unlinking or changing reflectors, unlink from the current one
-					if (dstId == 9999U || reflector != NULL) {
+				if (dstTG != currentTG) {
+					if (currentTG > 0U) {
 						std::string callsign = lookup->find(srcId);
+						LogMessage("Unlinking from reflector %u by %s", currentTG, callsign.c_str());
 
-						if (currentId != 9999U) {
-							LogMessage("Unlinked from reflector %u by %s", currentId, callsign.c_str());
-
+						if (!currentIsStatic) {
 							remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
 							remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
 							remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-
-							inactivityTimer.stop();
-							pollTimer.stop();
-							lostTimer.stop();
 						}
 
-						if (voice != NULL) {
-							if (dstId == 9999U)
-								voice->unlinked();
-							else
-								voice->linkedTo(dstId);
-						}
+						hangTimer.stop();
+					}
 
-						currentId = dstId;
+					const CStaticTG* found = NULL;
+					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+						if (dstTG == (*it).m_tg) {
+							found = &(*it);
+							break;
+						}
+					}
+
+					currentTG      = 0U;
+					currentAddrLen = 0U;
+
+					if (found == NULL) {
+						CP25Reflector* refl = reflectors.find(dstTG);
+						if (refl != NULL) {
+							currentTG       = dstTG;
+							currentAddr     = refl->m_addr;
+							currentAddrLen  = refl->m_addrLen;
+							currentIsStatic = false;
+						}
+					} else {
+						currentTG       = found->m_tg;
+						currentAddr     = found->m_addr;
+						currentAddrLen  = found->m_addrLen;
+						currentIsStatic = true;
 					}
 
 					// Link to the new reflector
-					if (reflector != NULL) {
-						currentId      = dstId;
-						currentAddr    = reflector->m_addr;
-						currentAddrLen = reflector->m_addrLen;
-
+					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
-						LogMessage("Linked to reflector %u by %s", currentId, callsign.c_str());
+						LogMessage("Switched to reflector %u due to RF activity from %s", currentTG, callsign.c_str());
 
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
+						if (!currentIsStatic) {
+							remoteNetwork.writePoll(currentAddr, currentAddrLen);
+							remoteNetwork.writePoll(currentAddr, currentAddrLen);
+							remoteNetwork.writePoll(currentAddr, currentAddrLen);
+						}
 
-						inactivityTimer.start();
-						pollTimer.start();
-						lostTimer.start();
+						hangTimer.setTimeout(rfHangTime);
+						hangTimer.start();
 					}
+
+					if (voice != NULL) {
+						if (currentTG == 0U)
+							voice->unlinked();
+						else
+							voice->linkedTo(dstTG);
+					}
+
 				}
-			} else if (buffer[0U] == 0x80U) {
+			}
+
+			if (buffer[0U] == 0x80U) {
 				if (voice != NULL)
 					voice->eof();
 			}
 
 			// If we're linked and we have a network, send it on
-			if (currentId != 9999U) {
+			if (currentTG > 0U) {
 				// Rewrite the LCF and the destination TG
 				if (buffer[0U] == 0x64U) {
 					buffer[1U] = 0x00U;			// LCF is for TGs
 				} else if (buffer[0U] == 0x65U) {
-					buffer[1U] = (currentId >> 16) & 0xFFU;
-					buffer[2U] = (currentId >> 8)  & 0xFFU;
-					buffer[3U] = (currentId >> 0)  & 0xFFU;
+					buffer[1U] = (currentTG >> 16) & 0xFFU;
+					buffer[2U] = (currentTG >> 8)  & 0xFFU;
+					buffer[3U] = (currentTG >> 0)  & 0xFFU;
 				}
 
 				remoteNetwork.writeData(buffer, len, currentAddr, currentAddrLen);
-				inactivityTimer.start();
+				hangTimer.start();
 			}
 		}
 
@@ -389,154 +434,41 @@ void CP25Gateway::run()
 
 		reflectors.clock(ms);
 
-		if (remoteSocket != NULL) {
-			int res = remoteSocket->read(buffer, 200U, addr, addrlen);
-			if (res > 0) {
-				buffer[res] = '\0';
-				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
-					unsigned int tg = (unsigned int)::atoi((char*)(buffer + 9U));
-
-					CP25Reflector* reflector = NULL;
-					if (tg != 9999U)
-						reflector = reflectors.find(tg);
-
-					if (reflector == NULL && currentId != 9999U) {
-						LogMessage("Unlinked from reflector %u by remote command", currentId);
-
-						if (voice != NULL) {
-							voice->unlinked();
-							voice->eof();
-						}
-
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-
-						inactivityTimer.stop();
-						pollTimer.stop();
-						lostTimer.stop();
-
-						currentId = 9999U;
-					} else if (reflector != NULL && currentId == 9999U) {
-						currentId      = tg;
-						currentAddr    = reflector->m_addr;
-						currentAddrLen = reflector->m_addrLen;
-
-						LogMessage("Linked to reflector %u by remote command", currentId);
-
-						if (voice != NULL) {
-							voice->linkedTo(currentId);
-							voice->eof();
-						}
-
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-
-						inactivityTimer.start();
-						pollTimer.start();
-						lostTimer.start();
-					} else if (reflector != NULL && currentId != 9999U) {
-						LogMessage("Unlinked from reflector %u by remote command", currentId);
-
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-						remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-
-						currentId      = tg;
-						currentAddr    = reflector->m_addr;
-						currentAddrLen = reflector->m_addrLen;
-
-						LogMessage("Linked to reflector %u by remote command", currentId);
-
-						if (voice != NULL) {
-							voice->linkedTo(currentId);
-							voice->eof();
-						}
-
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-						remoteNetwork.writePoll(currentAddr, currentAddrLen);
-
-						inactivityTimer.start();
-						pollTimer.start();
-						lostTimer.start();
-					}
-				} else {
-					CUtils::dump("Invalid remote command received", buffer, res);
-				}
-			}
-		}
-
 		if (voice != NULL)
 			voice->clock(ms);
 
-		inactivityTimer.clock(ms);
-		if (inactivityTimer.isRunning() && inactivityTimer.hasExpired()) {
-			if (currentId != 9999U && startupId == 9999U) {
-				LogMessage("Unlinking from %u due to inactivity", currentId);
+		hangTimer.clock(ms);
+		if (hangTimer.isRunning() && hangTimer.hasExpired()) {
+			if (currentTG > 0U) {
+				LogMessage("Unlinking from %u due to inactivity", currentTG);
 
-				remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-				remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-				remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+				if (!currentIsStatic) {
+					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+				}
 
 				if (voice != NULL)
 					voice->unlinked();
-				currentId = 9999U;
 
-				pollTimer.stop();
-				lostTimer.stop();
-				inactivityTimer.stop();
-			} else if (currentId != startupId) {
-				if (currentId != 9999U) {
-					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-					remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
-				}
+				currentTG      = 0U;
+				currentAddrLen = 0U;
 
-				CP25Reflector* reflector = reflectors.find(startupId);
-				if (reflector != NULL) {
-					currentId      = startupId;
-					currentAddr    = reflector->m_addr;
-					currentAddrLen = reflector->m_addrLen;
-
-					inactivityTimer.start();
-					pollTimer.start();
-					lostTimer.start();
-
-					LogMessage("Linked to reflector %u due to inactivity", currentId);
-
-					if (voice != NULL)
-						voice->linkedTo(currentId);
-
-					remoteNetwork.writePoll(currentAddr, currentAddrLen);
-					remoteNetwork.writePoll(currentAddr, currentAddrLen);
-					remoteNetwork.writePoll(currentAddr, currentAddrLen);
-				} else {
-					startupId = 9999U;
-					inactivityTimer.stop();
-					pollTimer.stop();
-					lostTimer.stop();
-				}
+				hangTimer.stop();
 			}
 		}
 
 		pollTimer.clock(ms);
 		if (pollTimer.isRunning() && pollTimer.hasExpired()) {
-			if (currentId != 9999U)
+			// Poll the static TGs
+			for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it)
+				remoteNetwork.writePoll((*it).m_addr, (*it).m_addrLen);
+
+			// Poll the dynamic TG
+			if (!currentIsStatic && currentAddrLen > 0U)
 				remoteNetwork.writePoll(currentAddr, currentAddrLen);
+
 			pollTimer.start();
-		}
-
-		lostTimer.clock(ms);
-		if (lostTimer.isRunning() && lostTimer.hasExpired()) {
-			if (currentId != 9999U) {
-				LogWarning("No response from %u, unlinking", currentId);
-				currentId = 9999U;
-			}
-
-			inactivityTimer.stop();
-			lostTimer.stop();
 		}
 
 		if (ms < 5U)
@@ -544,11 +476,6 @@ void CP25Gateway::run()
 	}
 
 	delete voice;
-
-	if (remoteSocket != NULL) {
-		remoteSocket->close();
-		delete remoteSocket;
-	}
 
 	localNetwork.close();
 
