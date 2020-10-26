@@ -12,6 +12,9 @@
 # HELLAS Zone P25 TG202
 202 hellaszone.com 41000
 
+# 204 Technology First
+204 203.129.17.27 41000
+
 # 214 SPAIN P25 Reflector
 214 214p25.xreflector.es 41000
 
@@ -278,6 +281,9 @@
 
 # 31672 P25 Pi-Star chat
 31672	p25-31672.pistar.uk	41000
+
+# 31769 P25 MB6NG
+31769	reflector.mb6ng.uk	41000
 
 # 31691 US Midwest P25 Reflector
 31691 net.w3axl.com 43169
