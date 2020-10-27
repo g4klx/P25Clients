@@ -67,6 +67,10 @@ public:
   unsigned int getNetworkNetHangTime() const;
   bool         getNetworkDebug() const;
 
+  // The Remote Commands section
+  bool         getRemoteCommandsEnabled() const;
+  unsigned int getRemoteCommandsPort() const;
+
 private:
   std::string  m_file;
   std::string  m_callsign;
@@ -100,6 +104,9 @@ private:
   unsigned int m_networkRFHangTime;
   unsigned int m_networkNetHangTime;
   bool         m_networkDebug;
+
+  bool         m_remoteCommandsEnabled;
+  unsigned int m_remoteCommandsPort;
 };
 
 #endif

@@ -32,7 +32,8 @@ enum SECTION {
   SECTION_ID_LOOKUP,
   SECTION_VOICE,
   SECTION_LOG,
-  SECTION_NETWORK
+  SECTION_NETWORK,
+  SECTION_REMOTE_COMMANDS
 };
 
 CConf::CConf(const std::string& file) :
@@ -61,7 +62,9 @@ m_networkParrotPort(0U),
 m_networkStatic(),
 m_networkRFHangTime(120U),
 m_networkNetHangTime(60U),
-m_networkDebug(false)
+m_networkDebug(false),
+m_remoteCommandsEnabled(false),
+m_remoteCommandsPort(6074U)
 {
 }
 
@@ -95,6 +98,8 @@ bool CConf::read()
 			  section = SECTION_LOG;
 		  else if (::strncmp(buffer, "[Network]", 9U) == 0)
 			  section = SECTION_NETWORK;
+		  else if (::strncmp(buffer, "[Remote Commands]", 17U) == 0)
+			  section = SECTION_REMOTE_COMMANDS;
 		  else
 			  section = SECTION_NONE;
 
@@ -193,6 +198,11 @@ bool CConf::read()
 			  m_networkNetHangTime = (unsigned int)::atoi(value);
 		  else if (::strcmp(key, "Debug") == 0)
 			  m_networkDebug = ::atoi(value) == 1;
+	  } else if (section == SECTION_REMOTE_COMMANDS) {
+		  if (::strcmp(key, "Enable") == 0)
+			  m_remoteCommandsEnabled = ::atoi(value) == 1;
+		  else if (::strcmp(key, "Port") == 0)
+			  m_remoteCommandsPort = (unsigned int)::atoi(value);
 	  }
   }
 
@@ -334,4 +344,14 @@ unsigned int CConf::getNetworkNetHangTime() const
 bool CConf::getNetworkDebug() const
 {
 	return m_networkDebug;
+}
+
+bool CConf::getRemoteCommandsEnabled() const
+{
+	return m_remoteCommandsEnabled;
+}
+
+unsigned int CConf::getRemoteCommandsPort() const
+{
+	return m_remoteCommandsPort;
 }

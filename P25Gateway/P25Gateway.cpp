@@ -203,6 +203,16 @@ void CP25Gateway::run()
 		return;
 	}
 
+	CUDPSocket* remoteSocket = NULL;
+	if (m_conf.getRemoteCommandsEnabled()) {
+		remoteSocket = new CUDPSocket(m_conf.getRemoteCommandsPort());
+		ret = remoteSocket->open();
+		if (!ret) {
+			delete remoteSocket;
+			remoteSocket = NULL;
+		}
+	}
+
 	CReflectors reflectors(m_conf.getNetworkHosts1(), m_conf.getNetworkHosts2(), m_conf.getNetworkReloadTime());
 	if (m_conf.getNetworkParrotPort() > 0U)
 		reflectors.setParrot(m_conf.getNetworkParrotAddress(), m_conf.getNetworkParrotPort());
@@ -391,6 +401,8 @@ void CP25Gateway::run()
 
 						hangTimer.setTimeout(rfHangTime);
 						hangTimer.start();
+					} else {
+						hangTimer.stop();
 					}
 
 					if (voice != NULL) {
@@ -427,6 +439,84 @@ void CP25Gateway::run()
 			unsigned int length = voice->read(buffer);
 			if (length > 0U)
 				localNetwork.writeData(buffer, length, rptAddr, rptAddrLen);
+		}
+
+		if (remoteSocket != NULL) {
+			sockaddr_storage addr;
+			unsigned int addrLen;
+			int res = remoteSocket->read(buffer, 200U, addr, addrLen);
+			if (res > 0) {
+				buffer[res] = '\0';
+				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
+					unsigned int tg = (unsigned int)::atoi((char*)(buffer + 9U));
+
+					if (tg != currentTG) {
+						if (currentAddrLen > 0U) {
+							LogMessage("Unlinked from reflector %u by remote command", currentTG);
+
+							if (!currentIsStatic) {
+								remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+								remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+								remoteNetwork.writeUnlink(currentAddr, currentAddrLen);
+							}
+
+							hangTimer.stop();
+						}
+
+						const CStaticTG* found = NULL;
+						for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+							if (tg == (*it).m_tg) {
+								found = &(*it);
+								break;
+							}
+						}
+
+						if (found == NULL) {
+							CP25Reflector* refl = reflectors.find(tg);
+							if (refl != NULL) {
+								currentTG       = tg;
+								currentAddr     = refl->m_addr;
+								currentAddrLen  = refl->m_addrLen;
+								currentIsStatic = false;
+							} else {
+								currentTG       = tg;
+								currentAddrLen  = 0U;
+								currentIsStatic = false;
+							}
+						} else {
+							currentTG       = found->m_tg;
+							currentAddr     = found->m_addr;
+							currentAddrLen  = found->m_addrLen;
+							currentIsStatic = true;
+						}
+
+						// Link to the new reflector
+						if (currentAddrLen > 0U) {
+							LogMessage("Switched to reflector %u by remote command", currentTG);
+
+							if (!currentIsStatic) {
+								remoteNetwork.writePoll(currentAddr, currentAddrLen);
+								remoteNetwork.writePoll(currentAddr, currentAddrLen);
+								remoteNetwork.writePoll(currentAddr, currentAddrLen);
+							}
+
+							hangTimer.setTimeout(rfHangTime);
+							hangTimer.start();
+						} else {
+							hangTimer.stop();
+						}
+
+						if (voice != NULL) {
+							if (currentAddrLen == 0U)
+								voice->unlinked();
+							else
+								voice->linkedTo(currentTG);
+						}
+					}
+				} else {
+					CUtils::dump("Invalid remote command received", buffer, res);
+				}
+			}
 		}
 
 		unsigned int ms = stopWatch.elapsed();
@@ -479,6 +569,11 @@ void CP25Gateway::run()
 	delete voice;
 
 	localNetwork.close();
+
+	if (remoteSocket != NULL) {
+		remoteSocket->close();
+		delete remoteSocket;
+	}
 
 	remoteNetwork.close();
 
