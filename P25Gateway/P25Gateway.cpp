@@ -273,7 +273,7 @@ void CP25Gateway::run()
 		unsigned int len = remoteNetwork.readData(buffer, 200U, addr, addrLen);
 		if (len > 0U) {
 			// If we're linked and it's from the right place, send it on
-			if (currentTG > 0U && CUDPSocket::match(currentAddr, addr)) {
+			if (currentAddrLen > 0U && CUDPSocket::match(currentAddr, addr)) {
 				// Don't pass reflector control data through to the MMDVM
 				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
 					// Rewrite the LCF and the destination TG
@@ -338,7 +338,7 @@ void CP25Gateway::run()
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
 				
 				if (dstTG != currentTG) {
-					if (currentTG > 0U) {
+					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Unlinking from reflector %u by %s", currentTG, callsign.c_str());
 
@@ -359,15 +359,16 @@ void CP25Gateway::run()
 						}
 					}
 
-					currentTG      = 0U;
-					currentAddrLen = 0U;
-
 					if (found == NULL) {
 						CP25Reflector* refl = reflectors.find(dstTG);
 						if (refl != NULL) {
 							currentTG       = dstTG;
 							currentAddr     = refl->m_addr;
 							currentAddrLen  = refl->m_addrLen;
+							currentIsStatic = false;
+						} else {
+							currentTG       = dstTG;
+							currentAddrLen  = 0U;
 							currentIsStatic = false;
 						}
 					} else {
@@ -393,12 +394,11 @@ void CP25Gateway::run()
 					}
 
 					if (voice != NULL) {
-						if (currentTG == 0U)
+						if (currentAddrLen == 0U)
 							voice->unlinked();
 						else
 							voice->linkedTo(dstTG);
 					}
-
 				}
 			}
 
@@ -408,7 +408,7 @@ void CP25Gateway::run()
 			}
 
 			// If we're linked and we have a network, send it on
-			if (currentTG > 0U) {
+			if (currentAddrLen > 0U) {
 				// Rewrite the LCF and the destination TG
 				if (buffer[0U] == 0x64U) {
 					buffer[1U] = 0x00U;			// LCF is for TGs
@@ -439,7 +439,9 @@ void CP25Gateway::run()
 
 		hangTimer.clock(ms);
 		if (hangTimer.isRunning() && hangTimer.hasExpired()) {
-			if (currentTG > 0U) {
+			currentTG = 0U;
+
+			if (currentAddrLen > 0U) {
 				LogMessage("Unlinking from %u due to inactivity", currentTG);
 
 				if (!currentIsStatic) {
@@ -451,7 +453,6 @@ void CP25Gateway::run()
 				if (voice != NULL)
 					voice->unlinked();
 
-				currentTG      = 0U;
 				currentAddrLen = 0U;
 
 				hangTimer.stop();
