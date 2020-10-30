@@ -46,6 +46,7 @@ public:
 
 	void setParrot(const std::string& address, unsigned int port);
 	void setP252DMR(const std::string& address, unsigned int port);
+	void setP252PCM(const std::string& address, unsigned int port);
 
 	bool load();
 
@@ -60,6 +61,8 @@ private:
 	unsigned int                m_parrotPort;
 	std::string					m_p252dmrAddress;
 	unsigned int				m_p252dmrPort;
+	std::string					m_p252pcmAddress;
+	unsigned int				m_p252pcmPort;
 	std::vector<CP25Reflector*> m_reflectors;
 	CTimer                      m_timer;
 };

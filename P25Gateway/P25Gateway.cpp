@@ -204,6 +204,8 @@ void CP25Gateway::run()
 		reflectors.setParrot(m_conf.getNetworkParrotAddress(), m_conf.getNetworkParrotPort());
 	if (m_conf.getNetworkP252DMRPort() > 0U)
 		reflectors.setP252DMR(m_conf.getNetworkP252DMRAddress(), m_conf.getNetworkP252DMRPort());
+	if (m_conf.getNetworkP252PCMPort() > 0U)
+		reflectors.setP252PCM(m_conf.getNetworkP252PCMAddress(), m_conf.getNetworkP252PCMPort());
 	reflectors.load();
 
 	CDMRLookup* lookup = new CDMRLookup(m_conf.getLookupName(), m_conf.getLookupTime());
@@ -237,6 +239,7 @@ void CP25Gateway::run()
 
 	unsigned int startupId = m_conf.getNetworkStartup();
 	bool p252dmr_enabled = (startupId == 20) ? true : false;
+	bool p252pcm_enabled = (startupId == 30) ? true : false;
 	
 	if (startupId != 9999U) {
 		CP25Reflector* reflector = reflectors.find(startupId);
@@ -272,7 +275,7 @@ void CP25Gateway::run()
 					// Rewrite the LCF and the destination TG
 					if (buffer[0U] == 0x64U) {
 						buffer[1U] = 0x00U;			// LCF is for TGs
-					} else if (buffer[0U] == 0x65U) {
+					} else if ((buffer[0U] == 0x65U) && !p252pcm_enabled) {
 						buffer[1U] = (currentId >> 16) & 0xFFU;
 						buffer[2U] = (currentId >> 8) & 0xFFU;
 						buffer[3U] = (currentId >> 0) & 0xFFU;
@@ -298,7 +301,7 @@ void CP25Gateway::run()
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
 				
-				if(p252dmr_enabled){
+				if(p252dmr_enabled || p252pcm_enabled){
 					currentId = dstId;
 				}
 				else if (dstId != currentId) {
