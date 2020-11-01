@@ -52,6 +52,7 @@ public:
   unsigned int getLogFileLevel() const;
   std::string  getLogFilePath() const;
   std::string  getLogFileRoot() const;
+  bool         getLogFileRotate() const;
 
   // The Network section
   unsigned int getNetworkPort() const;
@@ -91,6 +92,7 @@ private:
   unsigned int m_logFileLevel;
   std::string  m_logFilePath;
   std::string  m_logFileRoot;
+  bool         m_logFileRotate;
 
   unsigned int m_networkPort;
   std::string  m_networkHosts1;
