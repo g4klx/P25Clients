@@ -529,8 +529,6 @@ void CP25Gateway::run()
 
 		hangTimer.clock(ms);
 		if (hangTimer.isRunning() && hangTimer.hasExpired()) {
-			currentTG = 0U;
-
 			if (currentAddrLen > 0U) {
 				LogMessage("Unlinking from %u due to inactivity", currentTG);
 
@@ -547,6 +545,8 @@ void CP25Gateway::run()
 
 				hangTimer.stop();
 			}
+
+			currentTG = 0U;
 		}
 
 		pollTimer.clock(ms);
