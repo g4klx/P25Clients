@@ -27,7 +27,7 @@
 
 class CRptNetwork {
 public:
-	CRptNetwork(const std::string& myAddr, unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug);
+	CRptNetwork(unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug);
 	~CRptNetwork();
 
 	bool open();
@@ -41,8 +41,6 @@ public:
 	void close();
 
 private:
-	sockaddr_storage m_myAddr;
-	unsigned int     m_myAddrLen;
 	sockaddr_storage m_rptAddr;
 	unsigned int     m_rptAddrLen;
 	std::string      m_callsign;

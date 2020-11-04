@@ -189,7 +189,7 @@ void CP25Gateway::run()
 		return;
 	}
 
-	CRptNetwork localNetwork(m_conf.getMyAddress(), m_conf.getMyPort(), rptAddr, rptAddrLen, m_conf.getCallsign(), m_conf.getDebug());
+	CRptNetwork localNetwork(m_conf.getMyPort(), rptAddr, rptAddrLen, m_conf.getCallsign(), m_conf.getDebug());
 	ret = localNetwork.open();
 	if (!ret) {
 		::LogFinalise();

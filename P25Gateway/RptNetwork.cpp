@@ -24,20 +24,16 @@
 #include <cassert>
 #include <cstring>
 
-CRptNetwork::CRptNetwork(const std::string& myAddr, unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug) :
-m_myAddr(),
-m_myAddrLen(0U),
+CRptNetwork::CRptNetwork(unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug) :
 m_rptAddr(rptAddr),
 m_rptAddrLen(rptAddrLen),
 m_callsign(callsign),
-m_socket(myAddr, myPort),
+m_socket(myPort),
 m_debug(debug),
 m_timer(1000U, 5U)
 {
 	assert(myPort > 0U);
 	assert(rptAddrLen > 0U);
-
-	CUDPSocket::lookup(myAddr, myPort, m_myAddr, m_myAddrLen);
 
 	m_callsign.resize(10U, ' ');
 }
@@ -48,14 +44,9 @@ CRptNetwork::~CRptNetwork()
 
 bool CRptNetwork::open()
 {
-	if (m_myAddrLen == 0U) {
-		LogError("Unable to resolve the local address and port");
-		return false;
-	}
-
 	LogInfo("Opening Rpt network connection");
 
-	bool ret = m_socket.open(m_myAddr);
+	bool ret = m_socket.open(m_rptAddr);
 
 	if (ret) {
 		m_timer.start();
