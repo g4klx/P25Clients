@@ -16,7 +16,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "Network.h"
+#include "P25Network.h"
 #include "Utils.h"
 #include "Log.h"
 
@@ -24,26 +24,33 @@
 #include <cassert>
 #include <cstring>
 
-CNetwork::CNetwork(unsigned int port, const std::string& callsign, bool debug) :
+CP25Network::CP25Network(unsigned int port, const std::string& callsign, bool debug) :
 m_callsign(callsign),
-m_socket(port),
+m_socket(),
+m_port(port),
 m_debug(debug)
 {
+	assert(port > 0U);
+
 	m_callsign.resize(10U, ' ');
 }
 
-CNetwork::~CNetwork()
+CP25Network::~CP25Network()
 {
 }
 
-bool CNetwork::open()
+bool CP25Network::open()
 {
 	LogInfo("Opening P25 network connection");
 
-	return m_socket.open();
+	bool ret = m_socket.open(0, PF_INET, "", m_port);
+	if (!ret)
+		return false;
+
+	return m_socket.open(1, PF_INET6, "", m_port);
 }
 
-bool CNetwork::writeData(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
@@ -54,7 +61,7 @@ bool CNetwork::writeData(const unsigned char* data, unsigned int length, const s
 	return m_socket.write(data, length, addr, addrLen);
 }
 
-bool CNetwork::writePoll(const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::poll(const sockaddr_storage& addr, unsigned int addrLen)
 {
 	unsigned char data[15U];
 
@@ -69,7 +76,7 @@ bool CNetwork::writePoll(const sockaddr_storage& addr, unsigned int addrLen)
 	return m_socket.write(data, 11U, addr, addrLen);
 }
 
-bool CNetwork::writeUnlink(const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
 {
 	unsigned char data[15U];
 
@@ -84,7 +91,7 @@ bool CNetwork::writeUnlink(const sockaddr_storage& addr, unsigned int addrLen)
 	return m_socket.write(data, 11U, addr, addrLen);
 }
 
-unsigned int CNetwork::readData(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen)
+unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
@@ -99,7 +106,7 @@ unsigned int CNetwork::readData(unsigned char* data, unsigned int length, sockad
 	return len;
 }
 
-void CNetwork::close()
+void CP25Network::close()
 {
 	m_socket.close();
 

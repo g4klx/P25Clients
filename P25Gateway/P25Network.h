@@ -16,35 +16,36 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef	Network_H
-#define	Network_H
+#ifndef	P25Network_H
+#define	P25Network_H
 
 #include "UDPSocket.h"
 
 #include <cstdint>
 #include <string>
 
-class CNetwork {
+class CP25Network {
 public:
-	CNetwork(unsigned int port, const std::string& callsign, bool debug);
-	~CNetwork();
+	CP25Network(unsigned int port, const std::string& callsign, bool debug);
+	~CP25Network();
 
 	bool open();
 
-	bool writeData(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
+	bool write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
 
-	unsigned int readData(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
+	unsigned int read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
 
-	bool writePoll(const sockaddr_storage& addr, unsigned int addrLen);
+	bool poll(const sockaddr_storage& addr, unsigned int addrLen);
 
-	bool writeUnlink(const sockaddr_storage& addr, unsigned int addrLen);
+	bool unlink(const sockaddr_storage& addr, unsigned int addrLen);
 
 	void close();
 
 private:
-	std::string m_callsign;
-	CUDPSocket  m_socket;
-	bool        m_debug;
+	std::string  m_callsign;
+	CUDPSocket   m_socket;
+	unsigned int m_port;
+	bool         m_debug;
 };
 
 #endif

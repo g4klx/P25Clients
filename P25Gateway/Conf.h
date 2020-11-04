@@ -34,6 +34,7 @@ public:
   std::string  getCallsign() const;
   std::string  getRptAddress() const;
   unsigned int getRptPort() const;
+  std::string  getMyAddress() const;
   unsigned int getMyPort() const;
   bool         getDebug() const;
   bool         getDaemon() const;
@@ -77,6 +78,7 @@ private:
   std::string  m_callsign;
   std::string  m_rptAddress;
   unsigned int m_rptPort;
+  std::string  m_myAddress;
   unsigned int m_myPort;
   bool         m_debug;
   bool         m_daemon;
