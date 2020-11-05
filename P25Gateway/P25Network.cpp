@@ -43,11 +43,16 @@ bool CP25Network::open()
 {
 	LogInfo("Opening P25 network connection");
 
-	bool ret = m_socket.open(0, PF_INET, "", m_port);
-	if (!ret)
-		return false;
+	unsigned int index = 0U;
 
-	return m_socket.open(1, PF_INET6, "", m_port);
+	bool ret1 = m_socket.open(index, PF_INET, "", m_port);
+	if (ret1)
+		index++;
+
+	bool ret2 = m_socket.open(index, PF_INET6, "", m_port);
+
+	// We're OK as long as we have either IPv4 or IPv6 or both.
+	return ret1 || ret2;
 }
 
 bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
