@@ -54,11 +54,17 @@
 # RU DMR TG2503
 2503	p25.r1ik.ru		41000
 
+# 2700 Old Melbourne Florida Repeater Association
+2700	2700p25.ddns.net	41000
+
 # 3023 Ontario Crosslink
 3023	ontxlink.hopto.org	41000
 
 # 3142 Pennsylvania
 3142 3.215.215.169 41002
+
+# 3300 PRadise
+3300	3300p25.from-pr.com	41000
 
 # 4095 KM4NNO Wave (Bridged to the P25Link Network).
 4095	reflector.p25.link		41010
