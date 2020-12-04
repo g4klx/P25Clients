@@ -13,7 +13,7 @@
 202 hellaszone.com 41000
 
 # 204 Technology First
-204 203.129.17.27 41000
+204	w8ufo.hamshack.info	41000
 
 # 214 SPAIN P25 Reflector
 214 214p25.xreflector.es 41000
@@ -59,6 +59,9 @@
 
 # 3023 Ontario Crosslink
 3023	ontxlink.hopto.org	41000
+
+# 3026
+3026	3026.hamshack.info	41000
 
 # 3142 Pennsylvania
 3142 3.215.215.169 41002
