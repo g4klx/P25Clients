@@ -193,7 +193,7 @@
 10945	dl1bh.ddns.net	41000
 
 # 11069 KK6RQs reflector
-11069	173.26.181.228	41000
+11069	area52.zapto.org	41000
 
 # 22200 IT HBLINK REFLECTOR
 22200 p25.hblink.it 41000
