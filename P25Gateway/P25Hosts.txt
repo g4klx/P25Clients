@@ -297,6 +297,9 @@
 # 31672 P25 Pi-Star chat
 31672	p25-31672.pistar.uk	41000
 
+# 31679 Blind Hams
+31679	xlx.borris.me	41000
+
 # 31769 MB6NG P25
 31769	dmr.mb6ng.uk	41000
 
