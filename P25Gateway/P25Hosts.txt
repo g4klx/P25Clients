@@ -19,7 +19,7 @@
 214 214p25.xreflector.es 41000
 
 # 226 Romania YO P25 Network
-226	p25.dstar-yo.ro	41003
+226	p25.dstar-yo.ro	41000
 
 # HBLink Poland P25 TG260
 260 p25.hblink.pl 41000
@@ -49,7 +49,7 @@
 2231	p25.is0.org			41000
 
 # 2263 Bucharest YO3 P25 Network
-2263	p25.dstar-yo.ro	41000
+2263	p25.dstar-yo.ro	41003
 
 # 2265 Baia Mare YO5 P25 Network
 2265	p25.dstar-yo.ro	41005
