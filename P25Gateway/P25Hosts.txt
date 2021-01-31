@@ -225,6 +225,9 @@
 # 23551 P25 Scotland
 23551 p25scotland.ddns.net 41000
 
+# 25617 Russia Kavkaz
+25617   kavkaz.qrz.ru    41000
+
 # 25641 Russia P25 Net
 25641	194.182.85.217		41000
 
