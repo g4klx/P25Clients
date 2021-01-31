@@ -342,5 +342,8 @@
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
+# 52072 Phuket
+52072 xlx727phuketdstar.ddns.net 41000
+
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
