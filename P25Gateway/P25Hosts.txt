@@ -36,6 +36,9 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
+# 891 WNY DMR Network
+891 p25.wnydmr.network 41000
+
 # 927 Southern California
 927	927.org			41000
 
