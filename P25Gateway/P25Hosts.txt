@@ -36,9 +36,6 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
-# 891 WNY DMR Network
-891 p25.wnydmr.network 41000
-
 # 927 Southern California
 927	927.org			41000
 
@@ -242,6 +239,9 @@
 
 # 31010 Alabama Link
 31010	p25.alabamalink.info	41000
+
+# 310441 WNYDMR Digital Network
+310441 p25.wnydmr.network 41000
 
 # 31057 AF5XP Sulphur,Louisiana
 31057	af5xp.ddns.net		41000
