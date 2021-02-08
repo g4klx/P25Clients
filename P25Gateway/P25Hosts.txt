@@ -42,6 +42,9 @@
 # 927 Southern California
 927	927.org			41000
 
+# 994 The Online Radio Club (Bridged to XLX994)
+994	misc.openreflector.com		41000
+
 # KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
 2050	reflector.p25.link		41009
 
