@@ -90,7 +90,7 @@
 # 8208 China P25 Network bridge to P25NX
 8208 47.105.33.47 41000
 
-# 9480 ICQ POCAST 
+# 9480 ICQ PODCAST 
 9480	xlx235.mb6ng.uk	41001
 
 # 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
