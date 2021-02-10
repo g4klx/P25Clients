@@ -345,6 +345,9 @@
 # 43389 SouthEast Link US
 43389	p25.lmarc.net		41000
 
+# 45000 Korea
+45000 p25.dvham.com 41000
+
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
 50210   edone.now.im            41000
  
