@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2018,2020 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018,2020,2021 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -214,7 +214,7 @@ void CP25Reflector::run()
 				if (rpt == NULL) {
 					rpt = new CP25Repeater;
 					rpt->m_timer.start();
-					rpt->m_addr     = addr;
+					::memcpy(&rpt->m_addr, &addr, sizeof(struct sockaddr_storage));
 					rpt->m_addrLen  = addrLen;
 					rpt->m_callsign = std::string((char*)(buffer + 1U), 10U);
 					m_repeaters.push_back(rpt);
@@ -232,10 +232,9 @@ void CP25Reflector::run()
 				LogMessage("Removing %s (%s) unlinked", rpt->m_callsign.c_str(), CUDPSocket::display(addr, buff, 80U));
 
 				for (std::vector<CP25Repeater*>::iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-					CP25Repeater* itRpt = *it;
-					if (CUDPSocket::match(itRpt->m_addr, rpt->m_addr)) {
+					if (CUDPSocket::match((*it)->m_addr, rpt->m_addr)) {
 						m_repeaters.erase(it);
-						delete itRpt;
+						delete *it;
 						break;
 					}
 				}
@@ -300,13 +299,13 @@ void CP25Reflector::run()
 			(*it)->m_timer.clock(ms);
 
 		for (std::vector<CP25Repeater*>::iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-			CP25Repeater* itRpt = *it;
-			if (itRpt->m_timer.hasExpired()) {
+			if ((*it)->m_timer.hasExpired()) {
 				char buff[80U];
-				LogMessage("Removing %s (%s) disappeared", itRpt->m_callsign.c_str(), CUDPSocket::display(itRpt->m_addr, buff, 80U));
+				LogMessage("Removing %s (%s) disappeared", (*it)->m_callsign.c_str(),
+														   CUDPSocket::display((*it)->m_addr, buff, 80U));
 
 				m_repeaters.erase(it);
-				delete itRpt;
+				delete *it;
 				break;
 			}
 		}
@@ -355,12 +354,10 @@ void CP25Reflector::dumpRepeaters() const
 	LogMessage("Currently linked repeaters:");
 
 	for (std::vector<CP25Repeater*>::const_iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
-		std::string callsign  = (*it)->m_callsign;
-		sockaddr_storage addr = (*it)->m_addr;
-		unsigned int timer    = (*it)->m_timer.getTimer();
-		unsigned int timeout  = (*it)->m_timer.getTimeout();
-
 		char buffer[80U];
-		LogMessage("    %s: %s %u/%u", callsign.c_str(), CUDPSocket::display(addr, buffer, 80U), timer, timeout);
+		LogMessage("    %s: %s %u/%u", (*it)->m_callsign.c_str(),
+									   CUDPSocket::display((*it)->m_addr, buffer, 80U),
+									   (*it)->m_timer.getTimeout(),
+									   (*it)->m_timer.getTimeout());
 	}
 }
