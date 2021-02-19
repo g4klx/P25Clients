@@ -10,19 +10,19 @@
 6	70.44.20.24	41000
 
 # HELLAS Zone P25 TG202
-202 hellaszone.com 41000
+202	hellaszone.com	41000
 
 # 204 Technology First
 204	w8ufo.hamshack.info	41000
 
 # 214 SPAIN P25 Reflector
-214 214p25.xreflector.es 41000
+214	214p25.xreflector.es	41000
 
 # 226 Romania YO P25 Network
 226	p25.dstar-yo.ro	41000
 
 # HBLink Poland P25 TG260
-260 p25.hblink.pl 41000
+260	p25.hblink.pl	41000
 
 # 420 Super Freq
 420	hb.superfreqdigital.com	41000
@@ -37,7 +37,7 @@
 858	nz6d.dx40.com	41000
 
 # 891 WNY DMR Network
-891 p25.wnydmr.network 41000
+891	p25.wnydmr.network	41000
 
 # 927 Southern California
 927	927.org			41000
@@ -45,11 +45,14 @@
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com		41000
 
-# KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
+# 2050 KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
 2050	reflector.p25.link		41009
 
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	164.132.96.157	41000
+
+# 2221 IT PIEDMONT GDO
+2221	iz1zpj.duckdns.org	41000
 
 # 2231 IT Sardinia Is. - Multimode - https://is0.org
 2231	p25.is0.org			41000
@@ -73,7 +76,7 @@
 3026	3026.hamshack.info	41000
 
 # 3142 Pennsylvania
-3142 3.215.215.169 41002
+3142	3.215.215.169	41002
 
 # 3300 PRadise
 3300	3300p25.from-pr.com	41000
@@ -88,10 +91,10 @@
 6395	p25ref.nf9k.net		41000
 
 # 7225 MULTIPROTOCOLO ARGENTINA
-7225  ysfarg.ddns.net 41000
+7225	ysfarg.ddns.net	41000
 
 # 8208 China P25 Network bridge to P25NX
-8208 47.105.33.47 41000
+8208	47.105.33.47	41000
 
 # 9480 ICQ PODCAST 
 9480	xlx235.mb6ng.uk	41001
@@ -127,7 +130,7 @@
 10203	reflector.p25.link		41004
 
 # P25 France
-10208 m55.evxonline.net 41000
+10208	m55.evxonline.net	41000
 
 # P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
 10209	p25.we0fun.com	41000
@@ -183,26 +186,26 @@
 # 10403	Pacific	TAC 3 http://ysf.sz790.com:8082/
 10403	ysf.sz790.com		41000
 
-# 10401	Pacific	TAC 4
+# 10404	Pacific	TAC 4
 10404	p25tw338.ddns.net	41000
 
 # 10405 Shenzhen City, China http://125.91.17.122:8090/ysf/
 10405	125.91.17.122	42020
 
 # 10406 Zhejiang province, bridged to DMR TG 46055
-10406 p25.zj.digital 41000
+10406	p25.zj.digital	41000
 
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
-10421 9v1lh.spdns.org 41000
+10421	9v1lh.spdns.org	41000
 
 # 10444 VK64 P25 Group
-10444 vk64.chiffers.com 41000
+10444	vk64.chiffers.com	41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
 # 10888 Texas
-10888 29520.asnode.org 41000
+10888	29520.asnode.org	41000
 
 # 10945 Deutschland DL1BH
 10945	dl1bh.ddns.net	41000
@@ -211,31 +214,31 @@
 11069	area52.zapto.org	41000
 
 # 22200 IT HBLINK REFLECTOR
-22200 p25.hblink.it 41000
+22200	p25.hblink.it	41000
 
 # 22202 IT SARDINIA
-22202 87.106.152.249 41000
+22202	87.106.152.249	41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
 
 # 22221 HBLINK IT-DMR REGIONALE LOMBARDIA
-22221 dagobah.hblink.it 41000
+22221	dagobah.hblink.it	41000
 
 # 22252 IT MULTIPROTOCOL NETWORK
-22252 46.226.178.80 41000
+22252	46.226.178.80	41000
 
 # 22258 D2ALP HBLink Italia
-22258 94.177.173.53 41000
+22258	94.177.173.53	41000
 
 # 23225 Austria
 23225	94.199.173.123		41000
 
 # 23551 P25 Scotland
-23551 p25scotland.ddns.net 41000
+23551	p25scotland.ddns.net	41000
 
 # 25617 Russia Kavkaz
-25617   kavkaz.qrz.ru    41000
+25617	kavkaz.qrz.ru	41000
 
 # 25641 Russia P25 Net
 25641	194.182.85.217		41000
@@ -280,7 +283,7 @@
 31188	w9windigital.org	41000
 
 # 31264 XLX625 The BROniverse www.wa8bro.com
-31264 p25.dudetronics.com 41000
+31264	p25.dudetronics.com	41000
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
@@ -298,16 +301,16 @@
 31425	70.44.20.24	41001
 
 #  PA Cross Mode (alt), 31426
-31426 3.215.215.169 41001
+31426	3.215.215.169	41001
 
 # 31444	RI DIGITAL LINK TG#31444
-31444 149.28.54.153	41000
+31444	149.28.54.153	41000
 
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
-31555 mmdvm-p25.v24bridge.net 41000
+31555	mmdvm-p25.v24bridge.net	41000
 
 # 31620 Kings of Digital
-31620 wb5ekup25.duckdns.org 41000
+31620	wb5ekup25.duckdns.org	41000
 
 # 31665 TGIF Network, http://tgif.network
 31665	tgif.network		41000
@@ -322,7 +325,7 @@
 31769	dmr.mb6ng.uk	41000
 
 # 31691 US Midwest P25 Reflector
-31691 net.w3axl.com 43169
+31691	net.w3axl.com	43169
 
 # 31777 DX-LINK
 31777	8.9.4.102		41000
@@ -334,10 +337,10 @@
 31983	P25Reflector31983.K8JTK.org	41000
 
 # 32103 CW-Ops Academy
-32103 cwops.dyndns.org 41000
+32103	cwops.dyndns.org	41000
 
 # 33581 OMISS Group
-33581 omiss.dyndns.org 41000
+33581	omiss.dyndns.org	41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161		41000
@@ -346,10 +349,10 @@
 43389	p25.lmarc.net		41000
 
 # 45000 Korea
-45000 p25.dvham.com 41000
+45000	p25.dvham.com		41000
 
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
-50210   edone.now.im            41000
+50210	edone.now.im		41000
  
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
@@ -361,10 +364,10 @@
 51575	140.82.14.24	41000
 
 # 52072 Phuket
-52072 xlx727phuketdstar.ddns.net 41000
+52072	xlx727phuketdstar.ddns.net	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
 
 # 54100 Thailand
-54100 hs1qcj.asuscomm.com 41000
+54100	hs1qcj.asuscomm.com	41000
