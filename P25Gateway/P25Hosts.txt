@@ -201,6 +201,9 @@
 # 10444 VK64 P25 Group
 10444	vk64.chiffers.com	41000
 
+# 10473 LinAn, China, Fireside Chat Reflector
+10473	p25.hamdao.com	41000
+
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
