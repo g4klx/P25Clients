@@ -9,3 +9,6 @@
 
 # 52072 Phuket P25 bridge to XLX727C YSF/ DMR / DSTAR
 52072	xlx727phuketdstar.ddns.net	41000
+
+# 31069 K6JWN P25 / DMR / ALLSTAR
+31069 p25.k6jwn.org 41000
