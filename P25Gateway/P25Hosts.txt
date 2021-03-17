@@ -285,6 +285,9 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
+# 31257 NEARC
+31257 p25.w0jay.com 41000
+
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
