@@ -9,6 +9,9 @@
 # XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
 6	70.44.20.24	41000
 
+# 138 P25 PKT THAILAND
+138 e23jwe.ddns.net 41001
+
 # HELLAS Zone P25 TG202
 202	hellaszone.com	41000
 
@@ -371,6 +374,9 @@
 
 # 52072 Phuket
 52072	xlx727phuketdstar.ddns.net	41000
+
+# 52138 P25 Link Thailand
+52138 e23jwe.ddns.net 41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
