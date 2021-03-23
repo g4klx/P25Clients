@@ -267,6 +267,9 @@
 # 31062 Mountain West
 31062	p25.mw-dmr.net		41000
 
+# 31069 K6JWN Multimode-P25
+31069 p25.k6jwn.org 41000
+
 # 31077 PAPA Chat http://papasys.com
 31077	216.240.173.55	41007
 
