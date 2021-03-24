@@ -39,6 +39,9 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
+# 865 K1LNX Multimode Server - Knoxville, TN
+865 knoxp25.k1lnx.net
+
 # 891 WNY DMR Network
 891	p25.wnydmr.network	41000
 
