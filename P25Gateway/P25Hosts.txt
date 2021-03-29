@@ -114,15 +114,6 @@
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
-# 10101 World Wide TAC 1 (Bridged to the P25Link Network).
-10101	reflector.p25.link		41000
-
-# 10102 World Wide TAC 2 (Bridged to the P25Link Network).
-10102	reflector.p25.link		41001
-
-# 10103 World Wide TAC 3 (Bridged to the P25Link Network).
-10103	reflector.p25.link		41002
-
 # 10120 CQ-UK
 10120	81.150.10.62	41000
 
@@ -131,12 +122,6 @@
 
 # 10201 North America TAC 1
 10201	dvswitch.org		41010
-
-# 10202 North America TAC 2 (Bridged to the P25Link Network).
-10202	reflector.p25.link		41003
-
-# 10203 North America TAC 3 (Bridged to the P25Link Network).
-10203	reflector.p25.link		41004
 
 # P25 France
 10208	m55.evxonline.net	41000
@@ -155,12 +140,6 @@
 
 # 10301	Europe TAC 1
 10301	ea5gvk.duckdns.org	41000
-
-# 10302 Europe TAC 2 (Bridged to the P25Link Network).
-10302	reflector.p25.link		41005
-
-# 10303 Europe TAC 3 (Bridged to the P25Link Network).
-10303	reflector.p25.link		41006
 
 # 10310 Germany HAMNET (Bridge to 10320)	http://44.148.230.100/
 10310	44.148.230.100		41000
@@ -212,6 +191,18 @@
 
 # 10473 LinAn, China, Fireside Chat Reflector
 10473	p25.hamdao.com	41000
+
+# 10500 World Wide Bridged to the P25NX Network.
+10500	reflector.p25.link   			41000
+
+# 10501 TAC 1 Bridge to the P25NX Network.
+10501	reflector.p25.link				41001
+
+# 10502 TAC 2 Bridge to the P25NX Network.
+10502	reflector.p25.link				41002
+
+# 10503 TAC 3 Bridged to the P25NX Network.
+10503	reflector.p25.link				41003
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
