@@ -294,8 +294,8 @@
 # 31161 Virginia
 31161	24.49.15.69	41000
 
-# 31171 Illinois
-31171	74.208.235.115		41000
+# 31171 Illinois Link
+31171 illink.radiotechnology.xyz 		41000
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
