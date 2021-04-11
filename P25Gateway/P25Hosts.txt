@@ -342,8 +342,8 @@
 # 31679 Blind Hams
 31679	xlx.borris.me	41000
 
-# 31769 MB6NG P25
-31769	dmr.mb6ng.uk	41000
+# 31769 OZ-DMR
+31769	reflector.oz-dmr.uk	41000
 
 # 31691 US Midwest P25 Reflector
 31691	net.w3axl.com	43169
