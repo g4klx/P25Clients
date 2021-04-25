@@ -24,7 +24,7 @@
 #include <cassert>
 #include <cstring>
 
-CP25Network::CP25Network(unsigned int port, const std::string& callsign, bool debug) :
+CP25Network::CP25Network(unsigned short port, const std::string& callsign, bool debug) :
 m_callsign(callsign),
 m_socket(),
 m_port(port),

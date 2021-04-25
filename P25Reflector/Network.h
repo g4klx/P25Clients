@@ -26,7 +26,7 @@
 
 class CNetwork {
 public:
-	CNetwork(unsigned int port, bool debug);
+	CNetwork(unsigned short port, bool debug);
 	~CNetwork();
 
 	bool open();
