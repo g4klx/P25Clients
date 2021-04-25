@@ -24,7 +24,7 @@
 #include <cassert>
 #include <cstring>
 
-CRptNetwork::CRptNetwork(unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug) :
+CRptNetwork::CRptNetwork(unsigned short myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug) :
 m_rptAddr(rptAddr),
 m_rptAddrLen(rptAddrLen),
 m_callsign(callsign),

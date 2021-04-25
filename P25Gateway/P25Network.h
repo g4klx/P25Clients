@@ -26,7 +26,7 @@
 
 class CP25Network {
 public:
-	CP25Network(unsigned int port, const std::string& callsign, bool debug);
+	CP25Network(unsigned short port, const std::string& callsign, bool debug);
 	~CP25Network();
 
 	bool open();
@@ -44,7 +44,7 @@ public:
 private:
 	std::string  m_callsign;
 	CUDPSocket   m_socket;
-	unsigned int m_port;
+	unsigned short m_port;
 	bool         m_debug;
 };
 

@@ -33,8 +33,8 @@ public:
   // The General section
   std::string  getCallsign() const;
   std::string  getRptAddress() const;
-  unsigned int getRptPort() const;
-  unsigned int getMyPort() const;
+  unsigned short getRptPort() const;
+  unsigned short getMyPort() const;
   bool         getDebug() const;
   bool         getDaemon() const;
 
@@ -55,14 +55,14 @@ public:
   bool         getLogFileRotate() const;
 
   // The Network section
-  unsigned int getNetworkPort() const;
+  unsigned short getNetworkPort() const;
   std::string  getNetworkHosts1() const;
   std::string  getNetworkHosts2() const;
   unsigned int getNetworkReloadTime() const;
   std::string  getNetworkParrotAddress() const;
-  unsigned int getNetworkParrotPort() const;
+  unsigned short getNetworkParrotPort() const;
   std::string  getNetworkP252DMRAddress() const;
-  unsigned int getNetworkP252DMRPort() const;
+  unsigned short getNetworkP252DMRPort() const;
   std::vector<unsigned int> getNetworkStatic() const;
   unsigned int getNetworkRFHangTime() const;
   unsigned int getNetworkNetHangTime() const;
@@ -70,14 +70,14 @@ public:
 
   // The Remote Commands section
   bool         getRemoteCommandsEnabled() const;
-  unsigned int getRemoteCommandsPort() const;
+  unsigned short getRemoteCommandsPort() const;
 
 private:
   std::string  m_file;
   std::string  m_callsign;
   std::string  m_rptAddress;
-  unsigned int m_rptPort;
-  unsigned int m_myPort;
+  unsigned short m_rptPort;
+  unsigned short m_myPort;
   bool         m_debug;
   bool         m_daemon;
 
@@ -94,21 +94,21 @@ private:
   std::string  m_logFileRoot;
   bool         m_logFileRotate;
 
-  unsigned int m_networkPort;
+  unsigned short m_networkPort;
   std::string  m_networkHosts1;
   std::string  m_networkHosts2;
   unsigned int m_networkReloadTime;
   std::string  m_networkParrotAddress;
-  unsigned int m_networkParrotPort;
+  unsigned short m_networkParrotPort;
   std::string  m_networkP252DMRAddress;
-  unsigned int m_networkP252DMRPort;
+  unsigned short m_networkP252DMRPort;
   std::vector<unsigned int> m_networkStatic;;
   unsigned int m_networkRFHangTime;
   unsigned int m_networkNetHangTime;
   bool         m_networkDebug;
 
   bool         m_remoteCommandsEnabled;
-  unsigned int m_remoteCommandsPort;
+  unsigned short m_remoteCommandsPort;
 };
 
 #endif

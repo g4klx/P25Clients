@@ -356,8 +356,8 @@ void CP25Reflector::dumpRepeaters() const
 	for (std::vector<CP25Repeater*>::const_iterator it = m_repeaters.begin(); it != m_repeaters.end(); ++it) {
 		char buffer[80U];
 		LogMessage("    %s: %s %u/%u", (*it)->m_callsign.c_str(),
-									   CUDPSocket::display((*it)->m_addr, buffer, 80U),
-									   (*it)->m_timer.getTimeout(),
-									   (*it)->m_timer.getTimeout());
+			   CUDPSocket::display((*it)->m_addr, buffer, 80U),
+			   (*it)->m_timer.getTimeout(),
+			   (*it)->m_timer.getTimeout());
 	}
 }
