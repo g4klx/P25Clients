@@ -252,6 +252,9 @@
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
+# 23595 OZ-DMR
+23595	reflector.oz-dmr.uk	41000
+
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
 
@@ -344,9 +347,6 @@
 
 # 31679 Blind Hams
 31679	xlx.borris.me	41000
-
-# 31769 OZ-DMR
-31769	reflector.oz-dmr.uk	41000
 
 # 31691 US Midwest P25 Reflector
 31691	net.w3axl.com	43169
