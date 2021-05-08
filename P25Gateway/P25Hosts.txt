@@ -303,6 +303,9 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
+# 31226 Worldwide Dx Link System
+31226 192.99.70.1 41000
+
 # 31257 NEARC
 31257 p25.w0jay.com 41000
 
