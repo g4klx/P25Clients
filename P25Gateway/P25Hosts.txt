@@ -264,6 +264,9 @@
 # 28299 America-Ragchew
 28299	65.101.7.51		41000
 
+# 29252 Oklahoma Hamsomniacs
+29252 hamsomniac.mooo.com 41000
+
 # 30639 NorCal-Bridge / Multimode-P25-TG30639
 30639	nfonorcalp25.dyndns.org	41000
 
