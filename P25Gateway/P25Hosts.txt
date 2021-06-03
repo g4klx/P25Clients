@@ -277,7 +277,7 @@
 30639	nfonorcalp25.dyndns.org	41000
 
 # 31010 Alabama Link
-31010	p25.alabamalink.info	41000
+31010	alabamalink.radiotechnology.xyz	41000
 
 # 31057 AF5XP Sulphur,Louisiana
 31057	af5xp.ddns.net		41000
