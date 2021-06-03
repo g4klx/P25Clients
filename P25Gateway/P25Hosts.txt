@@ -10,7 +10,7 @@
 6	70.44.20.24	41000
 
 # 138 P25 PKT THAILAND
-138 e23jwe.ddns.net 41001
+138	e23jwe.ddns.net	41001
 
 # HELLAS Zone P25 TG202
 202	hellaszone.com	41000
@@ -106,7 +106,7 @@
 6395	p25ref.nf9k.net		41000
 
 # 7160 Peru Digital
-7160 p25.dmr-peru.pe 41000
+7160	p25.dmr-peru.pe	41000
 
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225	ysfarg.ddns.net	41000
@@ -264,6 +264,9 @@
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
 
+# 26078 Poland HBLink Network
+26078	p25.hblink.kutno.pl	41000
+
 # 25641 Russia P25 Net
 25641	194.182.85.217		41000
 
@@ -271,7 +274,7 @@
 28299	65.101.7.51		41000
 
 # 29252 Oklahoma Hamsomniacs
-29252 hamsomniac.mooo.com 41000
+29252	hamsomniac.mooo.com	41000
 
 # 30639 NorCal-Bridge / Multimode-P25-TG30639
 30639	nfonorcalp25.dyndns.org	41000
@@ -286,7 +289,7 @@
 31062	p25.mw-dmr.net		41000
 
 # 31069 K6JWN Multimode-P25
-31069 p25.k6jwn.org 41000
+31069	p25.k6jwn.org	41000
 
 # 31077 PAPA Chat http://papasys.com
 31077	216.240.173.55	41007
@@ -316,7 +319,7 @@
 31226 192.99.70.1 41000
 
 # 31257 NEARC
-31257 p25.w0jay.com 41000
+31257	p25.w0jay.com	41000
 
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
@@ -346,7 +349,7 @@
 31555	mmdvm-p25.v24bridge.net	41000
 
 # 31581 KD2UQK Long Island, NY - P25 Reflector
-31581 kd2uqk.ham-radio-op.net 41000
+31581	kd2uqk.ham-radio-op.net	41000
 
 # 31620 Kings of Digital
 31620	wb5ekup25.duckdns.org	41000
@@ -403,7 +406,7 @@
 52072	xlx727phuketdstar.ddns.net	41000
 
 # 52138 P25 Link Thailand
-52138 e23jwe.ddns.net 41000
+52138	e23jwe.ddns.net	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
