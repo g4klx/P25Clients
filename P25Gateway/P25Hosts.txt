@@ -3,7 +3,7 @@
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
 
-# 4 Wires-x,NXDN,YSF,XLX(D-Star & DMR),BM Bridge
+# P25TG4 > XLX389Q, CQ-VK WiRES-X, ALLSTAR, NXDN505
 4	p25.duckdns.org		41004
 
 # XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
