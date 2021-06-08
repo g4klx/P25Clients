@@ -39,6 +39,9 @@
 # 724 P25 Brazil
 724	p25brazil.ddns.net	41000
 
+# 730 Chile P25 Reflector to BM TG 730
+730	sdradio.cl	41000
+
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
