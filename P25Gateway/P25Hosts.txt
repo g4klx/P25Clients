@@ -312,6 +312,9 @@
 # 31092 Connecticut Chat
 31092	p25.alecwasserman.com	41000
 
+# 31121 First Coast FL
+31121	dvse.dmrnet.net	41000
+
 # 31161 Virginia
 31161	24.49.15.69	41000
 
