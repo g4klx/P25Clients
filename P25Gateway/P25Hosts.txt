@@ -30,6 +30,9 @@
 # 420 Super Freq
 420	hb.superfreqdigital.com	41000
 
+# 445 SuperMag Australia
+445	p25.Supermag.fishersaudio.com.au	41000
+
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
