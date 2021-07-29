@@ -425,3 +425,6 @@
 
 # 54100 Thailand
 54100	hs1qcj.asuscomm.com	41000
+
+# 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
+55100 140.82.3.34 41000
