@@ -45,6 +45,9 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
+# 822 TH-ASL-5508
+822 p25.xlx822.com 41000
+
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
