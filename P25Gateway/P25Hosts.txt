@@ -267,6 +267,9 @@
 # 23225 Austria
 23225	94.199.173.123		41000
 
+# 23426 FreeSTAR UK
+23426	p25.freestar.network	41000
+
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
