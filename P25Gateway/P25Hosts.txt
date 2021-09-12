@@ -10,7 +10,7 @@
 6	70.44.20.24	41000
 
 # 138 P25 PKT THAILAND
-138	e23jwe.ddns.net	41001
+138	p25138.freeddns.org	41001
 
 # HELLAS Zone P25 TG202
 202	hellaszone.com	41000
@@ -424,13 +424,13 @@
 52072	xlx727phuketdstar.ddns.net	41000
 
 # 52138 P25 Link Thailand
-52138	e23jwe.ddns.net	41000
+52138	p2552138.freeddns.org	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
 
 # 54100 Thailand
-54100	hs1qcj.asuscomm.com	41000
+54100	hs1qcj.ddns.net	41000
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
 55100 140.82.3.34 41000
