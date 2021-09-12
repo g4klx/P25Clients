@@ -417,6 +417,9 @@
 # 50535 VK Multimode Link
 50535	p25tg50535.vkradio.com	41000
 
+# 51503 US Philippines P25 network
+51503	149.28.201.109	4569
+
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
