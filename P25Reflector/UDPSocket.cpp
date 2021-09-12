@@ -167,18 +167,18 @@ char* CUDPSocket::display(const sockaddr_storage& addr, char* buffer, unsigned i
 	assert(length > INET6_ADDRSTRLEN);
 
 	switch (addr.ss_family) {
-	case AF_INET: {
-		struct sockaddr_in* in4 = (struct sockaddr_in*)&addr;
-		::inet_ntop(AF_INET, &in4->sin_addr, buffer, length);
-		::sprintf(buffer + ::strlen(buffer), ":%u", in4->sin_port);
-	}
+		case AF_INET: {
+			struct sockaddr_in* in4 = (struct sockaddr_in*)&addr;
+			::inet_ntop(AF_INET, &in4->sin_addr, buffer, length);
+			::sprintf(buffer + ::strlen(buffer), ":%u", in4->sin_port);
+		}
 		break;
 
 	case AF_INET6: {
-		struct sockaddr_in6* in6 = (struct sockaddr_in6*)&addr;
-		::inet_ntop(AF_INET6, &in6->sin6_addr, buffer, length);
-		::sprintf(buffer + ::strlen(buffer), ":%u", in6->sin6_port);
-	}
+			struct sockaddr_in6* in6 = (struct sockaddr_in6*)&addr;
+			::inet_ntop(AF_INET6, &in6->sin6_addr, buffer, length);
+			::sprintf(buffer + ::strlen(buffer), ":%u", in6->sin6_port);
+		}
 		break;
 
 	default:

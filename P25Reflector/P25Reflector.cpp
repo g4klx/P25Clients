@@ -357,7 +357,7 @@ void CP25Reflector::dumpRepeaters() const
 		char buffer[80U];
 		LogMessage("    %s: %s %u/%u", (*it)->m_callsign.c_str(),
 			   CUDPSocket::display((*it)->m_addr, buffer, 80U),
-			   (*it)->m_timer.getTimeout(),
+			   (*it)->m_timer.getTimer(),
 			   (*it)->m_timer.getTimeout());
 	}
 }
