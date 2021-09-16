@@ -27,6 +27,9 @@
 # HBLink Poland P25 TG260
 260	p25.hblink.pl	41000
 
+# 334 Mexico Analog Bridge Multimode (Bridged to the P25Link Network).
+334	reflector.p25.link		41007
+
 # 420 Super Freq
 420	hb.superfreqdigital.com	41000
 
