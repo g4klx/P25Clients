@@ -52,7 +52,7 @@
 858	nz6d.dx40.com	41000
 
 # 865 K1LNX Multimode Server - Knoxville, TN
-865 knoxp25.k1lnx.net
+865 knoxp25.k1lnx.net	41000
 
 # 891 WNY DMR Network
 891	p25.wnydmr.network	41000
@@ -61,13 +61,13 @@
 910	p25.freeddns.org	41000
 
 # 927 Southern California
-927	927.org			41000
+927	927.org	41000
 
 # 994 The Online Radio Club (Bridged to XLX994)
-994	misc.openreflector.com		41000
+994	misc.openreflector.com	41000
 
 # 2050 KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
-2050	reflector.p25.link		41009
+2050	reflector.p25.link	41009
 
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	164.132.96.157	41000
@@ -76,7 +76,7 @@
 2221	iz1zpj.duckdns.org	41000
 
 # 2231 IT Sardinia Is. - Multimode - https://is0.org
-2231	p25.is0.org			41000
+2231	p25.is0.org	41000
 
 # 2263 Bucharest YO3 P25 Network
 2263	p25.dstar-yo.ro	41003
@@ -85,7 +85,7 @@
 2265	p25.dstar-yo.ro	41005
 
 # RU DMR TG2503
-2503	p25.r1ik.ru		41000
+2503	p25.r1ik.ru	41000
 
 # 2700 Old Melbourne Florida Repeater Association
 2700	2700p25.ddns.net	41000
@@ -103,19 +103,19 @@
 3300	3300p25.from-pr.com	41000
 
 # 3340 Mexico Multimode/Multiplatform.
-3340 reflector.p25.link   41007
+3340	reflector.p25.link	41007
 
 # 3345 Mexico Multimode (Bridged to the P25Link Network).
-3345	reflector.p25.link		41008
+3345	reflector.p25.link	41008
 
 # 4095 KM4NNO Wave (Bridged to the P25Link Network).
-4095	reflector.p25.link		41010
+4095	reflector.p25.link	41010
 
 # 5057 VK7 TAS (hosted by VK7HSE)
-5057	45.248.50.37		41000
+5057	45.248.50.37	41000
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
-6395	p25ref.nf9k.net		41000
+6395	p25ref.nf9k.net	41000
 
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
@@ -403,16 +403,19 @@
 33581	omiss.dyndns.org	41000
 
 # 40721 Fusion Canada Fr
-40721	38.110.97.161		41000
+40721	38.110.97.161	41000
 
 # 43389 SouthEast Link US
-43389	p25.lmarc.net		41000
+43389	p25.lmarc.net	41000
 
 # 45000 Korea
-45000	p25.dvham.com		41000
+45000	p25.dvham.com	41000
+
+# 49562 Boredom Breaker
+49562	146.71.77.238	41000
 
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
-50210	edone.now.im		41000
+50210	edone.now.im	41000
  
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
