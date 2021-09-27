@@ -3,16 +3,16 @@
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
 
-# P25TG4 > XLX389Q, CQ-VK WiRES-X, ALLSTAR, NXDN505
+# 4 P25TG4 > XLX389Q, CQ-VK WiRES-X, ALLSTAR, NXDN505
 4	p25.duckdns.org		41004
 
-# XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
+# 6 XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
 6	70.44.20.24	41000
 
 # 138 P25 PKT THAILAND
 138	p25138.freeddns.org	41001
 
-# HELLAS Zone P25 TG202
+# 202 HELLAS Zone P25
 202	hellaszone.com	41000
 
 # 204 Technology First
@@ -24,8 +24,11 @@
 # 226 Romania YO P25 Network
 226	p25.dstar-yo.ro	41000
 
-# HBLink Poland P25 TG260
+# 260 HBLink Poland P25
 260	p25.hblink.pl	41000
+
+# 357 PennLink Group - info.pennlinkgroup.com
+357	3.215.215.169	41010
 
 # 420 Super Freq
 420	hb.superfreqdigital.com	41000
