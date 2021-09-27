@@ -446,3 +446,6 @@
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
 55100 140.82.3.34 41000
+
+# 60100 K8SDR SignalsEverywhere Experimenters Club
+60100 p25.signalseverywhere.com 41000
