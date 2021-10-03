@@ -66,6 +66,9 @@
 # 927 Southern California
 927	927.org	41000
 
+#1007 The Harley-Hangout
+1007	43773.kb5rir.com	41000
+
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
