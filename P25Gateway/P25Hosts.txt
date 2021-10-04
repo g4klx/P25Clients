@@ -69,6 +69,9 @@
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
+# 1007 The Harley-Hangout P25-Bridge
+1007	43773.kb5rir.com	41000
+
 # 2050 KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
 2050	reflector.p25.link	41009
 
