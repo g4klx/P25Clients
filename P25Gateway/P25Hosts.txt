@@ -438,6 +438,9 @@
 # 51503 US Philippines P25 network
 51503	149.28.201.109	4569
 
+# 51522 PINOY-LINK Network 
+51522 p25.pinoylink.net 41000
+
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
