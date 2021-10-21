@@ -288,11 +288,14 @@
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
 
+# 25641 Russia P25 Net
+25641	194.182.85.217		41000
+
 # 26078 Poland HBLink Network
 26078	p25.hblink.kutno.pl	41000
 
-# 25641 Russia P25 Net
-25641	194.182.85.217		41000
+# 26538 DE-NDS-Ost
+26538 116.203.223.233 41000
 
 # 28299 America-Ragchew
 28299	65.101.7.51		41000
