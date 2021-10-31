@@ -430,7 +430,7 @@
 49562	146.71.77.238	41000
 
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
-50210	edone.now.im	41000
+50210	edone.lucifernet.com	41000
  
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
