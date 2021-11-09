@@ -405,6 +405,9 @@
 # 31691 US Midwest P25 Reflector
 31691	net.w3axl.com	43169
 
+# 31775 FILAM HAMS P25 Reflector
+31775 p25.filamhams.net 41000
+
 # 31777 DX-LINK
 31777	8.9.4.102		41000
 
