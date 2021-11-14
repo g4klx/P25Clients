@@ -76,7 +76,10 @@
 2050	reflector.p25.link	41009
 
 # 2140 P25 Reflector BM DMR+ Multi 
-2140	164.132.96.157	41000
+2140	andalucia.xreflector.es	41002
+
+# 2147 P25 Reflector ANDALUCIA 
+2147	andalucia.xreflector.es 41001
 
 # 2221 IT PIEDMONT GDO
 2221	iz1zpj.duckdns.org	41000
