@@ -447,6 +447,9 @@
 # 50535 VK Multimode Link
 50535	p25tg50535.vkradio.com	41000
 
+# 50536 FreeSTAR VK
+50536	p25tg50536.vkradio.com	41001
+
 # 51503 US Philippines P25 network
 51503	45.79.76.10	41000
 
