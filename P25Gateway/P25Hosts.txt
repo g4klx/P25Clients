@@ -28,7 +28,7 @@
 357	3.215.215.169	41010
 
 # 420 Super Freq
-420	hb.superfreqdigital.com	41000
+420	p25.superfreqdigital.com	41000
 
 # 445 SuperMag Australia
 445	p25.Supermag.fishersaudio.com.au	41000
@@ -428,6 +428,9 @@
 
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
+
+# 311969 Omega Communications 
+311969  omegap25.ddns.net 41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
