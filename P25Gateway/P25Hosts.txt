@@ -354,8 +354,8 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
-# 311969 Omega Communications 
-311969 omegap25.ddns.net 41000
+# 31207 Sunflower Net
+31207   155.138.244.192   41000
 
 # 31226 Worldwide Dx Link System
 31226 192.99.70.1 41000
@@ -428,6 +428,9 @@
 
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
+
+# 311969 Omega Communications 
+311969  omegap25.ddns.net 41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
