@@ -354,6 +354,9 @@
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
+# 311969 Omega Communications 
+311969 omegap25.ddns.net 41000
+
 # 31226 Worldwide Dx Link System
 31226 192.99.70.1 41000
 
