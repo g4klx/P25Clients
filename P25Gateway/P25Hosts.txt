@@ -6,8 +6,14 @@
 # 6 XLX045E P25 <-> DMR/DSTAR/YSF/NXDN
 6	70.44.20.24	41000
 
+# 38 Thailand P25 Link XLX Nexus
+38	p2538.freeddns.org	41002
+
 # 138 P25 PKT THAILAND
 138	p25138.freeddns.org	41001
+
+# 149 Thailand P25 Link XLX149 Modules C
+149	p25.pwk.ac.th	41000
 
 # 202 HELLAS Zone P25
 202	hellaszone.com	41000
@@ -429,6 +435,9 @@
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
 
+# 37225 Haiti Digital Communications League (HDCL) P25
+37225	3.215.215.169 port	41011
+
 # 311969 Omega Communications 
 311969  omegap25.ddns.net 41000
 
@@ -482,3 +491,6 @@
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100 p25.signalseverywhere.com 41000
+
+# 65100 P25 2007DXgroup
+65100	89.46.75.115	41000
