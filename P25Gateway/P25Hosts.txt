@@ -375,6 +375,9 @@
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
 
+# 31395 Cleveland Skywarn Backbone
+31395 backbone.ad8g.net 41000
+
 # 31340 Central New Jersey
 31340	cnjham.msmts.com	41000
 
