@@ -441,9 +441,6 @@
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169 port	41011
 
-# 311969 Omega Communications 
-311969  omegap25.ddns.net 41000
-
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
 
@@ -473,6 +470,9 @@
 
 # 51522 PINOY-LINK Network 
 51522 p25.pinoylink.net 41000
+
+# 51526 Omega Communications 
+51526  omega25.ddns.net 41000
 
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
