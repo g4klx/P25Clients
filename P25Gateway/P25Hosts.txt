@@ -474,6 +474,9 @@
 # 51526 Omega Communications 
 51526  omega25.ddns.net 41000
 
+# 51547 KAPIHAN Network 
+51547 p25.kapihan.net 41000
+
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
