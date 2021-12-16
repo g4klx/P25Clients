@@ -441,6 +441,10 @@
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169 port	41011
 
+# 37500 Belarus link
+
+37500	46.173.218.79	41000
+
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
 
