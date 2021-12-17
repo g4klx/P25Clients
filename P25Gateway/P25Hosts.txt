@@ -439,7 +439,7 @@
 33581	omiss.dyndns.org	41000
 
 # 37225 Haiti Digital Communications League (HDCL) P25
-37225	3.215.215.169 port	41011
+37225	3.215.215.169	41011
 
 # 37500 Belarus Digital Voice network
 37500	46.173.218.79	41000
