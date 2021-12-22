@@ -442,7 +442,7 @@
 37225	3.215.215.169	41011
 
 # 37500 Belarus Digital Voice network
-37500	46.173.218.79	41000
+37500	eu1abr.kanyom.net	41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
