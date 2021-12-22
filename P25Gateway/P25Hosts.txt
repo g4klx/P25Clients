@@ -501,5 +501,8 @@
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100 p25.signalseverywhere.com 41000
 
+# 63600 Latvian Digital Voice network
+63600	xlx.ham.lv	41000
+
 # 65100 P25 2007DXgroup
 65100	89.46.75.115	41000
