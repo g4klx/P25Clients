@@ -439,7 +439,7 @@
 33581	omiss.dyndns.org	41000
 
 # 37225 Haiti Digital Communications League (HDCL) P25
-37225	3.215.215.169 port	41011
+37225	3.215.215.169	41011
 
 # 37500 Belarus Digital Voice network
 37500	46.173.218.79	41000
@@ -496,7 +496,7 @@
 54100	hs1qcj.ddns.net	41000
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
-55100 140.82.3.34 41000
+55100 45.63.6.57 41000
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100 p25.signalseverywhere.com 41000
