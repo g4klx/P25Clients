@@ -255,6 +255,9 @@
 # 10473 LinAn, China, Fireside Chat Reflector
 10473	p25.hamdao.com	41000
 
+# 10666 F5KFF P25 Net in Paris
+10666   f5kff.hd.free.fr  41000
+
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
