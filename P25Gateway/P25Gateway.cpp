@@ -449,7 +449,7 @@ void CP25Gateway::run()
 			if (res > 0) {
 				buffer[res] = '\0';
 				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
-					unsigned int tg = (unsigned int)::atoi((char*)(buffer + 9U));
+					unsigned int tg = ((strlen((char*)buffer + 0U) > 10) ? (unsigned int)::atoi((char*)(buffer + 10U)) : 9999);
 
 					if (tg != currentTG) {
 						if (currentAddrLen > 0U) {
