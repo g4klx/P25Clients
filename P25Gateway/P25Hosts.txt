@@ -294,6 +294,9 @@
 # 23426 FreeSTAR UK
 23426	p25.freestar.network	41000
 
+# 23456 SHARC Multi Mode System Sherman, ME
+23426	kc1noc.duckdns.org	41000
+
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
