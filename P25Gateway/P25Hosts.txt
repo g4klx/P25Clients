@@ -12,7 +12,7 @@
 # 138 P25 PKT THAILAND
 138	p25138.freeddns.org	41001
 
-# 149 Thailand P25 Link XLX149 Modules C
+# 149 Thailand P25 Link XLX149 Modules D
 149	p25.pwk.ac.th	41000
 
 # 202 HELLAS Zone P25
@@ -495,11 +495,17 @@
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
+# 52032 P25 Link XLX149 Modules C
+52032	p52032.pwk.ac.th	41009
+
 # 52072 Phuket
 52072	xlx727phuketdstar.ddns.net	41000
 
 # 52138 P25 Link Thailand
 52138	p2552138.freeddns.org	41000
+
+# 52910 XLX Nexus
+52910	p25x.mywire.org	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
