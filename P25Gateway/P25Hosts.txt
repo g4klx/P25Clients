@@ -316,7 +316,7 @@
 26538 116.203.223.233 41000
 
 # 28299 America-Ragchew
-28299	65.101.7.51		41000
+28299	arcp25.duckdns.org		41000
 
 # 29252 Oklahoma Hamsomniacs
 29252	hamsomniac.mooo.com	41000
