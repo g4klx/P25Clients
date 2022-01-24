@@ -36,6 +36,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -514,6 +515,21 @@ void CP25Gateway::run()
 								voice->linkedTo(currentTG);
 						}
 					}
+				} else if (::memcmp(buffer + 0U, "status", 6U) == 0) {
+					std::string state = std::string("p25:") + ((currentAddrLen > 0) ? "conn" : "disc");
+					remoteSocket->write((unsigned char*)state.c_str(), (unsigned int)state.length(), addr, addrLen);
+				} else if (::memcmp(buffer + 0U, "host", 4U) == 0) {
+					std::string ref;
+
+					if (currentAddrLen > 0) {
+						char buffer[INET6_ADDRSTRLEN];
+						if (getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0) {
+							ref = std::string(buffer);
+						}
+					}
+
+					std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
+					remoteSocket->write((unsigned char*)host.c_str(), (unsigned int)host.length(), addr, addrLen);
 				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}
