@@ -336,7 +336,7 @@ void CP25Gateway::run()
 							buffer[3U] = (currentTG >> 0)  & 0xFFU;
 						}
 
-						if (poll == false)
+						if (!poll)
 							localNetwork.write(buffer, len);
 
 						LogMessage("Switched to reflector %u due to network activity", currentTG);
