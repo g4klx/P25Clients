@@ -156,7 +156,7 @@ void CP25Gateway::run()
 				return;
 			}
 
-			// Double check it worked (AKA Paranoia) 
+			// Double check it worked (AKA Paranoia)
 			if (setuid(0) != -1) {
 				::fprintf(stderr, "It's possible to regain root - something is wrong!, exiting\n");
 				return;
@@ -302,8 +302,18 @@ void CP25Gateway::run()
 					hangTimer.start();
 				}
 			} else if (currentTG == 0U) {
+				bool poll = false;
+				unsigned char pollReply[11U] = { 0xF0U };
+				std::string callsign = m_conf.getCallsign();
+
+				callsign.resize(10U, ' ');
+
+				// Build poll reply data
+				for (unsigned int i = 0U; i < 10U; i++)
+					pollReply[i + 1U] = callsign.at(i);
+
 				// Don't pass reflector control data through to the MMDVM
-				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
+				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, std::min(11U, len)) == 0))) {
 					// Find the static TG that this audio data belongs to
 					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
 						if (CUDPSocket::match(addr, (*it).m_addr)) {
@@ -326,7 +336,8 @@ void CP25Gateway::run()
 							buffer[3U] = (currentTG >> 0)  & 0xFFU;
 						}
 
-						localNetwork.write(buffer, len);
+						if (!poll)
+							localNetwork.write(buffer, len);
 
 						LogMessage("Switched to reflector %u due to network activity", currentTG);
 
@@ -348,7 +359,7 @@ void CP25Gateway::run()
 				srcId  = (buffer[1U] << 16) & 0xFF0000U;
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
-				
+
 				if (dstTG != currentTG) {
 					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
