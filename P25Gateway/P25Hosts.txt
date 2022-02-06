@@ -73,7 +73,7 @@
 994	misc.openreflector.com	41000
 
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
-1007	43773.kb5rir.com	41000
+1007	43773.kb5rir.com	41003
 
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
