@@ -36,6 +36,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -155,7 +156,7 @@ void CP25Gateway::run()
 				return;
 			}
 
-			// Double check it worked (AKA Paranoia) 
+			// Double check it worked (AKA Paranoia)
 			if (setuid(0) != -1) {
 				::fprintf(stderr, "It's possible to regain root - something is wrong!, exiting\n");
 				return;
@@ -301,8 +302,18 @@ void CP25Gateway::run()
 					hangTimer.start();
 				}
 			} else if (currentTG == 0U) {
+				bool poll = false;
+				unsigned char pollReply[11U] = { 0xF0U };
+				std::string callsign = m_conf.getCallsign();
+
+				callsign.resize(10U, ' ');
+
+				// Build poll reply data
+				for (unsigned int i = 0U; i < 10U; i++)
+					pollReply[i + 1U] = callsign.at(i);
+
 				// Don't pass reflector control data through to the MMDVM
-				if (buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) {
+				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, std::min(11U, len)) == 0))) {
 					// Find the static TG that this audio data belongs to
 					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
 						if (CUDPSocket::match(addr, (*it).m_addr)) {
@@ -325,7 +336,8 @@ void CP25Gateway::run()
 							buffer[3U] = (currentTG >> 0)  & 0xFFU;
 						}
 
-						localNetwork.write(buffer, len);
+						if (!poll)
+							localNetwork.write(buffer, len);
 
 						LogMessage("Switched to reflector %u due to network activity", currentTG);
 
@@ -347,7 +359,7 @@ void CP25Gateway::run()
 				srcId  = (buffer[1U] << 16) & 0xFF0000U;
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
 				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
-				
+
 				if (dstTG != currentTG) {
 					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
@@ -449,7 +461,7 @@ void CP25Gateway::run()
 			if (res > 0) {
 				buffer[res] = '\0';
 				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
-					unsigned int tg = (unsigned int)::atoi((char*)(buffer + 9U));
+					unsigned int tg = ((strlen((char*)buffer + 0U) > 10) ? (unsigned int)::atoi((char*)(buffer + 10U)) : 9999);
 
 					if (tg != currentTG) {
 						if (currentAddrLen > 0U) {
@@ -514,6 +526,21 @@ void CP25Gateway::run()
 								voice->linkedTo(currentTG);
 						}
 					}
+				} else if (::memcmp(buffer + 0U, "status", 6U) == 0) {
+					std::string state = std::string("p25:") + ((currentAddrLen > 0) ? "conn" : "disc");
+					remoteSocket->write((unsigned char*)state.c_str(), (unsigned int)state.length(), addr, addrLen);
+				} else if (::memcmp(buffer + 0U, "host", 4U) == 0) {
+					std::string ref;
+
+					if (currentAddrLen > 0) {
+						char buffer[INET6_ADDRSTRLEN];
+						if (getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0) {
+							ref = std::string(buffer);
+						}
+					}
+
+					std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
+					remoteSocket->write((unsigned char*)host.c_str(), (unsigned int)host.length(), addr, addrLen);
 				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}

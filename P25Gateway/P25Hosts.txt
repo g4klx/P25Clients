@@ -12,7 +12,7 @@
 # 138 P25 PKT THAILAND
 138	p25138.freeddns.org	41001
 
-# 149 Thailand P25 Link XLX149 Modules C
+# 149 Thailand P25 Link XLX149 Modules D
 149	p25.pwk.ac.th	41000
 
 # 202 HELLAS Zone P25
@@ -73,7 +73,7 @@
 994	misc.openreflector.com	41000
 
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
-1007	43773.kb5rir.com	41000
+1007	43773.kb5rir.com	41003
 
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
@@ -186,6 +186,9 @@
 # 10260 Poland
 10260	80.211.249.221		41000
 
+# 10294 SkyHub https://skyhublink.com/connections
+10294 hub.skyhublink.com 41000
+
 # 10300 Europe	https://p25-eu.n18.de/
 10300	176.9.1.168		41000
 
@@ -255,6 +258,9 @@
 # 10473 LinAn, China, Fireside Chat Reflector
 10473	p25.hamdao.com	41000
 
+# 10666 F5KFF P25 Net in Paris
+10666   f5kff.hd.free.fr  41000
+
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
@@ -291,6 +297,9 @@
 # 23426 FreeSTAR UK
 23426	p25.freestar.network	41000
 
+#23456 SHARC Multi Mode System Sherman, ME
+23456	kc1noc.duckdns.org	41000
+
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
@@ -310,7 +319,7 @@
 26538 116.203.223.233 41000
 
 # 28299 America-Ragchew
-28299	65.101.7.51		41000
+28299	arcp25.duckdns.org		41000
 
 # 29252 Oklahoma Hamsomniacs
 29252	hamsomniac.mooo.com	41000
@@ -468,6 +477,9 @@
 # 50536 FreeSTAR VK
 50536	p25tg50536.vkradio.com	41001
 
+# 51502 DX1ACE
+51502 p25-dx1ace.hopto.org 41000
+
 # 51503 US Philippines P25 network
 51503	45.79.76.10	41000
 
@@ -483,11 +495,17 @@
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
+# 52032 P25 Link XLX149 Modules C
+52032	p52032.pwk.ac.th	41009
+
 # 52072 Phuket
 52072	xlx727phuketdstar.ddns.net	41000
 
 # 52138 P25 Link Thailand
 52138	p2552138.freeddns.org	41000
+
+# 52910 XLX Nexus
+52910	p25x.mywire.org	41000
 
 # 53099 New Zealand bridge to D-Star, DMR and NXDN
 53099	203.86.206.49		41000
