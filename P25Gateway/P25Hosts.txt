@@ -450,8 +450,8 @@
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169	41011
 
-# 37500 Belarus Digital Voice network
-37500	eu1abr.kanyom.net	41000
+# 37500 Belarus MultiMode Digital Voice Network
+37500	xlx375.bfrr.by	41000
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
