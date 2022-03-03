@@ -42,6 +42,9 @@
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
+# 556 ARFCOM AR15.com
+556	reflector.site	41000
+
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
 
