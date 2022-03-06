@@ -117,6 +117,9 @@
 # 3142 Pennsylvania
 3142	3.215.215.169	41002
 
+# 3160 K6JWN Multimode
+3160 p25-3160.k6jwn.org 41000
+
 # 3300 PRadise
 3300	3300p25.from-pr.com	41000
 
