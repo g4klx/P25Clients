@@ -19,7 +19,7 @@
 202	hellaszone.com	41000
 
 # 204 Technology First
-204	w8ufo.hamshack.info	41000
+204	41611.asnode.org	41000
 
 # 214 SPAIN P25 Reflector
 214	214p25.xreflector.es	41000
@@ -44,6 +44,9 @@
 
 # 556 ARFCOM AR15.com
 556	reflector.site	41000
+
+# 666 Brazil PY1IP P25 Reflector - http://tg666.p25.py1ip.com
+666	p25.py1ip.com	41000
 
 # 707 Rural Minnesota - Bridge to TGIF707, YSF US RuralMN-707
 707	707p25.kd0ioe.com	41000
@@ -112,7 +115,7 @@
 3023	ontxlink.hopto.org	41000
 
 # 3026 Alberta
-3026	3026.hamshack.info	41000
+3026	reflector.p25alberta.ca	41000
 
 # 3142 Pennsylvania
 3142	3.215.215.169	41002
