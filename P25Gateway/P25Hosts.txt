@@ -268,7 +268,7 @@
 10473	p25.hamdao.com	41000
 
 # 10512 Shanghai, China, SHLK Reflector
-10473	bolelk.vicp.net	41000
+10512	bolelk.vicp.net	41000
 
 # 10666 F5KFF P25 Net in Paris
 10666   f5kff.hd.free.fr  41000
