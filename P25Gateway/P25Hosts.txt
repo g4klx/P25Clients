@@ -120,6 +120,9 @@
 # 3142 Pennsylvania
 3142	3.215.215.169	41002
 
+# 3147 Tennessee
+3147 p25tn.w4kdg.org 41000
+
 # 3160 K6JWN Multimode
 3160 p25-3160.k6jwn.org 41000
 
