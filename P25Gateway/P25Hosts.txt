@@ -429,6 +429,9 @@
 # 31581 KD2UQK Long Island, NY - P25 Reflector
 31581	kd2uqk.ham-radio-op.net	41000
 
+# 31582 KO4UYJ Milton, Fl - P25 Reflector
+31582 ko4uyj.com 41000
+
 # 31620 Kings of Digital
 31620	wb5ekup25.duckdns.org	41000
 
