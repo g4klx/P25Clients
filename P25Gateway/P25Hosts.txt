@@ -57,6 +57,9 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
+# 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
+762 18.213.214.37 41000
+
 # 822 TH-ASL-5508
 822 p25.xlx822.com 41000
 
