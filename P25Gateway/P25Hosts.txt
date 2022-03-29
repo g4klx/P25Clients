@@ -471,6 +471,9 @@
 # 32103 CW-Ops Academy
 32103	cwops.dyndns.org	41000
 
+# 33015 Boriken Digital Network
+33015 kp4ca-p25.ddns.net 41000
+
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
 
