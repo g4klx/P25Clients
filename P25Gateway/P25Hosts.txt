@@ -271,7 +271,7 @@
 10407	p25021.dyndns.org	41000
 
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
-10421	9v1lh.spdns.org	41000
+10421	dl-nordwest.com	41000
 
 # 10444 VK64 P25 Group
 10444	vk64.chiffers.com	41000
