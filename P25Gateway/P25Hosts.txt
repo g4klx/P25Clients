@@ -397,7 +397,7 @@
 31161	24.49.15.69	41000
 
 # 31171 Illinois Link
-31171 illink.radiotechnology.xyz 		41000
+31171	illink.radiotechnology.xyz	41000
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
@@ -407,6 +407,9 @@
 
 # 31226 Worldwide Dx Link System
 31226 192.99.70.1 41000
+
+# 31238 Foxhole Radio Bridged Network
+31238	p25.foxhole.radio	41000
 
 # 31257 NEARC
 31257	p25.w0jay.com	41000
@@ -418,7 +421,7 @@
 31337	bridge.kc5jmj.com	41000
 
 # 31395 Cleveland Skywarn Backbone
-31395 backbone.ad8g.net 41000
+31395	backbone.ad8g.net	41000
 
 # 31340 Central New Jersey
 31340	cnjham.msmts.com	41000
@@ -445,13 +448,13 @@
 31581	kd2uqk.ham-radio-op.net	41000
 
 # 31582 KO4UYJ Milton, Fl - P25 Reflector
-31582 ko4uyj.com 41000
+31582	ko4uyj.com	41000
 
 # 31620 Kings of Digital
 31620	wb5ekup25.duckdns.org	41000
 
 # 31655 Ham Radio Venture Overland
-31655 149.248.8.155 41000
+31655	149.248.8.155	41000
 
 # 31665 TGIF Network, http://tgif.network
 31665	tgif.network		41000
@@ -466,7 +469,7 @@
 31691	net.w3axl.com	43169
 
 # 31775 FILAM HAMS P25 Reflector
-31775 p25.filamhams.net 41000
+31775	p25.filamhams.net	41000
 
 # 31777 DX-LINK
 31777	8.9.4.102		41000
