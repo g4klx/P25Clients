@@ -124,10 +124,10 @@
 3142	3.215.215.169	41002
 
 # 3147 Tennessee
-3147 p25tn.w4kdg.org 41000
+3147	p25tn.w4kdg.org	41000
 
 # 3160 K6JWN Multimode
-3160 p25-3160.k6jwn.org 41000
+3160	p25-3160.k6jwn.org	41000
 
 # 3300 PRadise
 3300	3300p25.from-pr.com	41000
@@ -155,6 +155,9 @@
 
 # 7941 STARLINK WHITE MOUNTAIN RADIO NETWORK
 7941	p25.strangled.net	41000
+
+# 8200 Mountain Lakes Regional Amateur Radio Society
+8200	home.tourge.net	41000
 
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
@@ -211,7 +214,7 @@
 10260	80.211.249.221		41000
 
 # 10294 SkyHub https://skyhublink.com/connections
-10294 hub.skyhublink.com 41000
+10294	hub.skyhublink.com	41000
 
 # 10300 Europe	https://p25-eu.n18.de/
 10300	176.9.1.168		41000
@@ -304,7 +307,7 @@
 11069	area52.zapto.org	41000
 
 # 21909 Mother Owl - Multi-mode HUB & Reflector
-21909 hub.kimberlychase.com 41000
+21909	hub.kimberlychase.com	41000
 
 # 22200 IT HBLINK REFLECTOR
 22200	p25.hblink.it	41000
@@ -330,7 +333,7 @@
 # 23426 FreeSTAR UK
 23426	p25.freestar.network	41000
 
-#23456 SHARC Multi Mode System Sherman, ME
+# 23456 SHARC Multi Mode System Sherman, ME
 23456	kc1noc.duckdns.org	41000
 
 # 23551 P25 Scotland
@@ -349,7 +352,7 @@
 26078	p25.hblink.kutno.pl	41000
 
 # 26538 DE-NDS-Ost
-26538 116.203.223.233 41000
+26538	116.203.223.233	41000
 
 # 28299 America-Ragchew
 28299	arcp25.duckdns.org		41000
@@ -406,7 +409,7 @@
 31207   155.138.244.192   41000
 
 # 31226 Worldwide Dx Link System
-31226 192.99.70.1 41000
+31226	192.99.70.1	41000
 
 # 31238 Foxhole Radio Bridged Network
 31238	p25.foxhole.radio	41000
@@ -484,7 +487,7 @@
 32103	cwops.dyndns.org	41000
 
 # 33015 KP4CA Digital Network
-33015 kp4ca-p25.ddns.net 41000
+33015	kp4ca-p25.ddns.net	41000
 
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
@@ -520,19 +523,19 @@
 50536	p25tg50536.vkradio.com	41001
 
 # 51502 DX1ACE
-51502 p25-dx1ace.hopto.org 41000
+51502	p25-dx1ace.hopto.org	41000
 
 # 51503 US Philippines P25 network
 51503	45.79.76.10	41000
 
 # 51522 PINOY-LINK Network 
-51522 p25.pinoylink.net 41000
+51522	p25.pinoylink.net	41000
 
 # 51526 Omega Communications 
 51526  omega25.ddns.net 41000
 
 # 51547 KAPIHAN Network 
-51547 p25.kapihan.net 41000
+51547	p25.kapihan.net	41000
 
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
@@ -559,10 +562,10 @@
 54100	hs1qcj.ddns.net	41000
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
-55100 45.63.6.57 41000
+55100	45.63.6.57	41000
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
-60100 p25.signalseverywhere.com 41000
+60100	p25.signalseverywhere.com	41000
 
 # 63600 Latvian Digital Voice network
 63600	xlx.ham.lv	41000
