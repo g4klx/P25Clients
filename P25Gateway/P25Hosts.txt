@@ -144,6 +144,9 @@
 # 5057 VK7 TAS (hosted by VK7HSE)
 5057	45.248.50.37	41000
 
+# 5205 CCARCNSW P25 Bridge
+5205	5205.p25dvm.com	41000
+
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
@@ -532,7 +535,7 @@
 51522	p25.pinoylink.net	41000
 
 # 51526 Omega Communications 
-51526  omega25.ddns.net 41000
+51526	omega25.ddns.net	41000
 
 # 51547 KAPIHAN Network 
 51547	p25.kapihan.net	41000
