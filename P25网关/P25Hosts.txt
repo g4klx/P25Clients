@@ -276,6 +276,9 @@
 # 10407 Shanghai City, China,bridged to DMR TG 46021
 10407	p25021.dyndns.org	41000
 
+# 10409 Beijing City, China,Miyun-HAM-Club P25 Repeater bridged to DMR TG 46001
+10409	43.138.30.198	41000
+
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421	dl-nordwest.com	41000
 
