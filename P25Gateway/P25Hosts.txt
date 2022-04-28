@@ -190,7 +190,7 @@
 10120	81.150.10.62	41000
 
 # 10169 Dipspit International - N0DIP
-10169 p25.dipspit.net 21000
+10169	p25.dipspit.net	41000
 
 # 10200 North America
 10200	dvswitch.org		41000
