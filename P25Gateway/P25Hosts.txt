@@ -459,10 +459,10 @@
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
 
-# 31581 KD2UQK Long Island, NY - P25 Reflector
+# 31581 KD2UQK Long Island, NY - P25 Talkaround
 31581	kd2uqk.ham-radio-op.net	41000
 
-# 31582 KO4UYJ Milton, Fl - P25 Reflector
+# 31582 KO4UYJ & KD2UQK East Coast Reflector P25 Bridge to 9050/27339
 31582	ko4uyj.com	41000
 
 # 31620 Kings of Digital
