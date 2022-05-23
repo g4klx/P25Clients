@@ -432,6 +432,9 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
+#31266 DGTLCOM Digital Common Interlink
+31266 dgtlcom.dyndns.org 41000
+
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
 
