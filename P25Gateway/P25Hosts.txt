@@ -336,6 +336,9 @@
 # 22258 D2ALP HBLink Italia
 22258	94.177.173.53	41000
 
+# 22487 IT - Digital Network Rete Multiprotocollo
+22487	famiuse.ddns.net	41000
+
 # 23225 Austria
 23225	94.199.173.123		41000
 
@@ -521,6 +524,9 @@
 
 # 43389 SouthEast Link US
 43389	p25.lmarc.net	41000
+
+# 44120 Japan
+44120	p25.f5.si	41000
 
 # 45000 Korea
 45000	p25.dvham.com	41000
