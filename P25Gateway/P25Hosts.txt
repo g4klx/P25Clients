@@ -534,7 +534,10 @@
 # 45000 Korea
 45000	p25.dvham.com	41000
 
-# 46010 P25 Link XLX074 Modules A / BM TG46010, Beijing, China
+# 46001 P25 Link BM TG 46001, China
+46001 p46001.bh1nyr.net 41004
+
+# 46010 P25 Link XLX074 / BM TG46010, Beijing, China
 46010	p25.bh1nyr.net	41000
 
 # 49562 Boredom Breaker
