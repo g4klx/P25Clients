@@ -150,6 +150,9 @@
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
+# 6969 JTF_HV Ham P25
+6969	69.118.62.100	41000
+
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
 
