@@ -537,11 +537,20 @@
 # 45000 Korea
 45000	p25.dvham.com	41000
 
-# 46001 P25 Link BM TG 46001, China
-46001 p46001.bh1nyr.net 41004
+# 46001 P25 Link TG46001, China
+46001 46001.freedmr.club 41000
 
-# 46010 P25 Link XLX074 / BM TG46010, Beijing, China
-46010	p25.bh1nyr.net	41000
+# 46004 P24 Link TG46004, Zone 4, China
+46004 46004.freedmr.club 41001
+
+# 46010 P25 Link TG46010, Beijing, China
+46010	46010.freedmr.club	41002
+
+# 46055 P25 Link TG46055, Zhejiang, China
+46055 46055.freedmr.club 41003
+
+# 460516 P25 Link TG460516, Xuzhou, China
+46516 460516.freedmr.club 41004
 
 # 49562 Boredom Breaker
 49562	146.71.77.238	41000
