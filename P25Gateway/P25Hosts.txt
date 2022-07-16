@@ -544,7 +544,7 @@
 46004 46004.freedmr.club 41001
 
 # 46010 P25 Link TG46010, Beijing, China
-46010	46010.freedmr.club	41002
+46010 46010.freedmr.club 41002
 
 # 46055 P25 Link TG46055, Zhejiang, China
 46055 46055.freedmr.club 41003
