@@ -147,6 +147,9 @@
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
 
+# 5621 HamFurs MultiMode Bridge
+5621 ord1.w3fur.radio 41400
+
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
