@@ -147,6 +147,9 @@
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
 
+# 5621 HamFurs MultiMode Bridge
+5621 ord1.w3fur.radio 41400
+
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
@@ -220,7 +223,7 @@
 10255	ve3rd.hopto.org 41000
 
 # 10260 Poland
-10260	80.211.249.221		41000
+10260	185.174.14.75		41000
 
 # 10294 SkyHub https://skyhublink.com/connections
 10294	hub.skyhublink.com	41000
