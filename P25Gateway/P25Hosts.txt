@@ -552,8 +552,8 @@
 # 46055 P25 Link TG46055, Zhejiang, China
 46055 46055.freedmr.club 41003
 
-# 460516 P25 Link TG460516, Xuzhou, China
-46516 460516.freedmr.club 41004
+# 46516 P25 Link TG46516, Xuzhou, China
+46516 46516.freedmr.club 41004
 
 # 49562 Boredom Breaker
 49562	146.71.77.238	41000
