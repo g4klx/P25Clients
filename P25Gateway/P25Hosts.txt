@@ -393,6 +393,9 @@
 # 31057 AF5XP Sulphur,Louisiana
 31057	af5xp.ddns.net		41000
 
+# 31059 Vidalia Net P25
+31059 vidalianet.cbridge.net 41000
+
 # 31062 Mountain West
 31062	p25.mw-dmr.net		41000
 
