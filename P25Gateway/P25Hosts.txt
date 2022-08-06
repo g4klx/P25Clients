@@ -453,7 +453,7 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
-# 31266 DGTLCOM Digital Common Interlink
+# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR)
 31266 dgtlcom.dyndns.org 41000
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
