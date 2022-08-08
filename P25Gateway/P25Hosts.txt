@@ -594,8 +594,8 @@
 # 52032 P25 Link XLX149 Modules C
 52032	p52032.pwk.ac.th	41009
 
-# 52072 Phuket
-52072	xlx727phuketdstar.ddns.net	41000
+# 52072 Phuket P25 <> FreeDMR <> Echolink
+52072 203.170.129.69 41000
 
 # 52138 P25 Link Thailand
 52138	p2552138.freeddns.org	41000
