@@ -18,7 +18,7 @@
 # 202 HELLAS Zone P25
 202	hellaszone.com	41000
 
-# 204 Technology First
+# 204 W8UFO P25 Reflector
 204	41611.asnode.org	41000
 
 # 214 SPAIN P25 Reflector
