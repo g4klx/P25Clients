@@ -528,6 +528,9 @@
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
 
+# 37030 RED SKYNET
+37030 skynet.xreflector.es 41000
+
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169	41011
 
