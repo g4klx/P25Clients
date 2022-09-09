@@ -178,7 +178,7 @@
 9050	45.77.198.235	41000
 
 # 9480 ICQPODCAST 
-9480	xlx.icqpodcast.com	41001
+9480	46.101.36.246 41000
 
 # 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
 9846	p25.dudetronics.com	41001
