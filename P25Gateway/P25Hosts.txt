@@ -364,7 +364,7 @@
 23595	reflector.oz-dmr.uk	41000
 
 # 25605 Ekaterinburg P25 
-25605   ysf.386i.ru     4100
+25605   ysf.386i.ru     41000
 
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
