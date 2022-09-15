@@ -363,7 +363,7 @@
 # 23595 OZ-DMR
 23595	reflector.oz-dmr.uk	41000
 
-# 25605 Ekaterinburg P25 
+# 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
 
 # 25617 Russia Kavkaz
