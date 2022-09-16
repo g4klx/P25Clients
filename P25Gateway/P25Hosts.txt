@@ -39,6 +39,9 @@
 # 445 SuperMag Australia
 445	p25.Supermag.fishersaudio.com.au	41000
 
+# 456 Apco25 Ruhrgebiet/NRW Germany
+456 456.ham-p25.de 41000
+
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
