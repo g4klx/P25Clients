@@ -549,6 +549,9 @@
 # 43389 SouthEast Link US
 43389	p25.lmarc.net	41000
 
+# 43715 Kazakhstan P25
+43715	ysf.01dx.kz	41000
+
 # 44000 Japan Main P25
 44000	p25-2.f5.si	41000
 
@@ -641,6 +644,3 @@
 
 # 65100 P25 2007DXgroup
 65100	89.46.75.115	41000
-
-# 74315 Kazakhstan P25
-74315	ysf.01dx.kz	41000
