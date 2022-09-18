@@ -111,6 +111,9 @@
 # 2265 Baia Mare YO5 P25 Network
 2265	p25.dstar-yo.ro	41005
 
+# 2345 CQ-North UK
+2345 p25.cqnorth.org.uk 41000
+
 # RU DMR TG2503
 2503	p25.r1ik.ru	41000
 
