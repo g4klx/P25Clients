@@ -442,7 +442,7 @@
 31121	dvse.dmrnet.net	41000
 
 # 31123 Florida Treasure Coast
-31123	45.152.209.147	41000
+31123 p25.kg4orq.com 41000
 
 # 31161 Virginia
 31161	24.49.15.69	41000
