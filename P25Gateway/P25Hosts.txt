@@ -66,6 +66,9 @@
 # 822 TH-ASL-5508
 822 p25.xlx822.com 41000
 
+# 841 Team Wave
+841 p25.mx0wvv.org 41000
+
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
