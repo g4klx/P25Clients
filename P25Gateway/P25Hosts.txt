@@ -387,8 +387,11 @@
 # 26078 Poland HBLink Network
 26078	p25.hblink.kutno.pl	41000
 
+# 26285 German Oberbayern Region
+26285 xlx850.bm262.de 41285
+
 # 26444 German Inselfreunde Net
-26444   xlx850.bm262.de     41000
+26444 xlx850.bm262.de 41000
 
 # 26538 DE-NDS-Ost
 26538	116.203.223.233	41000
