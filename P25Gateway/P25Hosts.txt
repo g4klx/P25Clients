@@ -18,7 +18,7 @@
 # 202 HELLAS Zone P25
 202	hellaszone.com	41000
 
-# 204 Technology First
+# 204 W8UFO P25 Reflector
 204	41611.asnode.org	41000
 
 # 214 SPAIN P25 Reflector
@@ -39,6 +39,9 @@
 # 445 SuperMag Australia
 445	p25.Supermag.fishersaudio.com.au	41000
 
+# 456 Apco25 Ruhrgebiet/NRW Germany
+456 456.ham-p25.de 41000
+
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
@@ -58,7 +61,7 @@
 730	sdradio.cl	41000
 
 # 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
-762 18.213.214.37 41000
+762 p25.w4pft.com 41000
 
 # 822 TH-ASL-5508
 822 p25.xlx822.com 41000
@@ -87,6 +90,9 @@
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
 
+# 1928 Motorola Nerd Network
+1928 216.128.134.7 41000
+
 # 2050 KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
 2050	reflector.p25.link	41009
 
@@ -107,6 +113,9 @@
 
 # 2265 Baia Mare YO5 P25 Network
 2265	p25.dstar-yo.ro	41005
+
+# 2345 CQ-North UK
+2345 p25.cqnorth.org.uk 41000
 
 # RU DMR TG2503
 2503	p25.r1ik.ru	41000
@@ -147,8 +156,14 @@
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
 
+# 5621 HamFurs MultiMode Bridge
+5621 ord1.w3fur.radio 41000
+
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
+
+# 6969 JTF_HV Ham P25
+6969	69.118.62.100	41000
 
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
@@ -156,8 +171,11 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225	ysfarg.ddns.net	41000
 
+# Uruguay Link
+7487 23.234.230.152 41000
+
 # 7941 STARLINK WHITE MOUNTAIN RADIO NETWORK
-7941	p25.strangled.net	41000
+7941	45.32.82.218	41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
@@ -169,7 +187,7 @@
 9050	45.77.198.235	41000
 
 # 9480 ICQPODCAST 
-9480	xlx.icqpodcast.com	41001
+9480	46.101.36.246 41000
 
 # 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
 9846	p25.dudetronics.com	41001
@@ -217,7 +235,7 @@
 10255	ve3rd.hopto.org 41000
 
 # 10260 Poland
-10260	80.211.249.221		41000
+10260	185.174.14.75		41000
 
 # 10294 SkyHub https://skyhublink.com/connections
 10294	hub.skyhublink.com	41000
@@ -265,7 +283,7 @@
 10402	47.104.177.248		41000
 
 # 10403	Pacific	TAC 3 http://ysf.sz790.com:8082/
-10403	ysf.sz790.com		41000
+10403	ysf46073.sz790.com		41000
 
 # 10404	Pacific	TAC 4
 10404	p25tw338.ddns.net	41000
@@ -315,7 +333,10 @@
 # 11069 KK6RQ DMR-310551
 11069	area52.zapto.org	41000
 
-# 21909 Mother Owl - Multi-mode HUB & Reflector
+# 20222 HELLAS-FRN
+20222 p25-frn.ddns.net Port 41000
+
+# 21909 PRIDE - Multi-mode HUB & Reflector
 21909	hub.kimberlychase.com	41000
 
 # 22200 IT HBLINK REFLECTOR
@@ -336,6 +357,9 @@
 # 22258 D2ALP HBLink Italia
 22258	94.177.173.53	41000
 
+# 22487 IT - Digital Network Rete Multiprotocollo
+22487	famiuse.ddns.net	41000
+
 # 23225 Austria
 23225	94.199.173.123		41000
 
@@ -350,6 +374,9 @@
 
 # 23595 OZ-DMR
 23595	reflector.oz-dmr.uk	41000
+
+# 25605 Russia Ekaterinburg 
+25605   ysf.386i.ru     41000
 
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
@@ -384,6 +411,9 @@
 # 31057 AF5XP Sulphur,Louisiana
 31057	af5xp.ddns.net		41000
 
+# 31059 Vidalia Net P25
+31059 vidalianet.cbridge.net 41000
+
 # 31062 Mountain West
 31062	p25.mw-dmr.net		41000
 
@@ -405,11 +435,14 @@
 # 31092 Connecticut Chat
 31092	p25.alecwasserman.com	41000
 
+# 31177 WESDIG P25 Reflector
+31177	p25.wesdig.com	41000
+
 # 31121 First Coast FL
 31121	dvse.dmrnet.net	41000
 
 # 31123 Florida Treasure Coast
-31123	45.152.209.147	41000
+31123 p25.kg4orq.com 41000
 
 # 31161 Virginia
 31161	24.49.15.69	41000
@@ -423,6 +456,9 @@
 # 31207 Sunflower Net
 31207   155.138.244.192   41000
 
+# 31220 Lucas County Ohio ARES
+31220 64.246.112.132 41000
+
 # 31226 Worldwide Dx Link System
 31226	192.99.70.1	41000
 
@@ -435,7 +471,7 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
-# 31266 DGTLCOM Digital Common Interlink
+# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR)
 31266 dgtlcom.dyndns.org 41000
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
@@ -489,9 +525,6 @@
 # 31691 US Midwest P25 Reflector
 31691	net.w3axl.com	43169
 
-# 31775 FILAM HAMS P25 Reflector
-31775	p25.filamhams.net	41000
-
 # 31777 DX-LINK
 31777	8.9.4.102		41000
 
@@ -510,6 +543,9 @@
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
 
+# 37030 RED SKYNET
+37030 skynet.xreflector.es 41000
+
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169	41011
 
@@ -522,8 +558,32 @@
 # 43389 SouthEast Link US
 43389	p25.lmarc.net	41000
 
+# 43715 Kazakhstan P25
+43715	ysf.01dx.kz	41000
+
+# 44000 Japan Main P25
+44000	p25-2.f5.si	41000
+
+# 44120 Japan P25
+44120	p25.f5.si	41000
+
 # 45000 Korea
 45000	p25.dvham.com	41000
+
+# 46001 P25 Link TG46001, China
+46001 46001.freedmr.club 41000
+
+# 46004 P25 Link TG46004, Zone 4, China
+46004 46004.freedmr.club 41001
+
+# 46010 P25 Link TG46010, Beijing, China
+46010 46010.freedmr.club 41002
+
+# 46055 P25 Link TG46055, Zhejiang, China
+46055 46055.freedmr.club 41003
+
+# 46516 P25 Link TG46516, Xuzhou, China
+46516 46516.freedmr.club 41004
 
 # 49562 Boredom Breaker
 49562	146.71.77.238	41000
@@ -546,9 +606,6 @@
 # 51503 US Philippines P25 network
 51503	45.79.76.10	41000
 
-# 51522 PINOY-LINK Network 
-51522	p25.pinoylink.net	41000
-
 # 51526 Omega Communications 
 51526	omega25.ddns.net	41000
 
@@ -561,8 +618,8 @@
 # 52032 P25 Link XLX149 Modules C
 52032	p52032.pwk.ac.th	41009
 
-# 52072 Phuket
-52072	xlx727phuketdstar.ddns.net	41000
+# 52072 Phuket P25 <> FreeDMR <> Echolink
+52072 203.170.129.69 41000
 
 # 52138 P25 Link Thailand
 52138	p2552138.freeddns.org	41000
@@ -582,14 +639,17 @@
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
 55100	45.63.6.57	41000
 
+# 56987 Mother Owl - Multi-mode HUB & Reflector
+56987	server.captsmokey.com	41000
+
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100	p25.signalseverywhere.com	41000
+
+# 62869 W3FUR - Pride Radio Group Multi-mode HUB & Reflector
+62869 lax1.w3fur.radio 41000
 
 # 63600 Latvian Digital Voice network
 63600	xlx.ham.lv	41000
 
 # 65100 P25 2007DXgroup
 65100	89.46.75.115	41000
-
-# 74315 Kazakhstan P25
-74315	ysf.01dx.kz	41000
