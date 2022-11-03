@@ -666,5 +666,5 @@
 # 72405 P25 MGBRASIL
 72405 mgbrasil.duckdns.org 41000
 
-# 72406 KM4HJJ repeater Pompano, Florida
-72406 km4hjj-p25.dyndns-server.com
+# 65101 KM4HJJ repeater Pompano, Florida
+65101 km4hjj-p25.dyndns-server.com
