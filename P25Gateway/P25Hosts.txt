@@ -90,6 +90,9 @@
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
+# 7245 MGBRASIL P25
+7245 mgbrasil.duckdns.org 41000
+
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
 1007	43773.kb5rir.com	41003
 
@@ -668,8 +671,3 @@
 
 # 65101 KM4HJJ repeater Pompano, Florida
 65101 km4hjj-p25.dyndns-server.com 41000
-
-# 72405 P25 MGBRASIL
-72405 mgbrasil.duckdns.org 41000
-
-
