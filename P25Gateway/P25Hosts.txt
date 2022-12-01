@@ -36,6 +36,9 @@
 # 357 VARG http://www.varg.club
 357	3.215.215.169	41010
 
+# 419 Toledo Amateur Digital Association
+419 tada-p25.ddns.net 41000
+
 # 420 Super Freq
 420	p25.superfreqdigital.com	41000
 
