@@ -475,7 +475,7 @@
 31207   155.138.244.192   41000
 
 # 31220 Lucas County Ohio ARES
-31220 64.246.112.132 41000
+31220 w8mal-dvbridge.hopto.org 41000
 
 # 31226 Worldwide Dx Link System
 31226	192.99.70.1	41000
