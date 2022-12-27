@@ -144,6 +144,9 @@
 # 3147 Tennessee
 3147	p25tn.w4kdg.org	41000
 
+# 3149 Utah
+3149		p25.aarthek.net	41000
+
 # 3160 K6JWN Multimode
 3160	p25-3160.k6jwn.org	41000
 
