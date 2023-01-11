@@ -15,7 +15,7 @@
 # 138 P25 PKT THAILAND
 138	p25138.freeddns.org	41001
 
-# 149 P25 Link To XLX149 Nexus
+# 149 P25 Link To XLX Nexus Module X
 149	p25.pwk.ac.th	41000
 
 # 202 HELLAS Zone P25
