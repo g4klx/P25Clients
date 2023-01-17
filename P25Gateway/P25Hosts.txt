@@ -87,6 +87,9 @@
 # 910 Washington,DC - Virginia - Maryland
 910	p25.freeddns.org	41000
 
+# 926 HamFurs/LoFAR MultiMode Bridge
+926 urf.kf3rry.org 41000
+
 # 927 Southern California
 927	927.org	41000
 
@@ -167,9 +170,6 @@
 
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
-
-# 5621 HamFurs MultiMode Bridge
-5621 ord1.w3fur.radio 41000
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
@@ -671,9 +671,6 @@
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100	p25.signalseverywhere.com	41000
-
-# 62869 W3FUR - Pride Radio Group Multi-mode HUB & Reflector
-62869 lax1.w3fur.radio 41000
 
 # 63600 Latvian Digital Voice network
 63600	xlx.ham.lv	41000
