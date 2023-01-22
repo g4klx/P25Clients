@@ -498,8 +498,11 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
-# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR)
-31266 dgtlcom.dyndns.org 41000
+# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR/M17)
+31266 urf734.dgtlcom.net 41000
+
+# 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
+31267 w8lrkp25.dyndns.org 41001
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
