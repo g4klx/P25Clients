@@ -171,6 +171,9 @@
 # 3345 Mexico Multimode (Bridged to the P25Link Network).
 3345	reflector.p25.link	41008
 
+# 3400 3400 Digital Group (NJ Multimode Reflector)
+3400 3400.ddns.net 41000
+
 # 4095 KM4NNO Wave (Bridged to the P25Link Network).
 4095	reflector.p25.link	41010
 
