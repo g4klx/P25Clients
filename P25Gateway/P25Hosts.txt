@@ -147,6 +147,9 @@
 # 3026 Alberta
 3026	reflector.p25alberta.ca	41000
 
+# 3120 LKDVM P25
+3120 lkdvm.xreflector.es 41000
+
 # 3139 Ohio
 3139 ohio.p25.in 41000
 
