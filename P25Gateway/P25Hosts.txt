@@ -129,7 +129,7 @@
 # 2265 Baia Mare YO5 P25 Network
 2265	p25.dstar-yo.ro	41005
 
-# 2284 Basel Switzerland
+# 2284 Basel Switzerland - http://2284.p25.zone
 2284 2284.p25.zone 41000
 
 # 2345 CQ-North UK
