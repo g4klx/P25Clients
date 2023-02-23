@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P25Parrot", "P25Parrot\P25Parrot.vcxproj", "{2AE94EAA-FD57-45C9-8555-6425CFA777A3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P25Gateway", "P25Gateway\P25Gateway.vcxproj", "{8B7A5406-8560-4B40-ADDA-9B8EBF93E232}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P25Reflector", "P25Reflector\P25Reflector.vcxproj", "{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +31,6 @@ Global
 		{8B7A5406-8560-4B40-ADDA-9B8EBF93E232}.Release|x64.Build.0 = Release|x64
 		{8B7A5406-8560-4B40-ADDA-9B8EBF93E232}.Release|x86.ActiveCfg = Release|Win32
 		{8B7A5406-8560-4B40-ADDA-9B8EBF93E232}.Release|x86.Build.0 = Release|Win32
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Debug|x64.ActiveCfg = Debug|x64
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Debug|x64.Build.0 = Debug|x64
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Debug|x86.ActiveCfg = Debug|Win32
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Debug|x86.Build.0 = Debug|Win32
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Release|x64.ActiveCfg = Release|x64
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Release|x64.Build.0 = Release|x64
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Release|x86.ActiveCfg = Release|Win32
-		{C68ABEB3-5CDD-4B26-8D66-77FE81EC6BB5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

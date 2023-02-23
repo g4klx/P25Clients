@@ -1,4 +1,4 @@
-SUBDIRS = P25Gateway P25Parrot P25Reflector
+SUBDIRS = P25Gateway P25Parrot
 CLEANDIRS = $(SUBDIRS:%=clean-%)
 INSTALLDIRS = $(SUBDIRS:%=install-%)
 
