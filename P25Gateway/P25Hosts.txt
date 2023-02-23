@@ -408,6 +408,9 @@
 # 23511 LEFARS Multi-Reflector
 23511 xlxlef.gb7hh.co.uk 41000
 
+# 23522 GB-PrestonARS-P25
+23522 23522p25ref.dyndns.org 41000
+
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
