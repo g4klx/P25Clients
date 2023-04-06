@@ -150,9 +150,6 @@
 # 3120 LKDVM P25
 3120	lkdvm.xreflector.es	41000
 
-# 3139 Ohio
-3139	ohio.p25.in	41000
-
 # 3142 Pennsylvania
 3142	3.215.215.169	41002
 
