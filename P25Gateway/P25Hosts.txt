@@ -198,8 +198,8 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225	ysfarg.ddns.net	41000
 
-# 7245 MGBRASIL P25
-7245	mgbrasil.duckdns.org 41000
+# 7245 BRASIL Multiprotocolo P25
+7245	pu4ron.dynv6.net 41000
 
 # Uruguay Link
 7487	23.234.230.152	41000
