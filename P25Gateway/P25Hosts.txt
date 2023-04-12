@@ -366,8 +366,8 @@
 # 20222 HELLAS-FRN
 20222 greece-frn.ddns.net 41000
 
-# 21909 PRIDE - Multi-mode HUB & Reflector
-21909	hub.kimberlychase.com	41000
+# 21909 PRIDE - LGBTQIA+ Hams
+21909	ham.kimberlychase.com	41000
 
 # 22200 IT HBLINK REFLECTOR
 22200	p25.hblink.it	41000
@@ -684,8 +684,6 @@
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
 55100	45.63.6.57	41000
 
-# 56987 Mother Owl - Multi-mode HUB & Reflector
-56987	server.captsmokey.com	41000
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100	p25.signalseverywhere.com	41000
