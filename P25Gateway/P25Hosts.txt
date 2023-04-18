@@ -547,7 +547,7 @@
 31581	kd2uqk.ham-radio-op.net	41000
 
 # 31582 KO4UYJ & KD2UQK East Coast Reflector P25 Bridge to 9050/27339
-31582	ko4uyj.com	41000
+31582	lnr.ko4uyj.com	41000
 
 # 31620 Kings of Digital
 31620	wb5ekup25.duckdns.org	41000
