@@ -516,6 +516,9 @@
 # 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
 31267	w8lrkp25.dyndns.org	41001
 
+# 31313 America's Kansas City Wide (P25/DMR/YSF)
+31313 p25.ddns.me 41002
+
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
 
