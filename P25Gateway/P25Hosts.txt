@@ -54,6 +54,9 @@
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
+# 555 Georgia 900 P25-ASL Xlink
+555 georgia900p25.hopto.org 41000
+
 # 556 ARFCOM AR15.com
 556	reflector.site	41000
 
