@@ -225,8 +225,8 @@
 # 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
 9846	p25.dudetronics.com	41001
 
-# 10100 World Wide	http://www.george-smart.co.uk/p25/
-10100	m1geo.com		41000
+# 10100 World Wide	http://dvgateway.m1geo.com/
+10100	dvgateway.m1geo.com		41000
 
 # 10101 World Wide TAC 1 (Bridged to the P25Link Network).
 10101	reflector.p25.link		41000
