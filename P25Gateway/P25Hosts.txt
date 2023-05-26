@@ -222,6 +222,9 @@
 # 9480 ICQPODCAST 
 9480	46.101.36.246 41000
 
+# 9517 M17 Project - M17-M17 C Reflector bridge
+9517	112.213.34.65 41002
+
 # 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
 9846	p25.dudetronics.com	41001
 
