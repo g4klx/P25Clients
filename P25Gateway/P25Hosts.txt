@@ -417,6 +417,9 @@
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
+# 23556 DV Scotland Phoenix Multimode
+23556 p25.dvsph.net 41000
+
 # 23595 OZ-DMR
 23595	p25.oz-dmr.network	41000
 
