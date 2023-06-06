@@ -111,6 +111,9 @@
 # 1928 Motorola Nerd Network
 1928	216.128.134.7	41000
 
+# 2044 P25 The Netherlands Main Reflector
+2044    51.83.46.75    41000
+
 # 2050 KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
 2050	reflector.p25.link	41009
 
