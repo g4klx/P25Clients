@@ -60,6 +60,9 @@
 # 556 ARFCOM AR15.com
 556	reflector.site	41000
 
+# 621 HRCC LINK
+621	urf.hrcc.link	41000
+
 # 666 Brazil PY1IP P25 Reflector - http://tg666.p25.py1ip.com
 666	p25.py1ip.com	41000
 
