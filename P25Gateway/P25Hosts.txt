@@ -406,7 +406,7 @@
 22487	famiuse.ddns.net	41000
 
 # 23225 Austria
-23225	p25.oe9hamnet.at	41000
+23225	service.oe9hamnet.at	41000
 
 # 23426 FreeSTAR UK
 23426	p25.freestar.network	41000
