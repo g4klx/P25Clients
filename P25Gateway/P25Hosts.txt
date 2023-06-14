@@ -264,10 +264,10 @@
 # 10203 North America TAC 3 (Bridged to the P25Link Network).
 10203	reflector.p25.link		41004
 
-# P25 France
+# 10208 P25 France
 10208	p25.f5dan.fr	41000
 
-# P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
+# 10209 P25 Fun Machine WE0FUN Bridge to C4FM, DMR, DStar, NXDN and AllStarLink (Analog) http://www.we0fun.com
 10209	p25.we0fun.com	41000
 
 # 10216 Northeast Ohio
