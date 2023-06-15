@@ -540,6 +540,9 @@
 # 31395 Cleveland Skywarn Backbone
 31395	backbone.ad8g.net	41000
 
+# 31399 OhioLink Network Crossmode. http://olnradio.digital
+31399 xlx.kd8grn.net 41000
+
 # 31340 Central New Jersey
 31340	cnjham.msmts.com	41000
 
