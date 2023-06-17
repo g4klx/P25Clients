@@ -375,6 +375,9 @@
 # 11069 KK6RQ DMR-310551
 11069	area52.zapto.org	41000
 
+# 20281 GR-KERKYRA-DV
+20281 greece.freedmr.online 41000
+
 # 20222 HELLAS-FRN
 20222 greece-frn.ddns.net 41000
 
