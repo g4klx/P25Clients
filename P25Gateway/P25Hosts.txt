@@ -564,6 +564,9 @@
 # 31444	RI DIGITAL LINK TG#31444
 31444	149.28.54.153	41000
 
+# 31490 Link to DMR TG 314900
+31490  ammermon.lorexddns.net  41001
+
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
 
