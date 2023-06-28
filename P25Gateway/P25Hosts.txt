@@ -144,6 +144,9 @@
 # 2345 CQ-North UK
 2345	p25.cqnorth.org.uk	41000
 
+# 2350 UK ChatterBOX
+2350	p252350.freestar.network	41001
+
 # RU DMR TG2503
 2503	p25.r1ik.ru	41000
 
