@@ -714,6 +714,9 @@
 # 60100 K8SDR SignalsEverywhere Experimenters Club
 60100	p25.signalseverywhere.com	41000
 
+# 60777 Who Cares ARG (URF239 A) https://whocaresradio.com/reflector
+60777	urf239.whocaresradio.com	41000
+
 # 63600 Latvian Digital Voice network
 63600	xlx.ham.lv	41000
 
