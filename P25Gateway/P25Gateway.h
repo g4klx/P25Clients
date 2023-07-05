@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2023 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,9 @@
 #if !defined(P25Gateway_H)
 #define	P25Gateway_H
 
+#include "P25Network.h"
+#include "Reflectors.h"
+#include "Voice.h"
 #include "Timer.h"
 #include "Conf.h"
 
@@ -38,6 +41,13 @@
 #include <WS2tcpip.h>
 #endif
 
+class CStaticTG {
+public:
+	unsigned int     m_tg;
+	sockaddr_storage m_addr;
+	unsigned int     m_addrLen;
+};
+
 class CP25Gateway
 {
 public:
@@ -47,7 +57,21 @@ public:
 	void run();
 
 private:
-	CConf m_conf;
+	CConf        m_conf;
+	CVoice*      m_voice;
+	CP25Network* m_remoteNetwork;
+	unsigned short m_currentTG;
+	unsigned int m_currentAddrLen;
+	sockaddr_storage m_currentAddr;
+	bool         m_currentIsStatic;
+	CTimer       m_hangTimer;
+	unsigned int m_rfHangTime;
+	CReflectors* m_reflectors;	
+	std::vector<CStaticTG> m_staticTGs;
+
+	void writeCommand(const std::string& command);
+
+	static void onCommand(const unsigned char* command, unsigned int length);
 };
 
 #endif
