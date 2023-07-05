@@ -96,6 +96,9 @@
 # 910 Washington,DC - Virginia - Maryland
 910	p25.freeddns.org	41000
 
+# 925 MotoChat 
+925 p25.motochat.eu 41925
+
 # 926 HamFurs/LoFAR MultiMode Bridge
 926 urf.kf3rry.org 41000
 
