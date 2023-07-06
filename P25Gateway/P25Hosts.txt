@@ -97,7 +97,7 @@
 910	p25.freeddns.org	41000
 
 # 925 MotoChat 
-925 p25.motochat.eu 41925
+925 p25.motochat.eu 41009
 
 # 926 HamFurs/LoFAR MultiMode Bridge
 926 urf.kf3rry.org 41000
@@ -454,10 +454,10 @@
 26078	p25.hblink.kutno.pl	41000
 
 # 26285 German Oberbayern Region
-26285	xlx850.bm262.de	41285
+26285	xlx850.bm262.de	41008
 
 # 26444 German Inselfreunde Net
-26444	xlx850.bm262.de	41000
+26444	xlx850.bm262.de	41004
 
 # 26538 DE-NDS-Ost
 26538	116.203.223.233	41000
