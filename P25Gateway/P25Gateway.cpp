@@ -578,7 +578,7 @@ void CP25Gateway::writeCommand(const std::string& command)
 		}
 	} else if (command.substr(0, 6) == "status") {
 		std::string state = std::string("p25:") + ((m_currentAddrLen > 0) ? "conn" : "disc");
-		m_mqtt->publish("command", state);
+		m_mqtt->publish("response", state);
 	} else if (command.substr(0, 4) == "host") {
 		std::string ref;
 
@@ -590,7 +590,7 @@ void CP25Gateway::writeCommand(const std::string& command)
 		}
 
 		std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
-		m_mqtt->publish("command", host);
+		m_mqtt->publish("response", host);
 	} else {
 		CUtils::dump("Invalid remote command received", (unsigned char*)command.c_str(), command.length());
 	}
