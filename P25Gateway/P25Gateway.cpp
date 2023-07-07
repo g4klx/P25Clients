@@ -25,6 +25,7 @@
 #include "Thread.h"
 #include "Utils.h"
 #include "Log.h"
+#include "GitVersion.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <WS2tcpip.h>
@@ -47,6 +48,17 @@ extern CMQTTConnection* m_mqtt;
 
 static CP25Gateway* gateway = NULL;
 
+static bool m_killed = false;
+static int  m_signal = 0;
+
+#if !defined(_WIN32) && !defined(_WIN64)
+static void sigHandler(int signum)
+{
+	m_killed = true;
+	m_signal = signum;
+}
+#endif
+
 #if defined(_WIN32) || defined(_WIN64)
 const char* DEFAULT_INI_FILE = "P25Gateway.ini";
 #else
@@ -68,7 +80,7 @@ int main(int argc, char** argv)
 		for (int currentArg = 1; currentArg < argc; ++currentArg) {
 			std::string arg = argv[currentArg];
 			if ((arg == "-v") || (arg == "--version")) {
-				::fprintf(stdout, "P25Gateway version %s\n", VERSION);
+				::fprintf(stdout, "P25Gateway version %s git #%.7s\n", VERSION, gitversion);
 				return 0;
 			} else if (arg.substr(0, 1) == "-") {
 				::fprintf(stderr, "Usage: P25Gateway [-v|--version] [filename]\n");
@@ -79,11 +91,36 @@ int main(int argc, char** argv)
 		}
 	}
 
-	gateway = new CP25Gateway(std::string(iniFile));
-	gateway->run();
-	delete gateway;
+#if !defined(_WIN32) && !defined(_WIN64)
+	::signal(SIGINT,  sigHandler);
+	::signal(SIGTERM, sigHandler);
+	::signal(SIGHUP,  sigHandler);
+#endif
 
-	return 0;
+	int ret = 0;
+
+	do {
+		m_signal = 0;
+
+		gateway = new CP25Gateway(std::string(iniFile));
+		ret = gateway->run();
+
+		delete gateway;
+
+		if (m_signal == 2)
+			::LogInfo("P25Gateway-%s exited on receipt of SIGINT", VERSION);
+
+		if (m_signal == 15)
+			::LogInfo("P25Gateway-%s exited on receipt of SIGTERM", VERSION);
+
+		if (m_signal == 1)
+			::LogInfo("P25Gateway-%s restarted on receipt of SIGHUP", VERSION);
+
+	} while (m_signal == 1);
+
+	::LogFinalise();
+
+	return ret;
 }
 
 CP25Gateway::CP25Gateway(const std::string& file) :
@@ -107,12 +144,12 @@ CP25Gateway::~CP25Gateway()
 	CUDPSocket::shutdown();
 }
 
-void CP25Gateway::run()
+int CP25Gateway::run()
 {
 	bool ret = m_conf.read();
 	if (!ret) {
 		::fprintf(stderr, "P25Gateway: cannot read the .ini file\n");
-		return;
+		return 1;
 	}
 
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -122,7 +159,7 @@ void CP25Gateway::run()
 		pid_t pid = ::fork();
 		if (pid == -1) {
 			::fprintf(stderr, "Couldn't fork() , exiting\n");
-			return;
+			return -1;
 		} else if (pid != 0) {
 			exit(EXIT_SUCCESS);
 		}
@@ -130,13 +167,13 @@ void CP25Gateway::run()
 		// Create new session and process group
 		if (::setsid() == -1) {
 			::fprintf(stderr, "Couldn't setsid(), exiting\n");
-			return;
+			return -1;
 		}
 
 		// Set the working directory to the root directory
 		if (::chdir("/") == -1) {
 			::fprintf(stderr, "Couldn't cd /, exiting\n");
-			return;
+			return -1;
 		}
 
 		// If we are currently root...
@@ -144,7 +181,7 @@ void CP25Gateway::run()
 			struct passwd* user = ::getpwnam("mmdvm");
 			if (user == NULL) {
 				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
-				return;
+				return -1;
 			}
 
 			uid_t mmdvm_uid = user->pw_uid;
@@ -153,18 +190,18 @@ void CP25Gateway::run()
 			// Set user and group ID's to mmdvm:mmdvm
 			if (setgid(mmdvm_gid) != 0) {
 				::fprintf(stderr, "Could not set mmdvm GID, exiting\n");
-				return;
+				return -1;
 			}
 
 			if (setuid(mmdvm_uid) != 0) {
 				::fprintf(stderr, "Could not set mmdvm UID, exiting\n");
-				return;
+				return -1;
 			}
 
 			// Double check it worked (AKA Paranoia)
 			if (setuid(0) != -1) {
 				::fprintf(stderr, "It's possible to regain root - something is wrong!, exiting\n");
-				return;
+				return -1;
 			}
 		}
 	}
@@ -185,32 +222,27 @@ void CP25Gateway::run()
 
 	m_mqtt = new CMQTTConnection(m_conf.getMQTTAddress(), m_conf.getMQTTPort(), m_conf.getMQTTName(), subscriptions, m_conf.getMQTTKeepalive());
 	ret = m_mqtt->open();
-	if (!ret) {
-		delete m_mqtt;
-		return;
-	}
+	if (!ret)
+		return 1;
 
 	sockaddr_storage rptAddr;
 	unsigned int rptAddrLen;
 	if (CUDPSocket::lookup(m_conf.getRptAddress(), m_conf.getRptPort(), rptAddr, rptAddrLen) != 0) {
 		LogError("Unable to resolve the address of the host");
-		return;
+		return 1;
 	}
 
 	CRptNetwork localNetwork(m_conf.getMyPort(), rptAddr, rptAddrLen, m_conf.getCallsign(), m_conf.getDebug());
 	ret = localNetwork.open();
-	if (!ret) {
-		::LogFinalise();
-		return;
-	}
+	if (!ret)
+		return 1;
 
 	m_remoteNetwork = new CP25Network(m_conf.getNetworkPort(), m_conf.getCallsign(), m_conf.getNetworkDebug());
 	ret = m_remoteNetwork->open();
 	if (!ret) {
 		delete m_remoteNetwork;
 		localNetwork.close();
-		::LogFinalise();
-		return;
+		return 1;
 	}
 
 	m_reflectors = new CReflectors(m_conf.getNetworkHosts1(), m_conf.getNetworkHosts2(), m_conf.getNetworkReloadTime());
@@ -241,7 +273,8 @@ void CP25Gateway::run()
 		}
 	}
 
-	LogMessage("Starting P25Gateway-%s", VERSION);
+	LogMessage("P25Gateway-%s is starting", VERSION);
+	LogMessage("Built %s %s (GitID #%.7s)", __TIME__, __DATE__, gitversion);
 
 	unsigned int srcId = 0U;
 	unsigned int dstTG = 0U;
@@ -503,7 +536,7 @@ void CP25Gateway::run()
 
 	lookup->stop();
 
-	::LogFinalise();
+	return 0;
 }
 
 void CP25Gateway::writeCommand(const std::string& command)

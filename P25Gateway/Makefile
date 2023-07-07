@@ -15,9 +15,23 @@ P25Gateway:	$(OBJECTS)
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
 
+P25Gateway.o: GitVersion.h FORCE
+
+.PHONY: GitVersion.h
+
+FORCE:
+
 install:
 		install -m 755 P25Gateway /usr/local/bin/
 
 clean:
 		$(RM) P25Gateway *.o *.d *.bak *~
- 
+
+# Export the current git version if the index file exists, else 000...
+GitVersion.h:
+ifneq ("$(wildcard ../.git/index)","")
+	echo "const char *gitversion = \"$(shell git rev-parse HEAD)\";" > $@
+else
+	echo "const char *gitversion = \"0000000000000000000000000000000000000000\";" > $@
+endif
+

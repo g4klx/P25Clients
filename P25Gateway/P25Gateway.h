@@ -54,7 +54,7 @@ public:
 	CP25Gateway(const std::string& file);
 	~CP25Gateway();
 
-	void run();
+	int run();
 
 private:
 	CConf        m_conf;
