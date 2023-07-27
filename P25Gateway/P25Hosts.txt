@@ -204,9 +204,6 @@
 # 6395 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
-# 6832 Ohio Valley Experimenters Club
-6832	p25.kd8lbs.com	41000
-
 # 6969 JTF_HV Ham P25
 6969	69.118.62.100	41000
 
