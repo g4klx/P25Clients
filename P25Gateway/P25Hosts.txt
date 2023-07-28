@@ -564,6 +564,9 @@
 # XLX045A P25 <-> DMR/DSTAR/YSF/NXDN <-> BM TG31425 PA Wide Cross Mode
 31425	70.44.20.24	41001
 
+# 31424 SVARC-Shenango Valley Amateur Radio Club- K3WRB
+31424 p25.n1tvi.net 41000
+
 #  PA Cross Mode (alt), 31426
 31426	3.215.215.169	41001
 
