@@ -97,7 +97,7 @@
 910	p25.freeddns.org	41000
 
 # 925 MotoChat 
-925 p25.motochat.eu 41925
+925 p25.motochat.eu 41009
 
 # 926 HamFurs/LoFAR MultiMode Bridge
 926 urf.kf3rry.org 41000
@@ -203,9 +203,6 @@
 
 # 6395 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
-
-# 6832 Ohio Valley Experimenters Club
-6832	p25.kd8lbs.com	41000
 
 # 6969 JTF_HV Ham P25
 6969	69.118.62.100	41000
@@ -454,10 +451,10 @@
 26078	p25.hblink.kutno.pl	41000
 
 # 26285 German Oberbayern Region
-26285	xlx850.bm262.de	41285
+26285	xlx850.bm262.de	41008
 
 # 26444 German Inselfreunde Net
-26444	xlx850.bm262.de	41000
+26444	xlx850.bm262.de	41004
 
 # 26538 DE-NDS-Ost
 26538	116.203.223.233	41000
@@ -567,6 +564,9 @@
 # XLX045A P25 <-> DMR/DSTAR/YSF/NXDN <-> BM TG31425 PA Wide Cross Mode
 31425	70.44.20.24	41001
 
+# 31424 SVARC-Shenango Valley Amateur Radio Club- K3WRB
+31424 p25.n1tvi.net 41000
+
 #  PA Cross Mode (alt), 31426
 31426	3.215.215.169	41001
 
@@ -633,7 +633,7 @@
 # 40721 Fusion Canada Fr
 40721	38.110.97.161	41000
 
-# 41120 STARLINK SYSTEM
+# 41120 LONE STAR LINK SYSTEM
 41120	216.128.136.176	41000
 
 # 43389 SouthEast Link US
