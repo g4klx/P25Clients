@@ -228,6 +228,9 @@
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
 
+# 8210 Ohio Valley
+8210 reflector.p25.in 41000
+
 # 9050 East Coast Reflector
 9050	45.77.198.235	41000
 
