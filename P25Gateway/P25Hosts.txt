@@ -498,6 +498,9 @@
 # 31079 ALERT Radio / Multimode P25/DMR
 31079	927.org			41001
 
+# 31138 kingsland Ga
+31138 kingsland.cbridge.net 41000
+
 # 31177 WESDIG P25 Reflector
 31177	p25.wesdig.com	41000
 
