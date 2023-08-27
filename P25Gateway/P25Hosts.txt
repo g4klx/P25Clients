@@ -666,6 +666,9 @@
 # 46010 P25 Link TG46010, Beijing, China
 46010	46010.bh1nyr.net	41002
 
+# 46023 P25 Link TG46023 bridge to BM TG46023, Chongqing, China
+46023	119.3.248.195	41000
+
 # 46516 P25 Link TG46516, Xuzhou, China
 46516	46516.bh1nyr.net	41004
 
