@@ -117,6 +117,9 @@
 # 927 Southern California
 927	927.org	41000
 
+# 946 FlagTorchSociety
+946 xlx.flagandtorchsociety.com 41000
+
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
