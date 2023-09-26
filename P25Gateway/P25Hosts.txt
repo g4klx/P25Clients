@@ -450,6 +450,9 @@
 # 23595 OZ-DMR
 23595	p25.oz-dmr.network	41000
 
+# 24033 2 Meter Crew Anti-Net
+24033 wg5eek.com 41000
+
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
 
