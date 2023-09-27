@@ -94,7 +94,7 @@
 841 p25.mx0wvv.org 41000
 
 # 847 Chandler Hams
-847 urf847.kk7mnz.com 41000
+847 xlx847.kk7mnz.com 41000
 
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
