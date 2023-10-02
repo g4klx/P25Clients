@@ -243,6 +243,9 @@
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
 
+# 8207 Houston Area XLX Reflector
+8207 p25.kd5dfb.net 41000
+
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
 
