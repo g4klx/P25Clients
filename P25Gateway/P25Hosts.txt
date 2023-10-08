@@ -36,6 +36,9 @@
 # 226 Romania YO P25 Network
 226	p25.dstar-yo.ro	41000
 
+# 228 Switzerland - https://project25.ch
+228 project25.ch 41000
+
 # 235 DV Scotland Phoenix Multimode
 235 p25.dvsph.net 41000
 
@@ -91,7 +94,7 @@
 841 p25.mx0wvv.org 41000
 
 # 847 Chandler Hams
-847 urf847.kk7mnz.com 41000
+847 xlx847.kk7mnz.com 41000
 
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
@@ -113,6 +116,9 @@
 
 # 927 Southern California
 927	927.org	41000
+
+# 946 FlagTorchSociety
+946 xlx.flagandtorchsociety.com 41000
 
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
@@ -216,6 +222,9 @@
 # 6969 JTF_HV Ham P25
 6969	69.118.62.100	41000
 
+# 7144 Chiriqui Link Panama
+7144	p25-hp3.ddns.net	41000
+
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
 
@@ -229,10 +238,13 @@
 7487	23.234.230.152	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
-7941 45.76.79.228 41000
+7941 45.76.64.212 41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
+
+# 8207 Houston Area XLX Reflector
+8207 p25.kd5dfb.net 41000
 
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
@@ -447,6 +459,9 @@
 # 23595 OZ-DMR
 23595	p25.oz-dmr.network	41000
 
+# 24033 2 Meter Crew Anti-Net
+24033 wg5eek.com 41000
+
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
 
@@ -545,9 +560,6 @@
 
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
-
-# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR/M17)
-31266	urf734.dgtlcom.net	41000
 
 # 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
 31267	w8lrkp25.dyndns.org	41001
