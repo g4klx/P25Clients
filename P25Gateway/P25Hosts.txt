@@ -393,6 +393,9 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
+# 10750 Australian Secondary P25 Reflector
+10750 clasn-p25.cloudasn.com 4100
+
 # 10888 Texas
 10888	29520.asnode.org	41000
 
