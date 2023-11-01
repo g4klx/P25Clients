@@ -555,8 +555,8 @@
 # 31220 Lucas County Ohio ARES
 31220	w8mal-dvbridge.hopto.org	41000
 
-# 31226 Worldwide Dx Link System
-31226	192.99.70.1	41000
+# 31226 Worldwide Chat
+31226	74.208.163.225	41000
 
 # 31238 Foxhole Radio Bridged Network
 31238	p25.foxhole.radio	41000
