@@ -612,6 +612,9 @@
 # 31490 Link to DMR TG 314900
 31490  ammermon.lorexddns.net  41001
 
+# 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
+31497 45.79.110.170 41000
+
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
 
