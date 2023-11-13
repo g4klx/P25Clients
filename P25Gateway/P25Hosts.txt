@@ -39,7 +39,7 @@
 # 228 Switzerland - https://project25.ch
 228 project25.ch 41000
 
-# 235 DV Scotland Phoenix Multimode
+# 235 DVSPH UK Wide
 235 p25.dvsph.net 41000
 
 # 260 HBLink Poland P25
@@ -458,6 +458,9 @@
 
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
+
+# 23556 DVSPH Multimode
+23556	xlx600.dvsph.net	41000
 
 # 23595 OZ-DMR
 23595	p25.oz-dmr.network	41000
