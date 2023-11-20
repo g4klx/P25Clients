@@ -96,7 +96,7 @@
 # 847 Chandler Hams
 847 xlx847.kk7mnz.com 41000
 
-# URF848
+# 848 Chandler Hams
 848 xlx848.kk7mnz.com 41000
 
 # 858 San Diego, CA
