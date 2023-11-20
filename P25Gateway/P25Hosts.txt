@@ -96,6 +96,9 @@
 # 847 Chandler Hams
 847 xlx847.kk7mnz.com 41000
 
+# 848 Chandler Hams
+848 xlx848.kk7mnz.com 41000
+
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
