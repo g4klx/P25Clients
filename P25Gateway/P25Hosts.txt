@@ -237,6 +237,9 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225	ysfarg.ddns.net	41000
 
+# 7240 MASTER-SUL Brasil
+7240	p25.freedmr-brasil.qsl.br 41000
+
 # 7245 BRASIL Multiprotocolo P25
 7245	pu4ron.dynv6.net 41000
 
