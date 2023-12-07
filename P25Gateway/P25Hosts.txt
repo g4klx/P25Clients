@@ -505,7 +505,16 @@
 26538	116.203.223.233	41000
 
 # 27565 KN4KNG Network
-27565	139.144.61.167	41000
+27565	kn4kng.com	41000
+
+# 27566 KN4KNG Network TAC1
+27566	kn4kng.com	41001
+
+# 27567 KN4KNG Network TAC2
+27567	kn4kng.com	41002
+
+# 27568 KN4KNG Network TAC3
+27568	kn4kng.com	41003
 
 # 28299 America-Ragchew
 28299	arcp25.duckdns.org		41000
