@@ -45,6 +45,9 @@
 # 260 HBLink Poland P25
 260	p25.hblink.pl	41000
 
+# 304 W8ARA P25
+304	ara.selfip.net	41000
+
 # 357 VARG http://www.varg.club
 357	3.215.215.169	41010
 
