@@ -94,7 +94,7 @@
 822 p25.xlx822.com 41000
 
 # 841 Team Wave
-841 p25.mx0wvv.org 41000
+841 wavenet.ddns.net 41000
 
 # 847 Chandler Hams
 847 xlx847.kk7mnz.com 41000
