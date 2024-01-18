@@ -132,6 +132,9 @@
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
 1007	43773.kb5rir.com	41003
 
+# 1402 DuckFar Repeater Group, Chicago
+1402 duckfarw9bmk.gotdns.com 43000
+
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
 
@@ -224,6 +227,9 @@
 
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
+
+# 5658 DuckFar Repeater Group, Chicago
+5658 duckfarw9bmk.gotdns.com 41000
 
 # 6395 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
@@ -808,9 +814,4 @@
 # 65101 KM4HJJ repeater Pompano, Florida
 65101	km4hjj-p25.dyndns-server.com	41000
 
-# 5658 DuckFar Repeater Group, Chicago
-5658 duckfarw9bmk.gotdns.com 41000
-
-# 1402 DuckFar Repeater Group, Chicago
-1402 duckfarw9bmk.gotdns.com 43000
 
