@@ -21,6 +21,9 @@
 # 149 P25 Link To XLX Nexus Module X
 149	p25.pwk.ac.th	41000
 
+# 164 K4FSG Reflector
+164	reflector.k4fsg.net	41000
+
 # 202 HELLAS Zone P25
 202	hellaszone.com	41000
 
@@ -33,8 +36,17 @@
 # 226 Romania YO P25 Network
 226	p25.dstar-yo.ro	41000
 
+# 228 Switzerland - https://project25.ch
+228 project25.ch 41000
+
+# 235 DVSPH UK Wide
+235 p25.dvsph.net 41000
+
 # 260 HBLink Poland P25
 260	p25.hblink.pl	41000
+
+# 304 W8ARA P25
+304	ara.selfip.net	41000
 
 # 357 VARG http://www.varg.club
 357	3.215.215.169	41010
@@ -82,7 +94,13 @@
 822 p25.xlx822.com 41000
 
 # 841 Team Wave
-841 p25.mx0wvv.org 41000
+841 mx0wvv.ddns.net 41000
+
+# 847 Chandler Hams
+847 xlx847.kk7mnz.com 41000
+
+# 848 Chandler Hams
+848 xlx848.kk7mnz.com 41000
 
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
@@ -105,11 +123,17 @@
 # 927 Southern California
 927	927.org	41000
 
+# 946 FlagTorchSociety
+946 xlx.flagandtorchsociety.com 41000
+
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
 1007	43773.kb5rir.com	41003
+
+# 1402 DuckFar Repeater Group, Chicago
+1402 duckfarw9bmk.gotdns.com 43000
 
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
@@ -192,6 +216,9 @@
 # 4095 KM4NNO Wave (Bridged to the P25Link Network).
 4095	reflector.p25.link	41010
 
+# 4487 448.700 UHF Repeater in Aurora, CO
+4487 N0oba1.asuscomm.cn 41000
+
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
 
@@ -201,17 +228,26 @@
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
 
+# 5658 DuckFar Repeater Group, Chicago
+5658 duckfarw9bmk.gotdns.com 41000
+
 # 6395 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
 
 # 6969 JTF_HV Ham P25
 6969	69.118.62.100	41000
 
+# 7144 Chiriqui Link Panama
+7144	p25-hp3.ddns.net	41000
+
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
 
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225	ysfarg.ddns.net	41000
+
+# 7240 MASTER-SUL Brasil
+7240	p25.freedmr-brasil.qsl.br 41000
 
 # 7245 BRASIL Multiprotocolo P25
 7245	pu4ron.dynv6.net 41000
@@ -220,13 +256,19 @@
 7487	23.234.230.152	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
-7941 45.76.79.228 41000
+7941 wmra.mooo.com 41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
 
+# 8207 Houston Area XLX Reflector
+8207 p25.kd5dfb.net 41000
+
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
+
+# 8210 Ohio Valley
+8210 reflector.p25.in 41000
 
 # 9050 East Coast Reflector
 9050	45.77.198.235	41000
@@ -269,6 +311,9 @@
 
 # 10203 North America TAC 3 (Bridged to the P25Link Network).
 10203	reflector.p25.link		41004
+
+# 10207 Arizona 900 P25
+10207 n6ex.ddns.net 41001
 
 # 10208 P25 France
 10208	p25.f5dan.fr	41000
@@ -351,9 +396,6 @@
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421	dl-nordwest.com	41000
 
-# 10444 VK64 P25 Group
-10444	vk64.chiffers.com	41000
-
 # 10472 Shenzhen City, China,bridged to DMR TG 46072
 10472	14.116.159.221	41000
 
@@ -369,6 +411,9 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
+# 10750 Australian Secondary P25 Reflector
+10750 clasn-p25.cloudasn.com 41000
+
 # 10888 Texas
 10888	29520.asnode.org	41000
 
@@ -380,6 +425,10 @@
 
 # 11069 KK6RQ DMR-310551
 11069	area52.zapto.org	41000
+
+
+# 17603 URFM17 Universal Reflector
+17603	urf.m17.link	41000
 
 # 20281 GR-KERKYRA-DV
 20281 greece.freedmr.online 41000
@@ -432,11 +481,14 @@
 # 23551 P25 Scotland
 23551	p25scotland.ddns.net	41000
 
-# 23556 DV Scotland Phoenix Multimode
-23556 p25.dvsph.net 41000
+# 23556 DVSPH Multimode
+23556	xlx600.dvsph.net	41000
 
 # 23595 OZ-DMR
 23595	p25.oz-dmr.network	41000
+
+# 24033 2 Meter Crew Anti-Net
+24033 wg5eek.com 41000
 
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
@@ -450,6 +502,9 @@
 # 26078 Poland HBLink Network
 26078	p25.hblink.kutno.pl	41000
 
+# 26230 German Hannover-XLink
+26230	p25.hannover-x.link	41000
+
 # 26285 German Oberbayern Region
 26285	xlx850.bm262.de	41008
 
@@ -461,6 +516,15 @@
 
 # 27565 KN4KNG Network
 27565	139.144.61.167	41000
+
+# 27566 KN4KNG Network TAC1
+27566	139.144.61.167	41001
+
+# 27567 KN4KNG Network TAC2
+27567	139.144.61.167	41002
+
+# 27568 KN4KNG Network TAC3
+27568	139.144.61.167	41003
 
 # 28299 America-Ragchew
 28299	arcp25.duckdns.org		41000
@@ -498,6 +562,9 @@
 # 31079 ALERT Radio / Multimode P25/DMR
 31079	927.org			41001
 
+# 31138 kingsland Ga
+31138 kingsland.cbridge.net 41000
+
 # 31177 WESDIG P25 Reflector
 31177	p25.wesdig.com	41000
 
@@ -519,11 +586,14 @@
 # 31207 Sunflower Net
 31207   155.138.244.192   41000
 
+# 31217 Central Illinois Skywarn - Linked to Brandmeister TG 311899
+31217 tg31217.kd9koo.com 41000
+
 # 31220 Lucas County Ohio ARES
 31220	w8mal-dvbridge.hopto.org	41000
 
-# 31226 Worldwide Dx Link System
-31226	192.99.70.1	41000
+# 31226 Worldwide Chat
+31226	74.208.163.225	41000
 
 # 31238 Foxhole Radio Bridged Network
 31238	p25.foxhole.radio	41000
@@ -534,11 +604,14 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
-# 31266 DGTLCOM Great Lakes Digital Common Interlink (P25/DMR/YSF/NXDN/DSTAR/M17)
-31266	urf734.dgtlcom.net	41000
-
 # 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
 31267	w8lrkp25.dyndns.org	41001
+
+# 31291 Southwest Missouri (P25/DMR)
+31291 p25.ddns.me 41001
+
+# 31297 Southwest Missouri Skywarn (P25/DMR)
+31297 p25.ddns.me 41003
 
 # 31313 America's Kansas City Wide (P25/DMR/YSF)
 31313 p25.ddns.me 41002
@@ -576,6 +649,9 @@
 # 31490 Link to DMR TG 314900
 31490  ammermon.lorexddns.net  41001
 
+# 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
+31497 45.79.110.170 41000
+
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
 
@@ -609,6 +685,9 @@
 # 31888 KG4JPL North-Central Florida
 31888	p25.kg4jpl.com		41000
 
+# 31947 K0MGS Western Missouri/KC Metro
+31947 p25.ddns.me 41000
+
 # 31983 K8JTK Hub Multimode ILS/DVMIS (K8JTK.org)
 31983	P25Reflector31983.K8JTK.org	41000
 
@@ -640,7 +719,7 @@
 43389	p25.lmarc.net	41000
 
 # 43715 Kazakhstan P25
-43715	ysf.01dx.kz	41000
+43715	un7bww.svx03.kz	41000
 
 # 44000 Japan Main P25
 44000	p25-2.f5.si	41000
@@ -651,11 +730,17 @@
 # 45000 Korea
 45000	p25.dvham.com	41000
 
+# 45001 P25-DS5QDR Korea
+45001	ds5qdr-mst.duckdns.org	41000
+
 # 46001 P25 Link TG46001, China
 46001	46001.bh1nyr.net	41000
 
 # 46010 P25 Link TG46010, Beijing, China
 46010	46010.bh1nyr.net	41002
+
+# 46023 P25 Link TG46023 bridge to BM TG46023, Chongqing, China
+46023	119.3.248.195	41000
 
 # 46516 P25 Link TG46516, Xuzhou, China
 46516	46516.bh1nyr.net	41004
@@ -728,4 +813,5 @@
 
 # 65101 KM4HJJ repeater Pompano, Florida
 65101	km4hjj-p25.dyndns-server.com	41000
+
 
