@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020,2024 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,8 +26,7 @@
 
 CP25Network::CP25Network(unsigned short port, const std::string& callsign, bool debug) :
 m_callsign(callsign),
-m_socket(),
-m_port(port),
+m_socket(port),
 m_debug(debug)
 {
 	assert(port > 0U);
@@ -43,16 +42,7 @@ bool CP25Network::open()
 {
 	LogInfo("Opening P25 network connection");
 
-	unsigned int index = 0U;
-
-	bool ret1 = m_socket.open(index, PF_INET, "", m_port);
-	if (ret1)
-		index++;
-
-	bool ret2 = m_socket.open(index, PF_INET6, "", m_port);
-
-	// We're OK as long as we have either IPv4 or IPv6 or both.
-	return ret1 || ret2;
+	return m_socket.open();
 }
 
 bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
