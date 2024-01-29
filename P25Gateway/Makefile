@@ -1,7 +1,9 @@
 CC      = cc
 CXX     = c++
-CFLAGS  = -g -O3 -Wall -DUDP_SOCKET_MAX=2 -std=c++0x -pthread
+
+CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
 LIBS    = -lpthread -lmosquitto
+
 LDFLAGS = -g
 
 OBJECTS = Conf.o DMRLookup.o Log.o Mutex.o MQTTConnection.o P25Gateway.o P25Network.o Reflectors.o RptNetwork.o StopWatch.o Thread.o \
