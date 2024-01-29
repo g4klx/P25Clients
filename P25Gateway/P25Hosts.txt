@@ -37,10 +37,10 @@
 226	p25.dstar-yo.ro	41000
 
 # 228 Switzerland - https://project25.ch
-228 project25.ch 41000
+228	project25.ch	41000
 
 # 235 DVSPH UK Wide
-235 p25.dvsph.net 41000
+235	p25.dvsph.net	41000
 
 # 260 HBLink Poland P25
 260	p25.hblink.pl	41000
@@ -52,7 +52,7 @@
 357	3.215.215.169	41010
 
 # 419 Toledo Amateur Digital Association
-419 tada-p25.ddns.net 41000
+419	tada-p25.ddns.net	41000
 
 # 420 Super Freq
 420	p25.superfreqdigital.com	41000
@@ -67,7 +67,7 @@
 530	zldigitalreflectors.hopto.org	41000
 
 # 555 Georgia 900 P25-ASL Xlink
-555 georgia900p25.hopto.org 41000
+555	georgia900p25.hopto.org	41000
 
 # 556 ARFCOM AR15.com
 556	reflector.site	41000
@@ -88,25 +88,25 @@
 730	sdradio.cl	41000
 
 # 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
-762 p25.w4pft.com 41000
+762	p25.w4pft.com	41000
 
 # 822 TH-ASL-5508
-822 p25.xlx822.com 41000
+822	p25.xlx822.com	41000
 
 # 841 Team Wave
-841 mx0wvv.ddns.net 41000
+841	mx0wvv.ddns.net	41000
 
 # 847 Chandler Hams
-847 xlx847.kk7mnz.com 41000
+847	xlx847.kk7mnz.com	41000
 
 # 848 Chandler Hams
-848 xlx848.kk7mnz.com 41000
+848	xlx848.kk7mnz.com	41000
 
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
 # 865 K1LNX Multimode Server - Knoxville, TN
-865 knoxp25.k1lnx.net	41000
+865	knoxp25.k1lnx.net	41000
 
 # 891 Western New York Digital Multimode Network - http://wny-digital.network - Buffalo, NY
 891	p25.wny-digital.network	41000
@@ -115,16 +115,16 @@
 910	p25.freeddns.org	41000
 
 # 925 MotoChat 
-925 p25.motochat.eu 41009
+925	p25.motochat.eu	41009
 
 # 926 HamFurs/LoFAR MultiMode Bridge
-926 urf.kf3rry.org 41000
+926	urf.kf3rry.org	41000
 
 # 927 Southern California
 927	927.org	41000
 
 # 946 FlagTorchSociety
-946 xlx.flagandtorchsociety.com 41000
+946	xlx.flagandtorchsociety.com	41000
 
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
@@ -133,7 +133,7 @@
 1007	43773.kb5rir.com	41003
 
 # 1402 DuckFar Repeater Group, Chicago
-1402 duckfarw9bmk.gotdns.com 43000
+1402	duckfarw9bmk.gotdns.com	43000
 
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
@@ -256,19 +256,19 @@
 7487	23.234.230.152	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
-7941 wmra.mooo.com 41000
+7941	wmra.mooo.com	41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
 
 # 8207 Houston Area XLX Reflector
-8207 p25.kd5dfb.net 41000
+8207	p25.kd5dfb.net	41000
 
 # 8208 China P25 Network bridge to P25NX
 8208	47.105.33.47	41000
 
 # 8210 Ohio Valley
-8210 reflector.p25.in 41000
+8210	reflector.p25.in	41000
 
 # 9050 East Coast Reflector
 9050	45.77.198.235	41000
@@ -313,7 +313,7 @@
 10203	reflector.p25.link		41004
 
 # 10207 Arizona 900 P25
-10207 n6ex.ddns.net 41001
+10207	n6ex.ddns.net	41001
 
 # 10208 P25 France
 10208	p25.f5dan.fr	41000
@@ -412,7 +412,7 @@
 10700	p25nsw.gustotech.net	41000
 
 # 10750 Australian Secondary P25 Reflector
-10750 clasn-p25.cloudasn.com 41000
+10750	clasn-p25.cloudasn.com	41000
 
 # 10888 Texas
 10888	29520.asnode.org	41000
@@ -426,15 +426,14 @@
 # 11069 KK6RQ DMR-310551
 11069	area52.zapto.org	41000
 
-
 # 17603 URFM17 Universal Reflector
 17603	urf.m17.link	41000
 
 # 20281 GR-KERKYRA-DV
-20281 greece.freedmr.online 41000
+20281	greece.freedmr.online	41000
 
 # 20222 HELLAS-FRN
-20222 greece-frn.ddns.net 41000
+20222	greece-frn.ddns.net	41000
 
 # 21909 PRIDE - LGBTQIA+ Hams
 21909	ham.kimberlychase.com	41000
@@ -488,7 +487,7 @@
 23595	p25.oz-dmr.network	41000
 
 # 24033 2 Meter Crew Anti-Net
-24033 wg5eek.com 41000
+24033	wg5eek.com	41000
 
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
@@ -563,7 +562,7 @@
 31079	927.org			41001
 
 # 31138 kingsland Ga
-31138 kingsland.cbridge.net 41000
+31138	kingsland.cbridge.net	41000
 
 # 31177 WESDIG P25 Reflector
 31177	p25.wesdig.com	41000
@@ -587,7 +586,7 @@
 31207   155.138.244.192   41000
 
 # 31217 Central Illinois Skywarn - Linked to Brandmeister TG 311899
-31217 tg31217.kd9koo.com 41000
+31217	tg31217.kd9koo.com	41000
 
 # 31220 Lucas County Ohio ARES
 31220	w8mal-dvbridge.hopto.org	41000
@@ -608,13 +607,13 @@
 31267	w8lrkp25.dyndns.org	41001
 
 # 31291 Southwest Missouri (P25/DMR)
-31291 p25.ddns.me 41001
+31291	p25.ddns.me	41001
 
 # 31297 Southwest Missouri Skywarn (P25/DMR)
-31297 p25.ddns.me 41003
+31297	p25.ddns.me	41003
 
 # 31313 America's Kansas City Wide (P25/DMR/YSF)
-31313 p25.ddns.me 41002
+31313	p25.ddns.me	41002
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
@@ -623,7 +622,7 @@
 31395	backbone.ad8g.net	41000
 
 # 31399 OhioLink Network Crossmode. http://olnradio.digital
-31399 xlx.kd8grn.net 41000
+31399	xlx.kd8grn.net	41000
 
 # 31340 Central New Jersey
 31340	cnjham.msmts.com	41000
@@ -638,7 +637,7 @@
 31425	70.44.20.24	41001
 
 # 31424 SVARC-Shenango Valley Amateur Radio Club- K3WRB
-31424 p25.n1tvi.net 41000
+31424	p25.n1tvi.net	41000
 
 #  PA Cross Mode (alt), 31426
 31426	3.215.215.169	41001
@@ -650,7 +649,7 @@
 31490  ammermon.lorexddns.net  41001
 
 # 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
-31497 45.79.110.170 41000
+31497	45.79.110.170	41000
 
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
@@ -686,7 +685,7 @@
 31888	p25.kg4jpl.com		41000
 
 # 31947 K0MGS Western Missouri/KC Metro
-31947 p25.ddns.me 41000
+31947	p25.ddns.me	41000
 
 # 31983 K8JTK Hub Multimode ILS/DVMIS (K8JTK.org)
 31983	P25Reflector31983.K8JTK.org	41000
@@ -813,5 +812,4 @@
 
 # 65101 KM4HJJ repeater Pompano, Florida
 65101	km4hjj-p25.dyndns-server.com	41000
-
 

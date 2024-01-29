@@ -43,7 +43,8 @@ public:
 
 private:
 	std::string m_callsign;
-	CUDPSocket  m_socket;
+	CUDPSocket  m_socket4;
+	CUDPSocket  m_socket6;
 	bool        m_debug;
 };
 
