@@ -646,7 +646,7 @@
 31444	149.28.54.153	41000
 
 # 31490 Link to DMR TG 314900
-31490  ammermon.lorexddns.net  41001
+31490 utah00.utahdrn.org 41000
 
 # 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
 31497	45.79.110.170	41000
