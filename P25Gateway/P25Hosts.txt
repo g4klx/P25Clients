@@ -780,7 +780,7 @@
 # 51575 PH-Dumaguete Link (Multimode)
 51575	140.82.14.24	41000
 
-# 52032 P25 Link XLX149 Modules C
+# 52032 P25 Link XLX149 Module C
 52032	p52032.pwk.ac.th	41009
 
 # 52072 Phuket P25 <> FreeDMR <> Echolink
@@ -789,8 +789,8 @@
 # 52138 P25 Link Thailand
 52138	p2552138.freeddns.org	41000
 
-# 52149 P25 Link To XLX149 Modules D
-52149	p52149.pwk.ac.th	41005
+# 52149 P25 Link To XLX149 Module K
+52149 p52149.pwk.ac.th 41005
 
 # 52910 XLX Nexus
 52910	p25x.mywire.org	41000
