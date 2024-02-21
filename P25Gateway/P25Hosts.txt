@@ -822,3 +822,5 @@
 # 65101 KM4HJJ repeater Pompano, Florida
 65101	km4hjj-p25.dyndns-server.com	41000
 
+# 65102 UHDARC Link to DMR 313040 and Echolink Server
+65102 198.74.48.229 41000
