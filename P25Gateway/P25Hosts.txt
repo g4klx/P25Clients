@@ -492,6 +492,9 @@
 # 24033 2 Meter Crew Anti-Net
 24033	wg5eek.com	41000
 
+# 25508 South Eastern MA P25
+25508 k1rfi.net 41000
+
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
 
