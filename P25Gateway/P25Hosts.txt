@@ -75,6 +75,9 @@
 # 621 HRCC LINK
 621	urf.hrcc.link	41000
 
+# 665 KK6RQ TAC-2
+665 area52.zapto.org 41001
+
 # 666 Brazil PY1IP P25 Reflector - http://tg666.p25.py1ip.com
 666	p25.py1ip.com	41000
 
