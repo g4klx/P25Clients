@@ -616,13 +616,13 @@
 31267	w8lrkp25.dyndns.org	41001
 
 # 31291 Southwest Missouri (P25/DMR)
-31291	p25.ddns.me	41001
+31291	144.202.50.132	41000
 
 # 31297 Southwest Missouri Skywarn (P25/DMR)
-31297	p25.ddns.me	41003
+31297	144.202.50.81	41000
 
 # 31313 America's Kansas City Wide (P25/DMR/YSF)
-31313	p25.ddns.me	41002
+31313	45.63.71.173	41000
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
@@ -694,7 +694,7 @@
 31888	p25.kg4jpl.com		41000
 
 # 31947 K0MGS Western Missouri/KC Metro
-31947	p25.ddns.me	41000
+31947	149.28.122.114	41000
 
 # 31983 K8JTK Hub Multimode ILS/DVMIS (K8JTK.org)
 31983	P25Reflector31983.K8JTK.org	41000
