@@ -519,6 +519,9 @@
 # 26444 German Inselfreunde Net
 26444	xlx850.bm262.de	41004
 
+# 26447 P25 XLX-OWL
+26447 p25.xkx-owl.de 41000
+
 # 26538 DE-NDS-Ost
 26538	116.203.223.233	41000
 
