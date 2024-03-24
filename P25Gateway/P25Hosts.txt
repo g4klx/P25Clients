@@ -220,7 +220,7 @@
 4095	reflector.p25.link	41010
 
 # 4487 448.700 UHF Repeater in Aurora, CO
-4487 N0oba1.asuscomm.cn 41000
+4487	N0oba1.asuscomm.cn	41000
 
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
@@ -232,7 +232,7 @@
 5205	5205.p25dvm.com	41000
 
 # 5658 DuckFar Repeater Group, Chicago
-5658 duckfarw9bmk.gotdns.com 41000
+5658	duckfarw9bmk.gotdns.com	41000
 
 # 6395 Indiana Digital Ham Radio P25 Reflector
 6395	p25ref.nf9k.net	41000
@@ -259,7 +259,7 @@
 7487	23.234.230.152	41000
 
 # 7573 Docksea P25
-7573 p25.docksea.com 41000
+7573	p25.docksea.com	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
 7941	wmra.mooo.com	41000
@@ -450,6 +450,9 @@
 # 22202 IT SARDINIA
 22202	87.106.152.249	41000
 
+# 22208 IT - Italy Centro
+22208	famiuse.ddns.net	41000
+
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
 
@@ -464,9 +467,6 @@
 
 # 22258 D2ALP HBLink Italia
 22258	94.177.173.53	41000
-
-# 22487 IT - Italy Centro
-22487	famiuse.ddns.net	41000
 
 # 23225 Austria
 23225	service.oe9hamnet.at	41000
@@ -496,7 +496,7 @@
 24033	wg5eek.com	41000
 
 # 25508 South Eastern MA P25
-25508 k1rfi.net 41000
+25508	k1rfi.net	41000
 
 # 25605 Russia Ekaterinburg 
 25605   ysf.386i.ru     41000
@@ -520,7 +520,7 @@
 26444	xlx850.bm262.de	41004
 
 # 26447 P25 XLX-OWL
-26447 xlx-owl.de 41000
+26447	xlx-owl.de	41000
 
 # 26538 DE-NDS-Ost
 26538	116.203.223.233	41000
@@ -661,7 +661,7 @@
 31444	149.28.54.153	41000
 
 # 31490 Link to DMR TG 314900
-31490 utah00.utahdrn.org 41000
+31490	utah00.utahdrn.org	41000
 
 # 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
 31497	45.79.110.170	41000
@@ -751,7 +751,7 @@
 46001	46001.bh1nyr.net	41000
 
 # 46005 P25 Link TG46005,China
-46005 47.109.24.90 41000
+46005	47.109.24.90	41000
 
 # 46010 P25 Link TG46010, Beijing, China
 46010	46010.bh1nyr.net	41002
@@ -763,7 +763,7 @@
 46516	46516.bh1nyr.net	41004
 
 # 46551 China ADEC
-46551 60.173.209.129 41000
+46551	60.173.209.129	41000
 
 # 49562 Boredom Breaker
 49562	146.71.77.238	41000
@@ -805,7 +805,7 @@
 52138	p2552138.freeddns.org	41000
 
 # 52149 P25 Link To XLX149 Module K
-52149 p52149.pwk.ac.th 41005
+52149	p52149.pwk.ac.th	41005
 
 # 52910 XLX Nexus
 52910	p25x.mywire.org	41000
@@ -835,4 +835,4 @@
 65101	km4hjj-p25.dyndns-server.com	41000
 
 # 65102 UHDARC Link to DMR 313040 and Echolink Server
-65102 198.74.48.229 41000
+65102	198.74.48.229	41000
