@@ -836,5 +836,3 @@
 
 # 65102 UHDARC Link to DMR 313040 and Echolink Server
 65102 198.74.48.229 41000
-
-
