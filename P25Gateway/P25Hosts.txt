@@ -241,7 +241,7 @@
 6969	69.118.62.100	41000
 
 # 7144 Chiriqui Link Panama
-7144	p25-hp3.ddns.net	41000
+7144	p25-hp3.dnsup.net	41000
 
 # 7160 Peru Digital
 7160	p25.dmr-peru.pe	41000
