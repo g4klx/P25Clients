@@ -832,7 +832,10 @@
 65100	89.46.75.115	41000
 
 # 65101 KM4HJJ repeater Pompano, Florida
-65101	km4hjj-p25.dyndns-server.com	41000
+65101 km4hjj-p25.dyndns-server.com 41000
 
 # 65102 UHDARC Link to DMR 313040 and Echolink Server
-65102	198.74.48.229	41000
+65102 198.74.48.229 41000
+
+# 65103 KOYA Kids on the Air
+65103 69.61.129.163 41400
