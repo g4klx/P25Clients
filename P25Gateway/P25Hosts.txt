@@ -839,3 +839,6 @@
 
 # 65103 KOYA Kids on the Air
 65103 69.61.129.163 41400
+
+# 65400 XLX288 P25 Reflector
+645400 xlx288.unusualperson.com 41000
