@@ -615,9 +615,6 @@
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
 
-# 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
-31267	w8lrkp25.dyndns.org	41001
-
 # 31291 Southwest Missouri (P25/DMR)
 31291	p25.ddns.me	41001
 
