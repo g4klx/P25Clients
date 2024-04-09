@@ -765,6 +765,9 @@
 # 46551 China ADEC
 46551	60.173.209.129	41000
 
+# 46851 TG460851 Guiyang China
+46851	120.76.96.210	41000
+
 # 49562 Boredom Breaker
 49562	146.71.77.238	41000
 
@@ -828,20 +831,23 @@
 # 63600 Latvian Digital Voice network
 63600	xlx.ham.lv	41000
 
-# 65100 P25 2007DXgroup
+# 64701 Reunion Island
+64701	165.169.31.30	41000
+
+# 65100 2007DXgroup
 65100	89.46.75.115	41000
 
-# 65101 KM4HJJ repeater Pompano, Florida
-65101 km4hjj-p25.dyndns-server.com 41000
+# 65101 KM4HJJ Repeater Pompano, Florida
+65101	km4hjj-p25.dyndns-server.com	41000
 
 # 65102 UHDARC Link to DMR 313040 and Echolink Server
-65102 198.74.48.229 41000
+65102	198.74.48.229	41000
 
 # 65103 KOYA Kids on the Air
-65103 69.61.129.163 41400
+65103	69.61.129.163	41400
 
-# 460851 P25 tg460851 GUIYANG CHINA 
-460851 120.76.96.210 41000
+# 460851 TG460851 Guiyang China
+460851	120.76.96.210	41000
 
-# 65400 XLX288 P25 Reflector
-645400 xlx288.unusualperson.com 41000
+# 65400 XLX288 Reflector
+645400	xlx288.unusualperson.com	41000
