@@ -222,6 +222,9 @@
 # 4487 448.700 UHF Repeater in Aurora, CO
 4487	N0oba1.asuscomm.cn	41000
 
+# 4519 TG P25 VHF Repeater
+4519	N0oba1.asuscomm.cn	41005
+
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
 
