@@ -265,7 +265,7 @@
 7573	p25.docksea.com	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
-7941	wmra.mooo.com	41000
+7941	45.63.54.20	41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
