@@ -672,6 +672,9 @@
 # 31499 Ivins - UT P25
 31499	ivinsp25utah.ddnsgeek.com	41002
 
+# 31500 Aviation Talk - P25
+31500	AviationP25-31500.ddnsgeek.com	41000
+
 # 31555 SE Wisconsin Regional Linked to WiDMR 31555
 31555	mmdvm-p25.v24bridge.net	41000
 
