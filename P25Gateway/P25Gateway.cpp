@@ -28,6 +28,7 @@
 #include "Timer.h"
 #include "Utils.h"
 #include "Log.h"
+#include "GitVersion.h""
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <WS2tcpip.h>
@@ -73,7 +74,7 @@ int main(int argc, char** argv)
 		for (int currentArg = 1; currentArg < argc; ++currentArg) {
 			std::string arg = argv[currentArg];
 			if ((arg == "-v") || (arg == "--version")) {
-				::fprintf(stdout, "P25Gateway version %s\n", VERSION);
+				::fprintf(stdout, "P25Gateway version %s git #%.7s\n", VERSION, gitversion);
 				return 0;
 			} else if (arg.substr(0, 1) == "-") {
 				::fprintf(stderr, "Usage: P25Gateway [-v|--version] [filename]\n");
@@ -313,7 +314,11 @@ void CP25Gateway::run()
 					pollReply[i + 1U] = callsign.at(i);
 
 				// Don't pass reflector control data through to the MMDVM
-				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, std::min(11U, len)) == 0))) {
+				unsigned int pollLen = 11U;
+				if (len < pollLen)
+					pollLen = len;
+
+				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, pollLen) == 0))) {
 					// Find the static TG that this audio data belongs to
 					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
 						if (CUDPSocket::match(addr, (*it).m_addr)) {
