@@ -28,7 +28,7 @@
 #include "Timer.h"
 #include "Utils.h"
 #include "Log.h"
-#include "GitVersion.h""
+#include "GitVersion.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <WS2tcpip.h>
