@@ -45,6 +45,9 @@
 # 260 HBLink Poland P25
 260	p25.hblink.pl	41000
 
+# 300 KOTA kidsontheair.org
+300 kota-p25.k0nnk.com 42010
+
 # 304 W8ARA P25
 304	ara.selfip.net	41000
 
