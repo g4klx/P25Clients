@@ -720,6 +720,9 @@
 # 33015 KP4CA Digital Network
 33015	kp4ca-p25.ddns.net	41000
 
+# 33420 Durango Mexico Digital Network
+33420	p25-mx.ddns.net	41000
+
 # 33581 OMISS Group
 33581	omiss.dyndns.org	41000
 
