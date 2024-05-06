@@ -357,19 +357,19 @@
 # 10303 Europe TAC 3 (Bridged to the P25Link Network).
 10303	reflector.p25.link		41006
 
-# 10310 Germany HAMNET (Bridge to 10320)	http://44.148.230.100/
+# 10310 Germany HAMNET (Identical to 10320)	http://44.148.230.100/
 10310	44.148.230.100		41000
 
-# 10311 Germany HAMNET Multimode (Bridge to 10321)	http://44.148.230.100/
+# 10311 Germany HAMNET Multimode (Identical to 10321)	http://44.148.230.100/
 10311	44.148.230.100		41010
 
-# 10320 Germany INTERNET (Bridge to 10310)	http://xlx-hc.ham-digital.org/
+# 10320 Germany INTERNET (Identical to 10310)	http://dv.afu.rwth-aachen.de/
 10320	137.226.79.122		41000
 
-# 10321 Germany INTERNET Multimode (Bridge to 10311)	http://xlx-hc.ham-digital.org/
+# 10321 Germany INTERNET Multimode (Identical to 10311)	http://dv.afu.rwth-aachen.de/
 10321	137.226.79.122		41010
 
-# 10328 German Pegasus Project
+# 10328 German Pegasus Project http://p25.projekt-pegasus.net/
 10328	5.9.59.26		41000
 
 # 10342 UK
