@@ -195,6 +195,9 @@
 # 3120 LKDVM P25
 3120	lkdvm.xreflector.es	41000
 
+# 3122 Louisiana Statewide
+3122	statewide.swlalink.com		41000
+
 # 3142 Pennsylvania
 3142	3.215.215.169	41002
 
