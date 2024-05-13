@@ -9,6 +9,9 @@
 # 38 Thailand P25 Link XLX Nexus
 38	p2538.freeddns.org	41002
 
+# 116 UK TGIF
+116	p25116.freestar.network	41003
+
 # XLX137 Module A Link to YSF79655
 137	p25a.mywire.org	41000
 
