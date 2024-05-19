@@ -643,7 +643,7 @@
 31337	bridge.kc5jmj.com	41000
 
 # 31379 Piedmont Triad Network
-31379 66.226.62.35 41000
+31379 130.51.21.144 41000
 
 # 31395 Cleveland Skywarn Backbone
 31395	backbone.ad8g.net	41000
