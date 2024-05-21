@@ -483,6 +483,9 @@
 # 22258 D2ALP HBLink Italia
 22258	94.177.173.53	41000
 
+# 22625 P25 Romania
+22625 p25.yo8teh.ro 41000
+
 # 23225 Austria
 23225	service.oe9hamnet.at	41000
 
@@ -887,3 +890,4 @@
 
 # 460851 TG460851 Guiyang China
 460851	120.76.96.210 41000
+
