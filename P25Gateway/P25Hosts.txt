@@ -409,7 +409,7 @@
 10407	p25021.dyndns.org	41000
 
 # 10409 Beijing City, China,Miyun-HAM-Club P25 Repeater bridged to DMR TG 46001
-10409	101.43.186.84	41000
+10409	p25.bi1llm.com	41000
 
 # 10410 Taiwan, TMMARC-P25 Reflector bridged to DMR TG 46621
 10410	reflector.tmmarc.org	41000
