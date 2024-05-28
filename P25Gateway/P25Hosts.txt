@@ -120,6 +120,9 @@
 # 900 New England 900 MHz P25 Network
 900 stn4571.ip.irlp.net 41000
 
+# 909 Volunteer Radio Association, Thailand P25 Network
+909 xlx.vra.or.th 41000
+
 # 910 Washington,DC - Virginia - Maryland
 910	p25.freeddns.org	41000
 
