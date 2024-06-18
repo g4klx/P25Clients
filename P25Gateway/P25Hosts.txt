@@ -72,6 +72,9 @@
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
+# 554 Georgia 900 P25 555 backup
+554 georgia900p25.us 41003
+
 # 555 Georgia 900 P25
 555 georgia900p25.us 41000
 
