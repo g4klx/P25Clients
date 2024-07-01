@@ -462,8 +462,8 @@
 # 22202 IT SARDINIA
 22202	87.106.152.249	41000
 
-# 22208 IT - Italy Centro
-22208	famiuse.ddns.net	41000
+# 22208 IT - Italy Centro Digiland
+22208	185.205.209.70	41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
