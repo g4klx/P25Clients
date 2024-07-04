@@ -498,6 +498,9 @@
 # 23456 SHARC Multi Mode System Sherman, ME
 23456	kc1noc.duckdns.org	41000
 
+# 23501 Euro Football
+23501 home.ka1vsc.com 41000
+
 # 23511 LEFARS Multi-Reflector
 23511	xlxlef.gb7hh.co.uk	41000
 
