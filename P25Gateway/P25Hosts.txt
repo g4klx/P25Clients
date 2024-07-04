@@ -144,6 +144,9 @@
 # 946 FlagTorchSociety
 946	xlx.flagandtorchsociety.com	41000
 
+# 947 W8LRK Livingston County Amateur Radio Klub (Bridged to XLX947B)
+947 w8lrkp25.dyndns.org	41001
+
 # 994 The Online Radio Club (Bridged to XLX994)
 994	misc.openreflector.com	41000
 
@@ -236,6 +239,9 @@
 
 # 4519 TG P25 VHF Repeater
 4519	N0oba1.asuscomm.cn	41005
+
+# 4584 Great Lakes Digital Common (P25/DMR/NXDN/YSF/DSTAR/M17)
+4584 gldcom.dyndns.org 41000
 
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
