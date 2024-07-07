@@ -358,7 +358,7 @@
 10260	185.174.14.75		41000
 
 # 10294 SkyHub https://skyhublink.com/connections
-10294	hub.skyhublink.com	41000
+10294	kg0sky.duckdns.org  41000
 
 # 10300 Europe	https://p25-eu.n18.de/
 10300	176.9.1.168		41000
