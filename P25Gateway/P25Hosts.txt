@@ -144,7 +144,7 @@
 # 946 FlagTorchSociety
 946	xlx.flagandtorchsociety.com	41000
 
-# 947 W8LRK Livingston County Amateur Radio Klub (Bridged to XLX947B)
+# W8LRK Livingston Amateur Radio Klub (Bridged to XLX947B)
 947 w8lrkp25.dyndns.org	41001
 
 # 994 The Online Radio Club (Bridged to XLX994)
@@ -240,7 +240,7 @@
 # 4519 TG P25 VHF Repeater
 4519	N0oba1.asuscomm.cn	41005
 
-# 4584 Great Lakes Digital Common (P25/DMR/NXDN/YSF/DSTAR/M17)
+# Great Lakes Digital Common (P25/DMR/NXDN/YSF/DSTAR/M17)
 4584 gldcom.dyndns.org 41000
 
 # 5000 ALL THE COMMS
@@ -638,9 +638,6 @@
 
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
-
-# 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
-31267	w8lrkp25.dyndns.org	41001
 
 # 31291 Southwest Missouri (P25/DMR)
 31291	p25.ddns.me	41001
