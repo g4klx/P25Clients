@@ -144,7 +144,7 @@
 # 946 FlagTorchSociety
 946	xlx.flagandtorchsociety.com	41000
 
-# 947 W8LRK Livingston County Amateur Radio Klub (Bridged to XLX947B)
+# 947 W8LRK Livingston Amateur Radio Klub (Bridged to XLX947B)
 947 w8lrkp25.dyndns.org	41001
 
 # 994 The Online Radio Club (Bridged to XLX994)
@@ -638,9 +638,6 @@
 
 # 31264 XLX625 The BROniverse www.wa8bro.com
 31264	p25.dudetronics.com	41000
-
-# 31267 W8LRK Blue Zone - Livingston County Amateur Radio Klub
-31267	w8lrkp25.dyndns.org	41001
 
 # 31291 Southwest Missouri (P25/DMR)
 31291	p25.ddns.me	41001
