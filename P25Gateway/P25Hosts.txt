@@ -417,6 +417,9 @@
 # 10410 Taiwan, TMMARC-P25 Reflector bridged to DMR TG 46621
 10410	reflector.tmmarc.org	41000
 
+# 10411 Taiwan, P25 Reflector Bridged to DMR TG 46621 (Hosted by VR2YEP)
+10411 stayalone.idv.hk 41000
+
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421	dl-nordwest.com	41000
 
