@@ -117,6 +117,9 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
+# 888 KN6TYF Lucky Radio MM DV
+888 reflector1.dv.jchang.io 41000
+
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
 
@@ -455,6 +458,9 @@
 
 # 17603 URFM17 Universal Reflector
 17603	urf.m17.link	41000
+
+# 18436 LMR TALK MM DV
+18436 reflector.jchang.io 41000
 
 # 20281 GR-KERKYRA-DV
 20281	greece.freedmr.online	41000
