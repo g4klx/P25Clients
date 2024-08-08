@@ -120,6 +120,9 @@
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
 
+#888 KN6TYF Lucky Radio MM DV Bridge BM TG 314349
+888 reflector1.dv.jchang.io 41000
+
 # 891 Western New York Digital Multimode Network - http://wny-digital.network - Buffalo, NY
 891	p25.wny-digital.network	41000
 
@@ -455,6 +458,9 @@
 
 # 17603 URFM17 Universal Reflector
 17603	urf.m17.link	41000
+
+# 18436 KN6TYF LMR TALK
+18436 reflector.jchang.io 41000
 
 # 20281 GR-KERKYRA-DV
 20281	greece.freedmr.online	41000
