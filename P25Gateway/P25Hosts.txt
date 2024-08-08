@@ -120,7 +120,7 @@
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
 
-#888 KN6TYF Lucky Radio MM DV Bridge BM TG 314349
+# 888 KN6TYF Lucky Radio MM DV Bridge BM TG 314349
 888 reflector1.dv.jchang.io 41000
 
 # 891 Western New York Digital Multimode Network - http://wny-digital.network - Buffalo, NY
