@@ -870,7 +870,7 @@
 # 55295 (KT0ADS) TOADS Digital Voice
 55295 47.36.253.75 41000
 
-# 57686 KOTA kidsontheair.org
+# 57686 KOTA KIDSONTHEAIR
 57686 172.234.216.120 41000
 
 # 60100 K8SDR SignalsEverywhere Experimenters Club
