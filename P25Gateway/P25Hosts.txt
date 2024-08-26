@@ -334,10 +334,10 @@
 10169	p25.dipspit.net	41000
 
 # 10200 North America
-10200	dvswitch.org		41000
+10200	p25.dvswitch.org		41000
 
 # 10201 North America TAC 1
-10201	dvswitch.org		41010
+10201	p25.dvswitch.org		41010
 
 # 10202 North America TAC 2
 10202	reflector.p25.link		41003
