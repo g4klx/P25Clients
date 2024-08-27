@@ -822,6 +822,9 @@
 # 50516 Mudgee District Radio Group
 50516 54.66.203.116 41000
 
+# 50517 Mudgee TAC 1
+50517 54.66.203.116 41010
+
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
