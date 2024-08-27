@@ -818,7 +818,10 @@
 
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
 50210	edone.no-ip.com	41000
- 
+
+# 50516 Mudgee District Radio Group
+50516 54.66.203.116 41000
+
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
 
