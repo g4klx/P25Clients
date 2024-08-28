@@ -11,7 +11,7 @@ OBJECTS = Conf.o DMRLookup.o Log.o Mutex.o MQTTConnection.o P25Gateway.o P25Netw
 
 all:		P25Gateway
 
-P25Gateway:	$(OBJECTS)
+P25Gateway:	GitVersion.h $(OBJECTS)
 		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o P25Gateway
 
 %.o: %.cpp

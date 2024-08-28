@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016-2020,2023 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016-2024 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -100,23 +100,28 @@ int main(int argc, char** argv)
 	int ret = 0;
 
 	do {
-		m_killed = false;
 		m_signal = 0;
+		m_killed = false;
 
 		gateway = new CP25Gateway(std::string(iniFile));
 		ret = gateway->run();
 
 		delete gateway;
 
-		if (m_signal == 2)
-			::LogInfo("P25Gateway-%s exited on receipt of SIGINT", VERSION);
-
-		if (m_signal == 15)
-			::LogInfo("P25Gateway-%s exited on receipt of SIGTERM", VERSION);
-
-		if (m_signal == 1)
-			::LogInfo("P25Gateway-%s restarted on receipt of SIGHUP", VERSION);
-
+		switch (m_signal) {
+			case 2:
+				::LogInfo("P25Gateway-%s exited on receipt of SIGINT", VERSION);
+				break;
+			case 15:
+				::LogInfo("P25Gateway-%s exited on receipt of SIGTERM", VERSION);
+				break;
+			case 1:
+				::LogInfo("P25Gateway-%s is restarting on receipt of SIGHUP", VERSION);
+				break;
+			default:
+				::LogInfo("P25Gateway-%s exited on receipt of an unknown signal", VERSION);
+				break;
+		}
 	} while (m_signal == 1);
 
 	::LogFinalise();
@@ -339,7 +344,11 @@ int CP25Gateway::run()
 					pollReply[i + 1U] = callsign.at(i);
 
 				// Don't pass reflector control data through to the MMDVM
-				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, std::min(11U, len)) == 0))) {
+				unsigned int pollLen = 11U;
+				if (len < pollLen)
+					pollLen = len;
+
+				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, pollLen) == 0))) {
 					// Find the static TG that this audio data belongs to
 					for (std::vector<CStaticTG>::const_iterator it = m_staticTGs.cbegin(); it != m_staticTGs.cend(); ++it) {
 						if (CUDPSocket::match(addr, (*it).m_addr)) {
