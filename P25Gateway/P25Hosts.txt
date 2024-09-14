@@ -69,6 +69,9 @@
 # 456 Apco25 Ruhrgebiet/NRW Germany
 456 456.ham-p25.de 41000
 
+# 478 Ham Radio Village URF478
+478 urf.hamvillage.org 41000
+
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
 
