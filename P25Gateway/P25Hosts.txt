@@ -552,6 +552,9 @@
 # 26230 German Hannover-XLink
 26230	p25.hannover-x.link	41000
 
+# 26269 Multimode HE_RLP
+26269 urf169.dc9vq.de 41000
+
 # 26285 German Oberbayern Region
 26285	xlx850.bm262.de	41008
 
