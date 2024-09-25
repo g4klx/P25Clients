@@ -48,6 +48,9 @@
 # 260 HBLink Poland P25
 260	p25.hblink.pl	41000
 
+# 276 Amateur Radio Network
+276 p25.kc8cpw.com 41000
+
 # 304 W8ARA P25
 304	ara.selfip.net	41000
 
