@@ -105,6 +105,9 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
+# 747 Queen of the Skies - KN6TYF
+747 fne.dv.kn6tyf.com 41000
+
 # 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
 762	p25.w4pft.com	41000
 
@@ -126,11 +129,11 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
-# 888 KN6TYF Lucky Radio MM DV
-888 reflector1.dv.jchang.io 41000
-
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
+
+# 888 KN6TYF Lucky Radio MM DV
+888 reflector1.dv.jchang.io 41000
 
 # 891 Western New York Digital Multimode Network - http://wny-digital.network - Buffalo, NY
 891	p25.wny-digital.network	41000
