@@ -558,8 +558,8 @@
 # 26078 Poland HBLink Network
 26078	p25.hblink.kutno.pl	41000
 
-# 26230 German Hannover-XLink
-26230	p25.hannover-x.link	41000
+# 26230 German RegHannover
+26230	p25-tg26230.dl9cma.net 41010
 
 # 26269 Multimode HE_RLP
 26269 urf169.dc9vq.de 41000
