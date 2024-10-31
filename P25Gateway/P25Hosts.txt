@@ -105,8 +105,8 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
-# 747 Queen of the Skies - KN6TYF
-747  fne.dv.kn6tyf.com  41000
+# 747 DVMproject2P25 - KN6TYF
+747  fne.dv.kn6tyf.com  41001
 
 # 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
 762	p25.w4pft.com	41000
