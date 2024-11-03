@@ -177,6 +177,9 @@
 # 1928 Motorola Nerd Network
 1928	216.128.134.7	41000
 
+# 2043 Dutch P25 Reflector URFNLD
+2043    141.95.54.250    41000
+
 # 2044 P25 The Netherlands Main Reflector
 2044    51.83.46.75    41000
 
