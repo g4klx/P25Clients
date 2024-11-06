@@ -895,7 +895,7 @@
 54100	hs1qcj.ddns.net	41000
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
-55100	45.63.6.57	41000
+55100	192.155.88.30	41000
 
 # 55295 (KT0ADS) TOADS Digital Voice
 55295 47.36.253.75 41000
