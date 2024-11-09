@@ -493,7 +493,7 @@
 22202	p25.is0.org	41000
 
 # 22208 IT - Italy Centro Digiland
-22208	185.205.209.70	41000
+22208	italycentro.ddns.net	41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
