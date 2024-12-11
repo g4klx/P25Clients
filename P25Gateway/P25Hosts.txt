@@ -570,6 +570,9 @@
 # 26230 German RegHannover
 26230	p25-tg26230.dl9cma.net 41010
 
+# 26231 German NI-Mitte
+26231	p25-tg26231.dl9cma.net 41000
+
 # 26269 Multimode HE_RLP
 26269 urf169.dc9vq.de 41000
 
