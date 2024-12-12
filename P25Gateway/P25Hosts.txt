@@ -789,7 +789,7 @@
 # 33420 Durango Mexico Digital Network
 33420	p25-mx.ddns.net	41000
 
-# 33581 OMISS Group
+# 33581 NET TALK
 33581	omiss.dyndns.org	41000
 
 # 37030 RED SKYNET
