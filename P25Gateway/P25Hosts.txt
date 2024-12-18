@@ -112,7 +112,7 @@
 762	p25.w4pft.com	41000
 
 # 777 Almost Heaven WV P25
-777 74.208.38.36 41005
+777 wv777p25.ddns.net 41005
 
 # 822 TH-ASL-5508
 822	p25.xlx822.com	41000
