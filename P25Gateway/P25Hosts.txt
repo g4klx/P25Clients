@@ -105,6 +105,9 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
+# 732 Octane Network P25 to XLX732
+732 p25.octanenetwork.net 41000
+
 # 747 DVMproject2P25 - KN6TYF
 747  fne.dv.kn6tyf.com  41001
 
