@@ -1,4 +1,4 @@
-# P25Hosts.txt
+226# P25Hosts.txt
 #
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
@@ -523,7 +523,7 @@
 22556 urf556.kq4tnv.net	41000
 
 # 22625 P25 Romania
-22625 74.208.38.36 41004
+22625 82.165.47.94 41000
 
 # 23225 Austria
 23225	service.oe9hamnet.at	41000
