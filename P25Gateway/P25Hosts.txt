@@ -54,6 +54,9 @@
 # 304 W8ARA P25
 304	ara.selfip.net	41000
 
+# 312 TriState (IL, IN, WI) P25
+312 p25.tristatedmr.org 41000
+
 # 334 Mexico P25 (by XE1F)
 334	reflector.p25.link		41008
 
