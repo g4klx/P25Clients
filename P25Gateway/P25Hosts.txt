@@ -676,7 +676,7 @@
 31217	tg31217.kd9koo.com	41000
 
 # 31220 Lucas County Ohio ARES
-31220	w8mal-dvbridge.hopto.org	41000
+31220	w8mal-dvbridge.hopto.org	4100
 
 # 31226 Worldwide Chat
 31226	74.208.163.225	41000
