@@ -273,6 +273,12 @@
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
 
+# 5030 KK7GKG P25 to ASL Gateway
+5030  site1a.redmtncomms.com  41000
+
+# 5031 KK7GKG DEVELOPMENT
+5031  site0.redmtncomms.com
+
 # 5057 VK7 TAS (hosted by VK7HSE)
 5057	45.248.50.37	41000
 
