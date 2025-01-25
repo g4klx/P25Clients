@@ -801,6 +801,9 @@
 # 31888 KG4JPL North-Central Florida
 31888	p25.kg4jpl.com		41000
 
+# 31910 LMRNET
+31910 172.233.211.93    41000
+
 # 31947 K0MGS Western Missouri/KC Metro
 31947	p25.ddns.me	41000
 
