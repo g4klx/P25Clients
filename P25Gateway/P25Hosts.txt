@@ -384,6 +384,9 @@
 # 10216 Northeast Ohio
 10216	xlx216.km8v.com	41000
 
+# 10253 N6OCS
+10253 p25.wd6awp.us 41000
+
 # 10255 Southern Ontario
 10255	ve3rd.hopto.org 41000
 
