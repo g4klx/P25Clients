@@ -285,6 +285,9 @@
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
 
+# 5500 IVC Wireless Technology Club
+5500 p25.ivc.radio 41000
+
 # 5658 DuckFar Repeater Group, Chicago
 5658	duckfarw9bmk.gotdns.com	41000
 
