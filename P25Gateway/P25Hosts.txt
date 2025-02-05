@@ -978,6 +978,9 @@
 # 65105 UHDARC TAC 2
 65105	UHDARCtac2.mywire.org	41004
 
+# 65123 Murphy Radio Network (MRN)
+65123   45.33.22.225   41000
+
 # 65400 XLX288 Reflector
 65400	xlx288.unusualperson.com	41000
 
