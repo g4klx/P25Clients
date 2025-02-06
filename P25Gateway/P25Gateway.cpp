@@ -298,6 +298,7 @@ int CP25Gateway::run()
 
 	bool currentIsStatic        = false;
 	unsigned int currentTG      = 0U;
+	unsigned int receivedTG     = 0U;
 	unsigned int currentAddrLen = 0U;
 	sockaddr_storage currentAddr;
 
@@ -362,15 +363,25 @@ int CP25Gateway::run()
 				if (len < pollLen)
 					pollLen = len;
 
-				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, pollLen) == 0))) {
-					// Find the static TG that this audio data belongs to
-					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
-						if (CUDPSocket::match(addr, (*it).m_addr)) {
-							currentTG = (*it).m_tg;
-							break;
-						}
-					}
+				poll = (::memcmp(buffer, pollReply, pollLen) == 0);
 
+				// Find the static TG that this audio data belongs to
+				for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+					if (CUDPSocket::match(addr, (*it).m_addr)) {
+						receivedTG = (*it).m_tg;
+						break;
+					}
+				}
+				// Reference for control byte buffer[0u]
+				// https://github.com/Wodie/p25link/blob/master/MMDVM.pm
+				if (buffer[0U] == 0xF0U  && poll) {
+					// Poll response message
+					// LogMessage("Received network poll response for talkgroup %u ", receivedTG);
+				} else if (buffer[0U] == 0xF1U) {
+					// Server talkgroup disconnect
+					// LogMessage("Disconnect talkgroup for talkgroup %u ", receivedTG);
+				} else {
+					currentTG = receivedTG;
 					if (currentTG > 0U) {
 						currentAddr     = addr;
 						currentAddrLen  = addrLen;
