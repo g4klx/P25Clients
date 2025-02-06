@@ -329,7 +329,9 @@ int CP25Gateway::run()
 
 		// From the reflector to the MMDVM
 		unsigned int len = remoteNetwork.read(buffer, 200U, addr, addrLen);
-		if (len > 0U) {
+		// Read all queued packets so static talkgroup poll acks do not 
+		// cause a problem.
+		while (len > 0U) {
 			// If we're linked and it's from the right place, send it on
 			if (currentAddrLen > 0U && CUDPSocket::match(currentAddr, addr)) {
 				// Don't pass reflector control data through to the MMDVM
@@ -406,11 +408,12 @@ int CP25Gateway::run()
 					}
 				}
 			}
+			len = remoteNetwork.read(buffer, 200U, addr, addrLen);
 		}
 
 		// From the MMDVM to the reflector or control data
 		len = localNetwork.read(buffer, 200U);
-		if (len > 0U) {
+		while (len > 0U) {
 			if (buffer[0U] == 0x65U) {
 				dstTG  = (buffer[1U] << 16) & 0xFF0000U;
 				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
@@ -506,6 +509,7 @@ int CP25Gateway::run()
 				remoteNetwork.write(buffer, len, currentAddr, currentAddrLen);
 				hangTimer.start();
 			}
+			len = localNetwork.read(buffer, 200U);
 		}
 
 		if (voice != NULL) {
@@ -518,7 +522,7 @@ int CP25Gateway::run()
 			sockaddr_storage addr;
 			unsigned int addrLen;
 			int res = remoteSocket->read(buffer, 200U, addr, addrLen);
-			if (res > 0) {
+			while (res > 0) {
 				buffer[res] = '\0';
 				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
 					unsigned int tg = ((strlen((char*)buffer + 0U) > 10) ? (unsigned int)::atoi((char*)(buffer + 10U)) : 9999);
@@ -604,6 +608,7 @@ int CP25Gateway::run()
 				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}
+				res = remoteSocket->read(buffer, 200U, addr, addrLen);
 			}
 		}
 
