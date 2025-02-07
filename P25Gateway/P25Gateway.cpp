@@ -634,12 +634,13 @@ int CP25Gateway::run()
 				if (voice != NULL)
 					voice->unlinked();
 
-				currentAddrLen = 0U;
-
-				hangTimer.stop();
 			}
 
-			currentTG = 0U;
+			currentTG        = 0U;
+			currentAddrLen   = 0U;
+			currentIsStatic  = false;
+
+			hangTimer.stop();
 		}
 
 		localNetwork.clock(ms);
