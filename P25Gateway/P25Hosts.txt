@@ -198,6 +198,9 @@
 # 2050 Florida Simulticast Group
 2050	reflector.p25.link	41009
 
+# 2121 Cambria Multi-Mode Hub
+2121  108.174.58.66 41000
+
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	andalucia.xreflector.es	41002
 
