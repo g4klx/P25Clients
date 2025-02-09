@@ -678,6 +678,9 @@
 # 31171 Illinois Link
 31171	illink.radiotechnology.xyz	41000
 
+# 31181 Indiana Link
+31181 174.137.23.148 41000
+
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
 
