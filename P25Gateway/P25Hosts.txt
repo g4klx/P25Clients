@@ -180,6 +180,9 @@
 # 1402 DuckFar Repeater Group, Chicago
 1402	duckfarw9bmk.gotdns.com	43000
 
+# 1453 Turkish Dijital Radio Network
+1453	2861.adn.systems	41000
+
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
 
