@@ -46,7 +46,7 @@
 235	p25.dvsph.net	41000
 
 # 260 HBLink Poland P25
-260	p25.hblink.pl	41000
+260	80.211.195.50	41005
 
 # 276 Amateur Radio Network
 276 p25.kc8cpw.com 41000
