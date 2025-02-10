@@ -298,9 +298,9 @@ int CP25Gateway::run()
 
 	bool currentIsStatic        = false;
 	unsigned int currentTG      = 0U;
-	unsigned int receivedTG     = 0U;
 	unsigned int currentAddrLen = 0U;
 	sockaddr_storage currentAddr;
+	unsigned char talkgroupBuff[4U];
 
 	std::vector<unsigned int> staticIds = m_conf.getNetworkStatic();
 
@@ -351,6 +351,7 @@ int CP25Gateway::run()
 				}
 			} else if (currentTG == 0U) {
 				bool poll = false;
+				unsigned int receivedTG      = 0U;
 				unsigned char pollReply[11U] = { 0xF0U };
 				std::string callsign = m_conf.getCallsign();
 
@@ -383,6 +384,17 @@ int CP25Gateway::run()
 					// Server talkgroup disconnect
 					// LogMessage("Disconnect talkgroup for talkgroup %u ", receivedTG);
 				} else {
+					if (receivedTG != 0U) {
+						// Changed talkgroup.  Let the modem know.
+						// It may be told it by the content of the message.
+						// Just in case send it anyway!
+						unsigned char talkgroupBuff[4U];
+						talkgroupBuff[0U] = 0x65U;
+						talkgroupBuff[1U] = (receivedTG >> 16) & 0xFFU;
+						talkgroupBuff[2U] = (receivedTG >> 8)  & 0xFFU;
+						talkgroupBuff[3U] = (receivedTG >> 0)  & 0xFFU;
+						localNetwork.write(talkgroupBuff, 4);
+					}
 					currentTG = receivedTG;
 					if (currentTG > 0U) {
 						currentAddr     = addr;
@@ -639,6 +651,13 @@ int CP25Gateway::run()
 			currentTG        = 0U;
 			currentAddrLen   = 0U;
 			currentIsStatic  = false;
+
+			// Let modem know disconnected
+			talkgroupBuff[0U] = 0x65U;
+			talkgroupBuff[1U] = 0U;
+			talkgroupBuff[2U] = 0U;
+			talkgroupBuff[3U] = 0U;
+			localNetwork.write(talkgroupBuff, 4);
 
 			hangTimer.stop();
 		}

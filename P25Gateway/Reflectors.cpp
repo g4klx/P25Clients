@@ -82,6 +82,12 @@ bool CReflectors::load()
 			if (p1 != NULL && p2 != NULL && p3 != NULL) {
 				std::string host  = std::string(p2);
 				unsigned short port = (unsigned short)::atoi(p3);
+				unsigned int tg = (unsigned int)::atoi(p1);
+
+				if (tg > 0xFFFFU){
+					LogWarning("P25 Talkgroups can only be 16 bits. %u is too large",tg);
+					continue;
+				}
 
 				sockaddr_storage addr;
 				unsigned int addrLen;
@@ -117,6 +123,12 @@ bool CReflectors::load()
 				if (find(id) == NULL) {
 					std::string host  = std::string(p2);
 					unsigned short port = (unsigned short)::atoi(p3);
+					unsigned int tg = (unsigned int)::atoi(p1);
+
+					if (tg > 0xFFFFU){
+						LogWarning("P25 Talkgroups can only be 16 bits. %u is too large",tg);
+						continue;
+					}
 
 					sockaddr_storage addr;
 					unsigned int addrLen;
