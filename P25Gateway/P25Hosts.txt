@@ -180,6 +180,9 @@
 # 1402 DuckFar Repeater Group, Chicago
 1402	duckfarw9bmk.gotdns.com	43000
 
+# 1453 Turkish Dijital Radio Network
+1453	2861.adn.systems	41000
+
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
 
@@ -194,6 +197,9 @@
 
 # 2050 Florida Simulticast Group
 2050	reflector.p25.link	41009
+
+# 2121 Cambria Multi-Mode Hub
+2121  108.174.58.66 41000
 
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	andalucia.xreflector.es	41002
@@ -677,6 +683,9 @@
 
 # 31171 Illinois Link
 31171	illink.radiotechnology.xyz	41000
+
+# 31181 Indiana Link
+31181  174.137.23.148  41000
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
