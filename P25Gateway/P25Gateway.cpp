@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016-2020 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016-2024 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 #include "Timer.h"
 #include "Utils.h"
 #include "Log.h"
+#include "GitVersion.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <WS2tcpip.h>
@@ -53,6 +54,17 @@ const char* DEFAULT_INI_FILE = "/etc/P25Gateway.ini";
 
 const unsigned P25_VOICE_ID = 10999U;
 
+static bool m_killed = false;
+static int  m_signal = 0;
+
+#if !defined(_WIN32) && !defined(_WIN64)
+static void sigHandler(int signum)
+{
+	m_killed = true;
+	m_signal = signum;
+}
+#endif
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
@@ -73,7 +85,7 @@ int main(int argc, char** argv)
 		for (int currentArg = 1; currentArg < argc; ++currentArg) {
 			std::string arg = argv[currentArg];
 			if ((arg == "-v") || (arg == "--version")) {
-				::fprintf(stdout, "P25Gateway version %s\n", VERSION);
+				::fprintf(stdout, "P25Gateway version %s git #%.7s\n", VERSION, gitversion);
 				return 0;
 			} else if (arg.substr(0, 1) == "-") {
 				::fprintf(stderr, "Usage: P25Gateway [-v|--version] [filename]\n");
@@ -84,11 +96,44 @@ int main(int argc, char** argv)
 		}
 	}
 
-	CP25Gateway* gateway = new CP25Gateway(std::string(iniFile));
-	gateway->run();
-	delete gateway;
+#if !defined(_WIN32) && !defined(_WIN64)
+	::signal(SIGINT,  sigHandler);
+	::signal(SIGTERM, sigHandler);
+	::signal(SIGHUP,  sigHandler);
+#endif
 
-	return 0;
+	int ret = 0;
+
+	do {
+		m_signal = 0;
+		m_killed = false;
+
+		CP25Gateway* gateway = new CP25Gateway(std::string(iniFile));
+		ret = gateway->run();
+
+		delete gateway;
+
+		switch (m_signal) {
+			case 0:
+				break;
+			case 2:
+				::LogInfo("P25Gateway-%s exited on receipt of SIGINT", VERSION);
+				break;
+			case 15:
+				::LogInfo("P25Gateway-%s exited on receipt of SIGTERM", VERSION);
+				break;
+			case 1:
+				::LogInfo("P25Gateway-%s is restarting on receipt of SIGHUP", VERSION);
+				break;
+			default:
+				::LogInfo("P25Gateway-%s exited on receipt of an unknown signal", VERSION);
+				break;
+		}
+	} while (m_signal == 1);
+
+	::LogFinalise();
+
+	return ret;
 }
 
 CP25Gateway::CP25Gateway(const std::string& file) :
@@ -102,12 +147,12 @@ CP25Gateway::~CP25Gateway()
 	CUDPSocket::shutdown();
 }
 
-void CP25Gateway::run()
+int CP25Gateway::run()
 {
 	bool ret = m_conf.read();
 	if (!ret) {
 		::fprintf(stderr, "P25Gateway: cannot read the .ini file\n");
-		return;
+		return 1;
 	}
 
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -117,7 +162,7 @@ void CP25Gateway::run()
 		pid_t pid = ::fork();
 		if (pid == -1) {
 			::fprintf(stderr, "Couldn't fork() , exiting\n");
-			return;
+			return 1;
 		} else if (pid != 0) {
 			exit(EXIT_SUCCESS);
 		}
@@ -125,13 +170,13 @@ void CP25Gateway::run()
 		// Create new session and process group
 		if (::setsid() == -1) {
 			::fprintf(stderr, "Couldn't setsid(), exiting\n");
-			return;
+			return 1;
 		}
 
 		// Set the working directory to the root directory
 		if (::chdir("/") == -1) {
 			::fprintf(stderr, "Couldn't cd /, exiting\n");
-			return;
+			return 1;
 		}
 
 		// If we are currently root...
@@ -139,7 +184,7 @@ void CP25Gateway::run()
 			struct passwd* user = ::getpwnam("mmdvm");
 			if (user == NULL) {
 				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
-				return;
+				return 1;
 			}
 
 			uid_t mmdvm_uid = user->pw_uid;
@@ -148,18 +193,18 @@ void CP25Gateway::run()
 			// Set user and group ID's to mmdvm:mmdvm
 			if (setgid(mmdvm_gid) != 0) {
 				::fprintf(stderr, "Could not set mmdvm GID, exiting\n");
-				return;
+				return 1;
 			}
 
 			if (setuid(mmdvm_uid) != 0) {
 				::fprintf(stderr, "Could not set mmdvm UID, exiting\n");
-				return;
+				return 1;
 			}
 
 			// Double check it worked (AKA Paranoia)
 			if (setuid(0) != -1) {
 				::fprintf(stderr, "It's possible to regain root - something is wrong!, exiting\n");
-				return;
+				return 1;
 			}
 		}
 	}
@@ -172,7 +217,7 @@ void CP25Gateway::run()
 #endif
 	if (!ret) {
 		::fprintf(stderr, "P25Gateway: unable to open the log file\n");
-		return;
+		return 1;
 	}
 
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -187,14 +232,14 @@ void CP25Gateway::run()
 	unsigned int rptAddrLen;
 	if (CUDPSocket::lookup(m_conf.getRptAddress(), m_conf.getRptPort(), rptAddr, rptAddrLen) != 0) {
 		LogError("Unable to resolve the address of the host");
-		return;
+		return 1;
 	}
 
 	CRptNetwork localNetwork(m_conf.getMyPort(), rptAddr, rptAddrLen, m_conf.getCallsign(), m_conf.getDebug());
 	ret = localNetwork.open();
 	if (!ret) {
 		::LogFinalise();
-		return;
+		return 1;
 	}
 
 	CP25Network remoteNetwork(m_conf.getNetworkPort(), m_conf.getCallsign(), m_conf.getNetworkDebug());
@@ -202,7 +247,7 @@ void CP25Gateway::run()
 	if (!ret) {
 		localNetwork.close();
 		::LogFinalise();
-		return;
+		return 1;
 	}
 
 	CUDPSocket* remoteSocket = NULL;
@@ -255,6 +300,7 @@ void CP25Gateway::run()
 	unsigned int currentTG      = 0U;
 	unsigned int currentAddrLen = 0U;
 	sockaddr_storage currentAddr;
+	unsigned char talkgroupBuff[4U];
 
 	std::vector<unsigned int> staticIds = m_conf.getNetworkStatic();
 
@@ -276,14 +322,16 @@ void CP25Gateway::run()
 		}
 	}
 
-	for (;;) {
+	while (!m_killed) {
 		unsigned char buffer[200U];
 		sockaddr_storage addr;
 		unsigned int addrLen;
 
 		// From the reflector to the MMDVM
 		unsigned int len = remoteNetwork.read(buffer, 200U, addr, addrLen);
-		if (len > 0U) {
+		// Read all queued packets so static talkgroup poll acks do not 
+		// cause a problem.
+		while (len > 0U) {
 			// If we're linked and it's from the right place, send it on
 			if (currentAddrLen > 0U && CUDPSocket::match(currentAddr, addr)) {
 				// Don't pass reflector control data through to the MMDVM
@@ -303,6 +351,7 @@ void CP25Gateway::run()
 				}
 			} else if (currentTG == 0U) {
 				bool poll = false;
+				unsigned int receivedTG      = 0U;
 				unsigned char pollReply[11U] = { 0xF0U };
 				std::string callsign = m_conf.getCallsign();
 
@@ -313,15 +362,40 @@ void CP25Gateway::run()
 					pollReply[i + 1U] = callsign.at(i);
 
 				// Don't pass reflector control data through to the MMDVM
-				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, std::min(11U, len)) == 0))) {
-					// Find the static TG that this audio data belongs to
-					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
-						if (CUDPSocket::match(addr, (*it).m_addr)) {
-							currentTG = (*it).m_tg;
-							break;
-						}
-					}
+				unsigned int pollLen = 11U;
+				if (len < pollLen)
+					pollLen = len;
 
+				poll = (::memcmp(buffer, pollReply, pollLen) == 0);
+
+				// Find the static TG that this audio data belongs to
+				for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+					if (CUDPSocket::match(addr, (*it).m_addr)) {
+						receivedTG = (*it).m_tg;
+						break;
+					}
+				}
+				// Reference for control byte buffer[0u]
+				// https://github.com/Wodie/p25link/blob/master/MMDVM.pm
+				if (buffer[0U] == 0xF0U  && poll) {
+					// Poll response message
+					// LogMessage("Received network poll response for talkgroup %u ", receivedTG);
+				} else if (buffer[0U] == 0xF1U) {
+					// Server talkgroup disconnect
+					// LogMessage("Disconnect talkgroup for talkgroup %u ", receivedTG);
+				} else {
+					if (receivedTG != 0U) {
+						// Changed talkgroup.  Let the modem know.
+						// It may be told it by the content of the message.
+						// Just in case send it anyway!
+						unsigned char talkgroupBuff[4U];
+						talkgroupBuff[0U] = 0x65U;
+						talkgroupBuff[1U] = (receivedTG >> 16) & 0xFFU;
+						talkgroupBuff[2U] = (receivedTG >> 8)  & 0xFFU;
+						talkgroupBuff[3U] = (receivedTG >> 0)  & 0xFFU;
+						localNetwork.write(talkgroupBuff, 4);
+					}
+					currentTG = receivedTG;
 					if (currentTG > 0U) {
 						currentAddr     = addr;
 						currentAddrLen  = addrLen;
@@ -346,11 +420,12 @@ void CP25Gateway::run()
 					}
 				}
 			}
+			len = remoteNetwork.read(buffer, 200U, addr, addrLen);
 		}
 
 		// From the MMDVM to the reflector or control data
 		len = localNetwork.read(buffer, 200U);
-		if (len > 0U) {
+		while (len > 0U) {
 			if (buffer[0U] == 0x65U) {
 				dstTG  = (buffer[1U] << 16) & 0xFF0000U;
 				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
@@ -446,6 +521,7 @@ void CP25Gateway::run()
 				remoteNetwork.write(buffer, len, currentAddr, currentAddrLen);
 				hangTimer.start();
 			}
+			len = localNetwork.read(buffer, 200U);
 		}
 
 		if (voice != NULL) {
@@ -458,7 +534,7 @@ void CP25Gateway::run()
 			sockaddr_storage addr;
 			unsigned int addrLen;
 			int res = remoteSocket->read(buffer, 200U, addr, addrLen);
-			if (res > 0) {
+			while (res > 0) {
 				buffer[res] = '\0';
 				if (::memcmp(buffer + 0U, "TalkGroup", 9U) == 0) {
 					unsigned int tg = ((strlen((char*)buffer + 0U) > 10) ? (unsigned int)::atoi((char*)(buffer + 10U)) : 9999);
@@ -544,6 +620,7 @@ void CP25Gateway::run()
 				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}
+				res = remoteSocket->read(buffer, 200U, addr, addrLen);
 			}
 		}
 
@@ -569,12 +646,20 @@ void CP25Gateway::run()
 				if (voice != NULL)
 					voice->unlinked();
 
-				currentAddrLen = 0U;
-
-				hangTimer.stop();
 			}
 
-			currentTG = 0U;
+			currentTG        = 0U;
+			currentAddrLen   = 0U;
+			currentIsStatic  = false;
+
+			// Let modem know disconnected
+			talkgroupBuff[0U] = 0x65U;
+			talkgroupBuff[1U] = 0U;
+			talkgroupBuff[2U] = 0U;
+			talkgroupBuff[3U] = 0U;
+			localNetwork.write(talkgroupBuff, 4);
+
+			hangTimer.stop();
 		}
 
 		localNetwork.clock(ms);
@@ -609,5 +694,5 @@ void CP25Gateway::run()
 
 	lookup->stop();
 
-	::LogFinalise();
+	return 0;
 }

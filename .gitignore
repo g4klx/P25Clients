@@ -13,6 +13,8 @@ x64
 *.user
 *.VC.db
 .vs
-P25Reflector/P25Reflector
 P25Gateway/P25Gateway
 P25Parrot/P25Parrot
+P25Gateway/GitVersion.h
+P25Parrot/GitVersion.h
+
