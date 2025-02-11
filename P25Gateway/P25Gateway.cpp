@@ -526,8 +526,10 @@ int CP25Gateway::run()
 
 		if (voice != NULL) {
 			unsigned int length = voice->read(buffer);
-			if (length > 0U)
+			while (length > 0U) {
 				localNetwork.write(buffer, length);
+				length = voice->read(buffer);
+			}
 		}
 
 		if (remoteSocket != NULL) {
