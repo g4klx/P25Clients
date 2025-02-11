@@ -868,7 +868,7 @@
 45000	p25.dvham.com	41000
 
 # 45001 P25-DS5QDR Korea
-45001	ds5qdr-mst.duckdns.org	41000
+45001	dvsys.duckdns.org	41000
 
 # 46001 P25 Link TG46001, China
 46001	46001.bh1nyr.net	41000
