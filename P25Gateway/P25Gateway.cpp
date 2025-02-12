@@ -430,15 +430,10 @@ int CP25Gateway::run()
 				dstTG  = (buffer[1U] << 16) & 0xFF0000U;
 				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
 				dstTG |= (buffer[3U] << 0)  & 0x0000FFU;
-			} else if (buffer[0U] == 0x66U) {
-				srcId  = (buffer[1U] << 16) & 0xFF0000U;
-				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
-				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
-
 				if (dstTG != currentTG) {
 					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
-						LogMessage("Unlinking from reflector %u by %s", currentTG, callsign.c_str());
+						LogMessage("Unlinking from reflector %u", currentTG);
 
 						if (!currentIsStatic) {
 							remoteNetwork.unlink(currentAddr, currentAddrLen);
@@ -479,7 +474,7 @@ int CP25Gateway::run()
 					// Link to the new reflector
 					if (currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
-						LogMessage("Switched to reflector %u due to RF activity from %s", currentTG, callsign.c_str());
+						LogMessage("Switched to reflector %u due to RF activity", currentTG);
 
 						if (!currentIsStatic) {
 							remoteNetwork.poll(currentAddr, currentAddrLen);
@@ -500,6 +495,12 @@ int CP25Gateway::run()
 							voice->linkedTo(dstTG);
 					}
 				}
+
+			} else if (buffer[0U] == 0x66U) {
+				srcId  = (buffer[1U] << 16) & 0xFF0000U;
+				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
+				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
+
 			}
 
 			if (buffer[0U] == 0x80U) {
@@ -526,8 +527,10 @@ int CP25Gateway::run()
 
 		if (voice != NULL) {
 			unsigned int length = voice->read(buffer);
-			if (length > 0U)
+			while (length > 0U) {
 				localNetwork.write(buffer, length);
+				length = voice->read(buffer);
+			}
 		}
 
 		if (remoteSocket != NULL) {
