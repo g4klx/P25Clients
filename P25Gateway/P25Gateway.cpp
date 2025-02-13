@@ -348,6 +348,7 @@ int CP25Gateway::run()
 					localNetwork.write(buffer, len);
 
 					hangTimer.start();
+					CThread::sleep(18U); //throttle to prevent buffer overflow in MMDVM
 				}
 			} else if (currentTG == 0U) {
 				bool poll = false;
@@ -529,6 +530,7 @@ int CP25Gateway::run()
 			unsigned int length = voice->read(buffer);
 			while (length > 0U) {
 				localNetwork.write(buffer, length);
+				CThread::sleep(18U); //throttle to prevent buffer overflow in MMDVM
 				length = voice->read(buffer);
 			}
 		}
