@@ -53,6 +53,7 @@ const char* DEFAULT_INI_FILE = "/etc/P25Gateway.ini";
 #endif
 
 const unsigned P25_VOICE_ID = 10999U;
+const unsigned int P25_FRAME_TIME = 20U;
 
 static bool m_killed = false;
 static int  m_signal = 0;
@@ -281,6 +282,9 @@ int CP25Gateway::run()
 	CStopWatch stopWatch;
 	stopWatch.start();
 
+	CStopWatch frameStopWatch;
+	frameStopWatch.start();
+
 	CVoice* voice = NULL;
 	if (m_conf.getVoiceEnabled()) {
 		voice = new CVoice(m_conf.getVoiceDirectory(), m_conf.getVoiceLanguage(), P25_VOICE_ID);
@@ -344,10 +348,14 @@ int CP25Gateway::run()
 						buffer[2U] = (currentTG >> 8)  & 0xFFU;
 						buffer[3U] = (currentTG >> 0)  & 0xFFU;
 					}
+					while (frameStopWatch.elapsed() <P25_FRAME_TIME){
+						CThread::sleep(20-frameStopWatch.elapsed());
+					}
 
 					localNetwork.write(buffer, len);
-
+					frameStopWatch.start();
 					hangTimer.start();
+
 				}
 			} else if (currentTG == 0U) {
 				bool poll = false;
@@ -410,9 +418,10 @@ int CP25Gateway::run()
 							buffer[3U] = (currentTG >> 0)  & 0xFFU;
 						}
 
-						if (!poll)
+						if (!poll){
 							localNetwork.write(buffer, len);
-
+							frameStopWatch.start();
+						}
 						LogMessage("Switched to reflector %u due to network activity", currentTG);
 
 						hangTimer.setTimeout(netHangTime);
@@ -526,9 +535,15 @@ int CP25Gateway::run()
 		}
 
 		if (voice != NULL) {
+			// need to block on voice so that the parrot transmission
+			// does not get garbled.
 			unsigned int length = voice->read(buffer);
 			while (length > 0U) {
 				localNetwork.write(buffer, length);
+				frameStopWatch.start();
+				while (frameStopWatch.elapsed()<P25_FRAME_TIME) {
+					CThread::sleep(1U); //throttle to prevent buffer overflow in MMDVM
+				}
 				length = voice->read(buffer);
 			}
 		}
