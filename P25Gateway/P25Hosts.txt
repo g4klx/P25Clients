@@ -49,13 +49,13 @@
 260	80.211.195.50	41005
 
 # 276 Amateur Radio Network
-276 p25.kc8cpw.com	41000
+276	p25.kc8cpw.com	41000
 
 # 304 W8ARA P25
 304	ara.selfip.net	41000
 
 # 312 TriState (IL, IN, WI) P25
-312 p25.tristatedmr.org	41000
+312	p25.tristatedmr.org	41000
 
 # 334 Mexico P25 (by XE1F)
 334	reflector.p25.link	41008
@@ -76,7 +76,7 @@
 456	456.ham-p25.de	41000
 
 # 478 Ham Radio Village URF478
-478 urf.hamvillage.org 41000
+478	urf.hamvillage.org	41000
 
 # 554 Georgia 900 P25 555 backup
 554	georgia900p25.us	41003
@@ -157,7 +157,7 @@
 946	xlx.flagandtorchsociety.com	41000
 
 # 947 W8LRK Livingston Amateur Radio Klub (Bridged to XLX947B)
-947 w8lrkp25.dyndns.org	41001
+947	w8lrkp25.dyndns.org	41001
 
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
 1007	43773.kb5rir.com	41003
@@ -361,7 +361,7 @@
 10216	xlx216.km8v.com	41000
 
 # 10253 N6OCS
-10253 p25.wd6awp.us	41000
+10253	p25.wd6awp.us	41000
 
 # 10255 Southern Ontario
 10255	ve3rd.hopto.org	41000
@@ -424,7 +424,7 @@
 10410	reflector.tmmarc.org	41000
 
 # 10411 Taiwan, P25 Reflector Bridged to DMR TG 46621 (Hosted by VR2YEP)
-10411	stayalone.idv.hk 	41000
+10411	stayalone.idv.hk	41000
 
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421	dl-nordwest.com	41000
@@ -595,7 +595,7 @@
 31078	216.240.173.55	41000
 
 # 31079 ALERT Radio / Multimode P25/DMR
-31079	927.org		41001
+31079	927.org	41001
 
 # 31138 kingsland Ga
 31138	kingsland.cbridge.net	41000
@@ -739,7 +739,7 @@
 31888	p25.kg4jpl.com	41000
 
 # 31910 LMRNET LMR Talkaround
-31910 172.233.211.93	41000
+31910	172.233.211.93	41000
 
 # 31947 K0MGS Western Missouri/KC Metro
 31947	p25.ddns.me	41000
