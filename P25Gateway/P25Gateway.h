@@ -19,6 +19,7 @@
 #if !defined(P25Gateway_H)
 #define	P25Gateway_H
 
+#include "Voice.h"
 #include "Timer.h"
 #include "Conf.h"
 
@@ -47,7 +48,10 @@ public:
 	int run();
 
 private:
-	CConf m_conf;
+	CConf   m_conf;
+	CVoice* m_voice;
+
+	bool isVoiceBusy() const;
 };
 
 #endif

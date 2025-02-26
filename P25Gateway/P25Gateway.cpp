@@ -24,7 +24,6 @@
 #include "DMRLookup.h"
 #include "Version.h"
 #include "Thread.h"
-#include "Voice.h"
 #include "Timer.h"
 #include "Utils.h"
 #include "Log.h"
@@ -138,7 +137,8 @@ int main(int argc, char** argv)
 }
 
 CP25Gateway::CP25Gateway(const std::string& file) :
-m_conf(file)
+m_conf(file),
+m_voice(NULL)
 {
 	CUDPSocket::startup();
 }
@@ -282,16 +282,12 @@ int CP25Gateway::run()
 	CStopWatch stopWatch;
 	stopWatch.start();
 
-	CStopWatch frameStopWatch;
-	frameStopWatch.start();
-
-	CVoice* voice = NULL;
 	if (m_conf.getVoiceEnabled()) {
-		voice = new CVoice(m_conf.getVoiceDirectory(), m_conf.getVoiceLanguage(), P25_VOICE_ID);
-		bool ok = voice->open();
+		m_voice = new CVoice(m_conf.getVoiceDirectory(), m_conf.getVoiceLanguage(), P25_VOICE_ID);
+		bool ok = m_voice->open();
 		if (!ok) {
-			delete voice;
-			voice = NULL;
+			delete m_voice;
+			m_voice = NULL;
 		}
 	}
 
@@ -348,14 +344,11 @@ int CP25Gateway::run()
 						buffer[2U] = (currentTG >> 8)  & 0xFFU;
 						buffer[3U] = (currentTG >> 0)  & 0xFFU;
 					}
-					while (frameStopWatch.elapsed() <P25_FRAME_TIME){
-						CThread::sleep(20-frameStopWatch.elapsed());
-					}
 
-					localNetwork.write(buffer, len);
-					frameStopWatch.start();
+					if (!isVoiceBusy())
+						localNetwork.write(buffer, len);
+
 					hangTimer.start();
-
 				}
 			} else if (currentTG == 0U) {
 				bool poll = false;
@@ -401,8 +394,11 @@ int CP25Gateway::run()
 						talkgroupBuff[1U] = (receivedTG >> 16) & 0xFFU;
 						talkgroupBuff[2U] = (receivedTG >> 8)  & 0xFFU;
 						talkgroupBuff[3U] = (receivedTG >> 0)  & 0xFFU;
-						localNetwork.write(talkgroupBuff, 4);
+
+						if (!isVoiceBusy())
+							localNetwork.write(talkgroupBuff, 4U);
 					}
+
 					currentTG = receivedTG;
 					if (currentTG > 0U) {
 						currentAddr     = addr;
@@ -418,10 +414,11 @@ int CP25Gateway::run()
 							buffer[3U] = (currentTG >> 0)  & 0xFFU;
 						}
 
-						if (!poll){
-							localNetwork.write(buffer, len);
-							frameStopWatch.start();
+						if (!poll) {
+							if (!isVoiceBusy())
+								localNetwork.write(buffer, len);
 						}
+
 						LogMessage("Switched to reflector %u due to network activity", currentTG);
 
 						hangTimer.setTimeout(netHangTime);
@@ -429,6 +426,7 @@ int CP25Gateway::run()
 					}
 				}
 			}
+
 			len = remoteNetwork.read(buffer, 200U, addr, addrLen);
 		}
 
@@ -497,14 +495,13 @@ int CP25Gateway::run()
 						hangTimer.stop();
 					}
 
-					if (voice != NULL) {
+					if (m_voice != NULL) {
 						if (currentAddrLen == 0U)
-							voice->unlinked();
+							m_voice->unlinked();
 						else
-							voice->linkedTo(dstTG);
+							m_voice->linkedTo(dstTG);
 					}
 				}
-
 			} else if (buffer[0U] == 0x66U) {
 				srcId  = (buffer[1U] << 16) & 0xFF0000U;
 				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
@@ -513,8 +510,8 @@ int CP25Gateway::run()
 			}
 
 			if (buffer[0U] == 0x80U) {
-				if (voice != NULL)
-					voice->eof();
+				if (m_voice != NULL)
+					m_voice->eof();
 			}
 
 			// If we're linked and we have a network, send it on
@@ -531,21 +528,14 @@ int CP25Gateway::run()
 				remoteNetwork.write(buffer, len, currentAddr, currentAddrLen);
 				hangTimer.start();
 			}
+
 			len = localNetwork.read(buffer, 200U);
 		}
 
-		if (voice != NULL) {
-			// need to block on voice so that the parrot transmission
-			// does not get garbled.
-			unsigned int length = voice->read(buffer);
-			while (length > 0U) {
+		if (m_voice != NULL) {
+			unsigned int length = m_voice->read(buffer);
+			if (length > 0U)
 				localNetwork.write(buffer, length);
-				frameStopWatch.start();
-				while (frameStopWatch.elapsed()<P25_FRAME_TIME) {
-					CThread::sleep(1U); //throttle to prevent buffer overflow in MMDVM
-				}
-				length = voice->read(buffer);
-			}
 		}
 
 		if (remoteSocket != NULL) {
@@ -613,11 +603,11 @@ int CP25Gateway::run()
 							hangTimer.stop();
 						}
 
-						if (voice != NULL) {
+						if (m_voice != NULL) {
 							if (currentAddrLen == 0U)
-								voice->unlinked();
+								m_voice->unlinked();
 							else
-								voice->linkedTo(currentTG);
+								m_voice->linkedTo(currentTG);
 						}
 					}
 				} else if (::memcmp(buffer + 0U, "status", 6U) == 0) {
@@ -626,11 +616,10 @@ int CP25Gateway::run()
 				} else if (::memcmp(buffer + 0U, "host", 4U) == 0) {
 					std::string ref;
 
-					if (currentAddrLen > 0) {
+					if (currentAddrLen > 0U) {
 						char buffer[INET6_ADDRSTRLEN];
-						if (getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0) {
+						if (::getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
 							ref = std::string(buffer);
-						}
 					}
 
 					std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
@@ -638,6 +627,7 @@ int CP25Gateway::run()
 				} else {
 					CUtils::dump("Invalid remote command received", buffer, res);
 				}
+
 				res = remoteSocket->read(buffer, 200U, addr, addrLen);
 			}
 		}
@@ -647,8 +637,8 @@ int CP25Gateway::run()
 
 		reflectors.clock(ms);
 
-		if (voice != NULL)
-			voice->clock(ms);
+		if (m_voice != NULL)
+			m_voice->clock(ms);
 
 		hangTimer.clock(ms);
 		if (hangTimer.isRunning() && hangTimer.hasExpired()) {
@@ -661,8 +651,8 @@ int CP25Gateway::run()
 					remoteNetwork.unlink(currentAddr, currentAddrLen);
 				}
 
-				if (voice != NULL)
-					voice->unlinked();
+				if (m_voice != NULL)
+					m_voice->unlinked();
 
 			}
 
@@ -699,7 +689,7 @@ int CP25Gateway::run()
 			CThread::sleep(5U);
 	}
 
-	delete voice;
+	delete m_voice;
 
 	localNetwork.close();
 
@@ -713,4 +703,12 @@ int CP25Gateway::run()
 	lookup->stop();
 
 	return 0;
+}
+
+bool CP25Gateway::isVoiceBusy() const
+{
+	if (m_voice == NULL)
+		return false;
+
+	return m_voice->isBusy();
 }

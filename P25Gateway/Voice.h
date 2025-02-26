@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2017,2018,2019 by Jonathan Naylor G4KLX
+*   Copyright (C) 2017,2018,2019,2024 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -52,6 +52,8 @@ public:
 	void eof();
 
 	void clock(unsigned int ms);
+
+	bool isBusy() const;
 
 private:
 	std::string                            m_language;

@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2017,2018,2019 by Jonathan Naylor G4KLX
+*   Copyright (C) 2017,2018,2019,2024 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -425,4 +425,9 @@ void CVoice::clock(unsigned int ms)
 			m_n = 0x62U;
 		}
 	}
+}
+
+bool CVoice::isBusy() const
+{
+	return (m_status == VS_WAITING) || (m_status == VS_SENDING);
 }
