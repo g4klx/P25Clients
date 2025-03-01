@@ -688,7 +688,10 @@
 31171	illink.radiotechnology.xyz	41000
 
 # 31181 Indiana Link
-31181  174.137.23.148  41000
+31181  na9vy.us  41000
+
+#31182 Indiana State-Wide
+31182  na9vy.us  41001
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
