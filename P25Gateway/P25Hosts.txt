@@ -721,7 +721,7 @@
 31297	p25.ddns.me	41003
 
 # 31313 America's Kansas City Wide (P25/DMR/YSF)
-31313	p25.ddns.me	41002
+31313	xxlx.w0fh.net  41001
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
