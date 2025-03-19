@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020,2025 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ bool CRptNetwork::open()
 
 bool CRptNetwork::write(const unsigned char* data, unsigned int length)
 {
-	assert(data != NULL);
+	assert(data != nullptr);
 	assert(length > 0U);
 
 	if (m_debug)
@@ -84,7 +84,7 @@ bool CRptNetwork::writePoll()
 
 unsigned int CRptNetwork::read(unsigned char* data, unsigned int length)
 {
-	assert(data != NULL);
+	assert(data != nullptr);
 	assert(length > 0U);
 
 	sockaddr_storage addr;

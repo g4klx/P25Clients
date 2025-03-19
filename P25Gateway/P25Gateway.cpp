@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016-2024 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016-2025 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -138,7 +138,7 @@ int main(int argc, char** argv)
 
 CP25Gateway::CP25Gateway(const std::string& file) :
 m_conf(file),
-m_voice(NULL)
+m_voice(nullptr)
 {
 	CUDPSocket::startup();
 }
@@ -183,7 +183,7 @@ int CP25Gateway::run()
 		// If we are currently root...
 		if (getuid() == 0) {
 			struct passwd* user = ::getpwnam("mmdvm");
-			if (user == NULL) {
+			if (user == nullptr) {
 				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
 				return 1;
 			}
@@ -251,13 +251,13 @@ int CP25Gateway::run()
 		return 1;
 	}
 
-	CUDPSocket* remoteSocket = NULL;
+	CUDPSocket* remoteSocket = nullptr;
 	if (m_conf.getRemoteCommandsEnabled()) {
 		remoteSocket = new CUDPSocket(m_conf.getRemoteCommandsPort());
 		ret = remoteSocket->open();
 		if (!ret) {
 			delete remoteSocket;
-			remoteSocket = NULL;
+			remoteSocket = nullptr;
 		}
 	}
 
@@ -287,7 +287,7 @@ int CP25Gateway::run()
 		bool ok = m_voice->open();
 		if (!ok) {
 			delete m_voice;
-			m_voice = NULL;
+			m_voice = nullptr;
 		}
 	}
 
@@ -307,7 +307,7 @@ int CP25Gateway::run()
 	std::vector<CStaticTG> staticTGs;
 	for (std::vector<unsigned int>::const_iterator it = staticIds.cbegin(); it != staticIds.cend(); ++it) {
 		CP25Reflector* reflector = reflectors.find(*it);
-		if (reflector != NULL) {
+		if (reflector != nullptr) {
 			CStaticTG staticTG;
 			staticTG.m_tg      = *it;
 			staticTG.m_addr    = reflector->m_addr;
@@ -451,7 +451,7 @@ int CP25Gateway::run()
 						hangTimer.stop();
 					}
 
-					const CStaticTG* found = NULL;
+					const CStaticTG* found = nullptr;
 					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
 						if (dstTG == (*it).m_tg) {
 							found = &(*it);
@@ -459,9 +459,9 @@ int CP25Gateway::run()
 						}
 					}
 
-					if (found == NULL) {
+					if (found == nullptr) {
 						CP25Reflector* refl = reflectors.find(dstTG);
-						if (refl != NULL) {
+						if (refl != nullptr) {
 							currentTG       = dstTG;
 							currentAddr     = refl->m_addr;
 							currentAddrLen  = refl->m_addrLen;
@@ -495,7 +495,7 @@ int CP25Gateway::run()
 						hangTimer.stop();
 					}
 
-					if (m_voice != NULL) {
+					if (m_voice != nullptr) {
 						if (currentAddrLen == 0U)
 							m_voice->unlinked();
 						else
@@ -510,7 +510,7 @@ int CP25Gateway::run()
 			}
 
 			if (buffer[0U] == 0x80U) {
-				if (m_voice != NULL)
+				if (m_voice != nullptr)
 					m_voice->eof();
 			}
 
@@ -532,13 +532,13 @@ int CP25Gateway::run()
 			len = localNetwork.read(buffer, 200U);
 		}
 
-		if (m_voice != NULL) {
+		if (m_voice != nullptr) {
 			unsigned int length = m_voice->read(buffer);
 			if (length > 0U)
 				localNetwork.write(buffer, length);
 		}
 
-		if (remoteSocket != NULL) {
+		if (remoteSocket != nullptr) {
 			sockaddr_storage addr;
 			unsigned int addrLen;
 			int res = remoteSocket->read(buffer, 200U, addr, addrLen);
@@ -560,7 +560,7 @@ int CP25Gateway::run()
 							hangTimer.stop();
 						}
 
-						const CStaticTG* found = NULL;
+						const CStaticTG* found = nullptr;
 						for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
 							if (tg == (*it).m_tg) {
 								found = &(*it);
@@ -568,9 +568,9 @@ int CP25Gateway::run()
 							}
 						}
 
-						if (found == NULL) {
+						if (found == nullptr) {
 							CP25Reflector* refl = reflectors.find(tg);
-							if (refl != NULL) {
+							if (refl != nullptr) {
 								currentTG       = tg;
 								currentAddr     = refl->m_addr;
 								currentAddrLen  = refl->m_addrLen;
@@ -603,7 +603,7 @@ int CP25Gateway::run()
 							hangTimer.stop();
 						}
 
-						if (m_voice != NULL) {
+						if (m_voice != nullptr) {
 							if (currentAddrLen == 0U)
 								m_voice->unlinked();
 							else
@@ -637,7 +637,7 @@ int CP25Gateway::run()
 
 		reflectors.clock(ms);
 
-		if (m_voice != NULL)
+		if (m_voice != nullptr)
 			m_voice->clock(ms);
 
 		hangTimer.clock(ms);
@@ -651,7 +651,7 @@ int CP25Gateway::run()
 					remoteNetwork.unlink(currentAddr, currentAddrLen);
 				}
 
-				if (m_voice != NULL)
+				if (m_voice != nullptr)
 					m_voice->unlinked();
 
 			}
@@ -693,7 +693,7 @@ int CP25Gateway::run()
 
 	localNetwork.close();
 
-	if (remoteSocket != NULL) {
+	if (remoteSocket != nullptr) {
 		remoteSocket->close();
 		delete remoteSocket;
 	}
@@ -707,7 +707,7 @@ int CP25Gateway::run()
 
 bool CP25Gateway::isVoiceBusy() const
 {
-	if (m_voice == NULL)
+	if (m_voice == nullptr)
 		return false;
 
 	return m_voice->isBusy();
