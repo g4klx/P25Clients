@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016-2024 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016-2025 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@
 // In Log.cpp
 extern CMQTTConnection* m_mqtt;
 
-static CP25Gateway* gateway = NULL;
+static CP25Gateway* gateway = nullptr;
 
 static bool m_killed = false;
 static int  m_signal = 0;
@@ -133,15 +133,15 @@ int main(int argc, char** argv)
 
 CP25Gateway::CP25Gateway(const std::string& file) :
 m_conf(file),
-m_voice(NULL),
-m_remoteNetwork(NULL),
+m_voice(nullptr),
+m_remoteNetwork(nullptr),
 m_currentTG(0U),
 m_currentAddrLen(0U),
 m_currentAddr(),
 m_currentIsStatic(false),
 m_hangTimer(1000U),
 m_rfHangTime(0U),
-m_reflectors(NULL),
+m_reflectors(nullptr),
 m_staticTGs()
 {
 	CUDPSocket::startup();
@@ -187,7 +187,7 @@ int CP25Gateway::run()
 		// If we are currently root...
 		if (getuid() == 0) {
 			struct passwd* user = ::getpwnam("mmdvm");
-			if (user == NULL) {
+			if (user == nullptr) {
 				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
 				return -1;
 			}
@@ -277,7 +277,7 @@ int CP25Gateway::run()
 		bool ok = m_voice->open();
 		if (!ok) {
 			delete m_voice;
-			m_voice = NULL;
+			m_voice = nullptr;
 		}
 	}
 
@@ -293,7 +293,7 @@ int CP25Gateway::run()
 
 	for (std::vector<unsigned int>::const_iterator it = staticIds.cbegin(); it != staticIds.cend(); ++it) {
 		CP25Reflector* reflector = m_reflectors->find(*it);
-		if (reflector != NULL) {
+		if (reflector != nullptr) {
 			CStaticTG staticTG;
 			staticTG.m_tg      = *it;
 			staticTG.m_addr    = reflector->m_addr;
@@ -316,7 +316,9 @@ int CP25Gateway::run()
 
 		// From the reflector to the MMDVM
 		unsigned int len = m_remoteNetwork->read(buffer, 200U, addr, addrLen);
-		if (len > 0U) {
+		// Read all queued packets so static talkgroup poll acks do not 
+		// cause a problem.
+		while (len > 0U) {
 			// If we're linked and it's from the right place, send it on
 			if (m_currentAddrLen > 0U && CUDPSocket::match(m_currentAddr, addr)) {
 				// Don't pass reflector control data through to the MMDVM
@@ -330,12 +332,14 @@ int CP25Gateway::run()
 						buffer[3U] = (m_currentTG >> 0)  & 0xFFU;
 					}
 
-					localNetwork.write(buffer, len);
+					if (!isVoiceBusy())
+						localNetwork.write(buffer, len);
 
 					m_hangTimer.start();
 				}
 			} else if (m_currentTG == 0U) {
 				bool poll = false;
+				unsigned int receivedTG      = 0U;
 				unsigned char pollReply[11U] = { 0xF0U };
 				std::string callsign = m_conf.getCallsign();
 
@@ -350,15 +354,39 @@ int CP25Gateway::run()
 				if (len < pollLen)
 					pollLen = len;
 
-				if ((buffer[0U] != 0xF0U && buffer[0U] != 0xF1U) || (poll = (::memcmp(buffer, pollReply, pollLen) == 0))) {
-					// Find the static TG that this audio data belongs to
-					for (std::vector<CStaticTG>::const_iterator it = m_staticTGs.cbegin(); it != m_staticTGs.cend(); ++it) {
-						if (CUDPSocket::match(addr, (*it).m_addr)) {
-							m_currentTG = (*it).m_tg;
-							break;
-						}
+				poll = (::memcmp(buffer, pollReply, pollLen) == 0);
+
+				// Find the static TG that this audio data belongs to
+				for (std::vector<CStaticTG>::const_iterator it = m_staticTGs.cbegin(); it != m_staticTGs.cend(); ++it) {
+					if (CUDPSocket::match(addr, (*it).m_addr)) {
+						receivedTG = (*it).m_tg;
+						break;
+					}
+				}
+				// Reference for control byte buffer[0u]
+				// https://github.com/Wodie/p25link/blob/master/MMDVM.pm
+				if (buffer[0U] == 0xF0U  && poll) {
+					// Poll response message
+					// LogMessage("Received network poll response for talkgroup %u ", receivedTG);
+				} else if (buffer[0U] == 0xF1U) {
+					// Server talkgroup disconnect
+					// LogMessage("Disconnect talkgroup for talkgroup %u ", receivedTG);
+				} else {
+					if (receivedTG != 0U) {
+						// Changed talkgroup.  Let the modem know.
+						// It may be told it by the content of the message.
+						// Just in case send it anyway!
+						unsigned char talkgroupBuff[4U];
+						talkgroupBuff[0U] = 0x65U;
+						talkgroupBuff[1U] = (receivedTG >> 16) & 0xFFU;
+						talkgroupBuff[2U] = (receivedTG >> 8)  & 0xFFU;
+						talkgroupBuff[3U] = (receivedTG >> 0)  & 0xFFU;
+
+						if (!isVoiceBusy())
+							localNetwork.write(talkgroupBuff, 4U);
 					}
 
+					m_currentTG = receivedTG;
 					if (m_currentTG > 0U) {
 						m_currentAddr     = addr;
 						m_currentAddrLen  = addrLen;
@@ -373,8 +401,10 @@ int CP25Gateway::run()
 							buffer[3U] = (m_currentTG >> 0)  & 0xFFU;
 						}
 
-						if (!poll)
-							localNetwork.write(buffer, len);
+						if (!poll) {
+							if (!isVoiceBusy())
+								localNetwork.write(buffer, len);
+						}
 
 						LogMessage("Switched to reflector %u due to network activity", m_currentTG);
 						writeJSONLinking("network", m_currentTG);
@@ -384,20 +414,17 @@ int CP25Gateway::run()
 					}
 				}
 			}
+
+			len = m_remoteNetwork->read(buffer, 200U, addr, addrLen);
 		}
 
 		// From the MMDVM to the reflector or control data
 		len = localNetwork.read(buffer, 200U);
-		if (len > 0U) {
+		while (len > 0U) {
 			if (buffer[0U] == 0x65U) {
 				dstTG  = (buffer[1U] << 16) & 0xFF0000U;
 				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
 				dstTG |= (buffer[3U] << 0)  & 0x0000FFU;
-			} else if (buffer[0U] == 0x66U) {
-				srcId  = (buffer[1U] << 16) & 0xFF0000U;
-				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
-				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
-
 				if (dstTG != m_currentTG) {
 					if (m_currentAddrLen > 0U) {
 						std::string callsign = lookup->find(srcId);
@@ -413,7 +440,7 @@ int CP25Gateway::run()
 						m_hangTimer.stop();
 					}
 
-					const CStaticTG* found = NULL;
+					const CStaticTG* found = nullptr;
 					for (std::vector<CStaticTG>::const_iterator it = m_staticTGs.cbegin(); it != m_staticTGs.cend(); ++it) {
 						if (dstTG == (*it).m_tg) {
 							found = &(*it);
@@ -421,9 +448,9 @@ int CP25Gateway::run()
 						}
 					}
 
-					if (found == NULL) {
+					if (found == nullptr) {
 						CP25Reflector* refl = m_reflectors->find(dstTG);
-						if (refl != NULL) {
+						if (refl != nullptr) {
 							m_currentTG       = dstTG;
 							m_currentAddr     = refl->m_addr;
 							m_currentAddrLen  = refl->m_addrLen;
@@ -458,17 +485,22 @@ int CP25Gateway::run()
 						m_hangTimer.stop();
 					}
 
-					if (m_voice != NULL) {
+					if (m_voice != nullptr) {
 						if (m_currentAddrLen == 0U)
 							m_voice->unlinked();
 						else
 							m_voice->linkedTo(dstTG);
 					}
 				}
+			} else if (buffer[0U] == 0x66U) {
+				srcId  = (buffer[1U] << 16) & 0xFF0000U;
+				srcId |= (buffer[2U] << 8)  & 0x00FF00U;
+				srcId |= (buffer[3U] << 0)  & 0x0000FFU;
+
 			}
 
 			if (buffer[0U] == 0x80U) {
-				if (m_voice != NULL)
+				if (m_voice != nullptr)
 					m_voice->eof();
 			}
 
@@ -486,9 +518,11 @@ int CP25Gateway::run()
 				m_remoteNetwork->write(buffer, len, m_currentAddr, m_currentAddrLen);
 				m_hangTimer.start();
 			}
+
+			len = localNetwork.read(buffer, 200U);
 		}
 
-		if (m_voice != NULL) {
+		if (m_voice != nullptr) {
 			unsigned int length = m_voice->read(buffer);
 			if (length > 0U)
 				localNetwork.write(buffer, length);
@@ -499,7 +533,7 @@ int CP25Gateway::run()
 
 		m_reflectors->clock(ms);
 
-		if (m_voice != NULL)
+		if (m_voice != nullptr)
 			m_voice->clock(ms);
 
 		m_hangTimer.clock(ms);
@@ -514,7 +548,7 @@ int CP25Gateway::run()
 					m_remoteNetwork->unlink(m_currentAddr, m_currentAddrLen);
 				}
 
-				if (m_voice != NULL)
+				if (m_voice != nullptr)
 					m_voice->unlinked();
 
 				m_currentAddrLen = 0U;
@@ -582,7 +616,7 @@ void CP25Gateway::writeCommand(const std::string& command)
 				m_hangTimer.stop();
 			}
 
-			const CStaticTG* found = NULL;
+			const CStaticTG* found = nullptr;
 			for (std::vector<CStaticTG>::const_iterator it = m_staticTGs.cbegin(); it != m_staticTGs.cend(); ++it) {
 				if (tg == (*it).m_tg) {
 					found = &(*it);
@@ -590,9 +624,9 @@ void CP25Gateway::writeCommand(const std::string& command)
 				}
 			}
 
-			if (found == NULL) {
+			if (found == nullptr) {
 				CP25Reflector* refl = m_reflectors->find(tg);
-				if (refl != NULL) {
+				if (refl != nullptr) {
 					m_currentTG       = tg;
 					m_currentAddr     = refl->m_addr;
 					m_currentAddrLen  = refl->m_addrLen;
@@ -626,7 +660,7 @@ void CP25Gateway::writeCommand(const std::string& command)
 				m_hangTimer.stop();
 			}
 
-			if (m_voice != NULL) {
+			if (m_voice != nullptr) {
 				if (m_currentAddrLen == 0U)
 					m_voice->unlinked();
 				else
@@ -639,17 +673,16 @@ void CP25Gateway::writeCommand(const std::string& command)
 	} else if (command.substr(0, 4) == "host") {
 		std::string ref;
 
-		if (m_currentAddrLen > 0) {
+		if (m_currentAddrLen > 0U) {
 			char buffer[INET6_ADDRSTRLEN];
-			if (getnameinfo((struct sockaddr*)&m_currentAddr, m_currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0) {
+			if (::getnameinfo((struct sockaddr*)&m_currentAddr, m_currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
 				ref = std::string(buffer);
-			}
 		}
 
 		std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
 		m_mqtt->publish("response", host);
 	} else {
-		CUtils::dump("Invalid remote command received", (unsigned char*)command.c_str(), command.length());
+		CUtils::dump("Invalid remote command received", (unsigned char*)command.c_str(), (unsigned int)command.length());
 	}
 }
 
@@ -699,9 +732,16 @@ void CP25Gateway::writeJSONRelinking(unsigned int tg)
 
 void CP25Gateway::onCommand(const unsigned char* command, unsigned int length)
 {
-	assert(gateway != NULL);
-	assert(command != NULL);
+	assert(gateway != nullptr);
+	assert(command != nullptr);
 
 	gateway->writeCommand(std::string((char*)command, length));
 }
 
+bool CP25Gateway::isVoiceBusy() const
+{
+	if (m_voice == nullptr)
+		return false;
+
+	return m_voice->isBusy();
+}

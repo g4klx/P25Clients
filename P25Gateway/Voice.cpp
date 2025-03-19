@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2017,2018,2019 by Jonathan Naylor G4KLX
+*   Copyright (C) 2017,2018,2019,2024,2025 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -99,14 +99,14 @@ m_language(language),
 m_indxFile(),
 m_imbeFile(),
 m_srcId(srcId),
-m_status(VS_NONE),
+m_status(VOICE_STATUS::NONE),
 m_timer(1000U, 1U),
 m_stopWatch(),
 m_sent(0U),
 m_n(0x62U),
 m_dstId(0U),
-m_imbe(NULL),
-m_voiceData(NULL),
+m_imbe(nullptr),
+m_voiceData(nullptr),
 m_voiceLength(0U),
 m_positions()
 {
@@ -139,7 +139,7 @@ CVoice::~CVoice()
 bool CVoice::open()
 {
 	FILE* fpindx = ::fopen(m_indxFile.c_str(), "rt");
-	if (fpindx == NULL) {
+	if (fpindx == nullptr) {
 		LogError("Unable to open the index file - %s", m_indxFile.c_str());
 		return false;
 	}
@@ -153,7 +153,7 @@ bool CVoice::open()
 	}
 
 	FILE* fpimbe = ::fopen(m_imbeFile.c_str(), "rb");
-	if (fpimbe == NULL) {
+	if (fpimbe == nullptr) {
 		LogError("Unable to open the IMBE file - %s", m_imbeFile.c_str());
 		::fclose(fpindx);
 		return false;
@@ -164,12 +164,12 @@ bool CVoice::open()
 	size_t sizeRead = ::fread(m_imbe, 1U, statStruct.st_size, fpimbe);
 	if (sizeRead != 0U) {
 		char buffer[80U];
-		while (::fgets(buffer, 80, fpindx) != NULL) {
+		while (::fgets(buffer, 80, fpindx) != nullptr) {
 			char* p1 = ::strtok(buffer, "\t\r\n");
-			char* p2 = ::strtok(NULL, "\t\r\n");
-			char* p3 = ::strtok(NULL, "\t\r\n");
+			char* p2 = ::strtok(nullptr, "\t\r\n");
+			char* p3 = ::strtok(nullptr, "\t\r\n");
 
-			if (p1 != NULL && p2 != NULL && p3 != NULL) {
+			if (p1 != nullptr && p2 != nullptr && p3 != nullptr) {
 				std::string symbol  = std::string(p1);
 				unsigned int start  = ::atoi(p2) * IMBE_LENGTH;
 				unsigned int length = ::atoi(p3) * IMBE_LENGTH;
@@ -204,7 +204,7 @@ void CVoice::linkedTo(unsigned int tg)
 		words.push_back("linkedto");
 	}
 
-	for (unsigned int i = 0U; letters[i] != 0x00U; i++)
+	for (unsigned int i = 0U; (i < 10U) && (letters[i] != 0x00U); i++)
 		words.push_back(std::string(1U, letters[i]));
 
 	createVoice(tg, words);
@@ -261,9 +261,9 @@ void CVoice::createVoice(unsigned int tg, const std::vector<std::string>& words)
 
 unsigned int CVoice::read(unsigned char* data)
 {
-	assert(data != NULL);
+	assert(data != nullptr);
 
-	if (m_status != VS_SENDING)
+	if (m_status != VOICE_STATUS::SENDING)
 		return 0U;
 
 	unsigned int offset = m_sent * IMBE_LENGTH;
@@ -272,7 +272,7 @@ unsigned int CVoice::read(unsigned char* data)
 		::memcpy(data, REC80, 17U);
 		m_timer.stop();
 		m_voiceLength = 0U;
-		m_status = VS_NONE;
+		m_status = VOICE_STATUS::NONE;
 		return 17U;
 	}
 
@@ -409,7 +409,7 @@ void CVoice::eof()
 	if (m_voiceLength == 0U)
 		return;
 
-	m_status = VS_WAITING;
+	m_status = VOICE_STATUS::WAITING;
 
 	m_timer.start();
 }
@@ -418,11 +418,16 @@ void CVoice::clock(unsigned int ms)
 {
 	m_timer.clock(ms);
 	if (m_timer.isRunning() && m_timer.hasExpired()) {
-		if (m_status == VS_WAITING) {
+		if (m_status == VOICE_STATUS::WAITING) {
 			m_stopWatch.start();
-			m_status = VS_SENDING;
+			m_status = VOICE_STATUS::SENDING;
 			m_sent = 0U;
 			m_n = 0x62U;
 		}
 	}
+}
+
+bool CVoice::isBusy() const
+{
+	return (m_status == VOICE_STATUS::WAITING) || (m_status == VOICE_STATUS::SENDING);
 }

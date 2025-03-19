@@ -1,4 +1,4 @@
-# P25Hosts.txt
+226# P25Hosts.txt
 #
 # The format of this file is the number of the Talk Group followed by the host name or address and port
 #
@@ -46,10 +46,16 @@
 235	p25.dvsph.net	41000
 
 # 260 HBLink Poland P25
-260	p25.hblink.pl	41000
+260	80.211.195.50	41005
+
+# 276 Amateur Radio Network
+276 p25.kc8cpw.com 41000
 
 # 304 W8ARA P25
 304	ara.selfip.net	41000
+
+# 312 TriState (IL, IN, WI) P25
+312 p25.tristatedmr.org 41000
 
 # 334 Mexico P25 (by XE1F)
 334	reflector.p25.link		41008
@@ -68,6 +74,9 @@
 
 # 456 Apco25 Ruhrgebiet/NRW Germany
 456 456.ham-p25.de 41000
+
+# 478 Ham Radio Village URF478
+478 urf.hamvillage.org 41000
 
 # 530 NZ
 530	zldigitalreflectors.hopto.org	41000
@@ -99,11 +108,20 @@
 # 730 Chile P25 Reflector to BM TG 730
 730	sdradio.cl	41000
 
+# 732 Octane Network P25 to XLX732
+732 p25.octanenetwork.net 41000
+
+# 739 Broadnet Repeater System, NYC
+739  P25.ke2aem.com  41000
+
+# 747 DVMproject2P25 - KN6TYF
+747  fne.dv.kn6tyf.com  41001
+
 # 762 W4PFT Multimode Linked to BM TG 312486-Franklin County, GA
 762	p25.w4pft.com	41000
 
 # 777 Almost Heaven WV P25
-777 74.208.38.36 41005
+777 wv777p25.ddns.net 41005
 
 # 822 TH-ASL-5508
 822	p25.xlx822.com	41000
@@ -120,11 +138,11 @@
 # 858 San Diego, CA
 858	nz6d.dx40.com	41000
 
-# 888 KN6TYF Lucky Radio MM DV
-888 reflector1.dv.jchang.io 41000
-
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
+
+# 888 KN6TYF Lucky Radio MM DV
+888  reflector1.dv.jchang.io  41000
 
 # 891 Western New York Digital Multimode Network - http://wny-digital.network - Buffalo, NY
 891	p25.wny-digital.network	41000
@@ -162,17 +180,29 @@
 # 1402 DuckFar Repeater Group, Chicago
 1402	duckfarw9bmk.gotdns.com	43000
 
+# 1453 Turkish Dijital Radio Network
+1453	2861.adn.systems	41000
+
 # 1701 Sector 001
 1701	hamsomniac.mooo.com	41001
 
 # 1928 Motorola Nerd Network
 1928	216.128.134.7	41000
 
+# 2043 Dutch P25 Urfd Reflector URFNL1
+2043    141.95.54.250    41000
+
 # 2044 P25 The Netherlands Main Reflector
 2044    51.83.46.75    41000
 
 # 2050 Florida Simulticast Group
 2050	reflector.p25.link	41009
+
+# 2113 Keywork Reflector
+2113  souche.asuscomm.com  41000
+
+# 2121 Cambria Multi-Mode Hub
+2121  108.174.58.66 41000
 
 # 2140 P25 Reflector BM DMR+ Multi 
 2140	andalucia.xreflector.es	41002
@@ -241,10 +271,10 @@
 4095	reflector.p25.link	41010
 
 # 4487 448.700 UHF Repeater in Aurora, CO
-4487	N0oba1.asuscomm.cn	41000
+4487	N0oba1.asuscomm.com	41000
 
 # 4519 TG P25 VHF Repeater
-4519	N0oba1.asuscomm.cn	41005
+4519	N0oba1.asuscomm.com	41005
 
 # 4584 Great Lakes Digital Common (P25/DMR/NXDN/YSF/DSTAR/M17)
 4584 gldcom.dyndns.org 41000
@@ -252,11 +282,20 @@
 # 5000 ALL THE COMMS
 5000	p25.p25stuff.com	41000
 
+# 5030 KK7GKG P25 to ASL Gateway
+5030  site1a.redmtncomms.com  41000
+
+# 5031 KK7GKG DEVELOPMENT
+5031  site0.redmtncomms.com
+
 # 5057 VK7 TAS (hosted by VK7HSE)
 5057	45.248.50.37	41000
 
 # 5205 CCARCNSW P25 Bridge
 5205	5205.p25dvm.com	41000
+
+# 5500 IVC Wireless Technology Club
+5500 p25.ivc.radio 41000
 
 # 5658 DuckFar Repeater Group, Chicago
 5658	duckfarw9bmk.gotdns.com	41000
@@ -289,7 +328,7 @@
 7573	p25.docksea.com	41000
 
 # 7941 WHITE MOUNTAIN REPEATER ASSOCIATION
-7941	45.63.54.20	41000
+7941  wmra-multimode.link  41000
 
 # 8200 Mountain Lakes Regional Amateur Radio Society
 8200	n2yqt.tourge.net	41000
@@ -356,6 +395,9 @@
 
 # 10216 Northeast Ohio
 10216	xlx216.km8v.com	41000
+
+# 10253 N6OCS
+10253 p25.wd6awp.us 41000
 
 # 10255 Southern Ontario
 10255	ve3rd.hopto.org 41000
@@ -459,11 +501,17 @@
 # 11069 KK6RQ DMR-310551
 11069	area52.zapto.org	41000
 
+# 11710 Emergency Radio Long Island
+11710  sbanetweb.com  41000
+
 # 17603 URFM17 Universal Reflector
 17603	urf.m17.link	41000
 
 # 18436 LMR TALK MM DV
 18436 reflector.jchang.io 41000
+
+# 20210 GR-Hellas-ADN-P25
+20210	gr-hellas-adn.ddnsfree.com 41000
 
 # 20281 GR-KERKYRA-DV
 20281	greece.freedmr.online	41000
@@ -478,10 +526,10 @@
 22200	p25.hblink.it	41000
 
 # 22202 IT SARDINIA
-22202	87.106.152.249	41000
+22202	p25.is0.org	41000
 
 # 22208 IT - Italy Centro Digiland
-22208	185.205.209.70	41000
+22208	italycentro.ddns.net	41000
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
@@ -498,8 +546,14 @@
 # 22258 D2ALP HBLink Italia
 22258	94.177.173.53	41000
 
+# 22273 IT-C4FM_BAT
+22273 82.85.236.36  41000
+
+# 22556 URF556 Stafford Virginia
+22556 urf556.kq4tnv.net	41000
+
 # 22625 P25 Romania
-22625 74.208.38.36 41004
+22625 82.165.47.94 41000
 
 # 23225 Austria
 23225	service.oe9hamnet.at	41000
@@ -546,11 +600,20 @@
 # 26078 Poland HBLink Network
 26078	p25.hblink.kutno.pl	41000
 
-# 26230 German Hannover-XLink
-26230	p25.hannover-x.link	41000
+# 26230 German RegHannover
+26230	p25-tg26230.dl9cma.net 41010
+
+# 26231 German NI-Mitte
+26231	p25-tg26231.dl9cma.net 41000
+
+# 26269 Multimode HE_RLP
+26269 urf169.dc9vq.de 41000
 
 # 26285 German Oberbayern Region
 26285	xlx850.bm262.de	41008
+
+# 26334 German Funknetz-Celle
+26334 85.215.198.111 41000
 
 # 26444 German Inselfreunde Net
 26444	xlx850.bm262.de	41004
@@ -574,7 +637,7 @@
 27568	139.144.61.167	41003
 
 # 28299 America-Ragchew
-28299	arcp25.duckdns.org		41000
+28299	arcp25.duckdns.org		41001
 
 # 29252 Oklahoma Hamsomniacs
 29252	hamsomniac.mooo.com	41000
@@ -622,10 +685,16 @@
 31123	p25.kg4orq.com	41000
 
 # 31161 Virginia
-31161	24.49.15.69	41000
+31161	philbonet.ddns.net	41001
 
 # 31171 Illinois Link
 31171	illink.radiotechnology.xyz	41000
+
+# 31181 Indiana Link
+31181  na9vy.us  41000
+
+#31182 Indiana State-Wide
+31182  na9vy.us  41001
 
 # 31188 Southern Indiana
 31188	w9windigital.org	41000
@@ -637,7 +706,7 @@
 31217	tg31217.kd9koo.com	41000
 
 # 31220 Lucas County Ohio ARES
-31220	w8mal-dvbridge.hopto.org	41000
+31220	w8mal-dvbridge.hopto.org	4100
 
 # 31226 Worldwide Chat
 31226	74.208.163.225	41000
@@ -658,16 +727,25 @@
 31297	p25.ddns.me	41003
 
 # 31313 America's Kansas City Wide (P25/DMR/YSF)
-31313	p25.ddns.me	41002
+31313	xxlx.w0fh.net  41001
 
 # 31337 SWLA <-> DMR TG 311995 <-> XLX337
 31337	bridge.kc5jmj.com	41000
 
-# 31378 Foothills Wave Whisperers
-31378 66.226.62.35 41000
+# 31377 Foothills Wave Whisperers
+31377 66.226.62.35 41000
 
 # 31379 Piedmont Triad Network
 31379 130.51.21.144 41000
+
+# 31390 TORCON WX
+31390 167.88.45.175 41000
+
+# 31391 TORCON ARC- TORCON Amateur Radio Club
+31391 167.88.45.175 41001
+
+# 31392 TORCON TAC
+31392 167.88.45.175 41002
 
 # 31395 Cleveland Skywarn Backbone
 31395	backbone.ad8g.net	41000
@@ -696,8 +774,11 @@
 # 31444	RI DIGITAL LINK TG#31444
 31444	149.28.54.153	41000
 
-# 31490 Link to DMR TG 314900
+# 31490 Utah DRN 314900 Bridge
 31490	utah00.utahdrn.org	41000
+
+# 31491 Utah DRN 314901 Bridge
+31491	utah01.utahdrn.org	41001
 
 # 31497 LifeFlight, UT Statewide - Link to DMR TG 31497
 31497	45.79.110.170	41000
@@ -720,6 +801,9 @@
 # 31620 Kings of Digital
 31620	wb5ekup25.duckdns.org	41000
 
+# 31644 BM Link P25 to DMR
+31644 homeservice.freeddns.org 41000
+
 # 31655 Ham Radio Venture Overland
 31655	149.248.8.155	41000
 
@@ -741,6 +825,9 @@
 # 31888 KG4JPL North-Central Florida
 31888	p25.kg4jpl.com		41000
 
+# 31910 LMRNET LMR Talkaround
+31910 172.233.211.93    41000
+
 # 31947 K0MGS Western Missouri/KC Metro
 31947	p25.ddns.me	41000
 
@@ -756,7 +843,7 @@
 # 33420 Durango Mexico Digital Network
 33420	p25-mx.ddns.net	41000
 
-# 33581 OMISS Group
+# 33581 NET TALK
 33581	omiss.dyndns.org	41000
 
 # 37030 RED SKYNET
@@ -790,7 +877,7 @@
 45000	p25.dvham.com	41000
 
 # 45001 P25-DS5QDR Korea
-45001	ds5qdr-mst.duckdns.org	41000
+45001	dvsys.duckdns.org	41000
 
 # 46001 P25 Link TG46001, China
 46001	46001.bh1nyr.net	41000
@@ -819,11 +906,11 @@
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
 50210	edone.no-ip.com	41000
 
-# 50516 Mudgee District Radio Group
+# 50516 Western NSW TAC 1
 50516 54.66.203.116 41000
 
-# 50517 Mudgee TAC 1
-50517 54.153.151.6 41010
+# 50517 Western NSW TAC 2
+50517 54.66.203.116 41010
 
 # 50525 Bridge to YSF, NXDN and DMR
 50525	50525.p25dvm.com	41000
@@ -871,7 +958,7 @@
 54100	hs1qcj.ddns.net	41000
 
 # 55100 (WWRARN) World Wide Ragchew Amateur Radio Net
-55100	45.63.6.57	41000
+55100	192.155.88.30	41000
 
 # 55295 (KT0ADS) TOADS Digital Voice
 55295 47.36.253.75 41000
@@ -908,6 +995,9 @@
 
 # 65105 UHDARC TAC 2
 65105	UHDARCtac2.mywire.org	41004
+
+# 65123 Murphy Radio Network (MRN)
+65123   45.33.22.225   41000
 
 # 65400 XLX288 Reflector
 65400	xlx288.unusualperson.com	41000

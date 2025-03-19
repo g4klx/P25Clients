@@ -60,7 +60,7 @@ private:
 	CConf        m_conf;
 	CVoice*      m_voice;
 	CP25Network* m_remoteNetwork;
-	unsigned short m_currentTG;
+	unsigned int m_currentTG;
 	unsigned int m_currentAddrLen;
 	sockaddr_storage m_currentAddr;
 	bool         m_currentIsStatic;
@@ -68,6 +68,8 @@ private:
 	unsigned int m_rfHangTime;
 	CReflectors* m_reflectors;	
 	std::vector<CStaticTG> m_staticTGs;
+
+	bool isVoiceBusy() const;
 
 	void writeJSONStatus(const std::string& status);
 	void writeJSONLinking(const std::string& reason, unsigned int tg);

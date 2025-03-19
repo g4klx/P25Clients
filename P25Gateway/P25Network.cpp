@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016,2020,2024 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020,2024,2025 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ bool CP25Network::open()
 
 bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
 {
-	assert(data != NULL);
+	assert(data != nullptr);
 	assert(length > 0U);
 
 	if (m_debug)
@@ -123,7 +123,7 @@ bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
 
 unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen)
 {
-	assert(data != NULL);
+	assert(data != nullptr);
 	assert(length > 0U);
 
 	int len = m_socket4.read(data, length, addr, addrLen);
