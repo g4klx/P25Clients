@@ -56,12 +56,17 @@ m_mqttAddress("127.0.0.1"),
 m_mqttPort(1883U),
 m_mqttKeepalive(60U),
 m_mqttName("p25-gateway"),
+m_mqttAuthEnabled(false),
+m_mqttUsername(),
+m_mqttPassword(),
 m_networkPort(0U),
 m_networkHosts1(),
 m_networkHosts2(),
 m_networkReloadTime(0U),
 m_networkParrotAddress("127.0.0.1"),
 m_networkParrotPort(0U),
+m_networkP252DMRAddress("127.0.0.1"),
+m_networkP252DMRPort(0U),
 m_networkStatic(),
 m_networkRFHangTime(120U),
 m_networkNetHangTime(60U),
@@ -177,6 +182,12 @@ bool CConf::read()
 				m_mqttKeepalive = (unsigned int)::atoi(value);
 			else if (::strcmp(key, "Name") == 0)
 				m_mqttName = value;
+			else if (::strcmp(key, "Auth") == 0)
+				m_mqttAuthEnabled = ::atoi(value) == 1;
+			else if (::strcmp(key, "Username") == 0)
+				m_mqttUsername = value;
+			else if (::strcmp(key, "Password") == 0)
+				m_mqttPassword = value;
 		} else if (section == SECTION::NETWORK) {
 			if (::strcmp(key, "Port") == 0)
 				m_networkPort = (unsigned short)::atoi(value);
@@ -301,6 +312,21 @@ unsigned int CConf::getMQTTKeepalive() const
 std::string CConf::getMQTTName() const
 {
 	return m_mqttName;
+}
+
+bool CConf::getMQTTAuthEnabled() const
+{
+	return m_mqttAuthEnabled;
+}
+
+std::string CConf::getMQTTUsername() const
+{
+	return m_mqttUsername;
+}
+
+std::string CConf::getMQTTPassword() const
+{
+	return m_mqttPassword;
 }
 
 unsigned short CConf::getNetworkPort() const
