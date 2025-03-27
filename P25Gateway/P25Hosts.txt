@@ -648,6 +648,9 @@
 # 30639 NorCal-Bridge / Multimode-P25-TG30639
 30639	nfonorcalp25.dyndns.org	41000
 
+# 31000 US Severe Weather (P25/DMR)
+31000  69.62.69.117  41000
+
 # 31010 Alabama Link
 31010	alabamalink.radiotechnology.xyz	41000
 
