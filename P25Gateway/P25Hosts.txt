@@ -894,6 +894,9 @@
 # 46005 P25 Link TG46005,China
 46005	47.109.24.90	41000
 
+# 46008 P25 Link to BM TG46008, Region 8 of China
+46008  p25.tg46008.cn  41000
+
 # 46010 P25 Link TG46010, Beijing, China
 46010	46010.bh1nyr.net	41002
 
