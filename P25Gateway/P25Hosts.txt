@@ -828,6 +828,9 @@
 # 31691 US Midwest P25 Reflector
 31691	net.w3axl.com	43169
 
+# 31701 Starfleet Amateur Radio Group P25 Reflector
+31701  45.30.129.91  41000
+
 # 31777 DX-LINK
 31777	8.9.4.102		41000
 
