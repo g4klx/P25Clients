@@ -129,9 +129,6 @@
 # 777 Almost Heaven WV P25
 777 wv777p25.ddns.net 41005
 
-# 822 TH-ASL-5508
-822	p25.xlx822.com	41000
-
 # 841 Team Wave
 841	mx0wvv.ddns.net	41000
 
@@ -140,9 +137,6 @@
 
 # 848 Chandler Hams
 848	xlx848.kk7mnz.com	41000
-
-# 858 San Diego, CA
-858	nz6d.dx40.com	41000
 
 # 865 K1LNX Multimode Server - Knoxville, TN
 865	knoxp25.k1lnx.net	41000
@@ -165,9 +159,6 @@
 # 925 MotoChat 
 925	p25.motochat.eu	41009
 
-# 926 HamFurs/LoFAR MultiMode Bridge
-926	urf.kf3rry.org	41000
-
 # 927 Southern California
 927	927.org	41000
 
@@ -177,9 +168,6 @@
 # 947 W8LRK Livingston Amateur Radio Klub (Bridged to XLX947B)
 947 w8lrkp25.dyndns.org	41001
 
-# 994 The Online Radio Club (Bridged to XLX994)
-994	misc.openreflector.com	41000
-
 # 1007 The Harley-Hangout "TGIF TG-1007 Multi-Function Bridge"
 1007	43773.kb5rir.com	41003
 
@@ -188,9 +176,6 @@
 
 # 1453 Turkish Dijital Radio Network
 1453	2861.adn.systems	41000
-
-# 1701 Sector 001
-1701	hamsomniac.mooo.com	41001
 
 # 1928 Motorola Nerd Network
 1928	216.128.134.7	41000
@@ -222,12 +207,6 @@
 # 2231 IT Sardinia Is. - Multimode - https://is0.org
 2231	p25.is0.org	41000
 
-# 2263 Bucharest YO3 P25 Network
-2263	p25.dstar-yo.ro	41003
-
-# 2265 Baia Mare YO5 P25 Network
-2265	p25.dstar-yo.ro	41005
-
 # 2284 Basel Switzerland - https://p25.network
 2284	p25.network	41000
 
@@ -236,9 +215,6 @@
 
 # 2350 UK ChatterBOX
 2350	p252350.freestar.network	41001
-
-# RU DMR TG2503
-2503	p25.r1ik.ru	41000
 
 # 2700 Old Melbourne Florida Repeater Association
 2700	2700p25.ddns.net	41000
@@ -492,9 +468,6 @@
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
 
-# 10750 Australian Secondary P25 Reflector
-10750	clasn-p25.cloudasn.com	41000
-
 # 10888 Texas
 10888	29520.asnode.org	41000
 
@@ -509,9 +482,6 @@
 
 # 11710 Emergency Radio Long Island
 11710  sbanetweb.com  41000
-
-# 17603 URFM17 Universal Reflector
-17603	urf.m17.link	41000
 
 # 18436 LMR TALK MM DV
 18436 reflector.jchang.io 41000
@@ -539,12 +509,6 @@
 
 # 22212 IT PIEDMONT GDO
 22212	p25gdo.duckdns.org	41000
-
-# 22221 HBLINK IT-DMR REGIONALE LOMBARDIA
-22221	dagobah.hblink.it	41000
-
-# 22222 North Carolina NCC-1701
-22222	NCC-1701-P25.ddns.net	41001
 
 # 22252 IT MULTIPROTOCOL NETWORK
 22252	46.226.178.80	41000
@@ -576,26 +540,14 @@
 # 23511 LEFARS Multi-Reflector
 23511	xlxlef.gb7hh.co.uk	41000
 
-# 23522 GB-PrestonARS-P25
-23522	23522p25ref.dyndns.org	41000
-
-# 23551 P25 Scotland
-23551	p25scotland.ddns.net	41000
-
 # 23556 DVSPH Multimode
 23556	xlx600.dvsph.net	41000
-
-# 23595 OZ-DMR
-23595	p25.oz-dmr.network	41000
 
 # 24033 2 Meter Crew Anti-Net
 24033	wg5eek.com	41000
 
 # 25508 South Eastern MA P25
 25508	k1rfi.net	41000
-
-# 25605 Russia Ekaterinburg 
-25605   ysf.386i.ru     41000
 
 # 25617 Russia Kavkaz
 25617	kavkaz.qrz.ru	41000
@@ -645,12 +597,6 @@
 # 28299 America-Ragchew
 28299	arcp25.duckdns.org		41001
 
-# 29252 Oklahoma Hamsomniacs
-29252	hamsomniac.mooo.com	41000
-
-# 30639 NorCal-Bridge / Multimode-P25-TG30639
-30639	nfonorcalp25.dyndns.org	41000
-
 # 31000 US Severe Weather (P25/DMR)
 31000  69.62.69.117  41000
 
@@ -686,9 +632,6 @@
 
 # 31177 WESDIG P25 Reflector
 31177	p25.wesdig.com	41000
-
-# 31121 First Coast FL
-31121	dvse.dmrnet.net	41000
 
 # 31123 Florida Treasure Coast
 31123	p25.kg4orq.com	41000
@@ -774,9 +717,6 @@
 # XLX045A P25 <-> DMR/DSTAR/YSF/NXDN <-> BM TG31425 PA Wide Cross Mode
 31425	70.44.20.24	41001
 
-# 31424 SVARC-Shenango Valley Amateur Radio Club- K3WRB
-31424	p25.n1tvi.net	41000
-
 #  PA Cross Mode (alt), 31426
 31426	3.215.215.169	41001
 
@@ -852,17 +792,11 @@
 # 32103 CW-Ops Academy
 32103	cwops.dyndns.org	41000
 
-# 33015 KP4CA Digital Network
-33015	kp4ca-p25.ddns.net	41000
-
 # 33420 Durango Mexico Digital Network
 33420	p25-mx.ddns.net	41000
 
 # 33581 NET TALK
 33581	omiss.dyndns.org	41000
-
-# 37030 RED SKYNET
-37030	skynet.xreflector.es	41000
 
 # 37225 Haiti Digital Communications League (HDCL) P25
 37225	3.215.215.169	41011
@@ -938,9 +872,6 @@
 
 # 50536 FreeSTAR VK
 50536	p25tg50536.vkradio.com	41001
-
-# 51502 DX1ACE
-51502	p25-dx1ace.hopto.org	41000
 
 # 51503 US Philippines P25 network
 51503	45.79.76.10	41000
@@ -1025,4 +956,3 @@
 
 # 460851 TG460851 Guiyang China
 460851	120.76.96.210 41000
-
