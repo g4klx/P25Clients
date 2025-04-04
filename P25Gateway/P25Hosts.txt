@@ -93,6 +93,9 @@
 # 556 ARFCOM AR15.com
 556	reflector.site	41000
 
+# 609 AREA-609 SNJ
+609 67.205.135.215 41000
+
 # 621 HRCC LINK
 621	urf.hrcc.link	41000
 
