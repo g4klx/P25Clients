@@ -310,8 +310,8 @@ int CP25Gateway::run()
 		if (reflector != nullptr) {
 			CStaticTG staticTG;
 			staticTG.m_tg      = *it;
-			staticTG.m_addr    = reflector->m_addr;
-			staticTG.m_addrLen = reflector->m_addrLen;
+			staticTG.m_addr    = reflector->m_addr_v4;
+			staticTG.m_addrLen = reflector->m_addrLen_v4;
 			staticTGs.push_back(staticTG);
 
 			remoteNetwork.poll(staticTG.m_addr, staticTG.m_addrLen);
@@ -463,8 +463,8 @@ int CP25Gateway::run()
 						CP25Reflector* refl = reflectors.find(dstTG);
 						if (refl != nullptr) {
 							currentTG       = dstTG;
-							currentAddr     = refl->m_addr;
-							currentAddrLen  = refl->m_addrLen;
+							currentAddr     = refl->m_addr_v4;
+							currentAddrLen  = refl->m_addrLen_v4;
 							currentIsStatic = false;
 						} else {
 							currentTG       = dstTG;
@@ -572,8 +572,8 @@ int CP25Gateway::run()
 							CP25Reflector* refl = reflectors.find(tg);
 							if (refl != nullptr) {
 								currentTG       = tg;
-								currentAddr     = refl->m_addr;
-								currentAddrLen  = refl->m_addrLen;
+								currentAddr     = refl->m_addr_v4;
+								currentAddrLen  = refl->m_addrLen_v4;
 								currentIsStatic = false;
 							} else {
 								currentTG       = tg;

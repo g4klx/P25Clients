@@ -22,6 +22,8 @@
 #include "UDPSocket.h"
 #include "Timer.h"
 
+#include <nlohmann/json.hpp>
+
 #include <vector>
 #include <string>
 
@@ -29,14 +31,18 @@ class CP25Reflector {
 public:
 	CP25Reflector() :
 	m_id(),
-	m_addr(),
-	m_addrLen(0U)
+	m_addr_v4(),
+	m_addrLen_v4(0U),
+	m_addr_v6(),
+	m_addrLen_v6(0U)
 	{
 	}
 
 	unsigned int     m_id;
-	sockaddr_storage m_addr;
-	unsigned int     m_addrLen;
+	sockaddr_storage m_addr_v4;
+	unsigned int     m_addrLen_v4;
+	sockaddr_storage m_addr_v6;
+	unsigned int     m_addrLen_v6;
 };
 
 class CReflectors {
@@ -62,6 +68,9 @@ private:
 	unsigned short m_p252dmrPort;
 	std::vector<CP25Reflector*> m_reflectors;
 	CTimer       m_timer;
+
+	void remove();
+	void parse(const nlohmann::json& data);
 };
 
 #endif

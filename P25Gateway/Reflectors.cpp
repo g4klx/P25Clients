@@ -19,6 +19,8 @@
 #include "Reflectors.h"
 #include "Log.h"
 
+#include <fstream>
+
 #include <algorithm>
 #include <functional>
 #include <cstdio>
@@ -42,10 +44,7 @@ m_timer(1000U, reloadTime * 60U)
 
 CReflectors::~CReflectors()
 {
-	for (std::vector<CP25Reflector*>::iterator it = m_reflectors.begin(); it != m_reflectors.end(); ++it)
-		delete *it;
-
-	m_reflectors.clear();
+	remove();
 }
 
 void CReflectors::setParrot(const std::string& address, unsigned short port)
@@ -63,89 +62,27 @@ void CReflectors::setP252DMR(const std::string& address, unsigned short port)
 bool CReflectors::load()
 {
 	// Clear out the old reflector list
-	for (std::vector<CP25Reflector*>::iterator it = m_reflectors.begin(); it != m_reflectors.end(); ++it)
-		delete *it;
+	remove();
 
-	m_reflectors.clear();
+	try {
+		std::fstream f(m_hostsFile1);
+		nlohmann::json data = nlohmann::json::parse(f);
 
-	FILE* fp = ::fopen(m_hostsFile1.c_str(), "rt");
-	if (fp != nullptr) {
-		char buffer[100U];
-		while (::fgets(buffer, 100U, fp) != nullptr) {
-			if (buffer[0U] == '#')
-				continue;
-
-			char* p1 = ::strtok(buffer, " \t\r\n");
-			char* p2 = ::strtok(nullptr,   " \t\r\n");
-			char* p3 = ::strtok(nullptr,   " \t\r\n");
-
-			if (p1 != nullptr && p2 != nullptr && p3 != nullptr) {
-				std::string host  = std::string(p2);
-				unsigned short port = (unsigned short)::atoi(p3);
-				unsigned int tg = (unsigned int)::atoi(p1);
-
-				if (tg > 0xFFFFU){
-					LogWarning("P25 Talkgroups can only be 16 bits. %u is too large",tg);
-					continue;
-				}
-
-				sockaddr_storage addr;
-				unsigned int addrLen;
-				if (CUDPSocket::lookup(host, port, addr, addrLen) == 0) {
-					CP25Reflector* refl = new CP25Reflector;
-					refl->m_id      = (unsigned int)::atoi(p1);
-					refl->m_addr    = addr;
-					refl->m_addrLen = addrLen;
-					m_reflectors.push_back(refl);
-				} else {
-					LogWarning("Unable to resolve the address of %s", host.c_str());
-				}
-			}
-		}
-
-		::fclose(fp);
+		parse(data);
+	}
+	catch (...) {
+		LogError("Unable to load/parse file %s", m_hostsFile1.c_str());
+		return false;
 	}
 
-	fp = ::fopen(m_hostsFile2.c_str(), "rt");
-	if (fp != nullptr) {
-		char buffer[100U];
-		while (::fgets(buffer, 100U, fp) != nullptr) {
-			if (buffer[0U] == '#')
-				continue;
+	try {
+		std::fstream f(m_hostsFile2);
+		nlohmann::json data = nlohmann::json::parse(f);
 
-			char* p1 = ::strtok(buffer, " \t\r\n");
-			char* p2 = ::strtok(nullptr, " \t\r\n");
-			char* p3 = ::strtok(nullptr, " \t\r\n");
-
-			if (p1 != nullptr && p2 != nullptr && p3 != nullptr) {
-				// Don't allow duplicate reflector ids from the secondary hosts file.
-				unsigned int id = (unsigned int)::atoi(p1);
-				if (find(id) == nullptr) {
-					std::string host  = std::string(p2);
-					unsigned short port = (unsigned short)::atoi(p3);
-					unsigned int tg = (unsigned int)::atoi(p1);
-
-					if (tg > 0xFFFFU){
-						LogWarning("P25 Talkgroups can only be 16 bits. %u is too large",tg);
-						continue;
-					}
-
-					sockaddr_storage addr;
-					unsigned int addrLen;
-					if (CUDPSocket::lookup(host, port, addr, addrLen) == 0) {
-						CP25Reflector* refl = new CP25Reflector;
-						refl->m_id      = id;
-						refl->m_addr    = addr;
-						refl->m_addrLen = addrLen;
-						m_reflectors.push_back(refl);
-					} else {
-						LogWarning("Unable to resolve the address of %s", host.c_str());
-					}
-				}
-			}
-		}
-
-		::fclose(fp);
+		parse(data);
+	}
+	catch (...) {
+		LogWarning("Unable to load/parse file %s", m_hostsFile2.c_str());
 	}
 
 	size_t size = m_reflectors.size();
@@ -157,25 +94,25 @@ bool CReflectors::load()
 		unsigned int addrLen;
 		if (CUDPSocket::lookup(m_parrotAddress, m_parrotPort, addr, addrLen) == 0) {
 			CP25Reflector* refl = new CP25Reflector;
-			refl->m_id      = 10U;
-			refl->m_addr    = addr;
-			refl->m_addrLen = addrLen;
+			refl->m_id = 10U;
+			refl->m_addr_v4 = addr;
+			refl->m_addrLen_v4 = addrLen;
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
 		} else {
 			LogWarning("Unable to resolve the address of the Parrot");
 		}
 	}
-	
+
 	// Add the P252DMR entry
 	if (m_p252dmrPort > 0U) {
 		sockaddr_storage addr;
 		unsigned int addrLen;
 		if (CUDPSocket::lookup(m_p252dmrAddress, m_p252dmrPort, addr, addrLen) == 0) {
 			CP25Reflector* refl = new CP25Reflector;
-			refl->m_id      = 20U;
-			refl->m_addr    = addr;
-			refl->m_addrLen = addrLen;
+			refl->m_id = 20U;
+			refl->m_addr_v4 = addr;
+			refl->m_addrLen_v4 = addrLen;
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
 		} else {
@@ -207,5 +144,65 @@ void CReflectors::clock(unsigned int ms)
 	if (m_timer.isRunning() && m_timer.hasExpired()) {
 		load();
 		m_timer.start();
+	}
+}
+
+void CReflectors::remove()
+{
+	for (std::vector<CP25Reflector*>::iterator it = m_reflectors.begin(); it != m_reflectors.end(); ++it)
+		delete* it;
+
+	m_reflectors.clear();
+}
+
+void CReflectors::parse(const nlohmann::json& data)
+{
+	bool hasData = data["reflectors"].is_array();
+	if (!hasData)
+		throw;
+
+	nlohmann::json::array_t arr = data["reflectors"];
+	for (const auto& it : arr) {
+		unsigned int tg = it["designator"];
+		if (tg > 0xFFFFU) {
+			LogWarning("P25 Talkgroups can only be 16 bits. %u is too large", tg);
+			continue;
+		}
+
+		unsigned short port = it["port"];
+
+		sockaddr_storage addr_v4    = sockaddr_storage();
+		unsigned int     addrLen_v4 = 0U;
+
+		bool isNull = it["ipv4"].is_null();
+		if (!isNull) {
+			std::string ipv4 = it["ipv4"];
+			if (!CUDPSocket::lookup(ipv4, port, addr_v4, addrLen_v4) == 0) {
+				LogWarning("Unable to resolve the address of %s", ipv4.c_str());
+				addrLen_v4 = 0U;
+			}
+		}
+
+		sockaddr_storage addr_v6    = sockaddr_storage();
+		unsigned int     addrLen_v6 = 0U;
+
+		isNull = it["ipv6"].is_null();
+		if (!isNull) {
+			std::string ipv6 = it["ipv6"];
+			if (!CUDPSocket::lookup(ipv6, port, addr_v6, addrLen_v6) == 0) {
+				LogWarning("Unable to resolve the address of %s", ipv6.c_str());
+				addrLen_v6 = 0U;
+			}
+		}
+
+		if ((addrLen_v4 > 0U) || (addrLen_v6 > 0U)) {
+			CP25Reflector* refl = new CP25Reflector;
+			refl->m_id         = tg;
+			refl->m_addr_v4    = addr_v4;
+			refl->m_addrLen_v4 = addrLen_v4;
+			refl->m_addr_v6    = addr_v6;
+			refl->m_addrLen_v6 = addrLen_v6;
+			m_reflectors.push_back(refl);
+		}
 	}
 }
