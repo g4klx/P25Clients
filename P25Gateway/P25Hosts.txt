@@ -925,7 +925,7 @@
 63600	xlx.ham.lv	41000
 
 # 64701 Reunion Island
-64701	165.169.31.30	41000
+64701 numericroom.ddns.net 41000
 
 # 65100 2007DXgroup
 65100	89.46.75.115	41000
