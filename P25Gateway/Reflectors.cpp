@@ -20,6 +20,7 @@
 #include "Log.h"
 
 #include <fstream>
+#include <nlohmann/json.hpp>
 
 #include <algorithm>
 #include <functional>
@@ -65,10 +66,7 @@ bool CReflectors::load()
 	remove();
 
 	try {
-		std::fstream f(m_hostsFile1);
-		nlohmann::json data = nlohmann::json::parse(f);
-
-		parse(data);
+		parse(m_hostsFile1);
 	}
 	catch (...) {
 		LogError("Unable to load/parse file %s", m_hostsFile1.c_str());
@@ -76,10 +74,7 @@ bool CReflectors::load()
 	}
 
 	try {
-		std::fstream f(m_hostsFile2);
-		nlohmann::json data = nlohmann::json::parse(f);
-
-		parse(data);
+		parse(m_hostsFile2);
 	}
 	catch (...) {
 		LogWarning("Unable to load/parse file %s", m_hostsFile2.c_str());
@@ -94,9 +89,10 @@ bool CReflectors::load()
 		unsigned int addrLen;
 		if (CUDPSocket::lookup(m_parrotAddress, m_parrotPort, addr, addrLen) == 0) {
 			CP25Reflector* refl = new CP25Reflector;
-			refl->m_id = 10U;
-			refl->m_addr_v4 = addr;
-			refl->m_addrLen_v4 = addrLen;
+			refl->m_id           = 10U;
+			refl->IPv4.m_addr    = addr;
+			refl->IPv4.m_addrLen = addrLen;
+			refl->IPv6.m_addrLen = 0U;
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P25 parrot (TG%u)", refl->m_id);
 		} else {
@@ -110,9 +106,10 @@ bool CReflectors::load()
 		unsigned int addrLen;
 		if (CUDPSocket::lookup(m_p252dmrAddress, m_p252dmrPort, addr, addrLen) == 0) {
 			CP25Reflector* refl = new CP25Reflector;
-			refl->m_id = 20U;
-			refl->m_addr_v4 = addr;
-			refl->m_addrLen_v4 = addrLen;
+			refl->m_id           = 20U;
+			refl->IPv4.m_addr    = addr;
+			refl->IPv4.m_addrLen = addrLen;
+			refl->IPv6.m_addrLen = 0U;
 			m_reflectors.push_back(refl);
 			LogInfo("Loaded P252DMR (TG%u)", refl->m_id);
 		} else {
@@ -155,14 +152,18 @@ void CReflectors::remove()
 	m_reflectors.clear();
 }
 
-void CReflectors::parse(const nlohmann::json& data)
+void CReflectors::parse(const std::string& fileName)
 {
+	std::fstream file(fileName);
+
+	nlohmann::json data = nlohmann::json::parse(file);
+
 	bool hasData = data["reflectors"].is_array();
 	if (!hasData)
 		throw;
 
-	nlohmann::json::array_t arr = data["reflectors"];
-	for (const auto& it : arr) {
+	nlohmann::json::array_t hosts = data["reflectors"];
+	for (const auto& it : hosts) {
 		unsigned int tg = it["designator"];
 		if (tg > 0xFFFFU) {
 			LogWarning("P25 Talkgroups can only be 16 bits. %u is too large", tg);
@@ -198,10 +199,10 @@ void CReflectors::parse(const nlohmann::json& data)
 		if ((addrLen_v4 > 0U) || (addrLen_v6 > 0U)) {
 			CP25Reflector* refl = new CP25Reflector;
 			refl->m_id         = tg;
-			refl->m_addr_v4    = addr_v4;
-			refl->m_addrLen_v4 = addrLen_v4;
-			refl->m_addr_v6    = addr_v6;
-			refl->m_addrLen_v6 = addrLen_v6;
+			refl->IPv4.m_addr    = addr_v4;
+			refl->IPv4.m_addrLen = addrLen_v4;
+			refl->IPv6.m_addr    = addr_v6;
+			refl->IPv6.m_addrLen = addrLen_v6;
 			m_reflectors.push_back(refl);
 		}
 	}

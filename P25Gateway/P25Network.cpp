@@ -26,17 +26,22 @@
 
 CP25Network::CP25Network(unsigned short port, const std::string& callsign, bool debug) :
 m_callsign(callsign),
-m_socket4(port),
-m_socket6(port),
+m_socket4(nullptr),
+m_socket6(nullptr),
 m_debug(debug)
 {
 	assert(port > 0U);
+
+	m_socket4 = new CUDPSocket(port);
+	m_socket6 = new CUDPSocket(port);
 
 	m_callsign.resize(10U, ' ');
 }
 
 CP25Network::~CP25Network()
 {
+	delete m_socket4;
+	delete m_socket6;
 }
 
 bool CP25Network::open()
@@ -46,14 +51,27 @@ bool CP25Network::open()
 	sockaddr_storage addr4;
 	addr4.ss_family = AF_INET;
 
-	bool ret = m_socket4.open(addr4);
-	if (!ret)
-		return false;
+	bool ret4 = m_socket4->open(addr4);
+	if (!ret4) {
+		delete m_socket4;
+		m_socket4 = nullptr;
+	}
 
 	sockaddr_storage addr6;
 	addr6.ss_family = AF_INET6;
 
-	return m_socket6.open(addr6);
+	bool ret6 = m_socket6->open(addr6);
+	if (!ret6) {
+		delete m_socket6;
+		m_socket6 = nullptr;
+	}
+
+	if (!ret4 && !ret6) {
+		LogError("Unable to open an IPv4 or an IPv6 socket");
+		return false;
+	}
+
+	return true;
 }
 
 bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
@@ -66,9 +84,17 @@ bool CP25Network::write(const unsigned char* data, unsigned int length, const so
 
 	switch (addr.ss_family) {
 		case AF_INET:
-			return m_socket4.write(data, length, addr, addrLen);
+			if (m_socket4 != nullptr)
+				return m_socket4->write(data, length, addr, addrLen);
+			else
+				return false;
+
 		case AF_INET6:
-			return m_socket6.write(data, length, addr, addrLen);
+			if (m_socket6 != nullptr)
+				return m_socket6->write(data, length, addr, addrLen);
+			else
+				return false;
+
 		default:
 			LogError("Unknown socket address family - %u", addr.ss_family);
 			return false;
@@ -89,9 +115,17 @@ bool CP25Network::poll(const sockaddr_storage& addr, unsigned int addrLen)
 
 	switch (addr.ss_family) {
 		case AF_INET:
-			return m_socket4.write(data, 11U, addr, addrLen);
+			if (m_socket4 != nullptr)
+				return m_socket4->write(data, 11U, addr, addrLen);
+			else
+				return false;
+
 		case AF_INET6:
-			return m_socket6.write(data, 11U, addr, addrLen);
+			if (m_socket6 != nullptr)
+				return m_socket6->write(data, 11U, addr, addrLen);
+			else
+				return false;
+
 		default:
 			LogError("Unknown socket address family - %u", addr.ss_family);
 			return false;
@@ -112,9 +146,17 @@ bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
 
 	switch (addr.ss_family) {
 		case AF_INET:
-			return m_socket4.write(data, 11U, addr, addrLen);
+			if (m_socket4 != nullptr)
+				return m_socket4->write(data, 11U, addr, addrLen);
+			else
+				return false;
+
 		case AF_INET6:
-			return m_socket6.write(data, 11U, addr, addrLen);
+			if (m_socket6 != nullptr)
+				return m_socket6->write(data, 11U, addr, addrLen);
+			else
+				return false;
+
 		default:
 			LogError("Unknown socket address family - %u", addr.ss_family);
 			return false;
@@ -126,9 +168,14 @@ unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockadd
 	assert(data != nullptr);
 	assert(length > 0U);
 
-	int len = m_socket4.read(data, length, addr, addrLen);
-	if (len <= 0)
-		len = m_socket6.read(data, length, addr, addrLen);
+	int len = 0;
+
+	if (m_socket4 != nullptr)
+		len = m_socket4->read(data, length, addr, addrLen);
+
+	if ((m_socket6 != nullptr) && (len <= 0))
+		len = m_socket6->read(data, length, addr, addrLen);
+
 	if (len <= 0)
 		return 0U;
 
@@ -140,8 +187,17 @@ unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockadd
 
 void CP25Network::close()
 {
-	m_socket4.close();
-	m_socket6.close();
+	if (m_socket4 != nullptr) {
+		m_socket4->close();
+		delete m_socket4;
+		m_socket4 = nullptr;
+	}
+
+	if (m_socket6 != nullptr) {
+		m_socket6->close();
+		delete m_socket6;
+		m_socket6 = nullptr;
+	}
 
 	LogInfo("Closing P25 network connection");
 }
