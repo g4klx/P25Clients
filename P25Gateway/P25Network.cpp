@@ -74,7 +74,7 @@ bool CP25Network::open()
 	return true;
 }
 
-bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::write(const unsigned char* data, unsigned int length, const CP25Reflector& address)
 {
 	assert(data != nullptr);
 	assert(length > 0U);
@@ -82,26 +82,17 @@ bool CP25Network::write(const unsigned char* data, unsigned int length, const so
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Data Sent", data, length);
 
-	switch (addr.ss_family) {
-		case AF_INET:
-			if (m_socket4 != nullptr)
-				return m_socket4->write(data, length, addr, addrLen);
-			else
-				return false;
-
-		case AF_INET6:
-			if (m_socket6 != nullptr)
-				return m_socket6->write(data, length, addr, addrLen);
-			else
-				return false;
-
-		default:
-			LogError("Unknown socket address family - %u", addr.ss_family);
-			return false;
+	if (address.hasIPv6() && hasIPv6()) {
+		return m_socket6->write(data, length , address.IPv6.m_addr, address.IPv6.m_addrLen);
+	} else if (address.hasIPv4() && hasIPv4()) {
+		return m_socket4->write(data, length, address.IPv4.m_addr, address.IPv4.m_addrLen);
+	} else {
+		LogError("No suitable IP address to write data to TG%u", address.m_id);
+		return false;
 	}
 }
 
-bool CP25Network::poll(const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::poll(const CP25Reflector& address)
 {
 	unsigned char data[15U];
 
@@ -113,26 +104,17 @@ bool CP25Network::poll(const sockaddr_storage& addr, unsigned int addrLen)
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Poll Sent", data, 11U);
 
-	switch (addr.ss_family) {
-		case AF_INET:
-			if (m_socket4 != nullptr)
-				return m_socket4->write(data, 11U, addr, addrLen);
-			else
-				return false;
-
-		case AF_INET6:
-			if (m_socket6 != nullptr)
-				return m_socket6->write(data, 11U, addr, addrLen);
-			else
-				return false;
-
-		default:
-			LogError("Unknown socket address family - %u", addr.ss_family);
-			return false;
+	if (address.hasIPv6() && hasIPv6()) {
+		return m_socket6->write(data, 11U, address.IPv6.m_addr, address.IPv6.m_addrLen);
+	} else if (address.hasIPv4() && hasIPv4()) {
+		return m_socket4->write(data, 11U, address.IPv4.m_addr, address.IPv4.m_addrLen);
+	} else {
+		LogError("No suitable IP address to poll TG%u", address.m_id);
+		return false;
 	}
 }
 
-bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
+bool CP25Network::unlink(const CP25Reflector& address)
 {
 	unsigned char data[15U];
 
@@ -144,22 +126,13 @@ bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Unlink Sent", data, 11U);
 
-	switch (addr.ss_family) {
-		case AF_INET:
-			if (m_socket4 != nullptr)
-				return m_socket4->write(data, 11U, addr, addrLen);
-			else
-				return false;
-
-		case AF_INET6:
-			if (m_socket6 != nullptr)
-				return m_socket6->write(data, 11U, addr, addrLen);
-			else
-				return false;
-
-		default:
-			LogError("Unknown socket address family - %u", addr.ss_family);
-			return false;
+	if (address.hasIPv6() && hasIPv6()) {
+		return m_socket6->write(data, 11U, address.IPv6.m_addr, address.IPv6.m_addrLen);
+	} else if (address.hasIPv4() && hasIPv4()) {
+		return m_socket4->write(data, 11U, address.IPv4.m_addr, address.IPv4.m_addrLen);
+	} else {
+		LogError("No suitable IP address to unlink from TG%u", address.m_id);
+		return false;
 	}
 }
 
@@ -200,4 +173,33 @@ void CP25Network::close()
 	}
 
 	LogInfo("Closing P25 network connection");
+}
+
+bool CP25Network::hasIPv4() const
+{
+	return m_socket4 != nullptr;
+}
+
+bool CP25Network::hasIPv6() const
+{
+	return m_socket6 != nullptr;
+}
+
+bool CP25Network::match(const sockaddr_storage& address, const CP25Reflector& reflector)
+{
+	switch (address.ss_family) {
+		case AF_INET:
+			if (!reflector.hasIPv4())
+				return false;
+			return CUDPSocket::match(address, reflector.IPv4.m_addr);
+
+		case AF_INET6:
+			if (!reflector.hasIPv6())
+				return false;
+			return CUDPSocket::match(address, reflector.IPv6.m_addr);
+
+		default:
+			LogError("Trying to match an unknown protocol family - %d", address.ss_family);
+			return false;
+	}
 }

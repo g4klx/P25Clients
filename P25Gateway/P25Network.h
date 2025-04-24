@@ -19,6 +19,7 @@
 #ifndef	P25Network_H
 #define	P25Network_H
 
+#include "Reflectors.h"
 #include "UDPSocket.h"
 
 #include <cstdint>
@@ -31,15 +32,20 @@ public:
 
 	bool open();
 
-	bool write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
+	bool write(const unsigned char* data, unsigned int length, const CP25Reflector& address);
 
 	unsigned int read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
 
-	bool poll(const sockaddr_storage& addr, unsigned int addrLen);
+	bool poll(const CP25Reflector& address);
 
-	bool unlink(const sockaddr_storage& addr, unsigned int addrLen);
+	bool unlink(const CP25Reflector& address);
 
 	void close();
+
+	bool hasIPv4() const;
+	bool hasIPv6() const;
+
+	static bool match(const sockaddr_storage& address, const CP25Reflector& reflector);
 
 private:
 	std::string m_callsign;

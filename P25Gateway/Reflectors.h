@@ -1,5 +1,5 @@
 /*
-*   Copyright (C) 2016,2018,2020 by Jonathan Naylor G4KLX
+*   Copyright (C) 2016,2018,2020,2025 by Jonathan Naylor G4KLX
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -30,6 +30,27 @@ public:
 	CP25Reflector() :
 	m_id(0U)
 	{
+		IPv4.m_addrLen = 0U;
+		IPv6.m_addrLen = 0U;
+	}
+
+	CP25Reflector(const CP25Reflector& in)
+	{
+		m_id           = in.m_id;
+		IPv4.m_addr    = in.IPv4.m_addr;
+		IPv4.m_addrLen = in.IPv4.m_addrLen;
+		IPv6.m_addr    = in.IPv6.m_addr;
+		IPv6.m_addrLen = in.IPv6.m_addrLen;
+	}
+
+	bool hasIPv4() const
+	{
+		return IPv4.m_addrLen > 0U;
+	}
+
+	bool hasIPv6() const
+	{
+		return IPv6.m_addrLen > 0U;
 	}
 
 	unsigned int         m_id;
@@ -41,6 +62,14 @@ public:
 		sockaddr_storage m_addr;
 		unsigned int     m_addrLen;
 	} IPv6;
+
+	CP25Reflector& operator=(const CP25Reflector& in)
+	{
+		if (&in == this)
+			return *this;
+
+		return CP25Reflector(in);
+	}
 };
 
 class CReflectors {
