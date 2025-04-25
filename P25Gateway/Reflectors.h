@@ -25,6 +25,8 @@
 #include <vector>
 #include <string>
 
+#include <cstring>
+
 class CP25Reflector {
 public:
 	CP25Reflector() :
