@@ -36,11 +36,28 @@ public:
 
 	CP25Reflector(const CP25Reflector& in)
 	{
-		m_id           = in.m_id;
-		IPv4.m_addr    = in.IPv4.m_addr;
+		m_id = in.m_id;
+
 		IPv4.m_addrLen = in.IPv4.m_addrLen;
-		IPv6.m_addr    = in.IPv6.m_addr;
 		IPv6.m_addrLen = in.IPv6.m_addrLen;
+
+		::memcpy(&IPv4.m_addr, &in.IPv4.m_addr, sizeof(sockaddr_storage));
+		::memcpy(&IPv6.m_addr, &in.IPv6.m_addr, sizeof(sockaddr_storage));
+	}
+
+	bool isEmpty() const
+	{
+		return m_id == 0U;
+	}
+
+	bool isUsed() const
+	{
+		return m_id > 0U;
+	}
+
+	void reset()
+	{
+		m_id = 0U;
 	}
 
 	bool hasIPv4() const
@@ -65,10 +82,17 @@ public:
 
 	CP25Reflector& operator=(const CP25Reflector& in)
 	{
-		if (&in == this)
-			return *this;
+		if (&in != this) {
+			m_id = in.m_id;
 
-		return CP25Reflector(in);
+			IPv4.m_addrLen = in.IPv4.m_addrLen;
+			IPv6.m_addrLen = in.IPv6.m_addrLen;
+
+			::memcpy(&IPv4.m_addr, &in.IPv4.m_addr, sizeof(sockaddr_storage));
+			::memcpy(&IPv6.m_addr, &in.IPv6.m_addr, sizeof(sockaddr_storage));
+		}
+
+		return *this;
 	}
 };
 

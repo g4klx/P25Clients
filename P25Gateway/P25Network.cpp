@@ -141,32 +141,36 @@ unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockadd
 	assert(data != nullptr);
 	assert(length > 0U);
 
-	int len = 0;
+	if (hasIPv4()) {
+		int len = m_socket4->read(data, length, addr, addrLen);
+		if (len > 0) {
+			if (m_debug)
+				CUtils::dump(1U, "P25 Network Data Received", data, len);
+			return len;
+		}
+	}
 
-	if (m_socket4 != nullptr)
-		len = m_socket4->read(data, length, addr, addrLen);
+	if (hasIPv6()) {
+		int len = m_socket6->read(data, length, addr, addrLen);
+		if (len > 0) {
+			if (m_debug)
+				CUtils::dump(1U, "P25 Network Data Received", data, len);
+			return len;
+		}
+	}
 
-	if ((m_socket6 != nullptr) && (len <= 0))
-		len = m_socket6->read(data, length, addr, addrLen);
-
-	if (len <= 0)
-		return 0U;
-
-	if (m_debug)
-		CUtils::dump(1U, "P25 Network Data Received", data, len);
-
-	return len;
+	return 0U;
 }
 
 void CP25Network::close()
 {
-	if (m_socket4 != nullptr) {
+	if (hasIPv4()) {
 		m_socket4->close();
 		delete m_socket4;
 		m_socket4 = nullptr;
 	}
 
-	if (m_socket6 != nullptr) {
+	if (hasIPv6()) {
 		m_socket6->close();
 		delete m_socket6;
 		m_socket6 = nullptr;

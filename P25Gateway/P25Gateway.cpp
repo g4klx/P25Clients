@@ -290,8 +290,8 @@ int CP25Gateway::run()
 	unsigned int srcId = 0U;
 	unsigned int dstTG = 0U;
 
-	bool currentIsStatic    = false;
-	CP25Reflector currentTG = CP25Reflector();
+	bool currentIsStatic = false;
+	CP25Reflector currentTG;
 	unsigned char talkgroupBuff[4U];
 
 	std::vector<unsigned int> staticIds = m_conf.getNetworkStatic();
@@ -307,6 +307,8 @@ int CP25Gateway::run()
 			remoteNetwork.poll(*reflector);
 
 			LogMessage("Statically linked to reflector %u", it);
+		} else {
+			LogWarning("Unable to find static reflector %u", it);
 		}
 	}
 
@@ -321,7 +323,7 @@ int CP25Gateway::run()
 		// cause a problem.
 		while (len > 0U) {
 			// If we're linked and it's from the right place, send it on
-			if ((currentTG.m_id > 0U) && CP25Network::match(addr, currentTG)) {
+			if (currentTG.isUsed() && CP25Network::match(addr, currentTG)) {
 				// Don't pass reflector control data through to the MMDVM
 				if ((buffer[0U] != 0xF0U) && (buffer[0U] != 0xF1U)) {
 					// Rewrite the LCF and the destination TG
@@ -338,12 +340,12 @@ int CP25Gateway::run()
 
 					hangTimer.start();
 				}
-			} else if (currentTG.m_id == 0U) {
+			} else if (currentTG.isEmpty()) {
 				bool poll = false;
-				CP25Reflector receivedTG = CP25Reflector();
+				CP25Reflector receivedTG;
 				unsigned char pollReply[11U] = { 0xF0U };
-				std::string callsign = m_conf.getCallsign();
 
+				std::string callsign = m_conf.getCallsign();
 				callsign.resize(10U, ' ');
 
 				// Build poll reply data
@@ -373,7 +375,7 @@ int CP25Gateway::run()
 					// Server talkgroup disconnect
 					// LogMessage("Disconnect talkgroup for talkgroup %u ", receivedTG.m_id);
 				} else {
-					if (receivedTG.m_id != 0U) {
+					if (receivedTG.isUsed()) {
 						// Changed talkgroup.  Let the modem know.
 						// It may be told it by the content of the message.
 						// Just in case send it anyway!
@@ -383,12 +385,11 @@ int CP25Gateway::run()
 						talkgroupBuff[2U] = (receivedTG.m_id >> 8)  & 0xFFU;
 						talkgroupBuff[3U] = (receivedTG.m_id >> 0)  & 0xFFU;
 
-						if (!isVoiceBusy())
-							localNetwork.write(talkgroupBuff, 4U);
+						localNetwork.write(talkgroupBuff, 4U);
 					}
 
-					if (receivedTG.m_id > 0U) {
-						currentTG       = receivedTG;
+					currentTG = receivedTG;
+					if (receivedTG.isUsed()) {
 						currentIsStatic = true;
 
 						// Rewrite the LCF and the destination TG
@@ -424,7 +425,7 @@ int CP25Gateway::run()
 				dstTG |= (buffer[2U] << 8)  & 0x00FF00U;
 				dstTG |= (buffer[3U] << 0)  & 0x0000FFU;
 				if (dstTG != currentTG.m_id) {
-					if (currentTG.m_id > 0U) {
+					if (currentTG.isUsed()) {
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Unlinking from reflector %u", currentTG.m_id);
 
@@ -437,7 +438,7 @@ int CP25Gateway::run()
 						hangTimer.stop();
 					}
 
-					CP25Reflector found = CP25Reflector();
+					CP25Reflector found;
 					for (const auto& it : staticTGs) {
 						if (dstTG == it.m_id) {
 							found = it;
@@ -445,13 +446,13 @@ int CP25Gateway::run()
 						}
 					}
 
-					if (found.m_id == 0U) {
+					if (found.isEmpty()) {
 						CP25Reflector* refl = reflectors.find(dstTG);
 						if (refl != nullptr) {
 							currentTG       = *refl;
 							currentIsStatic = false;
 						} else {
-							currentTG       = CP25Reflector();
+							currentTG.reset();
 							currentIsStatic = false;
 						}
 					} else {
@@ -460,7 +461,7 @@ int CP25Gateway::run()
 					}
 
 					// Link to the new reflector
-					if (currentTG.m_id > 0U) {
+					if (currentTG.isUsed()) {
 						std::string callsign = lookup->find(srcId);
 						LogMessage("Switched to reflector %u due to RF activity", currentTG.m_id);
 
@@ -477,7 +478,7 @@ int CP25Gateway::run()
 					}
 
 					if (m_voice != nullptr) {
-						if (currentTG.m_id == 0U)
+						if (currentTG.isEmpty())
 							m_voice->unlinked();
 						else
 							m_voice->linkedTo(dstTG);
@@ -495,7 +496,7 @@ int CP25Gateway::run()
 			}
 
 			// If we're linked and we have a network, send it on
-			if (currentTG.m_id > 0U) {
+			if (currentTG.isUsed()) {
 				// Rewrite the LCF and the destination TG
 				if (buffer[0U] == 0x64U) {
 					buffer[1U] = 0x00U;			// LCF is for TGs
@@ -528,7 +529,7 @@ int CP25Gateway::run()
 					unsigned int tg = ((strlen((char*)buffer + 0U) > 10) ? (unsigned int)::atoi((char*)(buffer + 10U)) : 9999);
 
 					if (tg != currentTG.m_id) {
-						if (currentTG.m_id > 0U) {
+						if (currentTG.isUsed()) {
 							LogMessage("Unlinked from reflector %u by remote command", currentTG.m_id);
 
 							if (!currentIsStatic) {
@@ -540,7 +541,7 @@ int CP25Gateway::run()
 							hangTimer.stop();
 						}
 
-						CP25Reflector found = CP25Reflector();
+						CP25Reflector found;
 						for (const auto& it : staticTGs) {
 							if (tg == it.m_id) {
 								found = it;
@@ -548,13 +549,13 @@ int CP25Gateway::run()
 							}
 						}
 
-						if (found.m_id > 0U) {
+						if (found.isEmpty()) {
 							CP25Reflector* refl = reflectors.find(tg);
 							if (refl != nullptr) {
 								currentTG       = *refl;
 								currentIsStatic = false;
 							} else {
-								currentTG       = CP25Reflector();
+								currentTG.reset();
 								currentIsStatic = false;
 							}
 						} else {
@@ -563,7 +564,7 @@ int CP25Gateway::run()
 						}
 
 						// Link to the new reflector
-						if (currentTG.m_id > 0U) {
+						if (currentTG.isUsed()) {
 							LogMessage("Switched to reflector %u by remote command", currentTG.m_id);
 
 							if (!currentIsStatic) {
@@ -579,30 +580,28 @@ int CP25Gateway::run()
 						}
 
 						if (m_voice != nullptr) {
-							if (currentTG.m_id == 0U)
+							if (currentTG.isEmpty())
 								m_voice->unlinked();
 							else
 								m_voice->linkedTo(currentTG.m_id);
 						}
 					}
 				} else if (::memcmp(buffer + 0U, "status", 6U) == 0) {
-					std::string state = std::string("p25:") + ((currentTG.m_id > 0) ? "conn" : "disc");
+					std::string state = std::string("p25:") + (currentTG.isUsed() ? "conn" : "disc");
 					remoteSocket->write((unsigned char*)state.c_str(), (unsigned int)state.length(), addr, addrLen);
 				} else if (::memcmp(buffer + 0U, "host", 4U) == 0) {
-					std::string host = "p25:\"";
+					std::string host = "p25:\"NONE\"";
 
-					if (currentTG.m_id > 0U) {
+					if (currentTG.isUsed()) {
 						if (remoteNetwork.hasIPv6() && currentTG.hasIPv6()) {
 							char buffer[100U];
 							if (::getnameinfo((struct sockaddr*)&currentTG.IPv6.m_addr, currentTG.IPv6.m_addrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
-								host += std::string(buffer) + "\"";
+								host = "p25:\"" + std::string(buffer) + "\"";
 						} else if (remoteNetwork.hasIPv4() && currentTG.hasIPv4()) {
 							char buffer[100U];
 							if (::getnameinfo((struct sockaddr*)&currentTG.IPv4.m_addr, currentTG.IPv4.m_addrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
-								host += std::string(buffer) + "\"";
+								host = "p25:\"" + std::string(buffer) + "\"";
 						}
-					} else {
-						host += "NONE\"";
 					}
 
 					remoteSocket->write((unsigned char*)host.c_str(), (unsigned int)host.length(), addr, addrLen);
@@ -624,8 +623,8 @@ int CP25Gateway::run()
 
 		hangTimer.clock(ms);
 		if (hangTimer.isRunning() && hangTimer.hasExpired()) {
-			if (currentTG.m_id > 0U) {
-				LogMessage("Unlinking from %u due to inactivity", currentTG.m_id);
+			if (currentTG.isUsed()) {
+				LogMessage("Unlinking from reflector %u due to inactivity", currentTG.m_id);
 
 				if (!currentIsStatic) {
 					remoteNetwork.unlink(currentTG);
@@ -638,7 +637,7 @@ int CP25Gateway::run()
 
 			}
 
-			currentTG        = CP25Reflector();
+			currentTG.reset();
 			currentIsStatic  = false;
 
 			// Let modem know disconnected
@@ -646,7 +645,7 @@ int CP25Gateway::run()
 			talkgroupBuff[1U] = 0U;
 			talkgroupBuff[2U] = 0U;
 			talkgroupBuff[3U] = 0U;
-			localNetwork.write(talkgroupBuff, 4);
+			localNetwork.write(talkgroupBuff, 4U);
 
 			hangTimer.stop();
 		}
@@ -660,7 +659,7 @@ int CP25Gateway::run()
 				remoteNetwork.poll(it);
 
 			// Poll the dynamic TG
-			if (!currentIsStatic && (currentTG.m_id > 0U))
+			if (!currentIsStatic && currentTG.isUsed())
 				remoteNetwork.poll(currentTG);
 
 			pollTimer.start();
