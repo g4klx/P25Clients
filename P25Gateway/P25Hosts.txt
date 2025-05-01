@@ -487,7 +487,7 @@
 18436 reflector.jchang.io 41000
 
 # 20210 GR-Hellas-ADN-P25
-20210	gr-hellas-adn.ddnsfree.com 41000
+20210	gr-hellas-adn-p25.ddns.net 41000
 
 # 20281 GR-KERKYRA-DV
 20281	greece.freedmr.online	41000
