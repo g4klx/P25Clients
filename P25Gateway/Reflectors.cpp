@@ -65,20 +65,11 @@ bool CReflectors::load()
 	// Clear out the old reflector list
 	remove();
 
-	try {
-		parse(m_hostsFile1);
-	}
-	catch (...) {
-		LogError("Unable to load/parse file %s", m_hostsFile1.c_str());
+	bool ret = parseJSON(m_hostsFile1);
+	if (!ret)
 		return false;
-	}
 
-	try {
-		parse(m_hostsFile2);
-	}
-	catch (...) {
-		LogWarning("Unable to load/parse file %s", m_hostsFile2.c_str());
-	}
+	parseHosts(m_hostsFile2);
 
 	size_t size = m_reflectors.size();
 	LogInfo("Loaded %u P25 reflectors", size);
@@ -152,58 +143,129 @@ void CReflectors::remove()
 	m_reflectors.clear();
 }
 
-void CReflectors::parse(const std::string& fileName)
+bool CReflectors::parseJSON(const std::string& fileName)
 {
-	std::fstream file(fileName);
+	try {
+		std::fstream file(fileName);
 
-	nlohmann::json data = nlohmann::json::parse(file);
+		nlohmann::json data = nlohmann::json::parse(file);
 
-	bool hasData = data["reflectors"].is_array();
-	if (!hasData)
-		throw;
+		bool hasData = data["reflectors"].is_array();
+		if (!hasData)
+			throw;
 
-	nlohmann::json::array_t hosts = data["reflectors"];
-	for (const auto& it : hosts) {
-		unsigned int tg = it["designator"];
+		nlohmann::json::array_t hosts = data["reflectors"];
+		for (const auto& it : hosts) {
+			unsigned int tg = it["designator"];
+			if (tg > 0xFFFFU) {
+				LogWarning("P25 Talkgroups can only be 16 bits. %u is too large", tg);
+				continue;
+			}
+
+			unsigned short port = it["port"];
+
+			sockaddr_storage addr_v4    = sockaddr_storage();
+			unsigned int     addrLen_v4 = 0U;
+
+			bool isNull = it["ipv4"].is_null();
+			if (!isNull) {
+				std::string ipv4 = it["ipv4"];
+				if (!CUDPSocket::lookup(ipv4, port, addr_v4, addrLen_v4) == 0) {
+					LogWarning("Unable to resolve the address of %s", ipv4.c_str());
+					addrLen_v4 = 0U;
+				}
+			}
+
+			sockaddr_storage addr_v6    = sockaddr_storage();
+			unsigned int     addrLen_v6 = 0U;
+
+			isNull = it["ipv6"].is_null();
+			if (!isNull) {
+				std::string ipv6 = it["ipv6"];
+				if (!CUDPSocket::lookup(ipv6, port, addr_v6, addrLen_v6) == 0) {
+					LogWarning("Unable to resolve the address of %s", ipv6.c_str());
+					addrLen_v6 = 0U;
+				}
+			}
+
+			if ((addrLen_v4 > 0U) || (addrLen_v6 > 0U)) {
+				CP25Reflector* refl = new CP25Reflector;
+				refl->m_id           = tg;
+				refl->IPv4.m_addr    = addr_v4;
+				refl->IPv4.m_addrLen = addrLen_v4;
+				refl->IPv6.m_addr    = addr_v6;
+				refl->IPv6.m_addrLen = addrLen_v6;
+				m_reflectors.push_back(refl);
+			}
+		}
+	}
+	catch (...) {
+		LogError("Unable to load/parse file %s", fileName.c_str());
+		return false;
+	}
+
+	return true;
+}
+
+bool CReflectors::parseHosts(const std::string& fileName)
+{
+	FILE* fp = ::fopen(fileName.c_str(), "rt");
+	if (fp == nullptr) {
+		LogWarning("Unable to open the Hosts file %s", fileName.c_str());
+		return false;
+	}
+
+	char buffer[100U];
+	while (::fgets(buffer, 100U, fp) != nullptr) {
+		if (buffer[0U] == '#')
+			continue;
+
+		char* p1 = ::strtok(buffer, " \t\r\n");
+		char* p2 = ::strtok(nullptr, " \t\r\n");
+		char* p3 = ::strtok(nullptr, " \t\r\n");
+
+		if (p1 == nullptr || p2 == nullptr || p3 == nullptr)
+			continue;
+
+		unsigned short tg = (unsigned short)::atoi(p1);
+		std::string host = std::string(p2);
+		unsigned short port = (unsigned short)::atoi(p3);
+
 		if (tg > 0xFFFFU) {
 			LogWarning("P25 Talkgroups can only be 16 bits. %u is too large", tg);
 			continue;
 		}
 
-		unsigned short port = it["port"];
-
-		sockaddr_storage addr_v4    = sockaddr_storage();
-		unsigned int     addrLen_v4 = 0U;
-
-		bool isNull = it["ipv4"].is_null();
-		if (!isNull) {
-			std::string ipv4 = it["ipv4"];
-			if (!CUDPSocket::lookup(ipv4, port, addr_v4, addrLen_v4) == 0) {
-				LogWarning("Unable to resolve the address of %s", ipv4.c_str());
-				addrLen_v4 = 0U;
+		sockaddr_storage addr;
+		unsigned int addrLen;
+		if (CUDPSocket::lookup(host, port, addr, addrLen) == 0) {
+			CP25Reflector* refl = nullptr;
+			switch (addr.ss_family) {
+			case AF_INET:
+				refl = new CP25Reflector;
+				refl->m_id           = tg;
+				refl->IPv4.m_addr    = addr;
+				refl->IPv4.m_addrLen = addrLen;
+				m_reflectors.push_back(refl);
+				break;
+			case AF_INET6:
+				refl = new CP25Reflector;
+				refl->m_id           = tg;
+				refl->IPv6.m_addr    = addr;
+				refl->IPv6.m_addrLen = addrLen;
+				m_reflectors.push_back(refl);
+				break;
+			default:
+				LogWarning("Unknown address family for %s", host.c_str());
+				break;
 			}
 		}
-
-		sockaddr_storage addr_v6    = sockaddr_storage();
-		unsigned int     addrLen_v6 = 0U;
-
-		isNull = it["ipv6"].is_null();
-		if (!isNull) {
-			std::string ipv6 = it["ipv6"];
-			if (!CUDPSocket::lookup(ipv6, port, addr_v6, addrLen_v6) == 0) {
-				LogWarning("Unable to resolve the address of %s", ipv6.c_str());
-				addrLen_v6 = 0U;
-			}
-		}
-
-		if ((addrLen_v4 > 0U) || (addrLen_v6 > 0U)) {
-			CP25Reflector* refl = new CP25Reflector;
-			refl->m_id         = tg;
-			refl->IPv4.m_addr    = addr_v4;
-			refl->IPv4.m_addrLen = addrLen_v4;
-			refl->IPv6.m_addr    = addr_v6;
-			refl->IPv6.m_addrLen = addrLen_v6;
-			m_reflectors.push_back(refl);
+		else {
+			LogWarning("Unable to resolve the address of %s", host.c_str());
 		}
 	}
+
+	::fclose(fp);
+
+	return true;
 }

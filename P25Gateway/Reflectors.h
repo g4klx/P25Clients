@@ -123,7 +123,8 @@ private:
 	CTimer       m_timer;
 
 	void remove();
-	void parse(const std::string& fileName);
+	bool parseJSON(const std::string& fileName);
+	bool parseHosts(const std::string& fileName);
 };
 
 #endif
