@@ -609,17 +609,39 @@ int CP25Gateway::run()
 							else
 								m_voice->linkedTo(currentTG);
 						}
+
+						if (currentAddrLen == 0U) {
+							for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it)
+								LogMessage("Statically linked to reflector %u", *it);
+						}
 					}
 				} else if (::memcmp(buffer + 0U, "status", 6U) == 0) {
-					std::string state = std::string("p25:") + ((currentAddrLen > 0) ? "conn" : "disc");
+					std::string state = std::string("p25:") + (((currentAddrLen > 0) || !staticTGs.empty()) ? "conn" : "disc");
 					remoteSocket->write((unsigned char*)state.c_str(), (unsigned int)state.length(), addr, addrLen);
 				} else if (::memcmp(buffer + 0U, "host", 4U) == 0) {
 					std::string ref;
+					char buffer[INET6_ADDRSTRLEN];
+
+					// Concat Statics, if defined.
+					for (std::vector<CStaticTG>::const_iterator it = staticTGs.cbegin(); it != staticTGs.cend(); ++it) {
+
+						// CurrentAddr is not in Static list
+						if ((currentAddrLen == 0U) || ((currentAddrLen > 0U) && !CUDPSocket::match(currentAddr, (*it).m_addr))) {
+							if (ref.length() > 0)
+								ref += ",";
+							
+							if (::getnameinfo((struct sockaddr*)&(*it).m_addr, (*it).m_addrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
+								ref += std::string(buffer);
+						}
+					}
 
 					if (currentAddrLen > 0U) {
-						char buffer[INET6_ADDRSTRLEN];
-						if (::getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0)
-							ref = std::string(buffer);
+						if (::getnameinfo((struct sockaddr*)&currentAddr, currentAddrLen, buffer, sizeof(buffer), 0, 0, NI_NUMERICHOST | NI_NUMERICSERV) == 0) {
+							if (ref.length() > 0)
+								ref += ",";
+
+							ref += std::string(buffer);
+						}
 					}
 
 					std::string host = std::string("p25:\"") + ((ref.length() == 0) ? "NONE" : ref) + "\"";
