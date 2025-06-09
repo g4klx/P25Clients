@@ -101,7 +101,7 @@ int CUDPSocket::lookup(const std::string& hostname, unsigned short port, sockadd
 		paddr->sin_family = AF_INET;
 		paddr->sin_port = htons(port);
 		paddr->sin_addr.s_addr = htonl(INADDR_NONE);
-		LogError("Cannot find an address for host %s on port %u, using IPv4 any", port, hostname.c_str());
+		LogError("Cannot find an address for host %s on port %u, using IPv4 any", hostname.c_str(), port);
 		return err;
 	}
 

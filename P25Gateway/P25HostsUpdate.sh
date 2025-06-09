@@ -38,6 +38,6 @@ then
 fi
 
 # Download P25Hosts.json file
-curl https://dvref.com/p25/reflectors/?format=json > ${P25HOSTS}
+curl -X 'GET' 'https://dvref.com/p25/reflectors/' -H 'accept: */*' > ${P25HOSTS}
 
 exit 0
