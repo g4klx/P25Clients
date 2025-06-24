@@ -38,6 +38,6 @@ then
 fi
 
 # Download the P25Hosts.txt file
-curl https://dvref.com/downloads/P25Hosts-resolved.txt > ${P25HOSTS}
+curl --fail --silent -S -L -o  ${P25HOSTS} -A "P25Gateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.txt
 
 exit 0
