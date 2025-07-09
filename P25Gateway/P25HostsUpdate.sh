@@ -38,6 +38,6 @@ then
 fi
 
 # Download P25Hosts.json file
-curl -X 'GET' 'https://dvref.com/p25/reflectors/' -H 'accept: */*' > ${P25HOSTS}
+curl --fail --silent -S -L -o  ${NXDNHOSTS} -A "NXDNGateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.txt
 
 exit 0
