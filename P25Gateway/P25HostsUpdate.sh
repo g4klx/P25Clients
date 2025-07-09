@@ -38,6 +38,6 @@ then
 fi
 
 # Download P25Hosts.json file
-curl --fail --silent -S -L -o  ${NXDNHOSTS} -A "NXDNGateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.txt
+curl --fail --silent -S -L -o  ${NXDNHOSTS} -A "P25Gateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.json
 
 exit 0
