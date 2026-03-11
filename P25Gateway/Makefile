@@ -1,21 +1,23 @@
 CC      = cc
 CXX     = c++
 
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
+CFLAGS  = -g -O3 -Wall -std=c++0x -MMD -MD -pthread
 LIBS    = -lpthread -lmosquitto
 
 LDFLAGS = -g
 
-OBJECTS = Conf.o DMRLookup.o Log.o Mutex.o MQTTConnection.o P25Gateway.o P25Network.o Reflectors.o RptNetwork.o StopWatch.o Thread.o \
-	  Timer.o UDPSocket.o Utils.o Voice.o
+SRCS = $(wildcard *.cpp)
+OBJS = $(SRCS:.cpp=.o)
+DEPS = $(SRCS:.cpp=.d)
 
 all:		P25Gateway
 
-P25Gateway:	GitVersion.h $(OBJECTS)
-		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o P25Gateway
+P25Gateway:	GitVersion.h $(OBJS)
+		$(CXX) $(OBJS) $(CFLAGS) $(LIBS) -o P25Gateway
 
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
+-include $(DEPS)
 
 P25Gateway.o: GitVersion.h FORCE
 

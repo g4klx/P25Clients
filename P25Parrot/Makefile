@@ -1,18 +1,21 @@
 CC      = cc
 CXX     = c++
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
+CFLAGS  = -g -O3 -Wall -std=c++0x -MMD -MD -pthread
 LIBS    = -lpthread
 LDFLAGS = -g
 
-OBJECTS = Network.o P25Parrot.o Parrot.o StopWatch.o Thread.o Timer.o UDPSocket.o
+SRCS = $(wildcard *.cpp)
+OBJS = $(SRCS:.cpp=.o)
+DEPS = $(SRCS:.cpp=.d)
 
 all:		P25Parrot
 
-P25Parrot:	GitVersion.h $(OBJECTS)
-		$(CXX) $(OBJECTS) $(CFLAGS) $(LIBS) -o P25Parrot
+P25Parrot:	GitVersion.h $(OBJS)
+		$(CXX) $(OBJS) $(CFLAGS) $(LIBS) -o P25Parrot
 
 %.o: %.cpp
 		$(CXX) $(CFLAGS) -c -o $@ $<
+-include $(DEPS)
 
 P25Parrot.o: GitVersion.h FORCE
 
