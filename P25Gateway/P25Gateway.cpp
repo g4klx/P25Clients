@@ -682,9 +682,9 @@ void CP25Gateway::writeJSONStatus(const std::string& status)
 	nlohmann::json json;
 
 	json["timestamp"] = CUtils::createTimestamp();
-	json["message"] = status;
+	json["message"]   = status;
 
-	WriteJSON("status", json);
+	WriteJSON("status", json, false);
 }
 
 void CP25Gateway::writeJSONLinking(const std::string& reason, unsigned int tg)
@@ -692,11 +692,11 @@ void CP25Gateway::writeJSONLinking(const std::string& reason, unsigned int tg)
 	nlohmann::json json;
 
 	json["timestamp"] = CUtils::createTimestamp();
-	json["action"] = "linking";
-	json["reason"] = reason;
+	json["action"]    = "linking";
+	json["reason"]    = reason;
 	json["talkgroup"] = int(tg);
 
-	WriteJSON("link", json);
+	WriteJSON("link", json, true);
 }
 
 void CP25Gateway::writeJSONUnlinked(const std::string& reason)
@@ -704,10 +704,10 @@ void CP25Gateway::writeJSONUnlinked(const std::string& reason)
 	nlohmann::json json;
 
 	json["timestamp"] = CUtils::createTimestamp();
-	json["action"] = "unlinked";
-	json["reason"] = reason;
+	json["action"]    = "unlinked";
+	json["reason"]    = reason;
 
-	WriteJSON("link", json);
+	WriteJSON("link", json, true);
 }
 
 void CP25Gateway::writeJSONRelinking(unsigned int tg)
@@ -718,7 +718,7 @@ void CP25Gateway::writeJSONRelinking(unsigned int tg)
 	json["action"]    = "relinking";
 	json["talkgroup"] = int(tg);
 
-	WriteJSON("link", json);
+	WriteJSON("link", json, true);
 }
 
 void CP25Gateway::onCommand(const unsigned char* command, unsigned int length)
