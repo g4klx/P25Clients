@@ -8,12 +8,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -31,13 +31,13 @@ P25HOSTS=/path/to/P25Hosts.json
 ###############################################################################
 
 # Check we are root
-if [ "$(id -u)" != "0" ] 
+if [ "$(id -u)" != "0" ]
 then
 	echo "This script must be run as root" 1>&2
 	exit 1
 fi
 
 # Download P25Hosts.json file
-curl --fail --silent -S -L -o  ${NXDNHOSTS} -A "P25Gateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.json
+curl --fail --silent -S -L -o  ${P25HOSTS} -A "P25Gateway - G4KLX" https://hostfiles.refcheck.radio/P25Hosts.json
 
 exit 0
