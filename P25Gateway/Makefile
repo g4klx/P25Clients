@@ -1,8 +1,13 @@
 CC      = cc
 CXX     = c++
 
+# Use the following CFLAGS and LIBS if you don't want to use gpsd.
 CFLAGS  = -g -O3 -Wall -std=c++0x -MMD -MD -pthread
 LIBS    = -lpthread -lmosquitto
+
+# Use the following CFLAGS and LIBS if you do want to use gpsd.
+#CFLAGS  = -g -O3 -Wall -DUSE_GPSD -std=c++0x -MMD -MD -pthread
+#LIBS    = -lpthread -lgps -lmosquitto
 
 LDFLAGS = -g
 

@@ -141,7 +141,8 @@ m_currentTG(),
 m_currentIsStatic(false),
 m_hangTimer(1000U),
 m_rfHangTime(0U),
-m_reflectors(nullptr)
+m_reflectors(nullptr),
+m_writer(nullptr)
 {
 	CUDPSocket::startup();
 }
@@ -231,6 +232,8 @@ int CP25Gateway::run()
 	ret = m_mqtt->open();
 	if (!ret)
 		return 1;
+
+	createAPRS();
 
 	sockaddr_storage rptAddr;
 	unsigned int rptAddrLen;
@@ -529,6 +532,9 @@ int CP25Gateway::run()
 		if (m_voice != nullptr)
 			m_voice->clock(ms);
 
+		if (m_writer != nullptr)
+			m_writer->clock(ms);
+
 		m_hangTimer.clock(ms);
 		if (m_hangTimer.isRunning() && m_hangTimer.hasExpired()) {
 			if (m_currentTG.isUsed()) {
@@ -579,6 +585,11 @@ int CP25Gateway::run()
 
 	delete m_voice;
 
+	if (m_writer != nullptr) {
+		m_writer->close();
+		delete m_writer;
+	}
+
 	localNetwork.close();
 
 	m_remoteNetwork->close();
@@ -587,6 +598,34 @@ int CP25Gateway::run()
 	lookup->stop();
 
 	return 0;
+}
+
+void CP25Gateway::createAPRS()
+{
+	if (!m_conf.getAPRSEnabled())
+		return;
+
+	m_writer = new CAPRSWriter(m_conf.getCallsign(), m_conf.getAPRSSuffix(), m_conf.getDebug());
+
+	m_writer->setInfo(m_conf.getTxFrequency(), m_conf.getRxFrequency(), m_conf.getAPRSDescription(), m_conf.getAPRSSymbol());
+
+	bool enabled = m_conf.getGPSDEnabled();
+#if !defined(USE_GPSD)
+	// Not built with gpsd: use the fixed position
+	if (enabled) {
+		LogWarning("GPSD is enabled but not compiled in, using the [Info] position");
+		enabled = false;
+	}
+#endif
+	if (enabled)
+		m_writer->setGPSDLocation(m_conf.getGPSDAddress(), m_conf.getGPSDPort());
+	else
+		m_writer->setStaticLocation(m_conf.getLatitude(), m_conf.getLongitude(), m_conf.getHeight());
+
+	if (!m_writer->open()) {
+		delete m_writer;
+		m_writer = nullptr;
+	}
 }
 
 void CP25Gateway::writeCommand(const std::string& command)
