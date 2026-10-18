@@ -38,6 +38,24 @@ public:
 	bool          getDebug() const;
 	bool          getDaemon() const;
 
+	// The Info section
+	unsigned int getRxFrequency() const;
+	unsigned int getTxFrequency() const;
+	float        getLatitude() const;
+	float        getLongitude() const;
+	int          getHeight() const;
+
+	// The APRS section
+	bool         getAPRSEnabled() const;
+	std::string  getAPRSDescription() const;
+	std::string  getAPRSSuffix() const;
+	std::string  getAPRSSymbol() const;
+
+	// The GPSD section
+	bool         getGPSDEnabled() const;
+	std::string  getGPSDAddress() const;
+	std::string  getGPSDPort() const;
+
 	// The Id Lookup section
 	std::string  getLookupName() const;
 	unsigned int getLookupTime() const;
@@ -118,6 +136,21 @@ private:
 	bool         m_networkDebug;
 
 	bool         m_remoteCommandsEnabled;
+
+	unsigned int m_rxFrequency;
+	unsigned int m_txFrequency;
+	float        m_latitude;
+	float        m_longitude;
+	int          m_height;
+
+	bool         m_aprsEnabled;
+	std::string  m_aprsDescription;
+	std::string  m_aprsSuffix;
+	std::string  m_aprsSymbol;
+
+	bool         m_gpsdEnabled;
+	std::string  m_gpsdAddress;
+	std::string  m_gpsdPort;
 };
 
 #endif

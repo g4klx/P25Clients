@@ -1,0 +1,105 @@
+/*
+ *   Copyright (C) 2010,2011,2012,2016,2017,2018,2020,2023 by Jonathan Naylor G4KLX
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#ifndef	APRSWriter_H
+#define	APRSWriter_H
+
+#include "Timer.h"
+
+#include <string>
+
+#if !defined(_WIN32) && !defined(_WIN64)
+#include <netdb.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#if defined(USE_GPSD)
+#include <gps.h>
+#endif
+#else
+#include <WS2tcpip.h>
+#endif
+
+class CAPRSWriter {
+public:
+	CAPRSWriter(const std::string& callsign, const std::string& suffix, bool debug);
+	~CAPRSWriter();
+
+	bool open();
+
+	void setInfo(unsigned int txFrequency, unsigned int rxFrequency, const std::string& desc, const std::string& symbol);
+
+	void setStaticLocation(float latitude, float longitude, int height);
+
+	void setGPSDLocation(const std::string& address, const std::string& port);
+
+	void write(const char* data);
+
+	void clock(unsigned int ms);
+
+	void close();
+
+private:
+	CTimer            m_idTimer;
+	std::string       m_callsign;
+	bool              m_debug;
+	unsigned int      m_txFrequency;
+	unsigned int      m_rxFrequency;
+	float             m_latitude;
+	float             m_longitude;
+	int               m_height;
+	std::string       m_desc;
+	std::string       m_symbol;
+#if defined(USE_GPSD)
+	bool              m_gpsdEnabled;
+	std::string       m_gpsdAddress;
+	std::string       m_gpsdPort;
+	struct gps_data_t m_gpsdData;
+	bool              m_gpsdConnected;
+	bool              m_gpsdWarned;
+	CTimer            m_gpsdTimer;
+	CTimer            m_fixTimer;
+	bool              m_fixValid;
+	double            m_fixLatitude;
+	double            m_fixLongitude;
+	bool              m_fixAltitudeValid;
+	double            m_fixAltitude;
+	bool              m_fixMotionValid;
+	double            m_fixSpeed;
+	double            m_fixTrack;
+	CTimer            m_refreshTimer;
+	bool              m_beaconSent;
+	double            m_sentLatitude;
+	double            m_sentLongitude;
+#endif
+
+	void sendIdFrameFixed();
+	void sendIdFrameMobile();
+#if defined(USE_GPSD)
+	bool connectGPSD();
+	void disconnectGPSD();
+	void readGPSD();
+	bool mobileBeaconDue();
+#endif
+};
+
+#endif

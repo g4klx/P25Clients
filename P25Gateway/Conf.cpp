@@ -34,7 +34,10 @@ enum class SECTION {
 	LOG,
 	MQTT,
 	NETWORK,
-	REMOTE_COMMANDS
+	REMOTE_COMMANDS,
+	INFO,
+	APRS,
+	GPSD
 };
 
 CConf::CConf(const std::string& file) :
@@ -71,7 +74,19 @@ m_networkStatic(),
 m_networkRFHangTime(120U),
 m_networkNetHangTime(60U),
 m_networkDebug(false),
-m_remoteCommandsEnabled(false)
+m_remoteCommandsEnabled(false),
+m_rxFrequency(0U),
+m_txFrequency(0U),
+m_latitude(0.0F),
+m_longitude(0.0F),
+m_height(0),
+m_aprsEnabled(false),
+m_aprsDescription(),
+m_aprsSuffix(),
+m_aprsSymbol(),
+m_gpsdEnabled(false),
+m_gpsdAddress(),
+m_gpsdPort()
 {
 }
 
@@ -109,6 +124,12 @@ bool CConf::read()
 				section = SECTION::NETWORK;
 			else if (::strncmp(buffer, "[Remote Commands]", 17U) == 0)
 				section = SECTION::REMOTE_COMMANDS;
+			else if (::strncmp(buffer, "[Info]", 6U) == 0)
+				section = SECTION::INFO;
+			else if (::strncmp(buffer, "[APRS]", 6U) == 0)
+				section = SECTION::APRS;
+			else if (::strncmp(buffer, "[GPSD]", 6U) == 0)
+				section = SECTION::GPSD;
 			else
 				section = SECTION::NONE;
 
@@ -221,6 +242,33 @@ bool CConf::read()
 		} else if (section == SECTION::REMOTE_COMMANDS) {
 			if (::strcmp(key, "Enable") == 0)
 				m_remoteCommandsEnabled = ::atoi(value) == 1;
+		} else if (section == SECTION::INFO) {
+			if (::strcmp(key, "RXFrequency") == 0)
+				m_rxFrequency = (unsigned int)::atoi(value);
+			else if (::strcmp(key, "TXFrequency") == 0)
+				m_txFrequency = (unsigned int)::atoi(value);
+			else if (::strcmp(key, "Latitude") == 0)
+				m_latitude = float(::atof(value));
+			else if (::strcmp(key, "Longitude") == 0)
+				m_longitude = float(::atof(value));
+			else if (::strcmp(key, "Height") == 0)
+				m_height = ::atoi(value);
+		} else if (section == SECTION::APRS) {
+			if (::strcmp(key, "Enable") == 0)
+				m_aprsEnabled = ::atoi(value) == 1;
+			else if (::strcmp(key, "Description") == 0)
+				m_aprsDescription = value;
+			else if (::strcmp(key, "Suffix") == 0)
+				m_aprsSuffix = value;
+			else if (::strcmp(key, "Symbol") == 0)
+				m_aprsSymbol = value;
+		} else if (section == SECTION::GPSD) {
+			if (::strcmp(key, "Enable") == 0)
+				m_gpsdEnabled = ::atoi(value) == 1;
+			else if (::strcmp(key, "Address") == 0)
+				m_gpsdAddress = value;
+			else if (::strcmp(key, "Port") == 0)
+				m_gpsdPort = value;
 		}
 	}
 
@@ -394,3 +442,63 @@ bool CConf::getRemoteCommandsEnabled() const
 	return m_remoteCommandsEnabled;
 }
 
+
+unsigned int CConf::getRxFrequency() const
+{
+	return m_rxFrequency;
+}
+
+unsigned int CConf::getTxFrequency() const
+{
+	return m_txFrequency;
+}
+
+float CConf::getLatitude() const
+{
+	return m_latitude;
+}
+
+float CConf::getLongitude() const
+{
+	return m_longitude;
+}
+
+int CConf::getHeight() const
+{
+	return m_height;
+}
+
+bool CConf::getAPRSEnabled() const
+{
+	return m_aprsEnabled;
+}
+
+std::string CConf::getAPRSDescription() const
+{
+	return m_aprsDescription;
+}
+
+std::string CConf::getAPRSSuffix() const
+{
+	return m_aprsSuffix;
+}
+
+std::string CConf::getAPRSSymbol() const
+{
+	return m_aprsSymbol;
+}
+
+bool CConf::getGPSDEnabled() const
+{
+	return m_gpsdEnabled;
+}
+
+std::string CConf::getGPSDAddress() const
+{
+	return m_gpsdAddress;
+}
+
+std::string CConf::getGPSDPort() const
+{
+	return m_gpsdPort;
+}

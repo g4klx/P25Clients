@@ -19,6 +19,7 @@
 #if !defined(P25Gateway_H)
 #define	P25Gateway_H
 
+#include "APRSWriter.h"
 #include "P25Network.h"
 #include "Reflectors.h"
 #include "Voice.h"
@@ -66,6 +67,9 @@ private:
 	CTimer        m_hangTimer;
 	unsigned int  m_rfHangTime;
 	CReflectors*  m_reflectors;	
+	CAPRSWriter*  m_writer;
+
+	void createAPRS();
 
 	bool isVoiceBusy() const;
 
