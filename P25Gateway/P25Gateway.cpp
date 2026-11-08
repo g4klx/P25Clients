@@ -141,6 +141,7 @@ m_currentTG(),
 m_currentIsStatic(false),
 m_hangTimer(1000U),
 m_rfHangTime(0U),
+m_linkedTo(0U),
 m_reflectors(nullptr),
 m_writer(nullptr)
 {
@@ -324,6 +325,13 @@ int CP25Gateway::run()
 		while (len > 0U) {
 			// If we're linked and it's from the right place, send it on
 			if (m_currentTG.isUsed() && CP25Network::match(addr, m_currentTG)) {
+				
+				// Packet from reflector indicates the link is established
+				if (m_linkedTo != m_currentTG.m_id) {
+					writeJSONLinking("established", m_currentTG.m_id);
+					m_linkedTo = m_currentTG.m_id;
+				}
+
 				// Don't pass reflector control data through to the MMDVM
 				if ((buffer[0U] != 0xF0U) && (buffer[0U] != 0xF1U)) {
 					// Rewrite the LCF and the destination TG
@@ -391,6 +399,8 @@ int CP25Gateway::run()
 					m_currentTG = receivedTG;
 					if (receivedTG.isUsed()) {
 						m_currentIsStatic = true;
+						
+						m_linkedTo = m_currentTG.m_id;
 
 						// Rewrite the LCF and the destination TG
 						if (buffer[0U] == 0x64U) {
@@ -438,6 +448,7 @@ int CP25Gateway::run()
 						}
 
 						m_hangTimer.stop();
+						m_linkedTo = 0U;
 					}
 
 					CP25Reflector found;
@@ -553,6 +564,7 @@ int CP25Gateway::run()
 			
 			m_currentTG.reset();
 			m_currentIsStatic = false;
+			m_linkedTo = 0U;
 
 			// Let modem know disconnected
 			talkgroupBuff[0U] = 0x65U;
@@ -647,6 +659,7 @@ void CP25Gateway::writeCommand(const std::string& command)
 				}
 
 				m_hangTimer.stop();
+				m_linkedTo = 0U;
 			}
 
 			CP25Reflector found;
@@ -738,6 +751,7 @@ void CP25Gateway::writeJSONLinking(const std::string& reason, unsigned int tg)
 	json["timestamp"] = CUtils::createTimestamp();
 	json["action"]    = "linking";
 	json["reason"]    = reason;
+	json["protocol"]  = "p25";
 	json["talkgroup"] = int(tg);
 
 	WriteJSON("link", json, true);
@@ -760,6 +774,7 @@ void CP25Gateway::writeJSONRelinking(unsigned int tg)
 
 	json["timestamp"] = CUtils::createTimestamp();
 	json["action"]    = "relinking";
+	json["protocol"]  = "p25";
 	json["talkgroup"] = int(tg);
 
 	WriteJSON("link", json, true);

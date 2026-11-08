@@ -66,6 +66,7 @@ private:
 	bool          m_currentIsStatic;
 	CTimer        m_hangTimer;
 	unsigned int  m_rfHangTime;
+	unsigned int  m_linkedTo;
 	CReflectors*  m_reflectors;	
 	CAPRSWriter*  m_writer;
 
