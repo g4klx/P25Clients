@@ -751,7 +751,6 @@ void CP25Gateway::writeJSONLinking(const std::string& reason, unsigned int tg)
 	json["timestamp"] = CUtils::createTimestamp();
 	json["action"]    = "linking";
 	json["reason"]    = reason;
-	json["protocol"]  = "p25";
 	json["talkgroup"] = int(tg);
 
 	WriteJSON("link", json, true);
@@ -774,7 +773,6 @@ void CP25Gateway::writeJSONRelinking(unsigned int tg)
 
 	json["timestamp"] = CUtils::createTimestamp();
 	json["action"]    = "relinking";
-	json["protocol"]  = "p25";
 	json["talkgroup"] = int(tg);
 
 	WriteJSON("link", json, true);
