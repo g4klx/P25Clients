@@ -3,7 +3,7 @@
 		"timestamp": {"type": "string"},
 		"talkgroup": {"type": "integer"},
 		"action": {"type": "string", "enum": ["linking", "unlinked", "failed", "relinking"]},
-		"reason": {"type": "string", "enum": ["user", "network", "timer", "remote", "startup"]}
+		"reason": {"type": "string", "enum": ["user", "network", "timer", "remote", "startup", "static"]}
 	},
 
 	"status": {
