@@ -3,7 +3,7 @@
 		"timestamp": {"type": "string"},
 		"talkgroup": {"type": "integer"},
 		"action": {"type": "string", "enum": ["linking", "unlinked", "failed", "relinking"]},
-		"reason": {"type": "string", "enum": ["user", "network", "timer", "remote", "startup", "static"]}
+		"reason": {"type": "string", "enum": ["user", "network", "timer", "remote", "startup", "static", "established"]}
 	},
 
 	"status": {
@@ -18,7 +18,7 @@
 		"timestamp": {"$ref": "#/$defs/timestamp"},
 		"action": {"$ref": "#/$defs/action"},
 		"reason": {"$ref": "#/$defs/reason"},
-		"talkgroup": {"$ref": "#/defs/talkgroup"},
+		"talkgroup": {"$ref": "#/$defs/talkgroup"},
 		"required": ["timestamp", "action"]
 	}
 }
