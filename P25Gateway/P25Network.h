@@ -23,6 +23,7 @@
 #include "UDPSocket.h"
 
 #include <cstdint>
+#include <ctime>
 #include <string>
 
 class CP25Network {
@@ -45,6 +46,10 @@ public:
 	bool hasIPv4() const;
 	bool hasIPv6() const;
 
+	// Whether to send to this reflector over IPv6: it has an IPv6 address,
+	// and this host has a route to it (checked again each minute).
+	bool useIPv6(const CP25Reflector& address);
+
 	static bool match(const sockaddr_storage& address, const CP25Reflector& reflector);
 
 private:
@@ -52,6 +57,9 @@ private:
 	CUDPSocket* m_socket4;
 	CUDPSocket* m_socket6;
 	bool        m_debug;
+	sockaddr_storage m_v6Addr;
+	time_t      m_v6Checked;
+	bool        m_v6Ok;
 };
 
 #endif
